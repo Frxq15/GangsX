@@ -1,6 +1,6 @@
-package com.witherfrxq.gangsx.Utils;
+package net.withery.gangsx.Utils;
 
-import com.witherfrxq.gangsx.GangsX;
+import net.withery.gangsx.GangsX;
 
 public class Settings {
     private final GangsX plugin;

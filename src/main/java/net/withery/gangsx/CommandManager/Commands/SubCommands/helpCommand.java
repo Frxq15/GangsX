@@ -1,7 +1,7 @@
-package com.witherfrxq.gangsx.CommandManager.Commands.SubCommands;
+package net.withery.gangsx.CommandManager.Commands.SubCommands;
 
-import com.witherfrxq.gangsx.CommandManager.SubCommand;
-import com.witherfrxq.gangsx.GangsX;
+import net.withery.gangsx.CommandManager.SubCommand;
+import net.withery.gangsx.GangsX;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 

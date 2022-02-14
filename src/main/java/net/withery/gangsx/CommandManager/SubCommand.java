@@ -1,4 +1,4 @@
-package com.witherfrxq.gangsx.CommandManager;
+package net.withery.gangsx.CommandManager;
 
 import com.sun.istack.internal.NotNull;
 import org.bukkit.command.Command;

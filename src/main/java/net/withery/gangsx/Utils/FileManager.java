@@ -1,6 +1,6 @@
-package com.witherfrxq.gangsx.Utils;
+package net.withery.gangsx.Utils;
 
-import com.witherfrxq.gangsx.GangsX;
+import net.withery.gangsx.GangsX;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

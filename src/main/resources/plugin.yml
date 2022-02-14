@@ -1,6 +1,8 @@
-name: GangsX
+name: ${project.name}
+description: ${project.description}
 version: ${project.version}
-main: com.witherfrxq.gangsx.GangsX
+main: ${project.groupId}.${project.artifactId}.${project.name}
 api-version: 1.18
-authors: [Frxq15, WitheredToast]
-description: Gangs Plugin
+authors:
+  - Frxq15
+  - WitheredToast

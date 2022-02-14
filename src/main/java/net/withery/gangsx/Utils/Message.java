@@ -1,8 +1,7 @@
-package com.witherfrxq.gangsx.Utils;
+package net.withery.gangsx.Utils;
 
-import com.witherfrxq.gangsx.GangsX;
+import net.withery.gangsx.GangsX;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.entity.Player;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
