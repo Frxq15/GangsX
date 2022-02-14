@@ -19,10 +19,10 @@ public class Gang {
     private int kills;
     private int deaths;
     private boolean friendlyFire;
-    private List<Gang> allies;
-    private List<GPlayer> members;
-    private List<GPlayer> invites;
-    private List<Upgrade> upgrades;
+    private final List<Gang> allies;
+    private final List<GPlayer> members;
+    private final List<GPlayer> invites;
+    private final List<Upgrade> upgrades;
 
     public Gang(GangsX plugin, final UUID id, final String name, final long created, final String leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
         this.plugin = plugin;
