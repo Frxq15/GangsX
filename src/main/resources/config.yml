@@ -1,0 +1,2 @@
+#applicable types - "mysql" & "mongodb"
+storage-method: "mysql"
