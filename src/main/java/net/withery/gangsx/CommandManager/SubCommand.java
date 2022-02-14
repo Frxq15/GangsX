@@ -10,9 +10,9 @@ public abstract class SubCommand {
     private final String command;
     private final String permission;
     private final String usage;
-    private final List<String> aliases;
+    private final String[] aliases;
 
-    public SubCommand(String command, String permission, String usage, List<String> aliases) {
+    public SubCommand(String command, String permission, String usage, String... aliases) {
         this.command = command;
         this.permission = permission;
         this.usage = usage;
@@ -32,7 +32,7 @@ public abstract class SubCommand {
         return usage;
     }
 
-    public List<String> getAliases() {
+    public String[] getAliases() {
         return aliases;
     }
 

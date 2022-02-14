@@ -6,3 +6,9 @@ api-version: 1.18
 authors:
   - Frxq15
   - WitheredToast
+
+commands:
+  gang:
+    usage: /<command>
+    description: Gang Command
+    aliases: [gangs, gangsx]

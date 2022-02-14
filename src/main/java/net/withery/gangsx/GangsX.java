@@ -1,5 +1,6 @@
 package net.withery.gangsx;
 
+import net.withery.gangsx.CommandManager.CommandHandler;
 import net.withery.gangsx.Utils.FileManager;
 import net.withery.gangsx.Utils.Settings;
 import org.bukkit.Bukkit;
@@ -38,6 +39,9 @@ public final class GangsX extends JavaPlugin {
 
         fileManager = new FileManager(this);
         fileManager.generateMessages();
+
+        CommandHandler commandHandler = new CommandHandler(this);
+        commandHandler.load();
     }
 
     public static GangsX getInstance() {
