@@ -18,11 +18,12 @@ public abstract class SubCommand {
         this.usage = usage;
         this.aliases = aliases;
     }
-
+    @NotNull
     public String getCommand() {
         return command;
     }
 
+    @NotNull
     public String getPermission() {
         return permission;
     }
@@ -34,6 +35,8 @@ public abstract class SubCommand {
     public List<String> getAliases() {
         return aliases;
     }
+
+    @NotNull
     public abstract void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args);
 
     public abstract List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args);
