@@ -1,8 +1,8 @@
 package net.withery.gangsx.CommandManager;
 
-import com.sun.istack.internal.NotNull;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
