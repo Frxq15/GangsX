@@ -11,7 +11,7 @@ import java.util.List;
 public class helpCommand extends SubCommand {
     private final GangsX plugin;
     public helpCommand(GangsX plugin) {
-        super("help", "gangsx.command.help", "help <page>", Arrays.asList("commands", "usage"));
+        super("help", "gangsx.command.help", "help <page>", null);
         this.plugin = plugin;
     }
 
