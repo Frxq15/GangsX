@@ -1,0 +1,6 @@
+name: GangsX
+version: ${project.version}
+main: com.witherfrxq.gangsx.GangsX
+api-version: 1.18
+authors: [Frxq15, WitheredToast]
+description: Gangs Plugin
