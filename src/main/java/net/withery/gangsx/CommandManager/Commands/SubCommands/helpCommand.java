@@ -2,6 +2,7 @@ package net.withery.gangsx.CommandManager.Commands.SubCommands;
 
 import net.withery.gangsx.CommandManager.SubCommand;
 import net.withery.gangsx.GangsX;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -17,11 +18,7 @@ public class helpCommand extends SubCommand {
 
     @Override
     public void onCommand(CommandSender sender, Command command, String label, String[] args) {
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return null;
+        Bukkit.broadcastMessage("help");
     }
 
 }
