@@ -3,17 +3,18 @@ package net.withery.gangsx.Utils;
 import net.withery.gangsx.GangsX;
 
 public class Settings {
+
     private final GangsX plugin;
-    private String version;
     private String storagetype;
 
     public Settings(GangsX plugin) {
         this.plugin = plugin;
     }
+
     public void setSettings() {
-        this.version = plugin.getDescription().getVersion();
         checkStorage();
     }
+
     public void checkStorage() {
         this.storagetype = plugin.getConfig().getString("storage-method");
         switch (storagetype.toLowerCase()) {
@@ -29,5 +30,5 @@ public class Settings {
                 return;
         }
     }
-    public String getVersion() { return version; }
+
 }

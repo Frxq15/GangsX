@@ -6,7 +6,7 @@ import net.withery.gangsx.formatting.color.ColorFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ColorFormatter_1_18_R1 implements ColorFormatter {
+public class ColorFormatter_1_16 implements ColorFormatter {
 
     private static final Pattern HEX_PATTERN = Pattern.compile("&#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})");
 
@@ -19,7 +19,7 @@ public class ColorFormatter_1_18_R1 implements ColorFormatter {
         StringBuilder builder = new StringBuilder();
 
         while (matcher.find()) {
-            String hex = "#" + matcher.group(1); // '#' not covered in RegEx pattern
+            String hex = "#" + matcher.group(1); // '#' not covered in RegEx pattern group
             ChatColor chatColor = ChatColor.of(hex);
 
             if (chatColor == null) continue;
