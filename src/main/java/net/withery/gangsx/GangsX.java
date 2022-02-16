@@ -6,6 +6,7 @@ import net.withery.gangsx.Utils.Settings;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
+import net.withery.gangsx.settings.locale.LocaleRegistry;
 import net.withery.gangsx.settings.version.ServerVersion;
 import net.withery.gangsx.settings.version.ServerVersionChecker;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public final class GangsX extends JavaPlugin {
     private FileManager fileManager;
     private ServerVersionChecker sVersionChecker;
     private ColorFormatter colorFormatter;
+    private LocaleRegistry localeRegistry;
 
     @Override
     public void onEnable() {
@@ -41,6 +43,7 @@ public final class GangsX extends JavaPlugin {
     }
 
     void registry() {
+        // Move loading of things to different class/methods
         settings = new Settings(this);
         settings.setSettings();
 
@@ -59,6 +62,9 @@ public final class GangsX extends JavaPlugin {
             // Throw error, shutdown logic
         }
 
+        localeRegistry = new LocaleRegistry(this);
+        localeRegistry.load();
+
         CommandHandler commandHandler = new CommandHandler(this);
         commandHandler.load();
     }
@@ -69,6 +75,14 @@ public final class GangsX extends JavaPlugin {
 
     public Settings getSettings() {
         return settings;
+    }
+
+    public ColorFormatter getColorFormatter() {
+        return colorFormatter;
+    }
+
+    public LocaleRegistry getLocaleRegistry() {
+        return localeRegistry;
     }
 
 }

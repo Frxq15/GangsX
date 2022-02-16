@@ -5,7 +5,7 @@ import net.withery.gangsx.GangsX;
 public class Settings {
 
     private final GangsX plugin;
-    private String storagetype;
+    private String storageType;
 
     public Settings(GangsX plugin) {
         this.plugin = plugin;
@@ -16,8 +16,8 @@ public class Settings {
     }
 
     public void checkStorage() {
-        this.storagetype = plugin.getConfig().getString("storage-method");
-        switch (storagetype.toLowerCase()) {
+        storageType = plugin.getConfig().getString("storage-method", "null");
+        switch (storageType.toLowerCase()) {
             case "mysql":
                 plugin.log("Using storage type 'MySQL'");
                 return;

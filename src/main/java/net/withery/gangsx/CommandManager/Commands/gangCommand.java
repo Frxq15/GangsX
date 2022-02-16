@@ -4,7 +4,6 @@ import net.withery.gangsx.CommandManager.Commands.SubCommands.helpCommand;
 import net.withery.gangsx.CommandManager.ParentCommand;
 import net.withery.gangsx.CommandManager.SubCommand;
 import net.withery.gangsx.GangsX;
-import net.withery.gangsx.formatting.color.ColorFormatter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 
 public class gangCommand extends ParentCommand {
+
     public gangCommand(GangsX plugin, String name, String permission) {
         super(plugin, name, permission);
         register(new helpCommand(plugin));
