@@ -1,7 +1,6 @@
 package net.withery.gangsx;
 
 import net.withery.gangsx.CommandManager.CommandHandler;
-import net.withery.gangsx.Utils.FileManager;
 import net.withery.gangsx.Utils.Settings;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
@@ -17,7 +16,6 @@ public final class GangsX extends JavaPlugin {
 
     private static GangsX instance;
     private Settings settings;
-    private FileManager fileManager;
     private ServerVersionChecker sVersionChecker;
     private ColorFormatter colorFormatter;
     private LocaleRegistry localeRegistry;
@@ -46,9 +44,6 @@ public final class GangsX extends JavaPlugin {
         // Move loading of things to different class/methods
         settings = new Settings(this);
         settings.setSettings();
-
-        fileManager = new FileManager(this);
-        fileManager.generateMessages();
 
         sVersionChecker = new ServerVersionChecker();
 

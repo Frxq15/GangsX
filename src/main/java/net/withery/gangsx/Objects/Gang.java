@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Gang {
+
     private final GangsX plugin;
     private final UUID id;
 
@@ -42,54 +43,71 @@ public class Gang {
         this.upgrades = upgrades;
 
     }
+
     public UUID getID() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public long getCreated() {
         return created;
     }
+
     public String getLeader() {
         return leader;
     }
+
     public int getLevel() {
         return level;
     }
+
     public int getCoins() {
         return coins;
     }
+
     public double getBankBalance() {
         return bankBalance;
     }
+
     public int getKills() {
         return kills;
     }
+
     public int getDeaths() {
         return deaths;
     }
+
     public boolean hasFriendlyFire() {
         return friendlyFire;
     }
+
     public List<Gang> getAllies() {
         return allies;
     }
+
     public int getAlliesCount() {
         return allies.size();
     }
+
     public List<GPlayer> getMembers() {
         return members;
     }
+
     public int getMembersCount() {
         return members.size();
     }
+
     public List<GPlayer> getInvites() {
         return invites;
     }
+
     public List<Upgrade> getUpgrades() {
         return upgrades;
     }
+
     public int getUpgradesCount() {
         return upgrades.size();
     }
@@ -97,82 +115,109 @@ public class Gang {
     public void setName(String name) {
         this.name = name;
     }
+
     public void setCreated(long created) {
         this.created = created;
     }
+
     public void setLeader(String leader) {
         this.leader = leader;
     }
+
     public void setLevel(int level) {
         this.level = level;
     }
+
     public void setCoins(int coins) {
         this.coins = coins;
     }
+
     public void setBankBalance(int bankBalance) {
         this.bankBalance = bankBalance;
     }
+
     public void setKills(int kills) {
         this.kills = kills;
     }
+
     public void setDeaths(int deaths) {
         this.deaths = deaths;
     }
+
     public void setFriendlyFire(boolean friendlyFire) {
         this.friendlyFire = friendlyFire;
     }
+
     public void addAlly(Gang gang) {
         this.allies.add(gang);
     }
+
     public void addMember(GPlayer player) {
         this.members.add(player);
     }
+
     public void inviteMember(GPlayer player) {
         this.invites.add(player);
     }
+
     public void addUpgrade(Upgrade upgrade) {
         this.upgrades.add(upgrade);
     }
+
     public void increaseLevel(int levels) {
-        this.level = (this.level+levels);
+        this.level = (this.level + levels);
     }
+
     public void addCoins(int coins) {
-        this.coins = (this.coins+coins);
+        this.coins = (this.coins + coins);
     }
+
     public void addBankMoney(int bankMoney) {
-        this.bankBalance = (this.bankBalance+bankMoney);
+        this.bankBalance = (this.bankBalance + bankMoney);
     }
+
     public void addKills(int kills) {
-        this.kills = (this.kills+kills);
+        this.kills = (this.kills + kills);
     }
+
     public void addDeaths(int deaths) {
-        this.deaths = (this.deaths+deaths);
+        this.deaths = (this.deaths + deaths);
     }
+
     public void removeCoins(int coins) {
-        this.coins = (this.coins-coins);
+        this.coins = (this.coins - coins);
     }
+
     public void removeBankMoney(int bankMoney) {
-        this.bankBalance = (this.bankBalance-bankMoney);
+        this.bankBalance = (this.bankBalance - bankMoney);
     }
+
     public void removeAlly(Gang gang) {
         this.allies.remove(gang);
     }
+
     public void removeMember(GPlayer player) {
         this.members.remove(player);
     }
+
     public void removeUpgrade(Upgrade upgrade) {
         this.upgrades.remove(upgrade);
     }
+
     public void resetCoins() {
         this.coins = 0;
     }
+
     public void resetBankBalance() {
         this.bankBalance = 0;
     }
+
     public void resetKills() {
         this.kills = 0;
     }
+
     public void resetDeaths() {
         this.deaths = 0;
     }
+
 }
