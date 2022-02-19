@@ -19,7 +19,8 @@ public class Settings {
         storageType = plugin.getConfig().getString("storage-method", "null");
         switch (storageType.toLowerCase()) {
             case "mysql":
-                plugin.log("Using storage type 'MySQL'");
+                plugin.log("Using storage type MySQL");
+                plugin.sqlSetup();
                 return;
             case "mongodb":
                 plugin.log("Using storage type 'MongoDB'");

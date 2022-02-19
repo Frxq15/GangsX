@@ -13,7 +13,7 @@ public class Gang {
 
     private String name;
     private long created;
-    private String leader;
+    private UUID leader;
     private int level;
     private int coins;
     private double bankBalance;
@@ -25,7 +25,7 @@ public class Gang {
     private final List<GPlayer> invites;
     private final List<Upgrade> upgrades;
 
-    public Gang(GangsX plugin, final UUID id, final String name, final long created, final String leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
+    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
@@ -56,7 +56,7 @@ public class Gang {
         return created;
     }
 
-    public String getLeader() {
+    public UUID getLeader() {
         return leader;
     }
 
@@ -120,7 +120,7 @@ public class Gang {
         this.created = created;
     }
 
-    public void setLeader(String leader) {
+    public void setLeader(UUID leader) {
         this.leader = leader;
     }
 

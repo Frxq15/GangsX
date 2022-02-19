@@ -2,6 +2,8 @@ package net.withery.gangsx;
 
 import net.withery.gangsx.CommandManager.CommandHandler;
 import net.withery.gangsx.Utils.Settings;
+import net.withery.gangsx.datafactory.gang.SQLGangDataFactory;
+import net.withery.gangsx.datafactory.sql.SQLManager;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
@@ -19,6 +21,7 @@ public final class GangsX extends JavaPlugin {
     private ServerVersionChecker sVersionChecker;
     private ColorFormatter colorFormatter;
     private LocaleRegistry localeRegistry;
+    private SQLGangDataFactory sqlGangDataFactory;
 
     @Override
     public void onEnable() {
@@ -26,6 +29,7 @@ public final class GangsX extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         registry();
+        if(sqlGangDataFactory == null) return;
 
         getLogger().info("Enabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
@@ -45,6 +49,8 @@ public final class GangsX extends JavaPlugin {
         settings = new Settings(this);
         settings.setSettings();
 
+        if(sqlGangDataFactory == null) return;
+
         sVersionChecker = new ServerVersionChecker();
 
         if (sVersionChecker.isServerAtLeast(ServerVersion.VERSION_1_16))
@@ -62,6 +68,21 @@ public final class GangsX extends JavaPlugin {
 
         CommandHandler commandHandler = new CommandHandler(this);
         commandHandler.load();
+    }
+
+    public void sqlSetup() {
+        String host = getConfig().getString("database.mysql.host");
+        String database = getConfig().getString("database.mysql.database");
+        String username = getConfig().getString("database.mysql.username");
+        String password = getConfig().getString("database.mysql.password");
+        int port = getConfig().getInt("database.mysql.port");
+
+        SQLManager sqlManager = new SQLManager(this, host, database, username, password, port);
+       if(!sqlManager.connect()) {
+            log("Connection to mysql failed.");
+            Bukkit.getPluginManager().disablePlugin(this);
+       }
+
     }
 
     public static GangsX getInstance() {

@@ -2,13 +2,20 @@ package net.withery.gangsx.datafactory.gang;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.Objects.Gang;
+import net.withery.gangsx.datafactory.sql.SQLManager;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.UUID;
 
 public class SQLGangDataFactory extends GangDataFactory {
+    private final SQLManager sqlManager;
+    private String table = "gangsx_gangs";
 
-    public SQLGangDataFactory(GangsX plugin) {
+    public SQLGangDataFactory(GangsX plugin, SQLManager sqlManager) {
         super(plugin);
+        this.sqlManager = sqlManager;
     }
 
     /*
@@ -31,11 +38,21 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     Yours sincerely
     Sven De riches
+    your cute x
      */
 
     @Override
     public boolean initialize() {
-        return false;
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS "+table+" " +
+                    "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
+                    "coins INT, bankBalance DOUBLE, kills INT, deaths INT, friendlyFire BOOLEAN);");
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -45,7 +62,25 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public void initializeGangData(Gang gang) {
+        if(doesGangDataExist(gang.getID())) return;
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("INSERT INTO "+table+" " +
+                    "(uuid,name,created,leader,level,coins,bankBalance,kills,deaths,friendlyFire) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            statement.setString(1, gang.getID().toString());
+            statement.setString(2, gang.getName());
+            statement.setLong(3, gang.getCreated());
+            statement.setString(4, gang.getLeader().toString());
+            statement.setInt(5, gang.getLevel());
+            statement.setInt(6, gang.getCoins());
+            statement.setDouble(7, gang.getBankBalance());
+            statement.setInt(8, gang.getKills());
+            statement.setInt(9, gang.getDeaths());
+            statement.setBoolean(10, gang.hasFriendlyFire());
+            statement.executeUpdate();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -55,6 +90,12 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public Gang getGangData(UUID uuid) {
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT * from "+table+" WHERE uuid=?"+uuid);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -65,6 +106,16 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public boolean doesGangDataExist(UUID uuid) {
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT gang FROM "+table+" where UUID=?");
+            statement.setString(1, uuid.toString());
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

@@ -1,2 +1,11 @@
 #applicable types - "mysql" & "mongodb"
 storage-method: "mysql"
+database:
+  mysql:
+    host: "host"
+    port: 3306
+    database: "database"
+    username: "username"
+    password: "password"
+  mongodb:
+    connection-string: ""
