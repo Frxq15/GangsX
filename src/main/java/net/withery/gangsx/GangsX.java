@@ -1,12 +1,12 @@
 package net.withery.gangsx;
 
 import net.withery.gangsx.CommandManager.CommandHandler;
-import net.withery.gangsx.Utils.Settings;
-import net.withery.gangsx.datafactory.gang.SQLGangDataFactory;
-import net.withery.gangsx.datafactory.sql.SQLManager;
 import net.withery.gangsx.formatting.color.ColorFormatter;
+import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
+import net.withery.gangsx.datafactory.sql.SQLManager;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
+import net.withery.gangsx.settings.Settings;
 import net.withery.gangsx.settings.locale.LocaleRegistry;
 import net.withery.gangsx.settings.version.ServerVersion;
 import net.withery.gangsx.settings.version.ServerVersionChecker;
@@ -29,7 +29,7 @@ public final class GangsX extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         registry();
-        if(sqlGangDataFactory == null) return;
+        if (sqlGangDataFactory == null) return;
 
         getLogger().info("Enabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
@@ -44,19 +44,22 @@ public final class GangsX extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[GangsX] " + text);
     }
 
-    void registry() {
+    private void registry() {
         // Move loading of things to different class/methods
         settings = new Settings(this);
-        settings.setSettings();
 
-        if(sqlGangDataFactory == null) return;
+        switch (settings.getStorageType()) {
+            case MYSQL, MONGODB -> sqlSetup();
+        }
+
+        if (sqlGangDataFactory == null) return;
 
         sVersionChecker = new ServerVersionChecker();
 
-        if (sVersionChecker.isServerAtLeast(ServerVersion.VERSION_1_16))
+        if (sVersionChecker.isServerAbove(ServerVersion.VERSION_1_16))
             colorFormatter = new ColorFormatter_1_16();
 
-        else if (sVersionChecker.isServerAtLeast(ServerVersion.LEGACY))
+        else if (sVersionChecker.isServerAbove(ServerVersion.LEGACY))
             colorFormatter = new ColorFormatter_LEGACY();
 
         else {
@@ -71,18 +74,20 @@ public final class GangsX extends JavaPlugin {
     }
 
     public void sqlSetup() {
-        String host = getConfig().getString("database.mysql.host");
+        String host = getConfig().getString("database.mysql.host"); // Change to use settings.get...
         String database = getConfig().getString("database.mysql.database");
         String username = getConfig().getString("database.mysql.username");
         String password = getConfig().getString("database.mysql.password");
         int port = getConfig().getInt("database.mysql.port");
 
         SQLManager sqlManager = new SQLManager(this, host, database, username, password, port);
-       if(!sqlManager.connect()) {
+        if (!sqlManager.connect()) {
             log("Connection to mysql failed.");
             Bukkit.getPluginManager().disablePlugin(this);
-       }
+            return;
+        }
 
+        sqlGangDataFactory = new SQLGangDataFactory(this, sqlManager);
     }
 
     public static GangsX getInstance() {

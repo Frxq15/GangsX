@@ -1,5 +1,5 @@
-#applicable types - "mysql" & "mongodb"
-storage-method: "mysql"
+#applicable types - "MySQL", "MariaDB" & "MongoDB"
+storage-method: "MariaDB"
 database:
   mysql:
     host: "host"

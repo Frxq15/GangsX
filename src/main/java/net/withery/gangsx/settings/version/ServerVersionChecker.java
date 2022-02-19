@@ -10,7 +10,7 @@ public class ServerVersionChecker {
         checkVersion();
     }
 
-    public boolean isServerAtLeast(ServerVersion version) {
+    public boolean isServerAbove(ServerVersion version) {
         return this.version.ordinal() >= version.ordinal();
     }
 
