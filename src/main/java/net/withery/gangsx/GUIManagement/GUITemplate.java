@@ -30,25 +30,31 @@ public class GUITemplate {
         this.plugin = plugin;
         this.rows = rows;
         this.title = title;
-        inventory = Bukkit.createInventory(null,9 * rows, title);
+        inventory = Bukkit.createInventory(null, 9 * rows, title);
         inventoriesByUUID.put(getUUID(), this);
     }
+
     public interface GUIAction {
         void click(Player player);
     }
+
     public UUID getUUID() {
         return uuid;
     }
+
     public static Map<UUID, GUITemplate> getInventoriesByUUID() {
         return inventoriesByUUID;
     }
+
     public static Map<UUID, UUID> getOpenInventories() {
         return openInventories;
     }
+
     public void open(Player player) {
         player.openInventory(inventory);
         openInventories.put(player.getUniqueId(), getUUID());
     }
+
     public void delete() {
         for (Player p : Bukkit.getOnlinePlayers()) {
             UUID u = openInventories.get(p.getUniqueId());
@@ -58,15 +64,18 @@ public class GUITemplate {
         }
         inventoriesByUUID.remove(getUUID());
     }
-    public void setItem(int slot, ItemStack stack, GUIAction action){
+
+    public void setItem(int slot, ItemStack stack, GUIAction action) {
         inventory.setItem(slot, stack);
-        if (action != null){
+        if (action != null) {
             actions.put(slot, action);
         }
     }
-    public void setItem(int slot, ItemStack stack){
+
+    public void setItem(int slot, ItemStack stack) {
         setItem(slot, stack, null);
     }
+
     protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
@@ -75,6 +84,12 @@ public class GUITemplate {
         item.setItemMeta(meta);
         return item;
     }
+
+    /*
+    @Dan if u see this, subIds are pretty much useless, as every block should be covered by a material since technically 1.13
+    also this is deprecated cause there is a new method to add "damage" which is basically the subId, mainly used to
+    add multiple textures to one item though
+    */
     protected ItemStack createGuiItem(final Material material, byte subId, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1, subId);
         final ItemMeta meta = item.getItemMeta();
@@ -83,6 +98,7 @@ public class GUITemplate {
         item.setItemMeta(meta);
         return item;
     }
+
     protected ItemStack createGlowingGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
