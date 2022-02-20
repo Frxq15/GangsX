@@ -19,29 +19,6 @@ public class SQLGangDataFactory extends GangDataFactory {
         this.sqlManager = sqlManager;
     }
 
-    /*
-    Hey Dan, this is the class you wanted to work on.
-    You basically just need to fill in all the methods with your code that makes it do whatever it's supposed to do.
-    As this is the SQLGangDataFactory, you could guess it's all about making this work with an SQL Database (and only
-                                        covering the gang objects, the players are going to be handled independently).
-
-    You can look at what the methods are supposed to do, by looking at the methods tooltips or reading the java docs I
-    wrote in the GangDataFactory class (which this file is extending).
-
-    It would be smart to add some sort of Map in this class which stores the UUID -> Gang (<UUID, Gang>), which would
-    kind of be used as a cache (loadGangData, unloadGangData and isGangDataLoaded are methods that are related to that;
-    getGangData should pull from the cache, if it contains the gang, instead of querying).
-
-    There is no need to worry about making anything asynchronous as this is covered by the parent class (Methods such
-    as initializeGangDataAsync which call the normal methods asynchronously and return the result as CompletableFuture).
-
-    If you have any questions feel free to message me on Discord (kleinesNugget#5354 🙂)
-
-    Yours sincerely
-    Sven De riches
-    your cute x
-     */
-
     @Override
     public boolean initialize() {
         try {
@@ -149,11 +126,27 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public String getGangName(UUID uuid) {
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT name from "+table+" WHERE uuid="+uuid);
+            statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
+            return rs.getString("name");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public UUID getGangUniqueId(String name) {
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT uuid from "+table+" WHERE name="+name);
+            statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
+            return UUID.fromString(rs.getString("name"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
