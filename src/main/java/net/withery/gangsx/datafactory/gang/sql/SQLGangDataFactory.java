@@ -78,7 +78,6 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(9, gang.getDeaths());
             statement.setBoolean(10, gang.hasFriendlyFire());
             statement.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,14 +85,27 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public void deleteGangData(UUID uuid) {
-
+        if(!doesGangDataExist(uuid)) return;
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("DELETE * from "+table+" WHERE uuid="+uuid);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Gang getGangData(UUID uuid) {
         try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT * from "+table+" WHERE uuid=?"+uuid);
-
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT * from "+table+" WHERE uuid="+uuid);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                Gang gang = new Gang(GangsX.getInstance(), UUID.fromString(rs.getString("uuid")), rs.getString("name"),
+                        rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
+                        rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
+                        rs.getBoolean("friendlyFire"), null, null, null, null);
+                return gang;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

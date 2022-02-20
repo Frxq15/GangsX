@@ -74,13 +74,7 @@ public final class GangsX extends JavaPlugin {
     }
 
     public void sqlSetup() {
-        String host = getConfig().getString("database.mysql.host"); // Change to use settings.get...
-        String database = getConfig().getString("database.mysql.database");
-        String username = getConfig().getString("database.mysql.username");
-        String password = getConfig().getString("database.mysql.password");
-        int port = getConfig().getInt("database.mysql.port");
-
-        SQLManager sqlManager = new SQLManager(this, host, database, username, password, port);
+        SQLManager sqlManager = new SQLManager(this, settings.getHost(), settings.getDatabase(), settings.getUsername(), settings.getPassword(), settings.getPort());
         if (!sqlManager.connect()) {
             log("Connection to mysql failed.");
             Bukkit.getPluginManager().disablePlugin(this);
