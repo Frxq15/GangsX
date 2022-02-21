@@ -48,6 +48,13 @@ public final class GangsX extends JavaPlugin {
         // Move loading of things to different class/methods
         settings = new Settings(this);
 
+        localeRegistry = new LocaleRegistry(this);
+        localeRegistry.load();
+
+        CommandHandler commandHandler = new CommandHandler(this);
+        commandHandler.load();
+        log("loaded command handler.");
+
         switch (settings.getStorageType()) {
             case MYSQL, MONGODB -> sqlSetup();
         }
@@ -65,12 +72,6 @@ public final class GangsX extends JavaPlugin {
         else {
             // Throw error, shutdown logic
         }
-
-        localeRegistry = new LocaleRegistry(this);
-        localeRegistry.load();
-
-        CommandHandler commandHandler = new CommandHandler(this);
-        commandHandler.load();
     }
 
     public void sqlSetup() {

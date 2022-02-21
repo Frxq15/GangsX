@@ -9,16 +9,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
-public class CommandHandler {
-    private final GangsX plugin;
-    public CommandHandler(GangsX plugin) {
-        this.plugin = plugin;
-    }
+public record CommandHandler(GangsX plugin) {
+
     public void load() {
         registerCommands();
     }
+
     private void registerCommands() {
-        registerCommand("gang", new gangCommand(plugin, "gang", "gangsx.command.gang"));
+        registerCommand("gang", new gangCommand(plugin));
     }
 
     private void registerCommand(@NotNull String name, @NotNull CommandExecutor commandExecutor) {

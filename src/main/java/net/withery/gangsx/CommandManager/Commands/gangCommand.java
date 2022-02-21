@@ -12,8 +12,8 @@ import java.util.Arrays;
 
 public class gangCommand extends ParentCommand {
 
-    public gangCommand(GangsX plugin, String name, String permission) {
-        super(plugin, name, permission);
+    public gangCommand(GangsX plugin) {
+        super(plugin, "gang", "gangsx.command.gang");
         register(new helpCommand(plugin));
     }
 
