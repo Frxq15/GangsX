@@ -1,5 +1,6 @@
 package net.withery.gangsx;
 
+import net.withery.gangsx.APIManager.APIHooks;
 import net.withery.gangsx.CommandManager.CommandHandler;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
@@ -22,6 +23,7 @@ public final class GangsX extends JavaPlugin {
     private ColorFormatter colorFormatter;
     private LocaleRegistry localeRegistry;
     private SQLGangDataFactory sqlGangDataFactory;
+    private APIHooks apiHooks;
 
     @Override
     public void onEnable() {
@@ -30,14 +32,13 @@ public final class GangsX extends JavaPlugin {
         saveDefaultConfig();
         registry();
         if (sqlGangDataFactory == null) return;
-
-        getLogger().info("Enabled " + getDescription().getName() + " v" + getDescription().getVersion());
+        log("Enabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
 
     @Override
     public void onDisable() {
         // Shutdown logic here
-        getLogger().info("Disabled " + getDescription().getName() + " v" + getDescription().getVersion());
+        log("Disabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
 
     public void log(String text) {
@@ -53,7 +54,9 @@ public final class GangsX extends JavaPlugin {
 
         CommandHandler commandHandler = new CommandHandler(this);
         commandHandler.load();
-        log("loaded command handler.");
+
+        apiHooks = new APIHooks(this);
+        apiHooks.setupEconomy();
 
         switch (settings.getStorageType()) {
             case MYSQL, MONGODB -> sqlSetup();
