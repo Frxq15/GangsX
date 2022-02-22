@@ -15,6 +15,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 public final class GangsX extends JavaPlugin {
 
     private static GangsX instance;
@@ -24,6 +26,7 @@ public final class GangsX extends JavaPlugin {
     private LocaleRegistry localeRegistry;
     private SQLGangDataFactory sqlGangDataFactory;
     private APIHooks apiHooks;
+    private FileManager fileManager;
 
     @Override
     public void onEnable() {
@@ -56,7 +59,10 @@ public final class GangsX extends JavaPlugin {
         commandHandler.load();
 
         apiHooks = new APIHooks(this);
-        apiHooks.setupEconomy();
+        apiHooks.initialize();
+
+        fileManager = new FileManager(this);
+        fileManager.createShopFile();
 
         switch (settings.getStorageType()) {
             case MYSQL, MONGODB -> sqlSetup();
@@ -99,6 +105,8 @@ public final class GangsX extends JavaPlugin {
     public ColorFormatter getColorFormatter() {
         return colorFormatter;
     }
+
+    public FileManager getFileManager() { return fileManager; }
 
     public LocaleRegistry getLocaleRegistry() {
         return localeRegistry;

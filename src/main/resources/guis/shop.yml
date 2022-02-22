@@ -1,0 +1,26 @@
+ROWS: 5
+TITLE: "&bGang Shop"
+ITEMS:
+  1:
+    SLOT: 0
+    MATERIAL: GRASS_BLOCK
+    NAME: "&ctest item"
+    GLOW: true
+    COST: 10 #In gang coins
+    LORE:
+      - '&7Purchase this item for &b%cost% &7coins.'
+    COMMANDS:
+      - 'give %player% dirt 1'
+SHOP_MISC_ITEMS:
+  1:
+    SLOT: 39
+    MATERIAL: WHITE_STAINED_GLASS_PANE
+    GLOW: false
+    NAME: ''
+    LORE: []
+  2:
+    SLOT: 41
+    MATERIAL: WHITE_STAINED_GLASS_PANE
+    GLOW: false
+    NAME: ''
+    LORE: []

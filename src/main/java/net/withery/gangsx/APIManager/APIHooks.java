@@ -12,8 +12,12 @@ public class APIHooks {
     public APIHooks(GangsX plugin) {
         this.plugin = plugin;
     }
+
+    public void initialize() {
+        setupEconomy();
+        setupPapi();
+    }
     public boolean setupEconomy() {
-        plugin.log("Hooked into Vault successfully");
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
@@ -22,6 +26,7 @@ public class APIHooks {
             return false;
         }
         econ = rsp.getProvider();
+        plugin.log("Hooked into Vault successfully");
         return econ != null;
     }
     public void setupPapi() {
@@ -29,6 +34,7 @@ public class APIHooks {
             plugin.log("PlaceholderAPI not found, placeholders will not be enabled.");
             return;
         }
+        plugin.log("Hooked into PlaceholderAPI successfully");
         //load papi shit
     }
 }

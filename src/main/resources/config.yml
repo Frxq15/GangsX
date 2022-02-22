@@ -9,3 +9,10 @@ database:
     password: "password"
   mongodb:
     connection-string: ""
+
+gang:
+  blacklisted_names:
+    - nigger
+    - fuck
+    - shit
+    - cunt
