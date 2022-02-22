@@ -1,6 +1,7 @@
 package net.withery.gangsx.CommandManager.Commands;
 
 import net.withery.gangsx.CommandManager.Commands.SubCommands.helpCommand;
+import net.withery.gangsx.CommandManager.Commands.SubCommands.testCommand;
 import net.withery.gangsx.CommandManager.ParentCommand;
 import net.withery.gangsx.CommandManager.SubCommand;
 import net.withery.gangsx.GangsX;
@@ -15,6 +16,7 @@ public class gangCommand extends ParentCommand {
     public gangCommand(GangsX plugin) {
         super(plugin, "gang", "gangsx.command.gang");
         register(new helpCommand(plugin));
+        register(new testCommand(plugin));
     }
 
     @Override

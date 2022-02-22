@@ -91,7 +91,22 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public void updateGangData(Gang gang) {
-
+        try {
+            PreparedStatement statement = sqlManager.getConnection().prepareStatement("UPDATE "+table+" SET name=?, created=?, leader=?, level=?, coins=?, " +
+                    "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid="+gang.getID().toString()+";");
+            statement.setString(1, gang.getName());
+            statement.setLong(2, gang.getCreated());
+            statement.setString(3, gang.getLeader().toString());
+            statement.setInt(4, gang.getLevel());
+            statement.setInt(5, gang.getCoins());
+            statement.setDouble(6, gang.getBankBalance());
+            statement.setInt(7, gang.getKills());
+            statement.setInt(8, gang.getDeaths());
+            statement.setBoolean(9, gang.hasFriendlyFire());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -121,7 +136,6 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public void unloadGangData(UUID uuid) {
-
     }
 
     @Override

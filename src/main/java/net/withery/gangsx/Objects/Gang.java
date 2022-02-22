@@ -2,7 +2,9 @@ package net.withery.gangsx.Objects;
 
 import net.withery.gangsx.Enums.Upgrade;
 import net.withery.gangsx.GangsX;
+import org.bukkit.Bukkit;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,6 +43,25 @@ public class Gang {
         this.members = members;
         this.invites = invites;
         this.upgrades = upgrades;
+
+    }
+
+    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader) {
+        this.plugin = plugin;
+        this.id = id;
+        this.name = name;
+        this.created = created;
+        this.leader = leader;
+        this.level = 0;
+        this.coins = 0;
+        this.bankBalance = 0;
+        this.kills = 0;
+        this.deaths = 0;
+        this.friendlyFire = false;
+        this.allies = null;
+        this.members = null;
+        this.invites = null;
+        this.upgrades = null;
 
     }
 
@@ -218,6 +239,13 @@ public class Gang {
 
     public void resetDeaths() {
         this.deaths = 0;
+    }
+
+    public List<GPlayer> getOnlineMembers() {
+        List<GPlayer> members = new ArrayList<>();
+        Bukkit.getOnlinePlayers().forEach(p -> {
+        });
+        return members;
     }
 
 }

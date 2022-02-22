@@ -3,9 +3,12 @@ package net.withery.gangsx.Objects;
 import net.withery.gangsx.Enums.Role;
 import net.withery.gangsx.GangsX;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class GPlayer {
+    private final static Map<UUID, GPlayer> players = new HashMap<>();
     private final GangsX plugin;
     private final UUID uuid;
 
@@ -23,7 +26,16 @@ public class GPlayer {
         this.hasGang = hasGang;
         this.kills = kills;
         this.deaths = deaths;
+        players.put(uuid, this);
+    }
+    public static GPlayer getPlayerData(UUID uuid) {
+        if (!players.containsKey(uuid)) {
+            //new gplayer from sql
+        }
+        return players.get(uuid);
     }
 
-
+    public static Map<UUID, GPlayer> getAllPlayerData() {
+        return players;
+    }
 }
