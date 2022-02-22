@@ -1,8 +1,6 @@
-package net.withery.gangsx.Objects;
+package net.withery.gangsx.objects;
 
 import net.withery.gangsx.GangsX;
-
-import java.util.UUID;
 
 public class Upgrades {
     private final GangsX plugin;

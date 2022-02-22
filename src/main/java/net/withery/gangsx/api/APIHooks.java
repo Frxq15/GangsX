@@ -1,4 +1,4 @@
-package net.withery.gangsx.APIManager;
+package net.withery.gangsx.api;
 
 import net.milkbowl.vault.economy.Economy;
 import net.withery.gangsx.GangsX;

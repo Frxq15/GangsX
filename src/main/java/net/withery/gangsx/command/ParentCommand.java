@@ -1,16 +1,9 @@
-package net.withery.gangsx.CommandManager;
+package net.withery.gangsx.command;
 
 import net.withery.gangsx.GangsX;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.util.StringUtil;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public abstract class ParentCommand implements CommandExecutor {
     protected final GangsX plugin;

@@ -1,12 +1,13 @@
 package net.withery.gangsx;
 
-import net.withery.gangsx.APIManager.APIHooks;
-import net.withery.gangsx.CommandManager.CommandHandler;
+import net.withery.gangsx.api.APIHooks;
+import net.withery.gangsx.command.CommandHandler;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLManager;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
+import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.settings.Settings;
 import net.withery.gangsx.settings.locale.LocaleRegistry;
 import net.withery.gangsx.settings.version.ServerVersion;
@@ -14,8 +15,6 @@ import net.withery.gangsx.settings.version.ServerVersionChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 public final class GangsX extends JavaPlugin {
 

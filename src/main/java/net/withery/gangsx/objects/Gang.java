@@ -1,6 +1,6 @@
-package net.withery.gangsx.Objects;
+package net.withery.gangsx.objects;
 
-import net.withery.gangsx.Enums.Upgrade;
+import net.withery.gangsx.enums.Upgrade;
 import net.withery.gangsx.GangsX;
 import org.bukkit.Bukkit;
 

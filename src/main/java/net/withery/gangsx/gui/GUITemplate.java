@@ -1,4 +1,4 @@
-package net.withery.gangsx.GUIManagement;
+package net.withery.gangsx.gui;
 
 import net.withery.gangsx.GangsX;
 import org.bukkit.Bukkit;

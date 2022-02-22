@@ -1,7 +1,7 @@
 package net.withery.gangsx.datafactory.gang.sql;
 
 import net.withery.gangsx.GangsX;
-import net.withery.gangsx.Objects.Gang;
+import net.withery.gangsx.objects.Gang;
 import net.withery.gangsx.datafactory.gang.GangDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLManager;
 

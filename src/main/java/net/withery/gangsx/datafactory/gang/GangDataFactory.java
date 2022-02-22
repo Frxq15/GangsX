@@ -1,7 +1,7 @@
 package net.withery.gangsx.datafactory.gang;
 
 import net.withery.gangsx.GangsX;
-import net.withery.gangsx.Objects.Gang;
+import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;

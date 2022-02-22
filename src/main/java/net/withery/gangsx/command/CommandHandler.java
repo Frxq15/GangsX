@@ -1,6 +1,6 @@
-package net.withery.gangsx.CommandManager;
+package net.withery.gangsx.command;
 
-import net.withery.gangsx.CommandManager.Commands.gangCommand;
+import net.withery.gangsx.command.Commands.gangCommand;
 import net.withery.gangsx.GangsX;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;

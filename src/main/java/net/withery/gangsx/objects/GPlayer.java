@@ -1,6 +1,6 @@
-package net.withery.gangsx.Objects;
+package net.withery.gangsx.objects;
 
-import net.withery.gangsx.Enums.Role;
+import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.GangsX;
 
 import java.util.HashMap;

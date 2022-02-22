@@ -1,4 +1,4 @@
-package net.withery.gangsx.Enums;
+package net.withery.gangsx.enums;
 
 public enum Upgrade {
     MEMBER_LIMIT(0),

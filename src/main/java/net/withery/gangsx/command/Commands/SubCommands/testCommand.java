@@ -1,7 +1,7 @@
-package net.withery.gangsx.CommandManager.Commands.SubCommands;
+package net.withery.gangsx.command.Commands.SubCommands;
 
-import net.withery.gangsx.CommandManager.SubCommand;
-import net.withery.gangsx.GUIManagement.GUIs.Shop;
+import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.gui.GUIs.Shop;
 import net.withery.gangsx.GangsX;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

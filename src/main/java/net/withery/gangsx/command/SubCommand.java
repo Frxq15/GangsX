@@ -1,10 +1,8 @@
-package net.withery.gangsx.CommandManager;
+package net.withery.gangsx.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public abstract class SubCommand {
     private final String command;

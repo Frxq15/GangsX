@@ -1,6 +1,6 @@
-package net.withery.gangsx.GUIManagement.GUIs;
+package net.withery.gangsx.gui.GUIs;
 
-import net.withery.gangsx.GUIManagement.GUITemplate;
+import net.withery.gangsx.gui.GUITemplate;
 import net.withery.gangsx.GangsX;
 
 public class Shop extends GUITemplate {
