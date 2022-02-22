@@ -67,15 +67,22 @@ public final class GangsX extends JavaPlugin {
             case MYSQL, MONGODB -> sqlSetup();
         }
 
-        if (sqlGangDataFactory == null) return;
+        /*if (sqlGangDataFactory == null) {
+            log("yeah bro its null");
+            return;
+        }*/
 
         sVersionChecker = new ServerVersionChecker();
 
-        if (sVersionChecker.isServerAbove(ServerVersion.VERSION_1_16))
+        if (sVersionChecker.isServerAbove(ServerVersion.VERSION_1_16)) {
+            log("set to 1.16");
             colorFormatter = new ColorFormatter_1_16();
+        }
 
-        else if (sVersionChecker.isServerAbove(ServerVersion.LEGACY))
+        else if (sVersionChecker.isServerAbove(ServerVersion.LEGACY)) {
+            log("set to legacy");
             colorFormatter = new ColorFormatter_LEGACY();
+        }
 
         else {
             // Throw error, shutdown logic

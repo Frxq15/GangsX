@@ -30,7 +30,7 @@ public class GUITemplate {
         this.plugin = plugin;
         this.rows = rows;
         this.title = title;
-        inventory = Bukkit.createInventory(null, 9 * rows, title);
+        inventory = Bukkit.createInventory(null, 9 * rows, plugin.getColorFormatter().format(title));
         inventoriesByUUID.put(getUUID(), this);
     }
 
