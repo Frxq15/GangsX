@@ -38,4 +38,8 @@ public class GPlayer {
     public static Map<UUID, GPlayer> getAllPlayerData() {
         return players;
     }
+
+    public Gang getGang() {
+        return gang;
+    }
 }

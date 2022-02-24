@@ -20,30 +20,6 @@ public class FileManager {
         this.plugin = plugin;
     }
 
-    public void createShopFile() {
-        ShopFile = new File(plugin.getDataFolder()+"/guis", "shop.yml");
-        if (!ShopFile.exists()) {
-            ShopFile.getParentFile().mkdirs();
-            plugin.log("shop.yml was created successfully");
-            plugin.getInstance().saveResource("guis/shop.yml", false);
-        }
-        ShopConfig = new YamlConfiguration();
-        try {
-            ShopConfig.load(ShopFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    public void reloadShopFile() { ShopConfig = YamlConfiguration.loadConfiguration(ShopFile); }
-    public void saveShopFile() {
-        try {
-            ShopConfig.save(ShopFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getShopFile() { return ShopConfig; }
-
     public void createLangFile() {
         LangFile = new File(plugin.getDataFolder(), "en-us.yml");
         if (!LangFile.exists()) {
@@ -68,4 +44,29 @@ public class FileManager {
         }
     }
     public FileConfiguration getLangFile() { return LangConfig; }
+
+    public void createShopFile() {
+        ShopFile = new File(plugin.getDataFolder()+"/guis", "shop.yml");
+        if (!ShopFile.exists()) {
+            ShopFile.getParentFile().mkdirs();
+            plugin.log("shop.yml was created successfully");
+            plugin.getInstance().saveResource("guis/shop.yml", false);
+        }
+        ShopConfig = new YamlConfiguration();
+        try {
+            ShopConfig.load(ShopFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadShopFile() { ShopConfig = YamlConfiguration.loadConfiguration(ShopFile); }
+    public void saveShopFile() {
+        try {
+            ShopConfig.save(ShopFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getShopFile() { return ShopConfig; }
+
 }

@@ -4,14 +4,14 @@ import net.withery.gangsx.enums.Upgrade;
 import net.withery.gangsx.GangsX;
 import org.bukkit.Bukkit;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Gang {
 
     private final GangsX plugin;
     private final UUID id;
+
+    private final static Map<UUID, Gang> gangs = new HashMap<>();
 
     private String name;
     private long created;
@@ -26,6 +26,8 @@ public class Gang {
     private final List<GPlayer> members;
     private final List<GPlayer> invites;
     private final List<Upgrade> upgrades;
+
+    private List<GPlayer> onlinemembers;
 
     public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
         this.plugin = plugin;
@@ -43,7 +45,7 @@ public class Gang {
         this.members = members;
         this.invites = invites;
         this.upgrades = upgrades;
-
+        gangs.put(id, this);
     }
 
     public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader) {
@@ -62,6 +64,7 @@ public class Gang {
         this.members = null;
         this.invites = null;
         this.upgrades = null;
+        gangs.put(id, this);
 
     }
 
@@ -177,6 +180,10 @@ public class Gang {
         this.members.add(player);
     }
 
+    public void addOnlineMember(GPlayer player) {
+        this.onlinemembers.add(player);
+    }
+
     public void inviteMember(GPlayer player) {
         this.invites.add(player);
     }
@@ -221,6 +228,8 @@ public class Gang {
         this.members.remove(player);
     }
 
+    public void removeOnlineMember(GPlayer player) { this.onlinemembers.remove(player); }
+
     public void removeUpgrade(Upgrade upgrade) {
         this.upgrades.remove(upgrade);
     }
@@ -233,6 +242,7 @@ public class Gang {
         this.bankBalance = 0;
     }
 
+
     public void resetKills() {
         this.kills = 0;
     }
@@ -242,10 +252,7 @@ public class Gang {
     }
 
     public List<GPlayer> getOnlineMembers() {
-        List<GPlayer> members = new ArrayList<>();
-        Bukkit.getOnlinePlayers().forEach(p -> {
-        });
-        return members;
+        return onlinemembers;
     }
 
 }
