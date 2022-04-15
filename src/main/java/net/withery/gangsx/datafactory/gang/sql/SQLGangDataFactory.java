@@ -1,49 +1,78 @@
 package net.withery.gangsx.datafactory.gang.sql;
 
 import net.withery.gangsx.GangsX;
-import net.withery.gangsx.objects.Gang;
 import net.withery.gangsx.datafactory.gang.GangDataFactory;
-import net.withery.gangsx.datafactory.sql.SQLManager;
+import net.withery.gangsx.datafactory.sql.SQLHandler;
+import net.withery.gangsx.objects.Gang;
+import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class SQLGangDataFactory extends GangDataFactory {
-    private final SQLManager sqlManager;
-    private String table = "gangsx_gangs";
 
-    public SQLGangDataFactory(GangsX plugin, SQLManager sqlManager) {
+    private final static Map<UUID, Gang> gangs = new HashMap<>();
+
+    private final SQLHandler sqlHandler;
+    private final String GANGS_TABLE;
+    private int savingTask;
+
+    public SQLGangDataFactory(GangsX plugin, SQLHandler sqlHandler, String prefix) {
         super(plugin);
-        this.sqlManager = sqlManager;
+        this.sqlHandler = sqlHandler;
+        this.GANGS_TABLE = prefix + "gangs";
     }
 
     @Override
     public boolean initialize() {
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS "+table+" " +
-                    "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
-                    "coins INT, bankBalance DOUBLE, kills INT, deaths INT, friendlyFire BOOLEAN);");
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return false;
+        }
+
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + GANGS_TABLE + " " +
+                "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
+                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, friendlyFire BOOLEAN);")) {
             statement.executeUpdate();
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
+
+        savingTask = startSavingTask();
+        return true;
     }
 
     @Override
     public void terminate() {
+        Bukkit.getScheduler().cancelTask(savingTask);
+        savingTask = 0;
 
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return;
+        }
+
+        for (Gang gang : gangs.values())
+            updateGangData(gang);
+
+        gangs.clear();
     }
 
     @Override
     public void initializeGangData(Gang gang) {
-        if(doesGangDataExist(gang.getID())) return;
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("INSERT INTO "+table+" " +
-                    "(uuid,name,created,leader,level,coins,bankBalance,kills,deaths,friendlyFire) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return;
+        }
+
+        if (doesGangDataExist(gang.getID())) return;
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + GANGS_TABLE + " " +
+                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, gang.getID().toString());
             statement.setString(2, gang.getName());
             statement.setLong(3, gang.getCreated());
@@ -62,47 +91,93 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public void deleteGangData(UUID uuid) {
-        if(!doesGangDataExist(uuid)) return;
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("DELETE * from "+table+" WHERE uuid="+uuid);
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return;
+        }
+
+        if (!doesGangDataExist(uuid)) return;
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("DELETE * FROM " + GANGS_TABLE + " WHERE uuid=?")) {
+            statement.setString(1, uuid.toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        gangs.remove(uuid);
     }
 
     @Override
     public Gang getGangData(UUID uuid) {
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT * from "+table+" WHERE uuid="+uuid);
+        if (gangs.get(uuid) != null)
+            return gangs.get(uuid);
+
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return null;
+        }
+
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM " + GANGS_TABLE + " WHERE uuid=?")) {
+            statement.setString(1, uuid.toString());
+
             ResultSet rs = statement.executeQuery();
-            if(rs.next()) {
-                Gang gang = new Gang(GangsX.getInstance(), UUID.fromString(rs.getString("uuid")), rs.getString("name"),
+            Gang gang = null;
+
+            if (rs.next()) {
+                gang = new Gang(GangsX.getInstance(), UUID.fromString(rs.getString("uuid")), rs.getString("name"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
                         rs.getBoolean("friendlyFire"), null, null, null, null);
-                return gang;
             }
+
+            rs.close();
+            return gang;
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     @Override
     public void updateGangData(Gang gang) {
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("UPDATE "+table+" SET name=?, created=?, leader=?, level=?, coins=?, " +
-                    "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid="+gang.getID().toString()+";");
-            statement.setString(1, gang.getName());
-            statement.setLong(2, gang.getCreated());
-            statement.setString(3, gang.getLeader().toString());
-            statement.setInt(4, gang.getLevel());
-            statement.setInt(5, gang.getCoins());
-            statement.setDouble(6, gang.getBankBalance());
-            statement.setInt(7, gang.getKills());
-            statement.setInt(8, gang.getDeaths());
-            statement.setBoolean(9, gang.hasFriendlyFire());
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return;
+        }
+
+        // Insert if not exists, update if exists
+        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
+                "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
+                "kills = ?, deaths = ?, friendlyFire = ?;";
+
+        // OLD: "UPDATE " + GANGS_TABLE + " SET name=?, created=?, leader=?, level=?, coins=?, " +
+        //                "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid=?;"
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {
+            int i = 1;
+
+            // Setting insert variables
+            statement.setString(i++, gang.getID().toString());
+            statement.setString(i++, gang.getName());
+            statement.setLong(i++, gang.getCreated());
+            statement.setString(i++, gang.getLeader().toString());
+            statement.setInt(i++, gang.getLevel());
+            statement.setInt(i++, gang.getCoins());
+            statement.setDouble(i++, gang.getBankBalance());
+            statement.setInt(i++, gang.getKills());
+            statement.setInt(i++, gang.getDeaths());
+            statement.setBoolean(i++, gang.hasFriendlyFire());
+
+            // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
+            // Setting update variables
+            statement.setString(i++, gang.getName());
+            statement.setLong(i++, gang.getCreated());
+            statement.setString(i++, gang.getLeader().toString());
+            statement.setInt(i++, gang.getLevel());
+            statement.setInt(i++, gang.getCoins());
+            statement.setDouble(i++, gang.getBankBalance());
+            statement.setInt(i++, gang.getKills());
+            statement.setInt(i++, gang.getDeaths());
+            statement.setBoolean(i, gang.hasFriendlyFire());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,40 +186,54 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public boolean doesGangDataExist(UUID uuid) {
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT gang FROM "+table+" where UUID=?");
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return false;
+        }
+
+        // Not checking cache as we want to check whether the data exists in the database (?)
+
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT gang FROM `" + GANGS_TABLE + "` where uuid=?")) {
             statement.setString(1, uuid.toString());
             ResultSet rs = statement.executeQuery();
-            if(rs.next()) {
-                return true;
-            }
+            boolean exists = rs.next();
+
+            rs.close();
+            return exists;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     @Override
     public boolean isGangDataLoaded(UUID uuid) {
-        return false;
+        return gangs.containsKey(uuid);
     }
 
     @Override
     public void loadGangData(UUID uuid) {
-
+        getGangData(uuid);
     }
 
     @Override
     public void unloadGangData(UUID uuid) {
+        if (gangs.get(uuid) != null)
+            updateGangData(gangs.remove(uuid));
     }
 
     @Override
     public String getGangName(UUID uuid) {
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT name from "+table+" WHERE uuid="+uuid);
-            statement.executeQuery();
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT name FROM " + GANGS_TABLE + " WHERE uuid=?")) {
+            statement.setString(1, uuid.toString());
             ResultSet rs = statement.executeQuery();
-            return rs.getString("name");
+            String name = null;
+            if (rs.next())
+                name = rs.getString("name");
+
+            rs.close();
+
+            return name;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -153,15 +242,28 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public UUID getGangUniqueId(String name) {
-        try {
-            PreparedStatement statement = sqlManager.getConnection().prepareStatement("SELECT uuid from "+table+" WHERE name="+name);
-            statement.executeQuery();
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT uuid FROM " + GANGS_TABLE + " WHERE name=?")) {
+            statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
-            return UUID.fromString(rs.getString("name"));
+            UUID uuid = null;
+
+            if (rs.next())
+                uuid = UUID.fromString(rs.getString("uuid"));
+
+            rs.close();
+
+            return uuid;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private int startSavingTask() {
+        return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+            for (Gang gang : gangs.values())
+                updateGangData(gang);
+        }, 20L * 60L * 5, 20L * 60L * 5).getTaskId(); // TODO: 15/04/2022 get config values for timer
     }
 
 }

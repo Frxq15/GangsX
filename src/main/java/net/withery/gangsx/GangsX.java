@@ -4,7 +4,7 @@ import net.withery.gangsx.api.APIHooks;
 import net.withery.gangsx.command.CommandHandler;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
-import net.withery.gangsx.datafactory.sql.SQLManager;
+import net.withery.gangsx.datafactory.sql.SQLHandler;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
 import net.withery.gangsx.managers.FileManager;
@@ -90,14 +90,15 @@ public final class GangsX extends JavaPlugin {
     }
 
     public void sqlSetup() {
-        SQLManager sqlManager = new SQLManager(this, settings.getHost(), settings.getDatabase(), settings.getUsername(), settings.getPassword(), settings.getPort());
-        if (!sqlManager.connect()) {
+        SQLHandler sqlHandler = new SQLHandler(this, settings.getHost(), settings.getDatabase(), settings.getUsername(), settings.getPassword(), settings.getPort());
+        if (!sqlHandler.connect()) {
             log("Connection to mysql failed.");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
-        sqlGangDataFactory = new SQLGangDataFactory(this, sqlManager);
+        // TODO: 14/04/2022 read table prefix from config
+        sqlGangDataFactory = new SQLGangDataFactory(this, sqlHandler, "gangsx_");
     }
 
     public static GangsX getInstance() {

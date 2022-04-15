@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public abstract class GangDataFactory {
 
-    private final GangsX plugin;
+    protected final GangsX plugin;
 
     public GangDataFactory(GangsX plugin) {
         this.plugin = plugin;
