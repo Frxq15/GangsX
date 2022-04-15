@@ -68,6 +68,27 @@ public class Gang {
 
     }
 
+    public Gang(GangsX plugin, final UUID id, final GPlayer gPlayer) {
+        this.plugin = plugin;
+        this.id = id;
+        //set stuff from sql
+        this.name = name;
+        this.created = created;
+        this.leader = leader;
+        this.level = 0;
+        this.coins = 0;
+        this.bankBalance = 0;
+        this.kills = 0;
+        this.deaths = 0;
+        this.friendlyFire = false;
+        this.allies = null;
+        this.members = null;
+        this.invites = null;
+        this.upgrades = null;
+        gangs.put(id, this);
+
+    }
+
     public UUID getID() {
         return id;
     }

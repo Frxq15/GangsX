@@ -2,6 +2,7 @@ package net.withery.gangsx.gui.GUIs;
 
 import net.withery.gangsx.gui.GUITemplate;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,9 +23,12 @@ public class Shop extends GUITemplate {
     private Player p;
     private Gang gang;
     private GangsX plugin;
-    public Shop(GangsX plugin) {
+    public Shop(GangsX plugin, Player player) {
         super(plugin, plugin.getFileManager().getShopFile().getInt("ROWS"), plugin.getFileManager().getShopFile().getString("TITLE"));
         this.plugin = plugin;
+        this.p = player;
+        GPlayer gPlayer = new GPlayer(plugin, p.getUniqueId());
+        this.gang = gPlayer.getGang();
         initialize();
     }
     FileConfiguration shop = plugin.getFileManager().getShopFile();

@@ -28,6 +28,18 @@ public class GPlayer {
         this.deaths = deaths;
         players.put(uuid, this);
     }
+    public GPlayer(GangsX plugin, final UUID uuid) {
+        this.plugin = plugin;
+        this.uuid = uuid;
+        //set rest from sql
+        this.gang = gang;
+        this.role = role;
+        this.hasGang = hasGang;
+        this.kills = kills;
+        this.deaths = deaths;
+        players.put(uuid, this);
+    }
+
     public static GPlayer getPlayerData(UUID uuid) {
         if (!players.containsKey(uuid)) {
             //new gplayer from sql

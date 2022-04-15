@@ -17,7 +17,7 @@ public class testCommand extends SubCommand {
 
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        Shop shop = new Shop(plugin);
+        Shop shop = new Shop(plugin, (Player) sender);
         shop.open((Player) sender);
     }
 }
