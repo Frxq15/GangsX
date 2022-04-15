@@ -10,10 +10,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class GUITemplate {
     public static Map<UUID, GUITemplate> inventoriesByUUID = new HashMap<>();
@@ -78,20 +75,6 @@ public class GUITemplate {
 
     protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
-        final ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
-        meta.setLore(Arrays.asList(lore));
-        item.setItemMeta(meta);
-        return item;
-    }
-
-    /*
-    @Dan if u see this, subIds are pretty much useless, as every block should be covered by a material since technically 1.13
-    also this is deprecated cause there is a new method to add "damage" which is basically the subId, mainly used to
-    add multiple textures to one item though
-    */
-    protected ItemStack createGuiItem(final Material material, byte subId, final String name, final String... lore) {
-        final ItemStack item = new ItemStack(material, 1, subId);
         final ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
         meta.setLore(Arrays.asList(lore));

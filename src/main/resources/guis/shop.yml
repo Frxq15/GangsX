@@ -4,6 +4,7 @@ ITEMS:
   1:
     SLOT: 0
     MATERIAL: GRASS_BLOCK
+    AMOUNT: 1
     NAME: "&ctest item"
     GLOW: true
     COST: 10 #In gang coins
@@ -15,12 +16,14 @@ SHOP_MISC_ITEMS:
   1:
     SLOT: 39
     MATERIAL: WHITE_STAINED_GLASS_PANE
+    AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   2:
     SLOT: 41
     MATERIAL: WHITE_STAINED_GLASS_PANE
+    AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []

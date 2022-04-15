@@ -16,3 +16,7 @@ gang:
     - fuck
     - shit
     - cunt
+
+shop:
+  #what should the currency for the shop be? (coins or bankBalance)
+  currency: "coins"
