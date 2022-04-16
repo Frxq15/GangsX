@@ -31,7 +31,7 @@ public abstract class GangDataFactory {
 
     /**
      * Adds the gang data to the storage for the first time.
-     * This method is not made to update existing data.
+     * This method is not used to update existing data.
      * Can block the main thread ({@link GangDataFactory#initializeGangDataAsync(Gang)} may be used instead)
      *
      * @param gang Gang that the data will be taken from
@@ -40,7 +40,7 @@ public abstract class GangDataFactory {
 
     /**
      * Asynchronously adds the gang data to the storage for the first time.
-     * This method is not made to update existing data.
+     * This method is not used to update existing data.
      *
      * @param gang Gang that the data will be taken from
      */

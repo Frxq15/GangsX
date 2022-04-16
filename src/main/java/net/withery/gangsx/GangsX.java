@@ -39,6 +39,7 @@ public final class GangsX extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        sqlGangDataFactory.terminate();
         // Shutdown logic here
         log("Disabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
