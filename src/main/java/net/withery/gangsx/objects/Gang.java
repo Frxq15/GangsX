@@ -3,6 +3,7 @@ package net.withery.gangsx.objects;
 import net.withery.gangsx.enums.Upgrade;
 import net.withery.gangsx.GangsX;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -87,6 +88,13 @@ public class Gang {
         this.upgrades = null;
         gangs.put(id, this);
 
+    }
+
+    public void sendMessage(String message) {
+        this.onlinemembers.forEach(member -> {
+            Player p = Bukkit.getPlayer(member.getUUID());
+            p.sendMessage(plugin.getColorFormatter().format(message));
+        });
     }
 
     public UUID getID() {

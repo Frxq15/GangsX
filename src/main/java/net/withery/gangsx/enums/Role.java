@@ -8,4 +8,8 @@ public enum Role {
     CO_LEADER,
     LEADER;
 
+
+    public int getPriority() {
+        return this.ordinal();
+    }
 }

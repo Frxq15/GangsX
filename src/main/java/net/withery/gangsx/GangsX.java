@@ -8,6 +8,7 @@ import net.withery.gangsx.datafactory.sql.SQLHandler;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
 import net.withery.gangsx.managers.FileManager;
+import net.withery.gangsx.managers.RoleManager;
 import net.withery.gangsx.settings.Settings;
 import net.withery.gangsx.settings.locale.LocaleRegistry;
 import net.withery.gangsx.settings.version.ServerVersion;
@@ -26,6 +27,7 @@ public final class GangsX extends JavaPlugin {
     private SQLGangDataFactory sqlGangDataFactory;
     private APIHooks apiHooks;
     private FileManager fileManager;
+    private RoleManager roleManager;
 
     @Override
     public void onEnable() {
@@ -63,6 +65,8 @@ public final class GangsX extends JavaPlugin {
 
         fileManager = new FileManager(this);
         fileManager.createShopFile();
+
+        roleManager = new RoleManager(this, null);
 
         switch (settings.getStorageType()) {
             case MYSQL, MONGODB -> sqlSetup();
@@ -119,5 +123,7 @@ public final class GangsX extends JavaPlugin {
     public LocaleRegistry getLocaleRegistry() {
         return localeRegistry;
     }
+
+    public RoleManager getRoleManager() { return roleManager; }
 
 }

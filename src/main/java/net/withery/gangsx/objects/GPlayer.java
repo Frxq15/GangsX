@@ -51,7 +51,12 @@ public class GPlayer {
         return players;
     }
 
+
+    public UUID getUUID() { return uuid; }
     public Gang getGang() {
         return gang;
     }
+    public Role getRole() { return role; }
+    public Integer getKills() { return kills; }
+    public Integer getDeaths() { return deaths; }
 }
