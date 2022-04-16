@@ -177,6 +177,7 @@ public abstract class GangDataFactory {
      * @return Name of the gang
      */
     public abstract String getGangName(UUID uuid);
+    public abstract String getGangData(UUID uuid, String data);
 
     /**
      * Asynchronously gets the name of the gang with the given uuid.

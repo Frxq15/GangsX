@@ -24,10 +24,10 @@ public class Shop extends GUITemplate {
     private Gang gang;
     private GangsX plugin;
     public Shop(GangsX plugin, Player player) {
-        super(plugin, plugin.getFileManager().getShopFile().getInt("ROWS"), plugin.getFileManager().getShopFile().getString("TITLE"));
+        super(plugin, plugin.getFileManager().getShopFile().getInt("ROWS"), plugin.getColorFormatter().format(plugin.getFileManager().getShopFile().getString("TITLE")));
         this.plugin = plugin;
         this.p = player;
-        GPlayer gPlayer = new GPlayer(plugin, p.getUniqueId());
+        GPlayer gPlayer = GPlayer.getPlayerData(p.getUniqueId());
         this.gang = gPlayer.getGang();
         initialize();
     }
@@ -61,6 +61,7 @@ public class Shop extends GUITemplate {
     }
 
     void initialize() {
+        initializeItems();
         miscItems();
     }
     void initializeItems() {
@@ -116,9 +117,9 @@ public class Shop extends GUITemplate {
         String fcost = String.format("%,d", getItemCost(item));
         for(String lines : shop.getStringList("ITEMS."+item+".LORE")) {
             lines = lines.replace("%cost%", fcost);
-            lore.add(lines);
+            lore.add(plugin.getColorFormatter().format(lines));
         }
-        meta.setDisplayName(name);
+        meta.setDisplayName(plugin.getColorFormatter().format(name));
         if(hasGlow(item, true)) {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -138,9 +139,9 @@ public class Shop extends GUITemplate {
 
         final ItemMeta meta = i.getItemMeta();
         for(String lines : shop.getStringList("ITEMS."+item+".LORE")) {
-            lore.add(lines);
+            lore.add(plugin.getColorFormatter().format(lines));
         }
-        meta.setDisplayName(name);
+        meta.setDisplayName(plugin.getColorFormatter().format(name));
         if(hasGlow(item, false)) {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

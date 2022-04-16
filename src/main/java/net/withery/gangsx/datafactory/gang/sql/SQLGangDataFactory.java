@@ -241,6 +241,24 @@ public class SQLGangDataFactory extends GangDataFactory {
     }
 
     @Override
+    public String getGangData(UUID uuid, String type) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM " + GANGS_TABLE + " WHERE uuid=?")) {
+            statement.setString(1, uuid.toString());
+            ResultSet rs = statement.executeQuery();
+            String result = null;
+            if (rs.next())
+                result = rs.getString(type);
+
+            rs.close();
+
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public UUID getGangUniqueId(String name) {
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT uuid FROM " + GANGS_TABLE + " WHERE name=?")) {
             statement.setString(1, name);
