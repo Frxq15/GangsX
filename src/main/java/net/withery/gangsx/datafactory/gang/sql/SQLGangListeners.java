@@ -18,4 +18,5 @@ public class SQLGangListeners implements Listener {
         Gang gang = gPlayer.getGang();
         gang.addOnlineMember(gPlayer);
     }
+
 }

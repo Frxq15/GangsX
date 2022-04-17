@@ -27,4 +27,10 @@ public class RoleManager {
         }
         return roles[Math.max(0, role.ordinal() - 1)];
     }
+    public void promotePlayer() {
+        gPlayer.setRole(getNextRole());
+    }
+    public void demotePlayer() {
+        gPlayer.setRole(getPreviousRole());
+    }
 }

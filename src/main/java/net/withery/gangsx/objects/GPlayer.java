@@ -59,4 +59,7 @@ public class GPlayer {
     public Role getRole() { return role; }
     public Integer getKills() { return kills; }
     public Integer getDeaths() { return deaths; }
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

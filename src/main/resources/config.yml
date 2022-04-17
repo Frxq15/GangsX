@@ -11,12 +11,30 @@ database:
     connection-string: ""
 
 gang:
+  #how often should gang data be backed up?
+  save-interval: 5 #time in minutes
   blacklisted_names:
     - nigger
     - fuck
     - shit
     - cunt
+  name_min_length: 3
+  name_max_length: 16
+  maximum_level: 5
+  chat_format: "&f[&bGang-Chat&f] &7%role% &7%player%: &b%message%"
+  social_spy_format: "&f[&bGang-Spy&f] &7(%gang%) %role% &7%player%&7: &b%message%"
 
 shop:
   #what should the currency for the shop be? (coins or bankBalance)
   currency: "coins"
+
+upgrades:
+  max_homes:
+    default: 1
+    stages:
+      1:
+        value: 3
+        cost: 100000
+      2:
+        value: 5
+        cost: 250000
