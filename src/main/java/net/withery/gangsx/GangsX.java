@@ -2,6 +2,9 @@ package net.withery.gangsx;
 
 import net.withery.gangsx.api.APIHooks;
 import net.withery.gangsx.command.CommandHandler;
+import net.withery.gangsx.datafactory.gang.GangDataFactory;
+import net.withery.gangsx.datafactory.player.GPlayerDataFactory;
+import net.withery.gangsx.datafactory.player.sql.SQLGPlayerDataFactory;
 import net.withery.gangsx.formatting.color.ColorFormatter;
 import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLHandler;
@@ -19,12 +22,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GangsX extends JavaPlugin {
 
-    private static GangsX instance;
     private Settings settings;
     private ServerVersionChecker sVersionChecker;
     private ColorFormatter colorFormatter;
     private LocaleRegistry localeRegistry;
-    private SQLGangDataFactory sqlGangDataFactory;
+    private GangDataFactory gangDataFactory;
+    private GPlayerDataFactory gPlayerDataFactory;
     private APIHooks apiHooks;
     private FileManager fileManager;
     private RoleManager roleManager;
@@ -32,16 +35,15 @@ public final class GangsX extends JavaPlugin {
     @Override
     public void onEnable() {
         // Initialization logic here
-        instance = this;
         saveDefaultConfig();
         registry();
-        if (sqlGangDataFactory == null) return;
+        if (gangDataFactory == null) return;
         log("Enabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
 
     @Override
     public void onDisable() {
-        sqlGangDataFactory.terminate();
+        gangDataFactory.terminate();
         // Shutdown logic here
         log("Disabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }
@@ -69,7 +71,8 @@ public final class GangsX extends JavaPlugin {
         roleManager = new RoleManager(this, null);
 
         switch (settings.getStorageType()) {
-            case MYSQL, MONGODB -> sqlSetup();
+            case MYSQL -> sqlSetup();
+            case MONGODB -> getLogger().warning("MongoDB not supported yet.");
         }
 
         /*if (sqlGangDataFactory == null) {
@@ -103,11 +106,8 @@ public final class GangsX extends JavaPlugin {
         }
 
         // TODO: 14/04/2022 read table prefix from config
-        sqlGangDataFactory = new SQLGangDataFactory(this, sqlHandler, "gangsx_");
-    }
-
-    public static GangsX getInstance() {
-        return instance;
+        gangDataFactory = new SQLGangDataFactory(this, sqlHandler, "gangsx_");
+        gPlayerDataFactory = new SQLGPlayerDataFactory(this, sqlHandler, "gangsx_");
     }
 
     public Settings getSettings() {
@@ -116,6 +116,14 @@ public final class GangsX extends JavaPlugin {
 
     public ColorFormatter getColorFormatter() {
         return colorFormatter;
+    }
+
+    public GangDataFactory getGangDataFactory() {
+        return gangDataFactory;
+    }
+
+    public GPlayerDataFactory getGPlayerDataFactory() {
+        return gPlayerDataFactory;
     }
 
     public FileManager getFileManager() { return fileManager; }

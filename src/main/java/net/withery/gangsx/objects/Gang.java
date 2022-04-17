@@ -12,8 +12,6 @@ public class Gang {
     private final GangsX plugin;
     private final UUID id;
 
-    private final static Map<UUID, Gang> gangs = new HashMap<>();
-
     private String name;
     private long created;
     private UUID leader;
@@ -46,14 +44,13 @@ public class Gang {
         this.members = members;
         this.invites = invites;
         this.upgrades = upgrades;
-        gangs.put(id, this);
     }
 
-    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader) {
+    public Gang(GangsX plugin, final UUID id, final String name, final UUID leader) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
-        this.created = created;
+        this.created = System.currentTimeMillis();
         this.leader = leader;
         this.level = 0;
         this.coins = 0;
@@ -62,37 +59,15 @@ public class Gang {
         this.deaths = 0;
         this.friendlyFire = false;
         this.allies = null;
-        this.members = null;
+        this.members = List.of(plugin.getGPlayerDataFactory().getGPlayerData(leader));
         this.invites = null;
         this.upgrades = null;
-        gangs.put(id, this);
-
-    }
-
-    public Gang(GangsX plugin, final UUID id, final GPlayer gPlayer) {
-        this.plugin = plugin;
-        this.id = id;
-        //set stuff from sql
-        this.name = name;
-        this.created = created;
-        this.leader = leader;
-        this.level = 0;
-        this.coins = 0;
-        this.bankBalance = 0;
-        this.kills = 0;
-        this.deaths = 0;
-        this.friendlyFire = false;
-        this.allies = null;
-        this.members = null;
-        this.invites = null;
-        this.upgrades = null;
-        gangs.put(id, this);
 
     }
 
     public void sendMessage(String message) {
         this.onlinemembers.forEach(member -> {
-            Player p = Bukkit.getPlayer(member.getUUID());
+            Player p = Bukkit.getPlayer(member.getID());
             p.sendMessage(plugin.getColorFormatter().format(message));
         });
     }
@@ -257,7 +232,9 @@ public class Gang {
         this.members.remove(player);
     }
 
-    public void removeOnlineMember(GPlayer player) { this.onlinemembers.remove(player); }
+    public void removeOnlineMember(GPlayer player) {
+        this.onlinemembers.remove(player);
+    }
 
     public void removeUpgrade(Upgrade upgrade) {
         this.upgrades.remove(upgrade);
@@ -282,6 +259,13 @@ public class Gang {
 
     public List<GPlayer> getOnlineMembers() {
         return onlinemembers;
+    }
+
+    public boolean checkUnload() {
+        if (getOnlineMembers().isEmpty())
+            return true;
+
+        return false;
     }
 
 }

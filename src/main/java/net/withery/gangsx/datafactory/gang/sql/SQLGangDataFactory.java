@@ -87,6 +87,9 @@ public class SQLGangDataFactory extends GangDataFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        if (!gangs.containsKey(gang.getID()))
+            gangs.put(gang.getID(), gang);
     }
 
     @Override
@@ -124,10 +127,16 @@ public class SQLGangDataFactory extends GangDataFactory {
             Gang gang = null;
 
             if (rs.next()) {
-                gang = new Gang(GangsX.getInstance(), UUID.fromString(rs.getString("uuid")), rs.getString("name"),
+                gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
-                        rs.getBoolean("friendlyFire"), null, null, null, null);
+                        rs.getBoolean("friendlyFire"), null, null, null, null); // TODO: 17/04/2022 get upgrades/members/allies
+
+                // TODO: 17/04/2022 check how to get table names from each others datafactory
+                // Members: SELECT uuid FROM `*players_table*` WHERE gang=?;
+                // Allies: SELECT ally FROM `*allies_table*` WHERE gang=?; (Requires another table (gang - ally) which is using a composite primary key)
+                // Upgrades: SELECT * FROM `*upgrades_table*` WHERE gang=?; (Could be done within the gangs table but just to minimize having giant tables id recommend making another one (gang - upgrade1 - upgrade2 - upgrade3 - etc.)
+                // Invites: Assume they reset when the gang gets unloaded anyways so doesn't quite matter
             }
 
             rs.close();
@@ -224,7 +233,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public String getGangName(UUID uuid) {
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT name FROM " + GANGS_TABLE + " WHERE uuid=?")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT name FROM `" + GANGS_TABLE + "` WHERE uuid=?")) {
             statement.setString(1, uuid.toString());
             ResultSet rs = statement.executeQuery();
             String name = null;
@@ -241,26 +250,8 @@ public class SQLGangDataFactory extends GangDataFactory {
     }
 
     @Override
-    public String getGangData(UUID uuid, String type) {
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM " + GANGS_TABLE + " WHERE uuid=?")) {
-            statement.setString(1, uuid.toString());
-            ResultSet rs = statement.executeQuery();
-            String result = null;
-            if (rs.next())
-                result = rs.getString(type);
-
-            rs.close();
-
-            return result;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
     public UUID getGangUniqueId(String name) {
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT uuid FROM " + GANGS_TABLE + " WHERE name=?")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT uuid FROM `" + GANGS_TABLE + "` WHERE name=?")) {
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
             UUID uuid = null;

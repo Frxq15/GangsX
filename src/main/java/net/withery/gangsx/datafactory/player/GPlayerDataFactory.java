@@ -67,7 +67,6 @@ public abstract class GPlayerDataFactory {
 
     /**
      * Gets the player data with the given unique id from the storage.
-     * If there isn't any player with the given unique id, a new GPlayer will be created.
      * Can block the main thread ({@link GPlayerDataFactory#getGPlayerDataAsync(UUID)} may be used instead).
      *
      * @param uuid Unique id of the player that should be loaded
@@ -77,7 +76,6 @@ public abstract class GPlayerDataFactory {
 
     /**
      * Asynchronously gets the player data with the given unique id from the storage.
-     * If there isn't any player with the given unique id, a new player will be created.
      *
      * @param uuid Unique id of the player that should be loaded
      * @return A {@link CompletableFuture<GPlayer>} that will contain the loaded player, once the task has finished

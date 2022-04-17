@@ -25,7 +25,7 @@ public class FileManager {
         if (!LangFile.exists()) {
             LangFile.getParentFile().mkdirs();
             plugin.log("en-us.yml was created successfully");
-            plugin.getInstance().saveResource("en-us.yml", false);
+            plugin.saveResource("en-us.yml", false);
         }
 
         LangConfig = new YamlConfiguration();
@@ -50,7 +50,7 @@ public class FileManager {
         if (!ShopFile.exists()) {
             ShopFile.getParentFile().mkdirs();
             plugin.log("shop.yml was created successfully");
-            plugin.getInstance().saveResource("guis/shop.yml", false);
+            plugin.saveResource("guis/shop.yml", false);
         }
         ShopConfig = new YamlConfiguration();
         try {

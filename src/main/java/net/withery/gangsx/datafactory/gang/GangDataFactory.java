@@ -67,7 +67,6 @@ public abstract class GangDataFactory {
 
     /**
      * Gets the gang data with the given unique id from the storage.
-     * If there isn't any gang with the given unique id, a new gang will be created.
      * Can block the main thread ({@link GangDataFactory#getGangDataAsync(UUID)} may be used instead).
      *
      * @param uuid Unique id of the gang that should be loaded
@@ -77,7 +76,6 @@ public abstract class GangDataFactory {
 
     /**
      * Asynchronously gets the gang data with the given unique id from the storage.
-     * If there isn't any gang with the given unique id, a new gang will be created.
      *
      * @param uuid Unique id of the gang that should be loaded
      * @return A {@link CompletableFuture<Gang>} that will contain the loaded gang, once the task has finished
@@ -177,7 +175,6 @@ public abstract class GangDataFactory {
      * @return Name of the gang
      */
     public abstract String getGangName(UUID uuid);
-    public abstract String getGangData(UUID uuid, String data);
 
     /**
      * Asynchronously gets the name of the gang with the given uuid.

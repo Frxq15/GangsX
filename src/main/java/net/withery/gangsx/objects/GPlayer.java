@@ -1,65 +1,71 @@
 package net.withery.gangsx.objects;
 
-import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.enums.Role;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class GPlayer {
-    private final static Map<UUID, GPlayer> players = new HashMap<>();
+
     private final GangsX plugin;
     private final UUID uuid;
+    private String name;
 
     private Gang gang;
     private Role role;
-    private boolean hasGang;
     private int kills;
     private int deaths;
 
-    public GPlayer(GangsX plugin, final UUID uuid, final Gang gang, final Role role, final boolean hasGang, final int kills, final int deaths) {
+    public GPlayer(GangsX plugin, final UUID uuid, final String name, final Gang gang, final Role role, final int kills, final int deaths) {
         this.plugin = plugin;
         this.uuid = uuid;
+        this.name = name;
         this.gang = gang;
         this.role = role;
-        this.hasGang = hasGang;
         this.kills = kills;
         this.deaths = deaths;
-        players.put(uuid, this);
     }
-    public GPlayer(GangsX plugin, final UUID uuid) {
+
+    public GPlayer(GangsX plugin, final UUID uuid, final String name) {
         this.plugin = plugin;
         this.uuid = uuid;
-        //set rest from sql
-        this.gang = gang;
-        this.role = role;
-        this.hasGang = hasGang;
-        this.kills = kills;
-        this.deaths = deaths;
-        players.put(uuid, this);
+        this.name = name;
+        this.gang = null;
+        this.role = null;
+        this.kills = 0;
+        this.deaths = 0;
     }
 
-    public static GPlayer getPlayerData(UUID uuid) {
-        if (!players.containsKey(uuid)) {
-            //new gplayer from sql
-        }
-        return players.get(uuid);
+    public UUID getID() {
+        return uuid;
     }
 
-    public static Map<UUID, GPlayer> getAllPlayerData() {
-        return players;
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public UUID getUUID() { return uuid; }
     public Gang getGang() {
         return gang;
     }
-    public Role getRole() { return role; }
-    public Integer getKills() { return kills; }
-    public Integer getDeaths() { return deaths; }
+
+    public Role getRole() {
+        return role;
+    }
+
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public Integer getKills() {
+        return kills;
+    }
+
+    public Integer getDeaths() {
+        return deaths;
+    }
+
 }
