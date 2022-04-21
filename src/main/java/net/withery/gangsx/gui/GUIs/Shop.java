@@ -20,6 +20,9 @@ public class Shop extends GUITemplate {
     private Player player;
     private Gang gang;
     private GangsX plugin;
+    private FileConfiguration shop;
+    private Double balance;
+    private Integer coins;
 
     public Shop(GangsX plugin, Player player) {
         super(plugin, plugin.getFileManager().getShopFile().getInt("ROWS"), plugin.getColorFormatter().format(plugin.getFileManager().getShopFile().getString("TITLE")));
@@ -27,12 +30,11 @@ public class Shop extends GUITemplate {
         this.player = player;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
         this.gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        this.shop = plugin.getFileManager().getShopFile();
+        this.balance = gang.getBankBalance();
+        this.coins = gang.getCoins();
         initialize();
     }
-
-    FileConfiguration shop = plugin.getFileManager().getShopFile();
-    Double balance = gang.getBankBalance();
-    Integer coins = gang.getCoins();
 
     public Integer getBalance() {
         String selection = plugin.getConfig().getString("shop.currency");

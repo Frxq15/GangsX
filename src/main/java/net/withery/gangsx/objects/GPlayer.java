@@ -52,6 +52,10 @@ public class GPlayer {
         return gangId;
     }
 
+    public void setGangId(UUID gangId) {
+        this.gangId = gangId;
+    }
+
     public Role getRole() {
         return role;
     }
