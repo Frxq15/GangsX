@@ -3,11 +3,12 @@ package net.withery.gangsx.events;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerJoinGangEvent extends Event {
+public class PlayerJoinGangEvent extends Event implements Cancellable {
     private final GangsX plugin;
     private final Player player;
     private final Gang gang;

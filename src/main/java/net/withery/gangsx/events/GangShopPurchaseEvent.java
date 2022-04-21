@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemFlag;
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GangShopPurchaseEvent extends Event {
+public class GangShopPurchaseEvent extends Event implements Cancellable {
     private final GangsX plugin;
     private final Player player;
     private final Gang gang;
