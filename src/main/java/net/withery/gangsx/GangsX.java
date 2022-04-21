@@ -10,6 +10,7 @@ import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLHandler;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
+import net.withery.gangsx.listener.DataFactoryListener;
 import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.managers.RoleManager;
 import net.withery.gangsx.settings.Settings;
@@ -74,6 +75,8 @@ public final class GangsX extends JavaPlugin {
             case MYSQL -> sqlSetup();
             case MONGODB -> getLogger().warning("MongoDB not supported yet.");
         }
+
+        Bukkit.getPluginManager().registerEvents(new DataFactoryListener(this), this);
 
         /*if (sqlGangDataFactory == null) {
             log("yeah bro its null");

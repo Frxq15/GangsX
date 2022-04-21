@@ -59,7 +59,7 @@ public class Gang {
         this.deaths = 0;
         this.friendlyFire = false;
         this.allies = null;
-        this.members = List.of(plugin.getGPlayerDataFactory().getGPlayerData(leader));
+        this.members = null;
         this.invites = null;
         this.upgrades = null;
 

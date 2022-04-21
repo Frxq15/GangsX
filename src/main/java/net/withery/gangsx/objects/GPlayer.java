@@ -48,6 +48,8 @@ public class GPlayer {
         this.name = name;
     }
 
+    public void setGang(Gang gang) { this.gang = gang; }
+
     public Gang getGang() {
         return gang;
     }

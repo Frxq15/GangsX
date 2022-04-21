@@ -76,7 +76,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 "(uuid, name, gang, role, kills, deaths) VALUES (?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, gPlayer.getID().toString());
             statement.setString(2, gPlayer.getName());
-            statement.setString(3, gPlayer.getGang().toString());
+            statement.setString(3, gPlayer.getGang().getID().toString());
             statement.setString(4, gPlayer.getRole().name());
             statement.setInt(5, gPlayer.getKills());
             statement.setInt(6, gPlayer.getDeaths());
