@@ -37,7 +37,7 @@ public class Placeholders {
         if (player == null) {
             return "Invalid Player";
         }
-        GPlayer gPlayer = GPlayer.getPlayerData(player.getUniqueId());
+        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
         Gang gang = gPlayer.getGang();
 
         switch (identifier) {

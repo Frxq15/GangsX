@@ -68,7 +68,7 @@ public final class GangsX extends JavaPlugin {
         fileManager = new FileManager(this);
         fileManager.createShopFile();
 
-        roleManager = new RoleManager(this, null);
+        roleManager = new RoleManager(this);
 
         switch (settings.getStorageType()) {
             case MYSQL -> sqlSetup();
@@ -107,7 +107,10 @@ public final class GangsX extends JavaPlugin {
 
         // TODO: 14/04/2022 read table prefix from config
         gangDataFactory = new SQLGangDataFactory(this, sqlHandler, "gangsx_");
+        getGangDataFactory().initialize();
         gPlayerDataFactory = new SQLGPlayerDataFactory(this, sqlHandler, "gangsx_");
+        getGPlayerDataFactory().initialize();
+        log("Connected to mysql successful.");
     }
 
     public Settings getSettings() {
