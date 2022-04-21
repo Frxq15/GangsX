@@ -1,4 +1,4 @@
-package net.withery.gangsx.command.Commands.SubCommands;
+package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.GangsX;

@@ -1,9 +1,9 @@
-package net.withery.gangsx.command.Commands;
+package net.withery.gangsx.command.commands;
 
-import net.withery.gangsx.command.Commands.SubCommands.createCommand;
-import net.withery.gangsx.command.Commands.SubCommands.helpCommand;
-import net.withery.gangsx.command.Commands.SubCommands.testCommand;
-import net.withery.gangsx.command.Commands.SubCommands.versionCommand;
+import net.withery.gangsx.command.commands.subcommands.createCommand;
+import net.withery.gangsx.command.commands.subcommands.helpCommand;
+import net.withery.gangsx.command.commands.subcommands.testCommand;
+import net.withery.gangsx.command.commands.subcommands.versionCommand;
 import net.withery.gangsx.command.ParentCommand;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.GangsX;

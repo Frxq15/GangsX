@@ -7,13 +7,13 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class GangCreateEvent extends Event {
+public class PlayerJoinGangEvent extends Event {
     private final GangsX plugin;
     private final Player player;
     private final Gang gang;
     private boolean cancelled;
 
-    public GangCreateEvent(GangsX plugin, Player player, Gang gang) {
+    public PlayerJoinGangEvent(GangsX plugin, Player player, Gang gang) {
         this.plugin = plugin;
         this.player = player;
         this.gang = gang;
@@ -28,16 +28,16 @@ public class GangCreateEvent extends Event {
         return player;
     }
 
-    @NotNull
-    public Gang getGang() {
-        return gang;
-    }
-
     public boolean isCancelled() {
         return cancelled;
     }
 
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
+    }
+
+    @NotNull
+    public Gang getGang() {
+        return gang;
     }
 }

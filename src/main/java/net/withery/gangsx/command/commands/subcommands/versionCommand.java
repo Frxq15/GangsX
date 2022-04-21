@@ -1,16 +1,11 @@
-package net.withery.gangsx.command.Commands.SubCommands;
+package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
-import net.withery.gangsx.objects.GPlayer;
-import net.withery.gangsx.objects.Gang;
 import net.withery.gangsx.settings.locale.LocaleReference;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 public class versionCommand extends SubCommand {
     private final GangsX plugin;

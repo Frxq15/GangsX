@@ -1,5 +1,7 @@
 package net.withery.gangsx.settings.locale;
 
+import java.util.List;
+
 public enum LocaleReference {
 
     PREFIX("prefix", "&#bdc3c7[&#eb4034GangsX&#bdc3c7] "),
