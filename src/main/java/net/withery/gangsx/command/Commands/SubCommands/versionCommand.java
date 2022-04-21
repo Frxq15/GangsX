@@ -1,0 +1,27 @@
+package net.withery.gangsx.command.Commands.SubCommands;
+
+import net.withery.gangsx.GangsX;
+import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.objects.GPlayer;
+import net.withery.gangsx.objects.Gang;
+import net.withery.gangsx.settings.locale.LocaleReference;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
+
+public class versionCommand extends SubCommand {
+    private final GangsX plugin;
+
+    public versionCommand(GangsX plugin) {
+        super("version", "gangsx.command.versin", "version", new String[]{"v"});
+        this.plugin = plugin;
+    }
+
+    @Override
+    public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_PLUGIN_VERSION, plugin.getDescription().getVersion());
+    }
+}

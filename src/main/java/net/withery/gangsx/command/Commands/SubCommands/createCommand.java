@@ -31,7 +31,7 @@ public class createCommand extends SubCommand {
             String name = args[0];
             Gang gang = new Gang(plugin, UUID.randomUUID(), name, p.getUniqueId());
             GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
-            gPlayer.setGang(gang);
+            gPlayer.setGangId(gPlayer.getGangId());
             plugin.getLocaleRegistry().sendMessageToAll(LocaleReference.COMMAND_GANG_CREATED, gang.getName(), p.getName());
             plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_GANG_CREATED);
             return;

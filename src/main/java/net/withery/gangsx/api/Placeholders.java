@@ -79,7 +79,7 @@ public class Placeholders {
             case "player_deaths":
                 return String.valueOf(gPlayer.getDeaths());
             case "player_role":
-                return gPlayer.getRole().name();
+                return gPlayer.getRole().getName();
 
                 /* PLUGIN PLACEHOLDERS MAYBE?
 

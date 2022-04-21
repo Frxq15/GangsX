@@ -28,7 +28,7 @@ public class RoleManager {
     public Role getPreviousRole() {
         Role[] roles = Role.values();
         if(role.getPriority() == 0) {
-            return Role.Recruit;
+            return Role.RECRUIT;
         }
         return roles[Math.max(0, role.ordinal() - 1)];
     }
