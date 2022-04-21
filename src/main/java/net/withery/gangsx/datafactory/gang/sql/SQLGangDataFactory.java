@@ -112,6 +112,8 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     @Override
     public Gang getGangData(UUID uuid) {
+        if (uuid == null) return null;
+
         if (gangs.get(uuid) != null)
             return gangs.get(uuid);
 

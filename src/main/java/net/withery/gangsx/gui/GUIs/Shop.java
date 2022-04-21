@@ -26,7 +26,7 @@ public class Shop extends GUITemplate {
         this.plugin = plugin;
         this.player = player;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
-        this.gang = gPlayer.getGang();
+        this.gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
         initialize();
     }
 

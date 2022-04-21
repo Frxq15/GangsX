@@ -11,16 +11,16 @@ public class GPlayer {
     private final UUID uuid;
     private String name;
 
-    private Gang gang;
+    private UUID gangId;
     private Role role;
     private int kills;
     private int deaths;
 
-    public GPlayer(GangsX plugin, final UUID uuid, final String name, final Gang gang, final Role role, final int kills, final int deaths) {
+    public GPlayer(GangsX plugin, final UUID uuid, final String name, final UUID gangId, final Role role, final int kills, final int deaths) {
         this.plugin = plugin;
         this.uuid = uuid;
         this.name = name;
-        this.gang = gang;
+        this.gangId = gangId;
         this.role = role;
         this.kills = kills;
         this.deaths = deaths;
@@ -30,7 +30,7 @@ public class GPlayer {
         this.plugin = plugin;
         this.uuid = uuid;
         this.name = name;
-        this.gang = null;
+        this.gangId = null;
         this.role = null;
         this.kills = 0;
         this.deaths = 0;
@@ -48,8 +48,8 @@ public class GPlayer {
         this.name = name;
     }
 
-    public Gang getGang() {
-        return gang;
+    public UUID getGangId() {
+        return gangId;
     }
 
     public Role getRole() {

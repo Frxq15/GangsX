@@ -5,7 +5,6 @@ import net.withery.gangsx.datafactory.player.GPlayerDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLHandler;
 import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.objects.GPlayer;
-import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
@@ -76,7 +75,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 "(uuid, name, gang, role, kills, deaths) VALUES (?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, gPlayer.getID().toString());
             statement.setString(2, gPlayer.getName());
-            statement.setString(3, gPlayer.getGang().toString());
+            statement.setString(3, gPlayer.getGangId().toString());
             statement.setString(4, gPlayer.getRole().name());
             statement.setInt(5, gPlayer.getKills());
             statement.setInt(6, gPlayer.getDeaths());
@@ -126,12 +125,12 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             if (rs.next()) {
                 UUID uuidDB = UUID.fromString(rs.getString("uuid"));
                 String name = rs.getString("name");
-                Gang gang = plugin.getGangDataFactory().getGangData(UUID.fromString(rs.getString("gang")));
+                UUID gangId = UUID.fromString(rs.getString("gang"));
                 Role role = Role.valueOf(rs.getString("role"));
                 int kills = rs.getInt("kills");
                 int deaths = rs.getInt("deaths");
 
-                gPlayer = new GPlayer(plugin, uuidDB, name, gang, role, kills, deaths);
+                gPlayer = new GPlayer(plugin, uuidDB, name, gangId, role, kills, deaths);
             }
 
             rs.close();
@@ -159,7 +158,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             // Setting insert variables
             statement.setString(i++, gPlayer.getID().toString());
             statement.setString(i++, gPlayer.getName());
-            statement.setString(i++, gPlayer.getGang().getID().toString());
+            statement.setString(i++, gPlayer.getGangId().toString());
             statement.setString(i++, gPlayer.getRole().name());
             statement.setInt(i++, gPlayer.getKills());
             statement.setInt(i++, gPlayer.getDeaths());
@@ -167,7 +166,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
             statement.setString(i++, gPlayer.getName());
-            statement.setString(i++, gPlayer.getGang().getID().toString());
+            statement.setString(i++, gPlayer.getGangId().toString());
             statement.setString(i++, gPlayer.getRole().name());
             statement.setInt(i++, gPlayer.getKills());
             statement.setInt(i, gPlayer.getDeaths());

@@ -44,7 +44,7 @@ public class DataFactoryListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(event.getPlayer().getUniqueId());
-        Gang gang = gPlayer.getGang();
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
         if (gang != null)
             gang.addOnlineMember(gPlayer);
     }
@@ -54,7 +54,7 @@ public class DataFactoryListener implements Listener {
         Player player = event.getPlayer();
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
 
-        Gang gang = gPlayer.getGang();
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
         if (gang != null) {
             gang.removeOnlineMember(gPlayer);
             if (gang.checkUnload())
