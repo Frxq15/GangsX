@@ -29,8 +29,8 @@ shop:
   currency: "coins"
 
 upgrades:
-  max_homes:
-    default: 1
+  home_limit:
+    maximum_level: 2
     stages:
       1:
         value: 3

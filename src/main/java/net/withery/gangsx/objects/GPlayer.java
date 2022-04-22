@@ -13,8 +13,7 @@ public class GPlayer {
 
     private UUID gangId;
     private Role role;
-    private int kills;
-    private int deaths;
+    private int kills, deaths;
 
     public GPlayer(GangsX plugin, final UUID uuid, final String name, final UUID gangId, final Role role, final int kills, final int deaths) {
         this.plugin = plugin;

@@ -1,6 +1,6 @@
 package net.withery.gangsx.objects;
 
-import net.withery.gangsx.enums.Upgrade;
+import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.GangsX;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,11 +25,11 @@ public class Gang {
     private final List<Gang> allies;
     private final List<GPlayer> members;
     private final List<GPlayer> invites;
-    private final List<Upgrade> upgrades;
+    private final HashMap<Upgrades, Integer> upgrades;
 
     private List<GPlayer> onlinemembers;
 
-    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
+    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final HashMap<Upgrades, Integer> upgrades) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
@@ -137,8 +137,8 @@ public class Gang {
         return invites;
     }
 
-    public List<Upgrade> getUpgrades() {
-        return upgrades;
+    public Integer getUpgrade(Upgrades upgrade) {
+        return upgrades.get(upgrade);
     }
 
     public int getUpgradesCount() {
@@ -199,8 +199,8 @@ public class Gang {
         this.invites.add(player);
     }
 
-    public void addUpgrade(Upgrade upgrade) {
-        this.upgrades.add(upgrade);
+    public void addUpgrade(Upgrades upgrade, Integer level) {
+        this.upgrades.put(upgrade, level);
     }
 
     public void increaseLevel(int levels) {
@@ -247,7 +247,7 @@ public class Gang {
         this.onlinemembers.remove(player);
     }
 
-    public void removeUpgrade(Upgrade upgrade) {
+    public void removeUpgrade(Upgrades upgrade) {
         this.upgrades.remove(upgrade);
     }
 
