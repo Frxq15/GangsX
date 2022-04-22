@@ -73,10 +73,10 @@ public class SQLGangDataFactory extends GangDataFactory {
         if (doesGangDataExist(gang.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + GANGS_TABLE + " " +
                 "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-            statement.setString(1, gang.getID().toString());
+            statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
             statement.setString(2, gang.getName());
             statement.setLong(3, gang.getCreated());
-            statement.setString(4, gang.getLeader().toString());
+            statement.setString(4, (gang.getLeader() == null ? null : gang.getLeader().toString()));
             statement.setInt(5, gang.getLevel());
             statement.setInt(6, gang.getCoins());
             statement.setDouble(7, gang.getBankBalance());
@@ -169,10 +169,10 @@ public class SQLGangDataFactory extends GangDataFactory {
             int i = 1;
 
             // Setting insert variables
-            statement.setString(i++, gang.getID().toString());
+            statement.setString(i++, (gang.getID() == null ? null : gang.getID().toString()));
             statement.setString(i++, gang.getName());
             statement.setLong(i++, gang.getCreated());
-            statement.setString(i++, gang.getLeader().toString());
+            statement.setString(i++, (gang.getLeader() == null ? null : gang.getLeader().toString()));
             statement.setInt(i++, gang.getLevel());
             statement.setInt(i++, gang.getCoins());
             statement.setDouble(i++, gang.getBankBalance());
@@ -185,7 +185,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             // Setting update variables
             statement.setString(i++, gang.getName());
             statement.setLong(i++, gang.getCreated());
-            statement.setString(i++, gang.getLeader().toString());
+            statement.setString(i++, (gang.getLeader() == null ? null : gang.getLeader().toString()));
             statement.setInt(i++, gang.getLevel());
             statement.setInt(i++, gang.getCoins());
             statement.setDouble(i++, gang.getBankBalance());

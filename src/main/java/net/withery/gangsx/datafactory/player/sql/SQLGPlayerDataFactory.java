@@ -73,10 +73,10 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         if (doesGPlayerDataExist(gPlayer.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + PLAYERS_TABLE + " " +
                 "(uuid, name, gang, role, kills, deaths) VALUES (?, ?, ?, ?, ?, ?)")) {
-            statement.setString(1, gPlayer.getID().toString());
+            statement.setString(1, (gPlayer.getID() == null ? null : gPlayer.getID().toString()));
             statement.setString(2, gPlayer.getName());
-            statement.setString(3, gPlayer.getGangId().toString());
-            statement.setString(4, gPlayer.getRole().name());
+            statement.setString(3, (gPlayer.getGangId() == null ? null : gPlayer.getGangId().toString()));
+            statement.setString(4, (gPlayer.getRole() == null ? null : gPlayer.getRole().name()));
             statement.setInt(5, gPlayer.getKills());
             statement.setInt(6, gPlayer.getDeaths());
             statement.executeUpdate();
@@ -123,10 +123,13 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             GPlayer gPlayer = null;
 
             if (rs.next()) {
-                UUID uuidDB = UUID.fromString(rs.getString("uuid"));
+                String stringUUID = rs.getString("uuid");
+                UUID uuidDB = (stringUUID == null ? null : UUID.fromString(stringUUID));
                 String name = rs.getString("name");
-                UUID gangId = UUID.fromString(rs.getString("gang"));
-                Role role = Role.valueOf(rs.getString("role"));
+                String stringGangID = rs.getString("gang");
+                UUID gangId = (stringGangID == null ? null : UUID.fromString(stringGangID));
+                String stringRole = rs.getString("role");
+                Role role = (stringRole == null ? null : Role.valueOf(stringRole));
                 int kills = rs.getInt("kills");
                 int deaths = rs.getInt("deaths");
 
@@ -156,18 +159,18 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             int i = 1;
 
             // Setting insert variables
-            statement.setString(i++, gPlayer.getID().toString());
+            statement.setString(i++, (gPlayer.getID() == null ? null : gPlayer.getID().toString()));
             statement.setString(i++, gPlayer.getName());
-            statement.setString(i++, gPlayer.getGangId().toString());
-            statement.setString(i++, gPlayer.getRole().name());
+            statement.setString(i++, (gPlayer.getGangId() == null ? null : gPlayer.getGangId().toString()));
+            statement.setString(i++, (gPlayer.getRole() == null ? null : gPlayer.getRole().name()));
             statement.setInt(i++, gPlayer.getKills());
             statement.setInt(i++, gPlayer.getDeaths());
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
             statement.setString(i++, gPlayer.getName());
-            statement.setString(i++, gPlayer.getGangId().toString());
-            statement.setString(i++, gPlayer.getRole().name());
+            statement.setString(i++, (gPlayer.getGangId() == null ? null : gPlayer.getGangId().toString()));
+            statement.setString(i++, (gPlayer.getRole() == null ? null : gPlayer.getRole().name()));
             statement.setInt(i++, gPlayer.getKills());
             statement.setInt(i, gPlayer.getDeaths());
             statement.executeUpdate();
