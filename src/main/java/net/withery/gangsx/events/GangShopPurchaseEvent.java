@@ -23,14 +23,21 @@ public class GangShopPurchaseEvent extends Event implements Cancellable {
     private final Gang gang;
     private final String section;
     private boolean cancelled;
+    private final ItemStack item;
+    private static HandlerList handlers = new HandlerList();
 
-    public GangShopPurchaseEvent(GangsX plugin, Player player, Gang gang, String section) {
+    public GangShopPurchaseEvent(GangsX plugin, Player player, Gang gang, String section, ItemStack item) {
         this.plugin = plugin;
         this.player = player;
         this.gang = gang;
         this.section = section;
+        this.item = item;
     }
-    @NotNull
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return null;
@@ -50,27 +57,7 @@ public class GangShopPurchaseEvent extends Event implements Cancellable {
     }
 
     public ItemStack getPurchasedItem() {
-        String item = section;
-        FileConfiguration shop = plugin.getFileManager().getShopFile();
-        List<String> lore = new ArrayList<String>();
-        String material = shop.getString("ITEMS." + item + ".MATERIAL");
-        Integer amount = shop.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
-        String name = shop.getString("ITEMS." + item + ".NAME");
-        final ItemMeta meta = i.getItemMeta();
-        String fcost = String.format("%,d", shop.getInt("ITEMS." + item + ".COST"));
-        for (String lines : shop.getStringList("ITEMS." + item + ".LORE")) {
-            lines = lines.replace("%cost%", fcost);
-            lore.add(plugin.getColorFormatter().format(lines));
-        }
-        meta.setDisplayName(plugin.getColorFormatter().format(name));
-        if (shop.getBoolean("ITEMS." + item + ".GLOW")) {
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
-        meta.setLore(lore);
-        i.setItemMeta(meta);
-        return i;
+        return item;
     }
 
     public void setCancelled(boolean cancel) {

@@ -20,6 +20,7 @@ public class Gang {
     private double bankBalance;
     private int kills;
     private int deaths;
+    private int blocksbroken;
     private boolean friendlyFire;
     private final List<Gang> allies;
     private final List<GPlayer> members;
@@ -28,7 +29,7 @@ public class Gang {
 
     private List<GPlayer> onlinemembers;
 
-    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
+    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final List<Upgrade> upgrades) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
@@ -39,6 +40,7 @@ public class Gang {
         this.bankBalance = bankBalance;
         this.kills = kills;
         this.deaths = deaths;
+        this.blocksbroken = blocksbroken;
         this.friendlyFire = friendlyFire;
         this.allies = allies;
         this.members = members;
@@ -57,6 +59,7 @@ public class Gang {
         this.bankBalance = 0;
         this.kills = 0;
         this.deaths = 0;
+        this.blocksbroken = 0;
         this.friendlyFire = false;
         this.allies = null;
         this.members = null;
@@ -107,6 +110,8 @@ public class Gang {
     public int getDeaths() {
         return deaths;
     }
+
+    public int getBlocksBroken() { return blocksbroken; }
 
     public boolean hasFriendlyFire() {
         return friendlyFire;
@@ -172,6 +177,8 @@ public class Gang {
         this.deaths = deaths;
     }
 
+    public void setBlocksBroken(int blocks) { this.blocksbroken = blocks; }
+
     public void setFriendlyFire(boolean friendlyFire) {
         this.friendlyFire = friendlyFire;
     }
@@ -214,6 +221,10 @@ public class Gang {
 
     public void addDeaths(int deaths) {
         this.deaths = (this.deaths + deaths);
+    }
+
+    public void increaseBlocks(int blocks) {
+        this.blocksbroken = (this.blocksbroken + blocks);
     }
 
     public void removeCoins(int coins) {

@@ -1,6 +1,7 @@
 package net.withery.gangsx.gui.GUIs;
 
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.events.GangShopPurchaseEvent;
 import net.withery.gangsx.gui.GUITemplate;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
@@ -73,6 +74,13 @@ public class Shop extends GUITemplate {
                     Bukkit.broadcastMessage("not enough money bro");
                     return;
                 }
+                GangShopPurchaseEvent event = new GangShopPurchaseEvent(plugin, p, gang, item, createItem(item));
+                Bukkit.getPluginManager().callEvent(event);
+                if(event.isCancelled()) {
+                    delete();
+                    return;
+                }
+
                 for (String commands : shop.getStringList("ITEMS." + item + ".COMMANDS")) {
                     commands = commands.replace("%player%", p.getName())
                             .replace("%gang%", gang.getName())

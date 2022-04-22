@@ -36,7 +36,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + GANGS_TABLE + " " +
                 "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
-                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, friendlyFire BOOLEAN);")) {
+                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN);")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,7 +72,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         if (doesGangDataExist(gang.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + GANGS_TABLE + " " +
-                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, gang.getID().toString());
             statement.setString(2, gang.getName());
             statement.setLong(3, gang.getCreated());
@@ -82,7 +82,8 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setDouble(7, gang.getBankBalance());
             statement.setInt(8, gang.getKills());
             statement.setInt(9, gang.getDeaths());
-            statement.setBoolean(10, gang.hasFriendlyFire());
+            statement.setInt(10, gang.getBlocksBroken());
+            statement.setBoolean(11, gang.hasFriendlyFire());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +133,8 @@ public class SQLGangDataFactory extends GangDataFactory {
                 gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
-                        rs.getBoolean("friendlyFire"), null, null, null, null); // TODO: 17/04/2022 get upgrades/members/allies
+                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, null, null, null);
+                // TODO: 17/04/2022 get upgrades/members/allies
 
                 // TODO: 17/04/2022 check how to get table names from each others datafactory
                 // Members: SELECT uuid FROM `*players_table*` WHERE gang=?;
@@ -157,7 +159,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         }
 
         // Insert if not exists, update if exists
-        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
+        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
                 "kills = ?, deaths = ?, friendlyFire = ?;";
 
@@ -176,6 +178,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setDouble(i++, gang.getBankBalance());
             statement.setInt(i++, gang.getKills());
             statement.setInt(i++, gang.getDeaths());
+            statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i++, gang.hasFriendlyFire());
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
@@ -188,6 +191,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setDouble(i++, gang.getBankBalance());
             statement.setInt(i++, gang.getKills());
             statement.setInt(i++, gang.getDeaths());
+            statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i, gang.hasFriendlyFire());
             statement.executeUpdate();
         } catch (SQLException e) {
