@@ -108,6 +108,8 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
 
     @Override
     public GPlayer getGPlayerData(UUID uuid) {
+        if (uuid == null) return null;
+
         if (players.get(uuid) != null)
             return players.get(uuid);
 
@@ -134,6 +136,9 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 int deaths = rs.getInt("deaths");
 
                 gPlayer = new GPlayer(plugin, uuidDB, name, gangId, role, kills, deaths);
+
+                if (!players.containsKey(gPlayer.getID()))
+                    players.put(gPlayer.getID(), gPlayer);
             }
 
             rs.close();

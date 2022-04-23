@@ -141,6 +141,8 @@ public class SQLGangDataFactory extends GangDataFactory {
                 // Allies: SELECT ally FROM `*allies_table*` WHERE gang=?; (Requires another table (gang - ally) which is using a composite primary key)
                 // Upgrades: SELECT * FROM `*upgrades_table*` WHERE gang=?; (Could be done within the gangs table but just to minimize having giant tables id recommend making another one (gang - upgrade1 - upgrade2 - upgrade3 - etc.)
                 // Invites: Assume they reset when the gang gets unloaded anyways so doesn't quite matter
+                if (!gangs.containsKey(gang.getID()))
+                    gangs.put(gang.getID(), gang);
             }
 
             rs.close();

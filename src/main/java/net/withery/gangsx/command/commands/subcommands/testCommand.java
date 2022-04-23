@@ -1,8 +1,7 @@
 package net.withery.gangsx.command.commands.subcommands;
 
-import net.withery.gangsx.command.SubCommand;
-import net.withery.gangsx.gui.GUIs.Shop;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
