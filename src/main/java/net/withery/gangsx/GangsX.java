@@ -31,6 +31,7 @@ public final class GangsX extends JavaPlugin {
     private GPlayerDataFactory gPlayerDataFactory;
     private APIHooks apiHooks;
     private FileManager fileManager;
+    private CommandHandler commandHandler;
     private RoleManager roleManager;
 
     @Override
@@ -60,9 +61,6 @@ public final class GangsX extends JavaPlugin {
         localeRegistry = new LocaleRegistry(this);
         localeRegistry.load();
 
-        CommandHandler commandHandler = new CommandHandler(this);
-        commandHandler.load();
-
         apiHooks = new APIHooks(this);
         apiHooks.initialize();
 
@@ -70,6 +68,8 @@ public final class GangsX extends JavaPlugin {
         fileManager.createShopFile();
 
         roleManager = new RoleManager(this);
+        commandHandler = new CommandHandler(this);
+        commandHandler.load();
 
         switch (settings.getStorageType()) {
             case MYSQL -> sqlSetup();
@@ -113,7 +113,7 @@ public final class GangsX extends JavaPlugin {
         getGangDataFactory().initialize();
         gPlayerDataFactory = new SQLGPlayerDataFactory(this, sqlHandler, "gangsx_");
         getGPlayerDataFactory().initialize();
-        log("Connected to mysql successful.");
+        log("Connected to mysql successfully.");
     }
 
     public Settings getSettings() {

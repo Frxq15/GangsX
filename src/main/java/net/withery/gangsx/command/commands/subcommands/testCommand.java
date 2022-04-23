@@ -3,6 +3,9 @@ package net.withery.gangsx.command.commands.subcommands;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.gui.GUIs.Shop;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.objects.GPlayer;
+import net.withery.gangsx.objects.Gang;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,7 +20,10 @@ public class testCommand extends SubCommand {
 
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        Shop shop = new Shop(plugin, (Player) sender);
-        shop.open((Player) sender);
+        Player p = (Player) sender;
+        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        //Bukkit.broadcastMessage(gPlayer.getGangId().toString());
+        Bukkit.broadcastMessage(gang.getName());
     }
 }

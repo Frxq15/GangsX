@@ -166,7 +166,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         // OLD: "UPDATE " + GANGS_TABLE + " SET name=?, created=?, leader=?, level=?, coins=?, " +
         //                "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid=?;"
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {
-            int i = 1;
+            int i = 0;
 
             // Setting insert variables
             statement.setString(i++, (gang.getID() == null ? null : gang.getID().toString()));
@@ -208,7 +208,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         // Not checking cache as we want to check whether the data exists in the database (?)
 
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT gang FROM `" + GANGS_TABLE + "` where uuid=?")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT name FROM `" + GANGS_TABLE + "` where uuid=?")) {
             statement.setString(1, uuid.toString());
             ResultSet rs = statement.executeQuery();
             boolean exists = rs.next();

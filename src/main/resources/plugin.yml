@@ -3,6 +3,10 @@ description: ${project.description}
 version: ${project.version}
 main: ${project.groupId}.${project.artifactId}.${project.name}
 api-version: 1.18
+depend:
+  - Vault
+softdepend:
+  - PlaceholderAPI
 authors:
   - Frxq15
   - WitheredToast

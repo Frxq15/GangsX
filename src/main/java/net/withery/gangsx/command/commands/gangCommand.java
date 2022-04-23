@@ -8,6 +8,7 @@ import net.withery.gangsx.command.ParentCommand;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.settings.locale.LocaleReference;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,7 @@ public class gangCommand extends ParentCommand {
         register(new testCommand(plugin));
         register(new createCommand(plugin));
         register(new versionCommand(plugin));
+        Bukkit.broadcastMessage("registered gang sub commands");
     }
 
     @Override

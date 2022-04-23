@@ -30,11 +30,11 @@ public class APIHooks {
         return econ != null;
     }
     public void setupPapi() {
-        if(!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             plugin.log("PlaceholderAPI not found, placeholders will not be enabled.");
             return;
         }
         plugin.log("Hooked into PlaceholderAPI successfully");
-        //load papi shit
+        return;
     }
 }
