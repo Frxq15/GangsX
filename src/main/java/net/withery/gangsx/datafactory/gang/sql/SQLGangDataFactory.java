@@ -166,7 +166,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         // OLD: "UPDATE " + GANGS_TABLE + " SET name=?, created=?, leader=?, level=?, coins=?, " +
         //                "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid=?;"
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {
-            int i = 0;
+            int i = 1;
 
             // Setting insert variables
             statement.setString(i++, (gang.getID() == null ? null : gang.getID().toString()));
