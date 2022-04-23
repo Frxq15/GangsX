@@ -14,9 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-public class gangCommand extends ParentCommand {
+public class GangCommand extends ParentCommand {
 
-    public gangCommand(GangsX plugin) {
+    public GangCommand(GangsX plugin) {
         super(plugin, "gang", "gangsx.command.gang");
         register(new helpCommand(plugin));
         register(new testCommand(plugin));
