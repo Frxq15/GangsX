@@ -46,6 +46,8 @@ public class Gang {
         this.members = members;
         this.invites = invites;
         this.upgrades = upgrades;
+        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
+        this.addOnlineMember(gPlayer);
     }
 
     public Gang(GangsX plugin, final UUID id, final String name, final UUID leader) {
@@ -65,7 +67,8 @@ public class Gang {
         this.members = null;
         this.invites = null;
         this.upgrades = null;
-
+        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
+        this.addOnlineMember(gPlayer);
     }
 
     public void sendMessage(String message) {
