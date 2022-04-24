@@ -8,6 +8,7 @@ import net.withery.gangsx.settings.locale.LocaleReference;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -36,13 +37,23 @@ public class createCommand extends SubCommand {
         }
         if(args.length == 1) {
             String name = args[0];
-            Gang gang = new Gang(plugin, UUID.randomUUID(), name, p.getUniqueId());
-            plugin.getGangDataFactory().initializeGangData(gang);
-            gPlayer.setGangId(gang.getID());
-            gPlayer.setHasGang(true);
-            plugin.getLocaleRegistry().sendMessageToAll(LocaleReference.COMMAND_GANG_CREATED, gang.getName(), p.getName());
-            plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_GANG_CREATED);
-            return;
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    UUID gangId = UUID.randomUUID();
+                    while (plugin.getGangDataFactory().doesGangDataExist(gangId)) {
+                        gangId = UUID.randomUUID();
+                    }
+                    Gang gang = new Gang(plugin, gangId, name, p.getUniqueId());
+                    plugin.getGangDataFactory().initializeGangData(gang);
+                    gPlayer.setGangId(gang.getID());
+                    gPlayer.setHasGang(true);
+                    plugin.getLocaleRegistry().sendMessageToAll(LocaleReference.COMMAND_GANG_CREATED, gang.getName(), p.getName());
+                    plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_GANG_CREATED);
+                    return;
+                }
+
+            }.runTaskAsynchronously(plugin);
         }
         plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_WRONG_USAGE, this.getUsage());
         return;
