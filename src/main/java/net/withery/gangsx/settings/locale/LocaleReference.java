@@ -12,6 +12,7 @@ public enum LocaleReference {
     COMMAND_WRONG_USAGE("command.wrong_usage", "&#eb4034Invalid usage provided, use %usage%", "usage"),
     COMMAND_PLUGIN_VERSION("command.plugin-version", "&fRunning &#eb4034GangsX v%version%-SNAPSHOT", "version"),
     COMMAND_PLAYER_ALREADY_IN_GANG("command.player_already_in_gang", "&fYou are already in a gang."),
+    COMMAND_PLAYER_NOT_IN_A_GANG("command.player_not_in_a_gang", "&fYou are not in a gang."),
     COMMAND_SUB_COMMAND_NOT_FOUND("command.sub-command_not_found", "&7The sub command provided could not be found.");
 
     private final String reference;

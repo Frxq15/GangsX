@@ -1,9 +1,6 @@
 package net.withery.gangsx.command.commands;
 
-import net.withery.gangsx.command.commands.subcommands.createCommand;
-import net.withery.gangsx.command.commands.subcommands.helpCommand;
-import net.withery.gangsx.command.commands.subcommands.testCommand;
-import net.withery.gangsx.command.commands.subcommands.versionCommand;
+import net.withery.gangsx.command.commands.subcommands.*;
 import net.withery.gangsx.command.ParentCommand;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.GangsX;
@@ -23,6 +20,7 @@ public class GangCommand extends ParentCommand {
         register(new testCommand(plugin));
         register(new createCommand(plugin));
         register(new versionCommand(plugin));
+        register(new infoCommand(plugin));
         Bukkit.broadcastMessage("registered gang sub commands");
     }
 
