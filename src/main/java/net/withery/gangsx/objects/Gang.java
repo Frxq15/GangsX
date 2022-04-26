@@ -5,6 +5,7 @@ import net.withery.gangsx.GangsX;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Gang {
@@ -27,7 +28,7 @@ public class Gang {
     private final List<GPlayer> invites;
     private final HashMap<Upgrades, Integer> upgrades;
 
-    private List<GPlayer> onlinemembers;
+    private final List<GPlayer> onlinemembers = new ArrayList<>();
 
     public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final HashMap<Upgrades, Integer> upgrades) {
         this.plugin = plugin;
@@ -142,6 +143,14 @@ public class Gang {
 
     public Integer getUpgrade(Upgrades upgrade) {
         return upgrades.get(upgrade);
+    }
+
+    public Date getCreationDate() {
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
+        Date date = new Date(getCreated());
+        String created = f.format(date);
+        return date;
     }
 
     public int getUpgradesCount() {

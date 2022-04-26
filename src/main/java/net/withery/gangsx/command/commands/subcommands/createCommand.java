@@ -54,6 +54,7 @@ public class createCommand extends SubCommand {
                 }
 
             }.runTaskAsynchronously(plugin);
+            return;
         }
         plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_WRONG_USAGE, this.getUsage());
         return;

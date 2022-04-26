@@ -21,9 +21,9 @@ public class infoCommand extends SubCommand {
     }
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(args.length == 1) {
+        if(args.length == 0) {
             if(!(sender instanceof Player)) {
-                plugin.log("This command cannot be executed from console.");
+                plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_WRONG_USAGE, "/gang info <gang>");
                 return;
             }
             Player p = (Player) sender;
@@ -33,7 +33,6 @@ public class infoCommand extends SubCommand {
                 return;
             }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-
             return;
         }
         if(args.length == 2) {
