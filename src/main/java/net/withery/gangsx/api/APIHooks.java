@@ -34,6 +34,7 @@ public class APIHooks {
             plugin.log("PlaceholderAPI not found, placeholders will not be enabled.");
             return;
         }
+        new Placeholders(plugin).register();
         plugin.log("Hooked into PlaceholderAPI successfully");
         return;
     }

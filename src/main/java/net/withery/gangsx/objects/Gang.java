@@ -145,12 +145,12 @@ public class Gang {
         return upgrades.get(upgrade);
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Date date = new Date(getCreated());
         String created = f.format(date);
-        return date;
+        return created;
     }
 
     public int getUpgradesCount() {

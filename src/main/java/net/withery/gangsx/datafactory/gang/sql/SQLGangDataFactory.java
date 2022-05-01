@@ -224,6 +224,28 @@ public class SQLGangDataFactory extends GangDataFactory {
     }
 
     @Override
+    public boolean doesGangNameExist(String name) {
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return false;
+        }
+
+        // Not checking cache as we want to check whether the data exists in the database (?)
+
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT uuid FROM `" + GANGS_TABLE + "` where name=?")) {
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+            boolean exists = rs.next();
+
+            rs.close();
+            return exists;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public boolean isGangDataLoaded(UUID uuid) {
         return gangs.containsKey(uuid);
     }
