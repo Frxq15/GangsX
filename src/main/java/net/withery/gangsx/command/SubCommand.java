@@ -4,13 +4,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public abstract class SubCommand {
     private final String command;
     private final String permission;
     private final String usage;
-    private final String[] aliases;
+    private final List<String> aliases;
 
-    public SubCommand(String command, String permission, String usage, String... aliases) {
+    public SubCommand(String command, String permission, String usage, List<String> aliases) {
         this.command = command;
         this.permission = permission;
         this.usage = usage;
@@ -30,7 +32,7 @@ public abstract class SubCommand {
         return usage;
     }
 
-    public String[] getAliases() {
+    public List<String> getAliases() {
         return aliases;
     }
 

@@ -112,6 +112,8 @@ public abstract class GangDataFactory {
      */
     public abstract boolean doesGangDataExist(UUID uuid);
 
+    public abstract boolean doesGangNameExist(String name);
+
 
     /**
      * Asynchronously checks whether gang data with the given unique id exists.
@@ -122,6 +124,12 @@ public abstract class GangDataFactory {
     public CompletableFuture<Boolean> doesGangDataExistAsync(UUID uuid) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> future.complete(doesGangDataExist(uuid)));
+        return future;
+    }
+
+    public CompletableFuture<Boolean> doesGangNameExistAsync(String name) {
+        CompletableFuture<Boolean> future = new CompletableFuture<>();
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> future.complete(doesGangNameExist(name)));
         return future;
     }
 

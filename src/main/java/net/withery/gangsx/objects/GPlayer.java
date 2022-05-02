@@ -14,30 +14,44 @@ public class GPlayer {
     private UUID gangId;
     private Role role;
     private int kills, deaths;
+    private String gangIdString;
+    private boolean hasGang;
 
     public GPlayer(GangsX plugin, final UUID uuid, final String name, final UUID gangId, final Role role, final int kills, final int deaths) {
         this.plugin = plugin;
         this.uuid = uuid;
         this.name = name;
-        this.gangId = gangId;
         this.role = role;
         this.kills = kills;
         this.deaths = deaths;
+
+        if(gangId == null) {
+            setGangIdString("N/A");
+            setHasGang(false);
+            return;
+        }
+        this.gangId = gangId;
+        setHasGang(true);
     }
 
     public GPlayer(GangsX plugin, final UUID uuid, final String name) {
         this.plugin = plugin;
         this.uuid = uuid;
         this.name = name;
-        this.gangId = null;
         this.role = null;
         this.kills = 0;
         this.deaths = 0;
+        if(gangId == null) {
+            setGangIdString("N/A");
+            setHasGang(false);
+        }
     }
 
     public UUID getID() {
         return uuid;
     }
+
+    public boolean hasGang() { return hasGang; }
 
     public String getName() {
         return name;
@@ -50,6 +64,16 @@ public class GPlayer {
     public UUID getGangId() {
         return gangId;
     }
+
+    public String getGangIDString() {
+        return gangIdString;
+    }
+
+    public void setGangIdString(String id) {
+        this.gangIdString = id;
+    }
+
+    public void setHasGang(boolean hasGang) { this.hasGang = hasGang; }
 
     public void setGangId(UUID gangId) {
         this.gangId = gangId;

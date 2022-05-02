@@ -1,12 +1,13 @@
 package net.withery.gangsx.api;
 
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class Placeholders {
+public class Placeholders extends PlaceholderExpansion {
     private GangsX plugin;
 
     public Placeholders(GangsX plugin) {
@@ -26,7 +27,7 @@ public class Placeholders {
     }
 
     public String getIdentifier() {
-        return "gangs";
+        return "gangsx";
     }
 
     public String getVersion() {

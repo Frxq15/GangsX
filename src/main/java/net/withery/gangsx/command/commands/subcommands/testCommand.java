@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 public class testCommand extends SubCommand {
     private final GangsX plugin;
     public testCommand(GangsX plugin) {
@@ -22,7 +24,6 @@ public class testCommand extends SubCommand {
         Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-        //Bukkit.broadcastMessage(gPlayer.getGangId().toString());
         Bukkit.broadcastMessage(gang.getName());
     }
 }
