@@ -163,7 +163,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         // Insert if not exists, update if exists
         final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
-                "kills = ?, deaths = ?, friendlyFire = ?;";
+                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?;";
 
         // OLD: "UPDATE " + GANGS_TABLE + " SET name=?, created=?, leader=?, level=?, coins=?, " +
         //                "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid=?;"
