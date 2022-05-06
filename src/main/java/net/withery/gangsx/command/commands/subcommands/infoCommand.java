@@ -16,6 +16,7 @@ import java.util.UUID;
 
 public class infoCommand extends SubCommand {
     private final GangsX plugin;
+    private Gang gang;
 
     public infoCommand(GangsX plugin) {
         super("info", "gcgangs.command.info", "/gang info <gang>", Arrays.asList("show", "view"));
@@ -34,7 +35,7 @@ public class infoCommand extends SubCommand {
                 plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_NOT_IN_A_GANG);
                 return;
             }
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+            gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             //TODO: change getmembers to show online ppl as green and offline as red
             plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
                     gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
@@ -50,10 +51,42 @@ public class infoCommand extends SubCommand {
                     //arg provided is a gang
                     UUID uuid = plugin.getGangDataFactory().getGangUniqueId(arg);
                     if(plugin.getGangDataFactory().isGangDataLoaded(uuid)) {
+                        gang = plugin.getGangDataFactory().getGangData(uuid);
+                        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
+                                gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
+                                String.valueOf(gang.getKills()),
+                                String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
+                                "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+                        return;
 
-                    }
+                    } //isnt loaded
                     plugin.getGangDataFactory().initializeGangData(plugin.getGangDataFactory().getGangData(uuid));
+                    gang = plugin.getGangDataFactory().getGangData(uuid);
+                    plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
+                            gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
+                            String.valueOf(gang.getKills()),
+                            String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
+                            "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+                    return;
+                } //doesnt exist
+                GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(Bukkit.getOfflinePlayer(arg).getUniqueId());
+                if(plugin.getGPlayerDataFactory().doesGPlayerDataExist(Bukkit.getOfflinePlayer(arg).getUniqueId())) {
+                    if(gPlayer.hasGang()) {
+                        UUID uuid = gPlayer.getGangId();
+                        gang = plugin.getGangDataFactory().getGangData(uuid);
+                        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
+                                gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
+                                String.valueOf(gang.getKills()),
+                                String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
+                                "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+                        return;
+                    }
+                    plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_DOESNT_EXIST);
+                    return;
                 }
+                plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_DOESNT_EXIST);
+                return;
+
             });
             return;
         }
