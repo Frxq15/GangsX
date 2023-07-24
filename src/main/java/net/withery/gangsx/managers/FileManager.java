@@ -21,11 +21,11 @@ public class FileManager {
     }
 
     public void createLangFile() {
-        LangFile = new File(plugin.getDataFolder(), "en-us.yml");
+        LangFile = new File(plugin.getDataFolder(), "locale.yml");
         if (!LangFile.exists()) {
             LangFile.getParentFile().mkdirs();
-            plugin.log("en-us.yml was created successfully");
-            plugin.saveResource("en-us.yml", false);
+            plugin.log("locale.yml was created successfully");
+            plugin.saveResource("locale.yml", false);
         }
 
         LangConfig = new YamlConfiguration();

@@ -2,7 +2,6 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
-import net.withery.gangsx.settings.locale.LocaleReference;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +18,6 @@ public class versionCommand extends SubCommand {
 
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_PLUGIN_VERSION, plugin.getDescription().getVersion());
+        sender.sendMessage(plugin.getLocaleManager().getMessage("PLUGIN_VERSION").replace("%version%", plugin.getDescription().getVersion()));
     }
 }

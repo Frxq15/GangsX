@@ -141,7 +141,7 @@ public class Gang {
         return invites;
     }
 
-    public Integer getUpgrade(Upgrades upgrade) {
+    public Integer getUpgradeLevel(Upgrades upgrade) {
         return upgrades.get(upgrade);
     }
 

@@ -4,7 +4,6 @@ import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
-import net.withery.gangsx.settings.locale.LocaleReference;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,25 +25,21 @@ public class infoCommand extends SubCommand {
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(args.length == 0) {
             if(!(sender instanceof Player)) {
-                plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_WRONG_USAGE, "/gang info <gang>");
+                plugin.getLocaleManager().sendUsageMessage(sender, "&c"+this.getUsage());
                 return;
             }
             Player p = (Player) sender;
             GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
             if(!gPlayer.hasGang()) {
-                plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_NOT_IN_A_GANG);
+                plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
                 return;
             }
             gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             //TODO: change getmembers to show online ppl as green and offline as red
-            plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
-                    gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
-                    String.valueOf(gang.getKills()),
-                    String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
-                    "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+            plugin.getLocaleManager().sendGangInfo(sender, gang);
             return;
         }
-        if(args.length == 2) {
+        if(args.length == 1) {
             String arg = args[0];
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                 if(plugin.getGangDataFactory().doesGangNameExist(arg)) {
@@ -52,21 +47,13 @@ public class infoCommand extends SubCommand {
                     UUID uuid = plugin.getGangDataFactory().getGangUniqueId(arg);
                     if(plugin.getGangDataFactory().isGangDataLoaded(uuid)) {
                         gang = plugin.getGangDataFactory().getGangData(uuid);
-                        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
-                                gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
-                                String.valueOf(gang.getKills()),
-                                String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
-                                "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+                        plugin.getLocaleManager().sendGangInfo(sender, gang);
                         return;
 
-                    } //isnt loaded
+                    } //not loaded
                     plugin.getGangDataFactory().initializeGangData(plugin.getGangDataFactory().getGangData(uuid));
                     gang = plugin.getGangDataFactory().getGangData(uuid);
-                    plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
-                            gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
-                            String.valueOf(gang.getKills()),
-                            String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
-                            "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+                    plugin.getLocaleManager().sendGangInfo(sender, gang);
                     return;
                 } //doesnt exist
                 GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(Bukkit.getOfflinePlayer(arg).getUniqueId());
@@ -74,23 +61,19 @@ public class infoCommand extends SubCommand {
                     if(gPlayer.hasGang()) {
                         UUID uuid = gPlayer.getGangId();
                         gang = plugin.getGangDataFactory().getGangData(uuid);
-                        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_INFO, gang.getName(),
-                                gang.getCreationDate(), Bukkit.getOfflinePlayer(gang.getLeader()).getName(), String.valueOf(gang.getLevel()),
-                                String.valueOf(gang.getKills()),
-                                String.valueOf(gang.getDeaths()), String.valueOf(gang.getBlocksBroken()), "insert members",
-                                "insert allies", String.format("%,d", gang.getCoins()), String.format("%,d", (int)gang.getBankBalance()));
+                        plugin.getLocaleManager().sendGangInfo(sender, gang);
                         return;
                     }
-                    plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_DOESNT_EXIST);
+                    plugin.getLocaleManager().sendMessage(sender, "GANG_NOT_FOUND");
                     return;
                 }
-                plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_GANG_DOESNT_EXIST);
+                plugin.getLocaleManager().sendMessage(sender, "GANG_NOT_FOUND");
                 return;
 
             });
             return;
         }
-        plugin.getLocaleRegistry().sendMessage(sender, LocaleReference.COMMAND_WRONG_USAGE, "/gang info <gang>");
+        plugin.getLocaleManager().sendUsageMessage(sender, "&c"+this.getUsage());
         return;
     }
 }

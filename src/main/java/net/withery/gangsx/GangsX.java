@@ -14,7 +14,7 @@ import net.withery.gangsx.listener.DataFactoryListener;
 import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.managers.RoleManager;
 import net.withery.gangsx.settings.Settings;
-import net.withery.gangsx.settings.locale.LocaleRegistry;
+import net.withery.gangsx.settings.locale.localeManager;
 import net.withery.gangsx.settings.version.ServerVersion;
 import net.withery.gangsx.settings.version.ServerVersionChecker;
 import org.bukkit.Bukkit;
@@ -26,7 +26,7 @@ public final class GangsX extends JavaPlugin {
     private Settings settings;
     private ServerVersionChecker sVersionChecker;
     private ColorFormatter colorFormatter;
-    private LocaleRegistry localeRegistry;
+    private localeManager localeManager;
     private GangDataFactory gangDataFactory;
     private GPlayerDataFactory gPlayerDataFactory;
     private APIHooks apiHooks;
@@ -58,8 +58,8 @@ public final class GangsX extends JavaPlugin {
         // Move loading of things to different class/methods
         settings = new Settings(this);
 
-        localeRegistry = new LocaleRegistry(this);
-        localeRegistry.load();
+        localeManager = new localeManager(this);
+        localeManager.createLocaleFile();
 
         apiHooks = new APIHooks(this);
         apiHooks.initialize();
@@ -134,8 +134,8 @@ public final class GangsX extends JavaPlugin {
 
     public FileManager getFileManager() { return fileManager; }
 
-    public LocaleRegistry getLocaleRegistry() {
-        return localeRegistry;
+    public localeManager getLocaleManager() {
+        return localeManager;
     }
 
     public RoleManager getRoleManager() { return roleManager; }

@@ -4,7 +4,7 @@ import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
-import net.withery.gangsx.settings.locale.LocaleReference;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,7 +12,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.UUID;
 
 public class createCommand extends SubCommand {
@@ -32,7 +31,7 @@ public class createCommand extends SubCommand {
         Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         if(gPlayer.hasGang()) {
-            plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_ALREADY_IN_GANG);
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_ALREADY_IN_GANG");
             return;
         }
         if(args.length == 1) {
@@ -48,15 +47,18 @@ public class createCommand extends SubCommand {
                     plugin.getGangDataFactory().initializeGangData(gang);
                     gPlayer.setGangId(gang.getID());
                     gPlayer.setHasGang(true);
-                    plugin.getLocaleRegistry().sendMessageToAll(LocaleReference.COMMAND_GANG_CREATED, gang.getName(), p.getName());
-                    plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_PLAYER_GANG_CREATED);
+                    Bukkit.broadcastMessage(plugin.getLocaleManager().getMessage("GANG_CREATED")
+                            .replace("%gang%", gang.getName())
+                            .replace("%player%", p.getName()));
+                    p.sendMessage(plugin.getLocaleManager().getMessage("PLAYER_GANG_CREATED")
+                            .replace("%gang%", gang.getName()));
                     return;
                 }
 
             }.runTaskAsynchronously(plugin);
             return;
         }
-        plugin.getLocaleRegistry().sendMessage(p, LocaleReference.COMMAND_WRONG_USAGE, this.getUsage());
+        plugin.getLocaleManager().sendUsageMessage(p, "&c"+this.getUsage());
         return;
     }
 }
