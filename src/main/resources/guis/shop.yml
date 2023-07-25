@@ -10,7 +10,7 @@ ITEMS:
     COST: 10 #In gang coins
     LORE:
       - '&7Purchase this item for &b%cost% &7coins.'
-    COMMANDS:
+    COMMANDS: #%player%, %gang% and %cost% placeholders available.
       - 'give %player% dirt 1'
 SHOP_MISC_ITEMS:
   1:

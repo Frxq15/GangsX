@@ -20,7 +20,7 @@ public class GangCommand extends ParentCommand {
         register(new createCommand(plugin));
         register(new versionCommand(plugin));
         register(new infoCommand(plugin));
-        Bukkit.broadcastMessage("registered gang sub commands");
+        register(new shopCommand(plugin));
     }
 
     @Override
@@ -34,7 +34,6 @@ public class GangCommand extends ParentCommand {
             plugin.getLocaleManager().sendUsageMessage(sender, "&cUsage: /gang <subcommand>");
             return true;
         }
-
         subLabel = args[0];
         subArgs = Arrays.copyOfRange(args, 1, args.length);
 

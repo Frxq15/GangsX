@@ -18,7 +18,7 @@ public class infoCommand extends SubCommand {
     private Gang gang;
 
     public infoCommand(GangsX plugin) {
-        super("info", "gcgangs.command.info", "/gang info <gang>", Arrays.asList("show", "view"));
+        super("info", "gangsx.command.info", "/gang info <gang>", Arrays.asList("show", "view"));
         this.plugin = plugin;
     }
     @Override

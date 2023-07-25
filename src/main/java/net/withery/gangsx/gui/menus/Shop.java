@@ -73,23 +73,26 @@ public class Shop extends GUITemplate {
         shop.getConfigurationSection("ITEMS").getKeys(false).forEach(item -> {
             setItem(getItemSlot(item, false), createItem(item), p -> {
                 if (getBalance() < getItemCost(item)) {
-                    Bukkit.broadcastMessage("not enough money bro");
+                    p.sendMessage(plugin.getLocaleManager().getMessage("SHOP_NOT_ENOUGH_MONEY")
+                            .replace("%amount%", getItemCost(item)+"")
+                            .replace("%currency%", plugin.getConfig().getString("shop.currency")));
                     delete();
                     return;
                 }
-               // GangShopPurchaseEvent event = new GangShopPurchaseEvent(plugin, p, gang, item, createItem(item));
-                //Bukkit.getPluginManager().callEvent(event);
-               // if(event.isCancelled()) {
-                  //  delete();
-                   // return;
-                //}
                 takeBalance(item);
                 for (String commands : shop.getStringList("ITEMS." + item + ".COMMANDS")) {
                     commands = commands.replace("%player%", p.getName())
                             .replace("%gang%", gang.getName())
                             .replace("%cost%", getItemCost(item) + "");
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commands);
-                    Bukkit.broadcastMessage("bought item");
+
+                    gang.sendMessage(plugin.getColorFormatter().format
+                            (plugin.getLocaleManager().getMessage("SHOP_ITEM_PURCHASED")
+                            .replace("%amount%", getItemCost(item)+"")
+                            .replace("%currency%", plugin.getConfig().getString("shop.currency"))
+                                    .replace("%player%", p.getName())
+                                    .replace("%gang%", gang.getName())
+                                    .replace("%item%", shop.getString("ITEMS."+item+".NAME"))));
                     delete();
                     return;
                 }
