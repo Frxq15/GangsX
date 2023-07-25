@@ -2,6 +2,7 @@ package net.withery.gangsx.objects;
 
 import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.formatting.number.NumberFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -240,7 +241,8 @@ public class Gang {
     }
 
     public void removeCoins(int coins) {
-        this.coins = (this.coins - coins);
+        Bukkit.broadcastMessage(coins+"");
+        this.coins -= coins;
     }
 
     public void removeBankMoney(int bankMoney) {
@@ -283,6 +285,8 @@ public class Gang {
     public List<GPlayer> getOnlineMembers() {
         return onlinemembers;
     }
+
+    public String getBankBalanceFormatted() { return NumberFormatter.format(getBankBalance()); }
 
     public boolean checkUnload() {
         if (getOnlineMembers().isEmpty())

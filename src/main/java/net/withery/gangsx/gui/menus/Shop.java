@@ -1,4 +1,4 @@
-package net.withery.gangsx.gui.GUIs;
+package net.withery.gangsx.gui.menus;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.events.GangShopPurchaseEvent;
@@ -55,8 +55,10 @@ public class Shop extends GUITemplate {
         switch (selection.toLowerCase()) {
             case "coins":
                 gang.removeCoins(getItemCost(item));
+                return;
             case "bankBalance", "balance":
                 gang.removeBankMoney(getItemCost(item));
+                return;
             default:
                 gang.removeCoins(getItemCost(item));
         }
@@ -72,21 +74,21 @@ public class Shop extends GUITemplate {
             setItem(getItemSlot(item, false), createItem(item), p -> {
                 if (getBalance() < getItemCost(item)) {
                     Bukkit.broadcastMessage("not enough money bro");
-                    return;
-                }
-                GangShopPurchaseEvent event = new GangShopPurchaseEvent(plugin, p, gang, item, createItem(item));
-                Bukkit.getPluginManager().callEvent(event);
-                if(event.isCancelled()) {
                     delete();
                     return;
                 }
-
+               // GangShopPurchaseEvent event = new GangShopPurchaseEvent(plugin, p, gang, item, createItem(item));
+                //Bukkit.getPluginManager().callEvent(event);
+               // if(event.isCancelled()) {
+                  //  delete();
+                   // return;
+                //}
+                takeBalance(item);
                 for (String commands : shop.getStringList("ITEMS." + item + ".COMMANDS")) {
                     commands = commands.replace("%player%", p.getName())
                             .replace("%gang%", gang.getName())
                             .replace("%cost%", getItemCost(item) + "");
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commands);
-                    takeBalance(item);
                     Bukkit.broadcastMessage("bought item");
                     delete();
                     return;
@@ -148,13 +150,13 @@ public class Shop extends GUITemplate {
         // misc item creation
         List<String> lore = new ArrayList<String>();
 
-        String material = shop.getString("ITEMS." + item + ".MATERIAL");
-        Integer amount = shop.getInt("ITEMS." + item + ".AMOUNT");
+        String material = shop.getString("SHOP_MISC_ITEMS." + item + ".MATERIAL");
+        Integer amount = shop.getInt("SHOP_MISC_ITEMS." + item + ".AMOUNT");
         final ItemStack i = new ItemStack(Material.valueOf(material), amount);
-        String name = shop.getString("ITEMS." + item + ".NAME");
+        String name = shop.getString("SHOP_MISC_ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
-        for (String lines : shop.getStringList("ITEMS." + item + ".LORE")) {
+        for (String lines : shop.getStringList("SHOP_MISC_ITEMS." + item + ".LORE")) {
             lore.add(plugin.getColorFormatter().format(lines));
         }
         meta.setDisplayName(plugin.getColorFormatter().format(name));

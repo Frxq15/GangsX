@@ -67,16 +67,16 @@ public class localeManager {
         getLocaleFile().getStringList("GANG_INFO").forEach(line -> {
             line = line
                     .replace("%gang%", gang.getName())
-                    .replace("%created%", gang.getCreationDate()
+                    .replace("%created%", gang.getCreationDate())
                             .replace("%leader%", Bukkit.getOfflinePlayer(gang.getLeader()).getName())
                             .replace("%level%", gang.getLevel()+"")
                             .replace("%kills%", gang.getKills()+"")
                             .replace("%deaths%", gang.getDeaths()+"")
                             .replace("%blocksbroken%", gang.getBlocksBroken()+"")
-                            .replace("%members%", gang.getMembers().toString())
+                            .replace("%members%", "&binsert members")
                             .replace("%allies%", "&dinsert allies")
                             .replace("%coins%", gang.getCoins()+"")
-                            .replace("%bank%", gang.getBankBalance()+""));
+                            .replace("%bank%", gang.getBankBalanceFormatted());
             sendRawMessage(sender, line);
         });
     }

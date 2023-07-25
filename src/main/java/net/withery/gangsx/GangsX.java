@@ -10,6 +10,8 @@ import net.withery.gangsx.datafactory.gang.sql.SQLGangDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLHandler;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
+import net.withery.gangsx.formatting.number.NumberFormatter;
+import net.withery.gangsx.gui.GUIListeners;
 import net.withery.gangsx.listener.DataFactoryListener;
 import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.managers.RoleManager;
@@ -71,6 +73,8 @@ public final class GangsX extends JavaPlugin {
         commandHandler = new CommandHandler(this);
         commandHandler.load();
 
+        Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
+
         switch (settings.getStorageType()) {
             case MYSQL -> sqlSetup();
             case MONGODB -> getLogger().warning("MongoDB not supported yet.");
@@ -86,12 +90,12 @@ public final class GangsX extends JavaPlugin {
         sVersionChecker = new ServerVersionChecker();
 
         if (sVersionChecker.isServerAbove(ServerVersion.VERSION_1_16)) {
-            log("set to 1.16");
+            log("Found newer plugin version");
             colorFormatter = new ColorFormatter_1_16();
         }
 
         else if (sVersionChecker.isServerAbove(ServerVersion.LEGACY)) {
-            log("set to legacy");
+            log("Found legacy plugin version");
             colorFormatter = new ColorFormatter_LEGACY();
         }
 
@@ -139,5 +143,7 @@ public final class GangsX extends JavaPlugin {
     }
 
     public RoleManager getRoleManager() { return roleManager; }
+
+    public APIHooks getAPIHooks() { return apiHooks; }
 
 }

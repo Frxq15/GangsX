@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
@@ -47,6 +48,7 @@ public class createCommand extends SubCommand {
                     plugin.getGangDataFactory().initializeGangData(gang);
                     gPlayer.setGangId(gang.getID());
                     gPlayer.setHasGang(true);
+                    gPlayer.setRole(Role.LEADER);
                     Bukkit.broadcastMessage(plugin.getLocaleManager().getMessage("GANG_CREATED")
                             .replace("%gang%", gang.getName())
                             .replace("%player%", p.getName()));

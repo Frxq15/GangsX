@@ -24,15 +24,20 @@ public class GUITemplate {
     private UUID uuid;
 
     public GUITemplate(GangsX plugin, int rows, String title) {
+        uuid = UUID.randomUUID();
         this.plugin = plugin;
         this.rows = rows;
         this.title = title;
         inventory = Bukkit.createInventory(null, 9 * rows, plugin.getColorFormatter().format(title));
+        actions = new HashMap<>();
         inventoriesByUUID.put(getUUID(), this);
     }
 
     public interface GUIAction {
         void click(Player player);
+    }
+    public Map<Integer, GUIAction> getActions() {
+        return actions;
     }
 
     public UUID getUUID() {
