@@ -8,6 +8,7 @@ GANG_NOT_FOUND: '&f[&bGangsX&f] &fThe gang you specified could not be found.'
 PLUGIN_VERSION: '&f[&bGangsX&f] &fRunning &bGangsX v%version%-SNAPSHOT'
 SHOP_NOT_ENOUGH_BALANCE: '&f[&bGangsX&f] &fYou need &b%amount% &f%currency% &fto purchase this item.'
 SHOP_ITEM_PURCHASED: '&f[&bGangsX&f] &7(%gang%) &b%player% &fpurchased a %item% &ffor &b%amount% &f%currency% from the gang shop.'
+BLACKLISTED_WORDS: '&f[&bGangsX&f] &fYou text you provided contains blacklisted words.'
 GANG_INFO:
   - ''
   - '&b&lGang Info &8- &b%gang%'

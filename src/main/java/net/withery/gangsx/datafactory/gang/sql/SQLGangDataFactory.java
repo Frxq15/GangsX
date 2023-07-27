@@ -72,7 +72,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         if (doesGangDataExist(gang.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + GANGS_TABLE + " " +
-                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)")) {
             statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
             statement.setString(2, gang.getName());
             statement.setLong(3, gang.getCreated());
@@ -84,6 +84,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(9, gang.getDeaths());
             statement.setInt(10, gang.getBlocksBroken());
             statement.setBoolean(11, gang.hasFriendlyFire());
+            statement.setString(12, plugin.getConfig().getString("gang.default_description"));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +131,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             Gang gang = null;
 
             if (rs.next()) {
-                gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"),
+                gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"), rs.getString("description"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
                         rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, null, null, null);
@@ -161,7 +162,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         }
 
         // Insert if not exists, update if exists
-        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
+        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
                 "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?;";
 
@@ -182,6 +183,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getDeaths());
             statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i++, gang.hasFriendlyFire());
+            statement.setString(i++, gang.getDescription());
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
@@ -195,6 +197,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getDeaths());
             statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i, gang.hasFriendlyFire());
+            statement.setString(i++, gang.getDescription());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

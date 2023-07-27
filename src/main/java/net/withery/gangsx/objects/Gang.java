@@ -15,6 +15,8 @@ public class Gang {
     private final UUID id;
 
     private String name;
+
+    private String description;
     private long created;
     private UUID leader;
     private int level;
@@ -31,10 +33,11 @@ public class Gang {
 
     private final List<GPlayer> onlinemembers = new ArrayList<>();
 
-    public Gang(GangsX plugin, final UUID id, final String name, final long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final HashMap<Upgrades, Integer> upgrades) {
+    public Gang(GangsX plugin, final UUID id, final String name, final String description, long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final HashMap<Upgrades, Integer> upgrades) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
+        this.description = description;
         this.created = created;
         this.leader = leader;
         this.level = level;
@@ -56,8 +59,11 @@ public class Gang {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
+        this.description = plugin.getConfig().getString("gang.default_description");
         this.created = System.currentTimeMillis();
         this.leader = leader;
+        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
+        this.addOnlineMember(gPlayer);
         this.level = 0;
         this.coins = 0;
         this.bankBalance = 0;
@@ -66,11 +72,9 @@ public class Gang {
         this.blocksbroken = 0;
         this.friendlyFire = false;
         this.allies = null;
-        this.members = null;
+        this.members = Arrays.asList(gPlayer);
         this.invites = null;
         this.upgrades = null;
-        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
-        this.addOnlineMember(gPlayer);
     }
 
     public void sendMessage(String message) {
@@ -121,6 +125,8 @@ public class Gang {
     public boolean hasFriendlyFire() {
         return friendlyFire;
     }
+
+    public String getDescription() { return description; }
 
     public List<Gang> getAllies() {
         return allies;

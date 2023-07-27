@@ -79,6 +79,7 @@ public class Shop extends GUITemplate {
                     delete();
                     return;
                 }
+                delete();
                 takeBalance(item);
                 for (String commands : shop.getStringList("ITEMS." + item + ".COMMANDS")) {
                     commands = commands.replace("%player%", p.getName())
@@ -86,14 +87,14 @@ public class Shop extends GUITemplate {
                             .replace("%cost%", getItemCost(item) + "");
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commands);
 
-                    gang.sendMessage(plugin.getColorFormatter().format
-                            (plugin.getLocaleManager().getMessage("SHOP_ITEM_PURCHASED")
+
+                    gang.sendMessage(
+                            plugin.getLocaleManager().getMessage("SHOP_ITEM_PURCHASED")
                             .replace("%amount%", getItemCost(item)+"")
                             .replace("%currency%", plugin.getConfig().getString("shop.currency"))
                                     .replace("%player%", p.getName())
                                     .replace("%gang%", gang.getName())
-                                    .replace("%item%", shop.getString("ITEMS."+item+".NAME"))));
-                    delete();
+                                    .replace("%item%", shop.getString("ITEMS."+item+".NAME")));
                     return;
                 }
             });

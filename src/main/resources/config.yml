@@ -12,8 +12,13 @@ database:
 
 gang:
   #how often should gang data be backed up?
-  save-interval: 5 #time in minutes
-  blacklisted_names:
+  save-interval: 10 #time in minutes
+  blacklisted_names: #applies to gang name
+    - nigger
+    - fuck
+    - shit
+    - cunt
+  blacklisted_words: #applies to gang description
     - nigger
     - fuck
     - shit
@@ -21,6 +26,7 @@ gang:
   name_min_length: 3
   name_max_length: 16
   maximum_level: 5
+  default_description: 'No description set :('
   chat_format: "&f[&bGang-Chat&f] &7%role% &7%player%: &b%message%"
   social_spy_format: "&f[&bGang-Spy&f] &7(%gang%) %role% &7%player%&7: &b%message%"
 

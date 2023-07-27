@@ -19,6 +19,7 @@ import net.withery.gangsx.settings.Settings;
 import net.withery.gangsx.settings.locale.localeManager;
 import net.withery.gangsx.settings.version.ServerVersion;
 import net.withery.gangsx.settings.version.ServerVersionChecker;
+import net.withery.gangsx.utils.CommandUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,8 +37,13 @@ public final class GangsX extends JavaPlugin {
     private CommandHandler commandHandler;
     private RoleManager roleManager;
 
+    private CommandUtils commandUtils;
+    public static GangsX instance;
+
+
     @Override
     public void onEnable() {
+        instance = this;
         // Initialization logic here
         saveDefaultConfig();
         registry();
@@ -72,6 +78,8 @@ public final class GangsX extends JavaPlugin {
         roleManager = new RoleManager(this);
         commandHandler = new CommandHandler(this);
         commandHandler.load();
+
+        commandUtils = new CommandUtils();
 
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
 
@@ -119,6 +127,7 @@ public final class GangsX extends JavaPlugin {
         getGPlayerDataFactory().initialize();
         log("Connected to mysql successfully.");
     }
+    public static GangsX getInstance() { return instance; }
 
     public Settings getSettings() {
         return settings;
@@ -141,6 +150,8 @@ public final class GangsX extends JavaPlugin {
     public localeManager getLocaleManager() {
         return localeManager;
     }
+
+    public CommandUtils getCommandUtils() { return commandUtils; }
 
     public RoleManager getRoleManager() { return roleManager; }
 
