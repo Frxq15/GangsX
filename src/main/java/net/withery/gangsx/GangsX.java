@@ -115,7 +115,7 @@ public final class GangsX extends JavaPlugin {
     public void sqlSetup() {
         SQLHandler sqlHandler = new SQLHandler(this, settings.getHost(), settings.getDatabase(), settings.getUsername(), settings.getPassword(), settings.getPort());
         if (!sqlHandler.connect()) {
-            log("Connection to mysql failed.");
+            log("MySQL Connection: failed");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -125,13 +125,14 @@ public final class GangsX extends JavaPlugin {
         getGangDataFactory().initialize();
         gPlayerDataFactory = new SQLGPlayerDataFactory(this, sqlHandler, "gangsx_");
         getGPlayerDataFactory().initialize();
-        log("Connected to mysql successfully.");
+        log("MySQL Connection: success");
     }
     public static GangsX getInstance() { return instance; }
 
     public Settings getSettings() {
         return settings;
     }
+
 
     public ColorFormatter getColorFormatter() {
         return colorFormatter;

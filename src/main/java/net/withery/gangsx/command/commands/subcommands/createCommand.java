@@ -44,7 +44,10 @@ public class createCommand extends SubCommand {
                 return;
             }
 
-
+            if(plugin.getGangDataFactory().doesGangNameExist(name)) {
+                plugin.getLocaleManager().sendMessage(p, "GANG_ALREADY_EXISTS");
+                return;
+            }
 
             new BukkitRunnable() {
                 @Override

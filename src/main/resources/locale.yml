@@ -16,6 +16,7 @@ GANG_PLAYER_INVITED: '&f[&bGangsX&f] &b%player% &finvited &b%target% &fto join t
 PLAYER_GANG_INVITED: '&f[&bGangsX&f] &b%player% &finvited you to join &b%gang%. &fJoin using &b/gang join %gang%'
 TARGET_ALREADY_INVITED: '&f[&bGangsX&f] &fThis player has already been invited to your gang.'
 INVALID_NAME_LENGTH: '&f[&bGangsX&f] &fPlease enter a name with a valid length.'
+GANG_ALREADY_EXISTS: '&f[&bGangsX&f] &fA gang with this name already exists.'
 GANG_INFO:
   - ''
   - '&b&lGang Info &8- &b%gang%'
