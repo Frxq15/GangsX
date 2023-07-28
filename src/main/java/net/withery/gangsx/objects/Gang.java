@@ -80,7 +80,7 @@ public class Gang {
     public void sendMessage(String message) {
         this.onlinemembers.forEach(member -> {
             Player p = Bukkit.getPlayer(member.getID());
-            p.sendMessage(plugin.getColorFormatter().format(message));
+            p.sendMessage(plugin.getColorFormatter().format(message).replace("%gang%", this.getName()));
         });
     }
 
@@ -196,6 +196,8 @@ public class Gang {
         this.deaths = deaths;
     }
 
+    public void setDescription(String description) { this.description = description; }
+
     public void setBlocksBroken(int blocks) { this.blocksbroken = blocks; }
 
     public void setFriendlyFire(boolean friendlyFire) {
@@ -247,7 +249,6 @@ public class Gang {
     }
 
     public void removeCoins(int coins) {
-        Bukkit.broadcastMessage(coins+"");
         this.coins -= coins;
     }
 

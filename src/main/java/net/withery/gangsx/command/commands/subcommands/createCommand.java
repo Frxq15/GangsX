@@ -37,6 +37,15 @@ public class createCommand extends SubCommand {
         }
         if(args.length == 1) {
             String name = args[0];
+
+            if(name.length() < plugin.getConfig().getInt("gang.name_min_length")
+                    || name.length() > plugin.getConfig().getInt("gang.name_max_length")) {
+                plugin.getLocaleManager().sendMessage(p, "INVALID_NAME_LENGTH");
+                return;
+            }
+
+
+
             new BukkitRunnable() {
                 @Override
                 public void run() {

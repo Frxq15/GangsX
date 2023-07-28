@@ -4,6 +4,7 @@ import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.gui.menus.Shop;
 import net.withery.gangsx.objects.GPlayer;
+import net.withery.gangsx.objects.Gang;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class setdescriptionCommand extends SubCommand {
 
     public setdescriptionCommand(GangsX plugin) {
         super("setdescription", "gangsx.command.setdescription", "/gang setdescription <description>",
-                Arrays.asList("setdesc"));
+                Arrays.asList("setdesc", "description", "desc"));
         this.plugin = plugin;
     }
     @Override
@@ -35,11 +36,14 @@ public class setdescriptionCommand extends SubCommand {
             String description = plugin.getCommandUtils().getFinalArg(args, 1);
 
             if(plugin.getCommandUtils().containsBlacklistedWords(description)) {
+                plugin.getLocaleManager().sendMessage(p, "BLACKLISTED_WORDS");
                 return;
             }
-            //set desc
+            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+            gang.setDescription(description);
+            gang.sendMessage(plugin.getLocaleManager().getMessage("DESCRIPTION_SET").replace("%description%", description));
             return;
         }
-        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang shop");
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang setdescription <description>");
     }
 }
