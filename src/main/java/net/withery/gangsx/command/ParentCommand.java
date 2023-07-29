@@ -34,7 +34,10 @@ public abstract class ParentCommand implements CommandExecutor {
             if(subCommand.getAliases() == null) {
                 return false;
             }
-
+        for (SubCommand subCommand : subCommands)
+            if(subCommand.getAliases().contains(label)) {
+                return true;
+            }
             else
                 for (String alias : subCommand.getAliases())
                     if (alias.equalsIgnoreCase(label))

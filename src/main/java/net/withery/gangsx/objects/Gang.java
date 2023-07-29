@@ -4,6 +4,7 @@ import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.formatting.number.NumberFormatter;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -26,14 +27,14 @@ public class Gang {
     private int deaths;
     private int blocksbroken;
     private boolean friendlyFire;
-    private final List<Gang> allies;
-    private final List<GPlayer> members;
-    private final List<GPlayer> invites;
-    private final HashMap<Upgrades, Integer> upgrades;
+    private List<Gang> allies;
+    private ArrayList<GPlayer> members = new ArrayList<>();;
+    private ArrayList<GPlayer> invites = new ArrayList<>();
+    private HashMap<Upgrades, Integer> upgrades;
 
-    private final List<GPlayer> onlinemembers = new ArrayList<>();
+    private ArrayList<GPlayer> onlinemembers = new ArrayList<>();
 
-    public Gang(GangsX plugin, final UUID id, final String name, final String description, long created, final UUID leader, final int level, final int coins, final double bankBalance, final int kills, final int deaths, final int blocksbroken, final boolean friendlyFire, final List<Gang> allies, final List<GPlayer> members, final List<GPlayer> invites, final HashMap<Upgrades, Integer> upgrades) {
+    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
@@ -49,13 +50,11 @@ public class Gang {
         this.friendlyFire = friendlyFire;
         this.allies = allies;
         this.members = members;
-        this.invites = invites;
+        this.invites = new ArrayList<>();
         this.upgrades = upgrades;
-        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
-        this.addOnlineMember(gPlayer);
     }
 
-    public Gang(GangsX plugin, final UUID id, final String name, final UUID leader) {
+    public Gang(GangsX plugin, final UUID id, String name, UUID leader) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
@@ -63,7 +62,6 @@ public class Gang {
         this.created = System.currentTimeMillis();
         this.leader = leader;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
-        this.addOnlineMember(gPlayer);
         this.level = 0;
         this.coins = 0;
         this.bankBalance = 0;
@@ -72,8 +70,9 @@ public class Gang {
         this.blocksbroken = 0;
         this.friendlyFire = false;
         this.allies = null;
-        this.members = Arrays.asList(gPlayer);
-        this.invites = null;
+        this.members = new ArrayList<GPlayer>();
+        members.add(gPlayer);
+        this.invites = new ArrayList<>();
         this.upgrades = null;
     }
 
@@ -291,6 +290,15 @@ public class Gang {
 
     public List<GPlayer> getOnlineMembers() {
         return onlinemembers;
+    }
+
+    public String convertMembersForInfo() {
+        ArrayList<String> members = new ArrayList<String>();
+        getMembers().forEach(gPlayer -> {
+            members.add(gPlayer.getName());
+        });
+       String m = members.toString().replace("[", "").replace("]", "");
+        return m;
     }
 
     public String getBankBalanceFormatted() { return NumberFormatter.format(getBankBalance()); }

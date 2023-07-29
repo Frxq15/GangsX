@@ -21,6 +21,9 @@ public class GangCommand extends ParentCommand {
         register(new versionCommand(plugin));
         register(new infoCommand(plugin));
         register(new shopCommand(plugin));
+        register(new setdescriptionCommand(plugin));
+        register(new inviteCommand(plugin));
+        register(new joinCommand(plugin));
     }
 
     @Override

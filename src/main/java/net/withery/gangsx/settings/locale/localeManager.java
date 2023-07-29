@@ -57,8 +57,11 @@ public class localeManager {
     public void sendRawMessage(CommandSender sender, String message) {
         sender.sendMessage(plugin.getColorFormatter().format(message));
     }
-    public void broadcastMessage(CommandSender sender, String message) {
-        sender.sendMessage(plugin.getColorFormatter().format(getLocaleFile().getString(message)));
+    public void broadcastLocaleMessage(String message) {
+        Bukkit.broadcastMessage(plugin.getColorFormatter().format(getLocaleFile().getString(message)));
+    }
+    public void broadcastMessage(String message) {
+        Bukkit.broadcastMessage(plugin.getColorFormatter().format(message));
     }
     public String getMessage(String message) {
         return plugin.getColorFormatter().format(getLocaleFile().getString(message));
@@ -70,10 +73,11 @@ public class localeManager {
                     .replace("%created%", gang.getCreationDate())
                             .replace("%leader%", Bukkit.getOfflinePlayer(gang.getLeader()).getName())
                             .replace("%level%", gang.getLevel()+"")
+                            .replace("%description%", gang.getDescription())
                             .replace("%kills%", gang.getKills()+"")
                             .replace("%deaths%", gang.getDeaths()+"")
                             .replace("%blocksbroken%", gang.getBlocksBroken()+"")
-                            .replace("%members%", "&binsert members")
+                            .replace("%members%", gang.convertMembersForInfo())
                             .replace("%allies%", "&dinsert allies")
                             .replace("%coins%", gang.getCoins()+"")
                             .replace("%bank%", gang.getBankBalanceFormatted());

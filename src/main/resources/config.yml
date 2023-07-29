@@ -23,6 +23,9 @@ gang:
     - fuck
     - shit
     - cunt
+  player_actions: #should GangsX globally broadcast these actions?
+    join_gang: true
+    leave_gang: true
   name_min_length: 3
   name_max_length: 16
   maximum_level: 5

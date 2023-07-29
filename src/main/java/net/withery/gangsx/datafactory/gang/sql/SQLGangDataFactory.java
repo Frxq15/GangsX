@@ -3,12 +3,14 @@ package net.withery.gangsx.datafactory.gang.sql;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.datafactory.gang.GangDataFactory;
 import net.withery.gangsx.datafactory.sql.SQLHandler;
+import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -36,7 +38,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + GANGS_TABLE + " " +
                 "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
-                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN);")) {
+                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN, description VARCHAR(36));")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,7 +136,7 @@ public class SQLGangDataFactory extends GangDataFactory {
                 gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"), rs.getString("description"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
-                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, null, null, null);
+                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null);
                 // TODO: 17/04/2022 get upgrades/members/allies
 
                 // TODO: 17/04/2022 check how to get table names from each others datafactory
@@ -164,7 +166,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         // Insert if not exists, update if exists
         final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
-                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?;";
+                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?, description = ?;";
 
         // OLD: "UPDATE " + GANGS_TABLE + " SET name=?, created=?, leader=?, level=?, coins=?, " +
         //                "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid=?;"
@@ -196,8 +198,8 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getKills());
             statement.setInt(i++, gang.getDeaths());
             statement.setInt(i++, gang.getBlocksBroken());
-            statement.setBoolean(i, gang.hasFriendlyFire());
-            statement.setString(i++, gang.getDescription());
+            statement.setBoolean(i++, gang.hasFriendlyFire());
+            statement.setString(i, gang.getDescription());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

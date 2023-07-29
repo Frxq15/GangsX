@@ -32,16 +32,23 @@ public class setdescriptionCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
-        if(args.length > 2) {
-            String description = plugin.getCommandUtils().getFinalArg(args, 1);
+        if(args.length > 0) {
+            String description = plugin.getCommandUtils().getFinalArg(args, 0);
 
             if(plugin.getCommandUtils().containsBlacklistedWords(description)) {
                 plugin.getLocaleManager().sendMessage(p, "BLACKLISTED_WORDS");
                 return;
             }
+            if(!p.hasPermission("gangsx.command.setdescription.color")) {
+                if(description.contains("&")) {
+                    plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
+                }
+            }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             gang.setDescription(description);
-            gang.sendMessage(plugin.getLocaleManager().getMessage("DESCRIPTION_SET").replace("%description%", description));
+            gang.sendMessage(plugin.getLocaleManager().getMessage("DESCRIPTION_SET")
+                    .replace("%description%", description)
+                    .replace("%player%", p.getName()));
             return;
         }
         plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang setdescription <description>");

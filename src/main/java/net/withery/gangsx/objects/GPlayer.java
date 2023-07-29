@@ -95,4 +95,14 @@ public class GPlayer {
         return deaths;
     }
 
+    public void kickFromGang() {
+        Gang gang = plugin.getGangDataFactory().getGangData(getGangId());
+        gang.removeMember(this);
+        gang.removeOnlineMember(this);
+        setHasGang(false);
+        setGangId(null);
+        setGangIdString(null);
+        setRole(null);
+    }
+
 }

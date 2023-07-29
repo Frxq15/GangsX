@@ -43,7 +43,14 @@ public class createCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "INVALID_NAME_LENGTH");
                 return;
             }
-
+            if(!name.chars().allMatch(Character::isLetter)) {
+                plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
+                return;
+            }
+            if(plugin.getCommandUtils().isBlacklistedName(name)) {
+                plugin.getLocaleManager().sendMessage(p, "BLACKLISTED_WORDS");
+                return;
+            }
             if(plugin.getGangDataFactory().doesGangNameExist(name)) {
                 plugin.getLocaleManager().sendMessage(p, "GANG_ALREADY_EXISTS");
                 return;
@@ -61,6 +68,7 @@ public class createCommand extends SubCommand {
                     gPlayer.setGangId(gang.getID());
                     gPlayer.setHasGang(true);
                     gPlayer.setRole(Role.LEADER);
+                    gang.addOnlineMember(gPlayer);
                     Bukkit.broadcastMessage(plugin.getLocaleManager().getMessage("GANG_CREATED")
                             .replace("%gang%", gang.getName())
                             .replace("%player%", p.getName()));
