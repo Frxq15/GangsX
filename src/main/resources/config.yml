@@ -27,6 +27,7 @@ gang:
     join_gang: true
     leave_gang: true
     kicked_from_gang: true
+    leader_changed: true
   roles:
     prefixes:
       leader: '&8[&aLeader&8]'

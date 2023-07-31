@@ -18,6 +18,7 @@ public class RoleManager {
         this.role = gPlayer.getRole();
     }
     public boolean canManage(Role promotion) {
+        if(gPlayer.getRole().equals(Role.LEADER)) { return false; }
         if(promotion.getPriority() >= role.getPriority()) { return false; }
         return true;
     }

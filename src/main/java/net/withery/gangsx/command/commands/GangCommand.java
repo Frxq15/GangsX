@@ -26,6 +26,8 @@ public class GangCommand extends ParentCommand {
         register(new joinCommand(plugin));
         register(new kickCommand(plugin));
         register(new depositCommand(plugin));
+        register(new withdrawCommand(plugin));
+        register(new leaderCommand(plugin));
     }
 
     @Override
