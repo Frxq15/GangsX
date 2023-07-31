@@ -26,8 +26,15 @@ gang:
   player_actions: #should GangsX globally broadcast these actions?
     join_gang: true
     leave_gang: true
+    kicked_from_gang: true
+  roles:
+    prefixes:
+      leader: '&8[&aLeader&8]'
   name_min_length: 3
   name_max_length: 16
+  bank:
+    limit_enabled: false #should we limit the amount that gangs can store inside the gang bank?
+    limit: 1000000000000
   maximum_level: 5
   default_description: 'No description set :('
   chat_format: "&f[&bGang-Chat&f] &7%role% &7%player%: &b%message%"

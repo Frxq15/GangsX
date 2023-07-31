@@ -1,9 +1,11 @@
 package net.withery.gangsx.datafactory.gang;
 
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -204,6 +206,14 @@ public abstract class GangDataFactory {
      * @return Unique id of the gang
      */
     public abstract UUID getGangUniqueId(String name);
+
+    /**
+     * Gets the members array of the gang with the given name.
+     *
+     * @param gangId ID of the gang
+     * @return Members array of the gang
+     */
+    public abstract ArrayList<GPlayer> getGangMembers(UUID gangId);
 
     /**
      * Asynchronously gets the unique id of the gang with the given name.

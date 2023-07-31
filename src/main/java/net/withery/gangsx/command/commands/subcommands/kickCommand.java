@@ -34,17 +34,39 @@ public class kickCommand extends SubCommand {
         }
         if(args.length == 1) {
             UUID uuid = Bukkit.getOfflinePlayer(args[0]).getUniqueId();
+
+            if(plugin.getGPlayerDataFactory().getGPlayerData(uuid) == null) {
+                plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_FOUND");
+                return;
+            }
+
             GPlayer tPlayer = plugin.getGPlayerDataFactory().getGPlayerData(uuid);
 
-            if(!tPlayer.getGangId().equals(gPlayer.getGangId())) {
+            if(tPlayer.getGangId() == null || !tPlayer.getGangId().equals(gPlayer.getGangId())) {
                 plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_YOUR_GANG");
                 return;
             }
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             tPlayer.kickFromGang();
+            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
 
+            gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_PLAYER_KICKED")
+                    .replace("%player%", p.getName())
+                    .replace("%target%", tPlayer.getName()));
 
+            if(Bukkit.getPlayer(tPlayer.getName()) != null) {
+                Player target = Bukkit.getPlayer(tPlayer.getName());
+                target.sendMessage(plugin.getLocaleManager().getMessage("PLAYER_GANG_KICKED")
+                        .replace("%player%", p.getName()));
+            }
+            if(plugin.getConfig().getBoolean("gang.player_actions.kicked_from_gang")) {
+                 Bukkit.broadcastMessage(plugin.getLocaleManager().getMessage("BROADCAST_GANG_KICKED")
+                         .replace("%player%", p.getName())
+                         .replace("%target%", tPlayer.getName())
+                         .replace("%gang%", gang.getName()));
+            }
+            return;
         }
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang kick <player>");
         return;
     }
 }

@@ -2,6 +2,7 @@ package net.withery.gangsx.objects;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.enums.Role;
+import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
@@ -28,10 +29,10 @@ public class GPlayer {
         if(gangId == null) {
             setGangIdString("N/A");
             setHasGang(false);
-            return;
+        } else {
+            this.gangId = gangId;
+            setHasGang(true);
         }
-        this.gangId = gangId;
-        setHasGang(true);
     }
 
     public GPlayer(GangsX plugin, final UUID uuid, final String name) {
@@ -98,11 +99,14 @@ public class GPlayer {
     public void kickFromGang() {
         Gang gang = plugin.getGangDataFactory().getGangData(getGangId());
         gang.removeMember(this);
-        gang.removeOnlineMember(this);
         setHasGang(false);
         setGangId(null);
         setGangIdString(null);
         setRole(null);
+
+        if(Bukkit.getPlayer(getName()) != null) {
+            gang.removeOnlineMember(this);
+        }
     }
 
 }

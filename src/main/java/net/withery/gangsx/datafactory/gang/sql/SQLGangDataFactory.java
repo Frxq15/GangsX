@@ -23,10 +23,13 @@ public class SQLGangDataFactory extends GangDataFactory {
     private final String GANGS_TABLE;
     private int savingTask;
 
+    private final String PLAYERS_TABLE;
+
     public SQLGangDataFactory(GangsX plugin, SQLHandler sqlHandler, String prefix) {
         super(plugin);
         this.sqlHandler = sqlHandler;
         this.GANGS_TABLE = prefix + "gangs";
+        this.PLAYERS_TABLE = prefix + "players";
     }
 
     @Override
@@ -137,6 +140,8 @@ public class SQLGangDataFactory extends GangDataFactory {
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
                         rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null);
+
+                gang.importMembers(getGangMembers(UUID.fromString(rs.getString("uuid"))));
                 // TODO: 17/04/2022 get upgrades/members/allies
 
                 // TODO: 17/04/2022 check how to get table names from each others datafactory
@@ -301,6 +306,27 @@ public class SQLGangDataFactory extends GangDataFactory {
             e.printStackTrace();
         }
         return null;
+    }
+    @Override
+    public ArrayList<GPlayer> getGangMembers(UUID gangId) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT uuid FROM `" + PLAYERS_TABLE + "` WHERE gang=?")) {
+            statement.setString(1, gangId.toString());
+            ResultSet rs = statement.executeQuery();
+            ArrayList<GPlayer> members = new ArrayList<>();
+            GPlayer gPlayer;
+
+            while (rs != null && rs.next()) {
+                gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(UUID.fromString(rs.getString("uuid")));
+                members.add(gPlayer);
+            }
+
+            rs.close();
+
+            return members;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<GPlayer>();
     }
 
     private int startSavingTask() {

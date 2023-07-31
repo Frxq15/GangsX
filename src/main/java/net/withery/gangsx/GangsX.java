@@ -54,6 +54,7 @@ public final class GangsX extends JavaPlugin {
     @Override
     public void onDisable() {
         gangDataFactory.terminate();
+        gPlayerDataFactory.terminate();
         // Shutdown logic here
         log("Disabled " + getDescription().getName() + " v" + getDescription().getVersion());
     }

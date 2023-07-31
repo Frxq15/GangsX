@@ -38,4 +38,7 @@ public class APIHooks {
         plugin.log("Hooked into PlaceholderAPI successfully");
         return;
     }
+    public Economy getEconomy() {
+        return econ;
+    }
 }

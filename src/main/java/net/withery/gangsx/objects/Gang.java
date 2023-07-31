@@ -18,7 +18,7 @@ public class Gang {
     private String name;
 
     private String description;
-    private long created;
+    private final long created;
     private UUID leader;
     private int level;
     private int coins;
@@ -31,7 +31,6 @@ public class Gang {
     private ArrayList<GPlayer> members = new ArrayList<>();;
     private ArrayList<GPlayer> invites = new ArrayList<>();
     private HashMap<Upgrades, Integer> upgrades;
-
     private ArrayList<GPlayer> onlinemembers = new ArrayList<>();
 
     public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades) {
@@ -135,7 +134,7 @@ public class Gang {
         return allies.size();
     }
 
-    public List<GPlayer> getMembers() {
+    public ArrayList<GPlayer> getMembers() {
         return members;
     }
 
@@ -167,10 +166,6 @@ public class Gang {
         this.name = name;
     }
 
-    public void setCreated(long created) {
-        this.created = created;
-    }
-
     public void setLeader(UUID leader) {
         this.leader = leader;
     }
@@ -193,6 +188,12 @@ public class Gang {
 
     public void setDeaths(int deaths) {
         this.deaths = deaths;
+    }
+
+    public void importMembers(ArrayList<GPlayer> imported) {
+        imported.forEach(member -> {
+            addMember(member);
+        });
     }
 
     public void setDescription(String description) { this.description = description; }
