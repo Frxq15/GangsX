@@ -10,10 +10,8 @@ import org.bukkit.Bukkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SQLGangDataFactory extends GangDataFactory {
 
@@ -331,11 +329,32 @@ public class SQLGangDataFactory extends GangDataFactory {
         return new ArrayList<GPlayer>();
     }
 
+    @Override
+    public void updateLeaderboardTopValues() {
+        int limit = plugin.getConfig().getInt("gang.leaderboard-data-pull-amount");
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM `" + GANGS_TABLE + "` GROUP BY name ORDER BY gang_value DESC LIMIT "+limit+";")) {
+            ResultSet rs = statement.executeQuery();
+            LinkedHashMap<Integer, Gang> top_values = new LinkedHashMap<>();
+            AtomicInteger i = new AtomicInteger(1);
+
+            Gang gang;
+
+            while (rs != null && rs.next()) {
+                gang = getGangData(UUID.fromString(rs.getString("uuid")));
+                top_values.put(i.get(), gang);
+            }
+            plugin.getLeaderboardManager().updateTopValues(top_values);
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private int startSavingTask() {
         return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (Gang gang : gangs.values())
                 updateGangData(gang);
-        }, 20L * 60L * plugin.getConfig().getInt("gang.save_interval"), 20L * 60L * plugin.getConfig().getInt("gang.save_interval")).getTaskId(); // TODO: 15/04/2022 get config values for timer
+        }, 20L * 60L * plugin.getConfig().getInt("gang.save-interval"), 20L * 60L * plugin.getConfig().getInt("gang.save-interval")).getTaskId();
     }
 
 }

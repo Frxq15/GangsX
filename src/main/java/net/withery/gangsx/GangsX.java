@@ -12,6 +12,7 @@ import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
 import net.withery.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
 import net.withery.gangsx.formatting.number.NumberFormatter;
 import net.withery.gangsx.gui.GUIListeners;
+import net.withery.gangsx.leaerboard.LeaderboardManager;
 import net.withery.gangsx.listener.DataFactoryListener;
 import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.managers.RoleManager;
@@ -38,6 +39,8 @@ public final class GangsX extends JavaPlugin {
     private RoleManager roleManager;
 
     private CommandUtils commandUtils;
+
+    private LeaderboardManager leaderboardManager;
     public static GangsX instance;
 
 
@@ -81,6 +84,8 @@ public final class GangsX extends JavaPlugin {
         commandHandler.load();
 
         commandUtils = new CommandUtils();
+
+        leaderboardManager = new LeaderboardManager(this);
 
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
 
@@ -156,6 +161,8 @@ public final class GangsX extends JavaPlugin {
     public CommandUtils getCommandUtils() { return commandUtils; }
 
     public RoleManager getRoleManager() { return roleManager; }
+
+    public LeaderboardManager getLeaderboardManager() { return leaderboardManager; }
 
     public APIHooks getAPIHooks() { return apiHooks; }
 

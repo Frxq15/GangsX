@@ -13,6 +13,8 @@ database:
 gang:
   #how often should gang data be backed up?
   save-interval: 10 #time in minutes
+  leaderboard-interval: 15 #time in minutes
+  leaderboard-data-pull-amount: 15 #for gang top, how many of the top gangs data should be loaded?
   blacklisted_names: #applies to gang name
     - nigger
     - fuck

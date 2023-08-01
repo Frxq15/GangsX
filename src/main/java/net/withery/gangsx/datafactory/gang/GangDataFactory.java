@@ -6,6 +6,7 @@ import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -214,6 +215,13 @@ public abstract class GangDataFactory {
      * @return Members array of the gang
      */
     public abstract ArrayList<GPlayer> getGangMembers(UUID gangId);
+
+    /**
+     * Gets the members array of the gang with the given name.
+     *
+     * @set leaderboard manager values
+     */
+    public abstract void updateLeaderboardTopValues();
 
     /**
      * Asynchronously gets the unique id of the gang with the given name.
