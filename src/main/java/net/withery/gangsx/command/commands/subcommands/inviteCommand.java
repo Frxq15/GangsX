@@ -53,6 +53,7 @@ public class inviteCommand extends SubCommand {
             gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_PLAYER_INVITED")
                     .replace("%player%", p.getName())
                     .replace("%target%", target.getName()));
+
             target.sendMessage(plugin.getLocaleManager().getMessage("PLAYER_GANG_INVITED")
                     .replace("%player%", p.getName())
                     .replace("%gang%", gang.getName()));

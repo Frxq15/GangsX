@@ -28,12 +28,14 @@ public class Gang {
     private int blocksbroken;
     private boolean friendlyFire;
     private List<Gang> allies;
+
+    private long value;
     private ArrayList<GPlayer> members = new ArrayList<>();;
     private ArrayList<GPlayer> invites = new ArrayList<>();
     private HashMap<Upgrades, Integer> upgrades;
     private ArrayList<GPlayer> onlinemembers = new ArrayList<>();
 
-    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades) {
+    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value) {
         this.plugin = plugin;
         this.id = id;
         this.name = name;
@@ -51,6 +53,7 @@ public class Gang {
         this.members = members;
         this.invites = new ArrayList<>();
         this.upgrades = upgrades;
+        this.value = value;
     }
 
     public Gang(GangsX plugin, final UUID id, String name, UUID leader) {
@@ -73,6 +76,7 @@ public class Gang {
         members.add(gPlayer);
         this.invites = new ArrayList<>();
         this.upgrades = null;
+        this.value = 0;
     }
 
     public void sendMessage(String message) {
@@ -109,6 +113,8 @@ public class Gang {
     public double getBankBalance() {
         return bankBalance;
     }
+
+    public long getValue() { return value;}
 
     public int getKills() {
         return kills;
@@ -173,6 +179,12 @@ public class Gang {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public void setValue(long value) { this.value = value; }
+
+    public void addValue(long value) { this.value += value; }
+
+    public void removeValue(long value) { this.value -= value; }
 
     public void setCoins(int coins) {
         this.coins = coins;

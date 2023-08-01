@@ -37,6 +37,8 @@ PLAYER_GIVEN_LEADER: '&f[&bGangsX&f] &b%player% &fgave you ownership of your gan
 BROADCAST_GANG_LEADER_CHANGED: '&f[&bGangsX&f] &b%player% &fgave &b%target% &fownership of the gang &b%gang%.'
 GANG_COMMAND_ON_COOLDOWN: '&f[&bGangsX&f] &fYou are currently on cooldown for this command.'
 GANG_ALERT: '&f[&bGangsX&f] &c&lALERT: &b%player% &fneeds help at &b%x%&7, &b%y%&7, &b%z% &7in &b%world%&f.'
+GANG_BANK_BALANCE: '&f[&bGangsX&f] Your gang bank contains &b$%balance%'
+GANG_COINS_BALANCE: '&f[&bGangsX&f] Your gang has &b%coins% &fgang coins.'
 GANG_INFO:
   - ''
   - '&b&lGang Info &8- &b%gang%'

@@ -41,7 +41,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + GANGS_TABLE + " " +
                 "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
-                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN, description VARCHAR(36));")) {
+                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN, description VARCHAR(36), gang_value BIGINT(132));")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         if (doesGangDataExist(gang.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + GANGS_TABLE + " " +
-                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)")) {
+                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description, gang_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)")) {
             statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
             statement.setString(2, gang.getName());
             statement.setLong(3, gang.getCreated());
@@ -90,6 +90,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(10, gang.getBlocksBroken());
             statement.setBoolean(11, gang.hasFriendlyFire());
             statement.setString(12, plugin.getConfig().getString("gang.default_description"));
+            statement.setLong(13, 0);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -139,7 +140,7 @@ public class SQLGangDataFactory extends GangDataFactory {
                 gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"), rs.getString("description"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
-                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null);
+                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null, rs.getLong("gang_value"));
 
                 gang.importMembers(getGangMembers(UUID.fromString(rs.getString("uuid"))));
                 // TODO: 17/04/2022 get upgrades/members/allies
@@ -148,7 +149,6 @@ public class SQLGangDataFactory extends GangDataFactory {
                 // Members: SELECT uuid FROM `*players_table*` WHERE gang=?;
                 // Allies: SELECT ally FROM `*allies_table*` WHERE gang=?; (Requires another table (gang - ally) which is using a composite primary key)
                 // Upgrades: SELECT * FROM `*upgrades_table*` WHERE gang=?; (Could be done within the gangs table but just to minimize having giant tables id recommend making another one (gang - upgrade1 - upgrade2 - upgrade3 - etc.)
-                // Invites: Assume they reset when the gang gets unloaded anyways so doesn't quite matter
                 if (!gangs.containsKey(gang.getID()))
                     gangs.put(gang.getID(), gang);
             }
@@ -171,7 +171,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         // Insert if not exists, update if exists
         final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
-                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?, description = ?;";
+                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?, description = ?, gang_value = ?;";
 
         // OLD: "UPDATE " + GANGS_TABLE + " SET name=?, created=?, leader=?, level=?, coins=?, " +
         //                "bankBalance=?, kills=?, deaths=?, friendlyFire=? WHERE uuid=?;"
@@ -191,6 +191,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i++, gang.hasFriendlyFire());
             statement.setString(i++, gang.getDescription());
+            statement.setLong(i++, gang.getValue());
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
@@ -204,7 +205,8 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getDeaths());
             statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i++, gang.hasFriendlyFire());
-            statement.setString(i, gang.getDescription());
+            statement.setString(i++, gang.getDescription());
+            statement.setLong(i, gang.getValue());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -333,7 +335,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (Gang gang : gangs.values())
                 updateGangData(gang);
-        }, 20L * 60L * 5, 20L * 60L * 5).getTaskId(); // TODO: 15/04/2022 get config values for timer
+        }, 20L * 60L * plugin.getConfig().getInt("gang.save_interval"), 20L * 60L * plugin.getConfig().getInt("gang.save_interval")).getTaskId(); // TODO: 15/04/2022 get config values for timer
     }
 
 }

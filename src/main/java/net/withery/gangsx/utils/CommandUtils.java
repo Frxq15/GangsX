@@ -2,8 +2,6 @@ package net.withery.gangsx.utils;
 
 import net.withery.gangsx.GangsX;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class CommandUtils {
     private GangsX plugin = GangsX.getInstance();
 
