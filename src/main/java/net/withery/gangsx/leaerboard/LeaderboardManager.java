@@ -20,7 +20,7 @@ public class LeaderboardManager {
     public Gang getGangByPosition(int position) {
         return this.top_values.get(position);
     }
-    private int startUpdateTask() {
+    public int startUpdateTask() {
         return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             plugin.getGangDataFactory().updateLeaderboardTopValues();
         }, 20L * 60L * plugin.getConfig().getInt("gang.leaderboard-interval"), 20L * 60L * plugin.getConfig().getInt("gang.leaderboar-interval")).getTaskId();

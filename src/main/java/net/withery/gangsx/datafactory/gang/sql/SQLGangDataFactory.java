@@ -21,6 +21,8 @@ public class SQLGangDataFactory extends GangDataFactory {
     private final String GANGS_TABLE;
     private int savingTask;
 
+    private int leaderboardTask;
+
     private final String PLAYERS_TABLE;
 
     public SQLGangDataFactory(GangsX plugin, SQLHandler sqlHandler, String prefix) {
@@ -47,12 +49,14 @@ public class SQLGangDataFactory extends GangDataFactory {
         }
 
         savingTask = startSavingTask();
+        leaderboardTask = plugin.getLeaderboardManager().startUpdateTask();
         return true;
     }
 
     @Override
     public void terminate() {
         Bukkit.getScheduler().cancelTask(savingTask);
+        Bukkit.getScheduler().cancelTask(leaderboardTask);
         savingTask = 0;
 
         if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
