@@ -39,6 +39,7 @@ GANG_COMMAND_ON_COOLDOWN: '&f[&bGangsX&f] &fYou are currently on cooldown for th
 GANG_ALERT: '&f[&bGangsX&f] &c&lALERT: &b%player% &fneeds help at &b%x%&7, &b%y%&7, &b%z% &7in &b%world%&f.'
 GANG_BANK_BALANCE: '&f[&bGangsX&f] Your gang bank contains &b$%balance%'
 GANG_COINS_BALANCE: '&f[&bGangsX&f] Your gang has &b%coins% &fgang coins.'
+GANG_VALUE: '&f[&fGangsX&f] The gang &b%gang% &fis worth &b$%amount%'
 GANG_INFO:
   - ''
   - '&b&lGang Info &8- &b%gang%'
