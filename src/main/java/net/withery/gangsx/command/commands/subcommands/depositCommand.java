@@ -33,16 +33,15 @@ public class depositCommand extends SubCommand {
         }
         if(args.length == 1) {
             double balance = plugin.getAPIHooks().getEconomy().getBalance(p);
+            if(!args[0].chars().allMatch(Character::isDigit)) {
+                plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
+                return;
+            }
             int amount = 0;
-
             try {
                 amount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
                 plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
-                return;
-            }
-            if(amount == 0) {
-                plugin.getLocaleManager().sendMessage(p, "VALUE_CANNOT_BE_ZERO");
                 return;
             }
             if(amount > balance) {
@@ -57,6 +56,7 @@ public class depositCommand extends SubCommand {
                 }
             }
             gang.addBankMoney(amount);
+            plugin.getAPIHooks().getEconomy().withdrawPlayer(p, amount);
             gang.sendMessage(plugin.getLocaleManager().getMessage("BANK_DEPOSITED")
                     .replace("%amount%", NumberFormatter.format(amount))
                     .replace("%player%", p.getName()));

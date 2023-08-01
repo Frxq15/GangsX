@@ -4,6 +4,7 @@ import net.withery.gangsx.GangsX;
 import net.withery.gangsx.enums.Role;
 import org.bukkit.Bukkit;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class GPlayer {
@@ -17,6 +18,8 @@ public class GPlayer {
     private int kills, deaths;
     private String gangIdString;
     private boolean hasGang;
+
+    private ArrayList<GPlayer> alertCooldown = new ArrayList<>();
 
     public GPlayer(GangsX plugin, final UUID uuid, final String name, final UUID gangId, final Role role, final int kills, final int deaths) {
         this.plugin = plugin;
@@ -33,6 +36,7 @@ public class GPlayer {
             this.gangId = gangId;
             setHasGang(true);
         }
+        this.alertCooldown = new ArrayList<>();
     }
 
     public GPlayer(GangsX plugin, final UUID uuid, final String name) {
@@ -46,6 +50,7 @@ public class GPlayer {
             setGangIdString("N/A");
             setHasGang(false);
         }
+        this.alertCooldown = new ArrayList<>();
     }
 
     public UUID getID() {
@@ -53,6 +58,10 @@ public class GPlayer {
     }
 
     public boolean hasGang() { return hasGang; }
+
+    public boolean isOnAlertCooldown() {
+        return this.alertCooldown.contains(this);
+    }
 
     public String getName() {
         return name;
@@ -75,6 +84,11 @@ public class GPlayer {
     }
 
     public void setHasGang(boolean hasGang) { this.hasGang = hasGang; }
+
+    public void applyAlertCooldown() {
+        this.alertCooldown.add(this);
+    }
+    public void removeAlertCooldown() { this.alertCooldown.remove(this); }
 
     public void setGangId(UUID gangId) {
         this.gangId = gangId;

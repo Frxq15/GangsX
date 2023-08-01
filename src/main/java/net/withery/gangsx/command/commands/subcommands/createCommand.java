@@ -80,7 +80,7 @@ public class createCommand extends SubCommand {
             }.runTaskAsynchronously(plugin);
             return;
         }
-        plugin.getLocaleManager().sendUsageMessage(p, "&c"+this.getUsage());
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang create <name>");
         return;
     }
 }

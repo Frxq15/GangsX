@@ -35,7 +35,6 @@ public class withdrawCommand extends SubCommand {
             double balance = plugin.getAPIHooks().getEconomy().getBalance(p);
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             int amount = 0;
-
             try {
                 amount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
@@ -50,7 +49,8 @@ public class withdrawCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "WITHDRAW_FAIL_AMOUNT");
                 return;
             }
-            gang.addBankMoney(amount);
+            gang.removeBankMoney(amount);
+            plugin.getAPIHooks().getEconomy().depositPlayer(p, amount);
             gang.sendMessage(plugin.getLocaleManager().getMessage("BANK_WITHDRAWN")
                     .replace("%amount%", NumberFormatter.format(amount))
                     .replace("%player%", p.getName()));

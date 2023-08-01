@@ -28,6 +28,8 @@ gang:
     leave_gang: true
     kicked_from_gang: true
     leader_changed: true
+  command_cooldowns: #time in seconds
+    alert: 15
   roles:
     prefixes:
       leader: '&8[&aLeader&8]'

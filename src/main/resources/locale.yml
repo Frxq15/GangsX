@@ -35,6 +35,8 @@ BROADCAST_GANG_KICKED: '&f[&bGangsX&f] &b%player% &fkicked &b%target% &ffrom &b%
 GANG_LEADER_CHANGED: '&f[&bGangsX&f] &b%player% &fgave &b%target% &fownership of your gang.'
 PLAYER_GIVEN_LEADER: '&f[&bGangsX&f] &b%player% &fgave you ownership of your gang.'
 BROADCAST_GANG_LEADER_CHANGED: '&f[&bGangsX&f] &b%player% &fgave &b%target% &fownership of the gang &b%gang%.'
+GANG_COMMAND_ON_COOLDOWN: '&f[&bGangsX&f] &fYou are currently on cooldown for this command.'
+GANG_ALERT: '&f[&bGangsX&f] &c&lALERT: &b%player% &fneeds help at &b%x%&7, &b%y%&7, &b%z% &7in &b%world%&f.'
 GANG_INFO:
   - ''
   - '&b&lGang Info &8- &b%gang%'
