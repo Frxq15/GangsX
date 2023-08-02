@@ -6,7 +6,7 @@ database:
     port: 3306
     database: "practice"
     username: "practice"
-    password: "s0DlbR2zitaphuneB8sp"
+    password: "scarypassword"
   mongodb:
     connection-string: ""
 
