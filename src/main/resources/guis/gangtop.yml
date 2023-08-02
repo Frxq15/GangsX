@@ -1,0 +1,76 @@
+ROWS: 5
+TITLE: "&8Top Gangs"
+
+DISPLAY_AMOUNT: 14
+DISPLAY_SLOTS:
+  1: 10
+  2: 11
+  3: 12
+  4: 13
+  5: 14
+  6: 15
+  7: 16
+  8: 19
+  9: 20
+  10: 21
+  11: 22
+  12: 23
+  13: 24
+  14: 25
+
+VALUE_ITEMS:
+  TOP_FORMAT:
+    NAME: '&e&lGang &b%gang%'
+    LORE:
+      - ''
+      - '&e&l • &fPlace: &b#%place%'
+      - '&e&l • &fValue: &b$%value%'
+      - '&e&l • &fLeader: &b%leader%'
+      - ''
+      - '&e&l • &fGang Level: &b%level%'
+      - '&e&l • &fGang Coins: &b%coins%'
+      - ''
+      - '&e&l • &fBlocks Mined: &b%blocksmined%'
+      - '&e&l • &fKills: &b%kills%'
+      - ''
+      - '&e&lClick &fto view their value breakdown'
+  GANG_NOT_FOUND:
+    NAME: '&e&lGang &bN/A'
+    SKULL-TEXTURE: 'https://textures.minecraft.net/texture/b6e522d918252149e6ede2edf3fe0f2c2c58fee6ac11cb88c617207218ae4595'
+    LORE:
+      - ''
+      - '&e&l • &fPlace: &b#%place%'
+      - '&e&l • &fValue: &b$0'
+      - '&e&l • &fLeader: &bNone'
+      - ''
+      - '&e&l • &fGang Level: &b0'
+      - '&e&l • &fGang Coins: &b0'
+      - ''
+      - '&e&l • &fBlocks Mined: &b0'
+      - '&e&l • &fKills: &b0'
+      - ''
+      - '&eNo gang data found for this position.'
+  CLOSE_MENU:
+    SLOT: 41
+    NAME: '&cExit'
+    MATERIAL: 'ARROW'
+VALUE_MISC_ITEMS:
+  1:
+    SLOT: 39
+    MATERIAL: "WRITABLE_BOOK"
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&eGang Top Rewards'
+    LORE:
+      - '&7Earn epic rewards by defeating the competition.'
+      - ''
+      - '&b1st Place:'
+      - '&e&l • &b$100 &fStore Credit'
+      - ''
+      - '&b2nd Place:'
+      - '&e&l • &b$50 &fStore Credit'
+      - ''
+      - '&b3rd Place:'
+      - '&e&l • &b$25 &fStore Credit'
+      - ''
+      - '&ePayouts are given out at the end of the season.'

@@ -23,9 +23,16 @@ public class testCommand extends SubCommand {
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player p = (Player) sender;
-        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
-        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-        Bukkit.broadcastMessage(gang.getName());
-        new Shop(plugin, p).open(p);
+
+        if(args.length == 0) {
+            boolean t = plugin.getLeaderboardManager().getGangByPosition(0) == null;
+            Bukkit.broadcastMessage(t+"");
+        }
+        if(args.length == 1) {
+            Bukkit.broadcastMessage(plugin.getLeaderboardManager().top_values.toString());
+        }
+        if(args.length == 2) {
+            plugin.getGangDataFactory().updateLeaderboardTopValues();
+        }
     }
 }

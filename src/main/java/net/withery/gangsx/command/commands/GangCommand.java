@@ -31,6 +31,9 @@ public class GangCommand extends ParentCommand {
         register(new alertCommand(plugin));
         register(new bankCommand(plugin));
         register(new coinsCommand(plugin));
+        register(new valueCommand(plugin));
+        register(new onlineCommand(plugin));
+        register(new topCommand(plugin));
     }
 
     @Override

@@ -16,6 +16,8 @@ import net.withery.gangsx.leaerboard.LeaderboardManager;
 import net.withery.gangsx.listener.DataFactoryListener;
 import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.managers.RoleManager;
+import net.withery.gangsx.objects.GPlayer;
+import net.withery.gangsx.objects.Gang;
 import net.withery.gangsx.settings.Settings;
 import net.withery.gangsx.settings.locale.localeManager;
 import net.withery.gangsx.settings.version.ServerVersion;
@@ -78,6 +80,7 @@ public final class GangsX extends JavaPlugin {
 
         fileManager = new FileManager(this);
         fileManager.createShopFile();
+        fileManager.createTopFile();
 
         roleManager = new RoleManager(this);
         commandHandler = new CommandHandler(this);
@@ -131,6 +134,20 @@ public final class GangsX extends JavaPlugin {
         getGangDataFactory().initialize();
         gPlayerDataFactory = new SQLGPlayerDataFactory(this, sqlHandler, "gangsx_");
         getGPlayerDataFactory().initialize();
+        Bukkit.getScheduler().runTaskLater(getInstance(), () -> getGangDataFactory().updateLeaderboardTopValues(), 20L * 3);
+
+        // NOTE: fixes online members in instance of plugin reload.
+        Bukkit.getScheduler().runTaskLater(getInstance(), () -> {
+            Bukkit.getOnlinePlayers().forEach(player -> {
+                GPlayer gPlayer = getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
+                if(gPlayer.hasGang()) {
+                    Gang gang = getGangDataFactory().getGangData(gPlayer.getGangId());
+                        if(!gang.getOnlineMembers().contains(gPlayer)) {
+                            gang.addOnlineMember(gPlayer);
+                    }
+                }
+            });
+        }, 20L * 3);
         log("MySQL Connection: success");
     }
     public static GangsX getInstance() { return instance; }

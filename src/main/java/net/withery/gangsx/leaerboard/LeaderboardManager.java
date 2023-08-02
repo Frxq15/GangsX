@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 public class LeaderboardManager {
 
     private final GangsX plugin;
-    private LinkedHashMap<Integer, Gang> top_values = new LinkedHashMap<Integer, Gang>();
+    public LinkedHashMap<Integer, Gang> top_values = new LinkedHashMap<>();
 
     public LeaderboardManager(GangsX plugin) {
         this.plugin = plugin;

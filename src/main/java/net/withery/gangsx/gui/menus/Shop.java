@@ -164,7 +164,7 @@ public class Shop extends GUITemplate {
             lore.add(plugin.getColorFormatter().format(lines));
         }
         meta.setDisplayName(plugin.getColorFormatter().format(name));
-        if (hasGlow(item, false)) {
+        if (hasGlow(item, true)) {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }

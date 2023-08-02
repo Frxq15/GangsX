@@ -1,6 +1,6 @@
 package net.withery.gangsx.gui;
 
-import net.withery.gangsx.gui.menus.Shop;
+import net.withery.gangsx.gui.menus.gangtop.Value;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,14 +16,17 @@ public class GUIListeners implements Listener {
         if (!(e.getWhoClicked() instanceof Player)) return;
         Player player = (Player) e.getWhoClicked();
         UUID playerUUID = player.getUniqueId();
-        UUID inventoryUUID = Shop.openInventories.get(playerUUID);
-        if (inventoryUUID != null) {
-            e.setCancelled(true);
+        UUID inventoryUUID = GUITemplate.openInventories.get(playerUUID);
+        if(GUITemplate.getOpenInventories().containsKey(playerUUID)) {
             GUITemplate gui = GUITemplate.getInventoriesByUUID().get(inventoryUUID);
-            Shop.GUIAction action = gui.getActions().get(e.getSlot());
-            if(e.getClickedInventory() != player.getOpenInventory().getTopInventory()) return;
-            if (action != null) {
-                action.click(player);
+            GUITemplate.GUIAction action = gui.getActions().get(e.getSlot());
+
+            if(GUITemplate.openInventories.containsKey(playerUUID)) {
+                e.setCancelled(true);
+                if(e.getClickedInventory() != player.getOpenInventory().getTopInventory()) return;
+                if (action != null) {
+                    action.click(player);
+                }
             }
         }
     }
@@ -31,12 +34,16 @@ public class GUIListeners implements Listener {
     public void onClose(InventoryCloseEvent e) {
         Player player = (Player) e.getPlayer();
         UUID playerUUID = player.getUniqueId();
-        Shop.openInventories.remove(playerUUID);
+        if(GUITemplate.getOpenInventories().containsKey(playerUUID)) {
+            GUITemplate.getOpenInventories().remove(playerUUID);
+        }
     }
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         UUID playerUUID = player.getUniqueId();
-        Shop.openInventories.remove(playerUUID);
+        if(GUITemplate.getOpenInventories().containsKey(playerUUID)) {
+            GUITemplate.getOpenInventories().remove(playerUUID);
+        }
     }
 }

@@ -74,6 +74,7 @@ public class Gang {
         this.allies = null;
         this.members = new ArrayList<GPlayer>();
         members.add(gPlayer);
+        addOnlineMember(gPlayer);
         this.invites = new ArrayList<>();
         this.upgrades = null;
         this.value = 0;
@@ -311,6 +312,14 @@ public class Gang {
             members.add(gPlayer.getName());
         });
        String m = members.toString().replace("[", "").replace("]", "");
+        return m;
+    }
+    public String convertOnlineMembersForInfo() {
+        ArrayList<String> members = new ArrayList<String>();
+        getOnlineMembers().forEach(gPlayer -> {
+            members.add(gPlayer.getName());
+        });
+        String m = members.toString().replace("[", "").replace("]", "");
         return m;
     }
 

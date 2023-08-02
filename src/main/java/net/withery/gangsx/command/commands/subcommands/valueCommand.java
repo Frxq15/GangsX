@@ -29,6 +29,19 @@ public class valueCommand extends SubCommand {
         }
         Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
+
+        if(args.length == 0) {
+            if(!gPlayer.hasGang()) {
+                plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
+                return;
+            }
+            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+            p.sendMessage(plugin.getLocaleManager().getMessage("GANG_VALUE")
+                    .replace("%gang%", gang.getName())
+                    .replace("%amount%", NumberFormatter.format(gang.getValue()) + ""));
+            return;
+        }
+
         if (args.length == 1) {
             String target = args[0];
             if(!plugin.getGangDataFactory().doesGangNameExist(target)) {
@@ -42,7 +55,7 @@ public class valueCommand extends SubCommand {
                     .replace("%amount%", NumberFormatter.format(gang.getValue()) + ""));
             return;
         }
-        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang coins");
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang value <gang>");
         return;
     }
 }

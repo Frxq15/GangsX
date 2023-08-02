@@ -28,8 +28,8 @@ public class alertCommand extends SubCommand {
         }
         Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
-        if(gPlayer.hasGang()) {
-            plugin.getLocaleManager().sendMessage(p, "PLAYER_ALREADY_IN_GANG");
+        if(!gPlayer.hasGang()) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
         if(args.length == 0) {

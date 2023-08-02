@@ -68,7 +68,6 @@ public class createCommand extends SubCommand {
                     gPlayer.setGangId(gang.getID());
                     gPlayer.setHasGang(true);
                     gPlayer.setRole(Role.LEADER);
-                    gang.addOnlineMember(gPlayer);
                     Bukkit.broadcastMessage(plugin.getLocaleManager().getMessage("GANG_CREATED")
                             .replace("%gang%", gang.getName())
                             .replace("%player%", p.getName()));

@@ -15,4 +15,4 @@ commands:
   gang:
     usage: /<command>
     description: Gang Command
-    aliases: [gangs, gangsx]
+    aliases: [gangs, g]

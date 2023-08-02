@@ -1,6 +1,7 @@
 package net.withery.gangsx.settings.locale;
 
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.formatting.number.NumberFormatter;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -80,7 +81,9 @@ public class localeManager {
                             .replace("%members%", gang.convertMembersForInfo())
                             .replace("%allies%", "&dinsert allies")
                             .replace("%coins%", gang.getCoins()+"")
-                            .replace("%bank%", gang.getBankBalanceFormatted());
+                            .replace("%bank%", gang.getBankBalanceFormatted())
+                                    .replace("%value%", NumberFormatter.format(gang.getValue()))
+                                    .replace("%totalmembers%", gang.getMembersCount()+"");
             sendRawMessage(sender, line);
         });
     }

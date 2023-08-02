@@ -10,40 +10,15 @@ import java.io.IOException;
 
 public class FileManager {
     private final GangsX plugin;
-
-    public File LangFile;
-    public FileConfiguration LangConfig;
     public File ShopFile;
     public FileConfiguration ShopConfig;
+
+    public File TopFile;
+    public FileConfiguration TopConfig;
 
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
     }
-
-    public void createLangFile() {
-        LangFile = new File(plugin.getDataFolder(), "locale.yml");
-        if (!LangFile.exists()) {
-            LangFile.getParentFile().mkdirs();
-            plugin.log("locale.yml was created successfully");
-            plugin.saveResource("locale.yml", false);
-        }
-
-        LangConfig = new YamlConfiguration();
-        try {
-            LangConfig.load(LangFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    public void reloadLangFile() { LangConfig = YamlConfiguration.loadConfiguration(LangFile); }
-    public void saveLangFile() {
-        try {
-            LangConfig.save(LangFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getLangFile() { return LangConfig; }
 
     public void createShopFile() {
         ShopFile = new File(plugin.getDataFolder()+"/guis", "shop.yml");
@@ -68,5 +43,29 @@ public class FileManager {
         }
     }
     public FileConfiguration getShopFile() { return ShopConfig; }
+
+    public void createTopFile() {
+        TopFile = new File(plugin.getDataFolder()+"/guis", "gangtop.yml");
+        if (!TopFile.exists()) {
+            TopFile.getParentFile().mkdirs();
+            plugin.log("gangtop.yml was created successfully");
+            plugin.saveResource("guis/gangtop.yml", false);
+        }
+        TopConfig = new YamlConfiguration();
+        try {
+            TopConfig.load(TopFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadTopFile() { TopConfig = YamlConfiguration.loadConfiguration(TopFile); }
+    public void saveTopFile() {
+        try {
+            TopConfig.save(TopFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getTopFile() { return TopConfig; }
 
 }
