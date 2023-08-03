@@ -23,6 +23,7 @@ import net.withery.gangsx.settings.locale.localeManager;
 import net.withery.gangsx.settings.version.ServerVersion;
 import net.withery.gangsx.settings.version.ServerVersionChecker;
 import net.withery.gangsx.utils.CommandUtils;
+import net.withery.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,10 +40,11 @@ public final class GangsX extends JavaPlugin {
     private FileManager fileManager;
     private CommandHandler commandHandler;
     private RoleManager roleManager;
-
     private CommandUtils commandUtils;
-
     private LeaderboardManager leaderboardManager;
+
+    private GangUtils gangUtils;
+
     public static GangsX instance;
 
 
@@ -89,6 +91,8 @@ public final class GangsX extends JavaPlugin {
         commandUtils = new CommandUtils();
 
         leaderboardManager = new LeaderboardManager(this);
+
+        gangUtils = new GangUtils(this);
 
         Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
 
@@ -180,6 +184,8 @@ public final class GangsX extends JavaPlugin {
     public RoleManager getRoleManager() { return roleManager; }
 
     public LeaderboardManager getLeaderboardManager() { return leaderboardManager; }
+
+    public GangUtils getGangUtils() { return gangUtils; }
 
     public APIHooks getAPIHooks() { return apiHooks; }
 

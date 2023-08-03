@@ -30,6 +30,7 @@ gang:
     leave_gang: true
     kicked_from_gang: true
     leader_changed: true
+    disband_gang: true
   command_cooldowns: #time in seconds
     alert: 15
   roles:

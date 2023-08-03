@@ -35,7 +35,6 @@ public class infoCommand extends SubCommand {
                 return;
             }
             gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-            //TODO: change getmembers to show online ppl as green and offline as red
             plugin.getLocaleManager().sendGangInfo(sender, gang);
             return;
         }

@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.command.Command;
@@ -10,13 +11,12 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.List;
 
-public class onlineCommand extends SubCommand {
+public class disbandCommand extends SubCommand {
     private final GangsX plugin;
 
-    public onlineCommand(GangsX plugin) {
-        super("online", "gangsx.command.online", "/gang online", List.of("onlinemembers"));
+    public disbandCommand(GangsX plugin) {
+        super("disband", "gangsx.command.disband", "/gang disband", null);
         this.plugin = plugin;
     }
     @Override
@@ -32,12 +32,21 @@ public class onlineCommand extends SubCommand {
             return;
         }
         if(args.length == 0) {
+            if(!gPlayer.getRole().equals(Role.LEADER)) {
+                plugin.getLocaleManager().sendMessage(p, "PLAYER_ONLY_LEADER_CAN_DISBAND");
+                return;
+            }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-            p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ONLINE")
-                    .replace("%gang%", gang.getName()).replace("%members%", gang.convertOnlineMembersForInfo()));
+            if(plugin.getConfig().getBoolean("gang.player_actions.disband_gang")) {
+                plugin.getLocaleManager().broadcastMessage(plugin.getLocaleManager().getMessage("BROADCAST_GANG_DISBANDED")
+                        .replace("%player%", p.getName())
+                        .replace("%gang%", gang.getName()));
+            }
+            gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_DISBANDED").replace("%gang%", gang.getName()));
+            plugin.getGangUtils().prepareDisband(gang);
             return;
         }
-        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang online");
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang disband");
         return;
     }
 }

@@ -1,6 +1,7 @@
 package net.withery.gangsx.command;
 
 import net.withery.gangsx.GangsX;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 
 import java.util.*;
@@ -42,7 +43,7 @@ public abstract class ParentCommand implements CommandExecutor {
 
             else
                 for (String alias : subCommand.getAliases())
-                    if (alias.equalsIgnoreCase(label))
+                    if (label.equalsIgnoreCase(alias))
                         return true;
 
         return false;
@@ -64,7 +65,7 @@ public abstract class ParentCommand implements CommandExecutor {
             }
             else
                 for (String alias : subCommand.getAliases())
-                    if (alias.equalsIgnoreCase(label))
+                    if (label.equalsIgnoreCase(alias))
                         return subCommand;
 
         return null;

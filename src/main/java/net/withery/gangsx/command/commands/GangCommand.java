@@ -34,6 +34,7 @@ public class GangCommand extends ParentCommand {
         register(new valueCommand(plugin));
         register(new onlineCommand(plugin));
         register(new topCommand(plugin));
+        register(new disbandCommand(plugin));
     }
 
     @Override
