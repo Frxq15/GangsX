@@ -1,5 +1,7 @@
 package net.withery.gangsx.enums;
 
+import net.withery.gangsx.GangsX;
+
 public enum Role {
 
     RECRUIT("Recruit"),
@@ -16,6 +18,13 @@ public enum Role {
 
     public String getName() {
         return name;
+    }
+
+    public String getRoleIcon() {
+        return GangsX.getInstance().getConfig().getString("gang.roles.icons."+getName().toLowerCase());
+    }
+    public String getRolePrefix() {
+        return GangsX.getInstance().getConfig().getString("gang.roles.prefixes."+getName().toLowerCase());
     }
 
     public int getPriority() {

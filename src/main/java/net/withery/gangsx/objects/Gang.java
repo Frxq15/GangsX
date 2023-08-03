@@ -1,5 +1,6 @@
 package net.withery.gangsx.objects;
 
+import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.formatting.number.NumberFormatter;
@@ -317,7 +318,9 @@ public class Gang {
     public String convertOnlineMembersForInfo() {
         ArrayList<String> members = new ArrayList<String>();
         getOnlineMembers().forEach(gPlayer -> {
-            members.add(gPlayer.getName());
+            String icon = gPlayer.getRole().getRoleIcon();
+            String display = icon+gPlayer.getName();
+            members.add(display);
         });
         String m = members.toString().replace("[", "").replace("]", "");
         return m;

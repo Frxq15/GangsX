@@ -35,7 +35,17 @@ gang:
     alert: 15
   roles:
     prefixes:
-      leader: '&8[&aLeader&8]'
+      leader: '&8[&4Leader&8]'
+      co-leader: '&8[&dCo-Leader&8]'
+      mod: '&8[&cMod&8]'
+      member: '&8[&aMember&8]'
+      recruit: '&8[&7Recruit&8]'
+    icons: #displayed in gang info
+      leader: '***'
+      co-leader: '**'
+      mod: '*'
+      member: '+'
+      recruit: '-'
   name_min_length: 3
   name_max_length: 16
   bank:
