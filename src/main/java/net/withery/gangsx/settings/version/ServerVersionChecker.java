@@ -32,7 +32,9 @@ public class ServerVersionChecker {
             case "1.15", "1.15.1", "1.15.2" -> version = ServerVersion.VERSION_1_15;
             case "1.16", "1.16.1", "1.16.2", "1.16.3", "1.16.4", "1.16.5" -> version = ServerVersion.VERSION_1_16;
             case "1.17", "1.17.1" -> version = ServerVersion.VERSION_1_17;
-            case "1.18", "1.18.1" -> version = ServerVersion.VERSION_1_18;
+            case "1.18", "1.18.1", "1.18.2" -> version = ServerVersion.VERSION_1_18;
+            case "1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4" -> version = ServerVersion.VERSION_1_19;
+            case "1.20.1" -> version = ServerVersion.VERSION_1_20;
 
             default -> {
                 // Checking if version-number starts with "1.", if so, get the 2nd number and check if it's smaller than 8 (1.8) and thus legacy

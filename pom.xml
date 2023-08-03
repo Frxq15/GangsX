@@ -8,7 +8,7 @@
     <artifactId>gangsx</artifactId>
     <name>GangsX</name>
     <description>The new generation of gangs</description>
-    <version>0.1.0</version>
+    <version>0.1.1-ALPHA</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

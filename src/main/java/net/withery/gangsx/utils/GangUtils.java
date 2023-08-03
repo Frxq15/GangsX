@@ -12,8 +12,7 @@ public class GangUtils {
         gang.getMembers().forEach(member -> {
             member.kickFromGang();
         });
-
         plugin.getGangDataFactory().unloadGangDataAsync(gang.getID());
-        plugin.getGangDataFactory().deleteGangData(gang.getID());
+        plugin.getGangDataFactory().deleteGangDataAsync(gang.getID());
     }
 }

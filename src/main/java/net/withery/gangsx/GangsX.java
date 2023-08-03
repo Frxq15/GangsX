@@ -103,20 +103,15 @@ public final class GangsX extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new DataFactoryListener(this), this);
 
-        /*if (sqlGangDataFactory == null) {
-            log("yeah bro its null");
-            return;
-        }*/
-
         sVersionChecker = new ServerVersionChecker();
 
         if (sVersionChecker.isServerAbove(ServerVersion.VERSION_1_16)) {
-            log("Found newer plugin version");
+            log("Assigning to spigot version: "+sVersionChecker.getVersion());
             colorFormatter = new ColorFormatter_1_16();
         }
 
         else if (sVersionChecker.isServerAbove(ServerVersion.LEGACY)) {
-            log("Found legacy plugin version");
+            log("Assigning to spigot version: "+sVersionChecker.getVersion()+" (LEGACY BUILD)");
             colorFormatter = new ColorFormatter_LEGACY();
         }
 

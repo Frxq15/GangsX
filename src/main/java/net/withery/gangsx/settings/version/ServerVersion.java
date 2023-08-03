@@ -14,6 +14,10 @@ public enum ServerVersion {
     VERSION_1_16,
     VERSION_1_17,
     VERSION_1_18,
+
+    VERSION_1_19,
+
+    VERSION_1_20,
     NEWER
 
 }
