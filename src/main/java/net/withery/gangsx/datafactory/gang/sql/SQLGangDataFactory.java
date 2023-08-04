@@ -110,7 +110,7 @@ public class SQLGangDataFactory extends GangDataFactory {
         }
 
         if (!doesGangDataExist(uuid)) return;
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("DELETE * FROM " + GANGS_TABLE + " WHERE uuid=?")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("DELETE FROM " + GANGS_TABLE + " WHERE uuid=?")) {
             statement.setString(1, uuid.toString());
             statement.executeUpdate();
         } catch (SQLException e) {
