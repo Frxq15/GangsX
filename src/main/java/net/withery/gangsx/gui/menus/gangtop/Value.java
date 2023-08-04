@@ -49,7 +49,10 @@ public class Value extends GUITemplate {
                 count.getAndIncrement();
             } else {
                 Gang gang = plugin.getLeaderboardManager().getGangByPosition(count.get());
-                setItem(gangtop.getInt("DISPLAY_SLOTS."+count.get()), createLeaderboardItem(gang, count.get()));
+                setItem(gangtop.getInt("DISPLAY_SLOTS."+count.get()), createLeaderboardItem(gang, count.get()), p -> {
+                    player.getOpenInventory().close();
+                    Bukkit.dispatchCommand(player, "gang info "+gang.getName());
+                });
                 count.getAndIncrement();
             }
         }

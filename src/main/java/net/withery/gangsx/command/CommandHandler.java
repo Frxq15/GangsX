@@ -33,7 +33,5 @@ public record CommandHandler(GangsX plugin) {
         // Using command executor as tab completer if it is one
         if (commandExecutor instanceof TabCompleter)
             command.setTabCompleter((TabCompleter) commandExecutor);
-
-        plugin.getLogger().log(Level.INFO, "Registered command " + command.getName());
     }
 }
