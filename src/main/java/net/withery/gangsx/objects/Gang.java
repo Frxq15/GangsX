@@ -1,11 +1,9 @@
 package net.withery.gangsx.objects;
 
-import net.withery.gangsx.enums.Role;
-import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.formatting.number.NumberFormatter;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -337,8 +335,9 @@ public class Gang {
         return false;
     }
     public void disband() {
-        getMembers().forEach(member -> {
-            member.kickFromGang();
-        });
+        List<GPlayer> gPlayers = new ArrayList<>(getMembers());
+        for (GPlayer gPlayer : gPlayers) {
+            gPlayer.kickFromGang();
+        }
     }
 }

@@ -96,7 +96,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         }
 
         if (!doesGPlayerDataExist(uuid)) return;
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("DELETE * FROM " + PLAYERS_TABLE + " WHERE uuid=?")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("DELETE FROM " + PLAYERS_TABLE + " WHERE uuid=?")) {
             statement.setString(1, uuid.toString());
             statement.executeUpdate();
         } catch (SQLException e) {
