@@ -1,10 +1,9 @@
 package net.withery.gangsx.command.commands;
 
-import net.withery.gangsx.command.commands.subcommands.*;
+import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.ParentCommand;
 import net.withery.gangsx.command.SubCommand;
-import net.withery.gangsx.GangsX;
-import org.bukkit.Bukkit;
+import net.withery.gangsx.command.commands.subcommands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -39,25 +38,25 @@ public class GangCommand extends ParentCommand {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!sender.hasPermission(permission)) {
+        if (!sender.hasPermission(permission)) {
             plugin.getLocaleManager().sendPermissionMessage(sender);
             return true;
         }
-        if(args.length == 0) {
-            //change to help message later
+        if (args.length == 0) {
+            //TODO: change to help message later
             plugin.getLocaleManager().sendUsageMessage(sender, "&cUsage: /gang <subcommand>");
             return true;
         }
         subLabel = args[0];
         subArgs = Arrays.copyOfRange(args, 1, args.length);
 
-        if(!exists(subLabel)) {
+        if (!exists(subLabel)) {
             plugin.getLocaleManager().sendMessage(sender, "SUB_COMMAND_NOT_FOUND");
             return true;
         }
         SubCommand subCommand = getExecutor(subLabel);
 
-        if(!sender.hasPermission(subCommand.getPermission())) {
+        if (!sender.hasPermission(subCommand.getPermission())) {
             plugin.getLocaleManager().sendPermissionMessage(sender);
             return true;
         }
