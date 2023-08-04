@@ -1,10 +1,10 @@
 package net.withery.gangsx.command;
 
 import net.withery.gangsx.GangsX;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class ParentCommand implements CommandExecutor {
     protected final GangsX plugin;
@@ -27,46 +27,27 @@ public abstract class ParentCommand implements CommandExecutor {
     }
 
     public boolean exists(String label) {
-        for (SubCommand subCommand : subCommands)
+        for (SubCommand subCommand : subCommands) {
             if (subCommand.getCommand().equalsIgnoreCase(label))
                 return true;
-
-        for (SubCommand subCommand : subCommands)
-            if(subCommand.getAliases() == null) {
-                return false;
-            }
-
-        for (SubCommand subCommand : subCommands)
-            if(subCommand.getAliases().contains(label)) {
-                return true;
-            }
-
-            else
+            else if (subCommand.getAliases() != null)
                 for (String alias : subCommand.getAliases())
-                    if (label.equalsIgnoreCase(alias))
+                    if (alias.equalsIgnoreCase(label))
                         return true;
+        }
 
         return false;
     }
 
     public SubCommand getExecutor(String label) {
-        for (SubCommand subCommand : subCommands)
+        for (SubCommand subCommand : subCommands){
             if (subCommand.getCommand().equalsIgnoreCase(label))
                 return subCommand;
-
-        for (SubCommand subCommand : subCommands)
-            if(subCommand.getAliases() == null) {
-                return subCommand;
-            }
-
-        for (SubCommand subCommand : subCommands)
-            if(subCommand.getAliases().contains(label)) {
-                return subCommand;
-            }
-            else
+            else if (subCommand.getAliases() != null)
                 for (String alias : subCommand.getAliases())
-                    if (label.equalsIgnoreCase(alias))
+                    if (alias.equalsIgnoreCase(label))
                         return subCommand;
+        }
 
         return null;
     }
