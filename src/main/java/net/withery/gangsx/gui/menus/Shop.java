@@ -76,10 +76,10 @@ public class Shop extends GUITemplate {
                     p.sendMessage(plugin.getLocaleManager().getMessage("SHOP_NOT_ENOUGH_MONEY")
                             .replace("%amount%", getItemCost(item)+"")
                             .replace("%currency%", plugin.getConfig().getString("shop.currency")));
-                    delete();
+                    player.getOpenInventory().close();
                     return;
                 }
-                delete();
+                player.getOpenInventory().close();
                 takeBalance(item);
                 for (String commands : shop.getStringList("ITEMS." + item + ".COMMANDS")) {
                     commands = commands.replace("%player%", p.getName())

@@ -116,7 +116,6 @@ public class SQLGangDataFactory extends GangDataFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         gangs.remove(uuid);
     }
 

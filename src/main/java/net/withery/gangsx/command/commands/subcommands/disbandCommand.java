@@ -5,6 +5,7 @@ import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,12 +38,12 @@ public class disbandCommand extends SubCommand {
                 return;
             }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+            gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_DISBANDED").replace("%gang%", gang.getName()));
             if(plugin.getConfig().getBoolean("gang.player_actions.disband_gang")) {
                 plugin.getLocaleManager().broadcastMessage(plugin.getLocaleManager().getMessage("BROADCAST_GANG_DISBANDED")
                         .replace("%player%", p.getName())
                         .replace("%gang%", gang.getName()));
             }
-            gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_DISBANDED").replace("%gang%", gang.getName()));
             plugin.getGangUtils().prepareDisband(gang);
             return;
         }

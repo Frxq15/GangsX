@@ -16,8 +16,17 @@ public class FileManager {
     public File TopFile;
     public FileConfiguration TopConfig;
 
+    public File ValueFile;
+    public FileConfiguration ValueConfig;
+
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
+    }
+
+    public void generate() {
+        createShopFile();
+        createValueFile();
+        createTopFile();
     }
 
     public void createShopFile() {
@@ -67,5 +76,29 @@ public class FileManager {
         }
     }
     public FileConfiguration getTopFile() { return TopConfig; }
+
+    public void createValueFile() {
+        ValueFile = new File(plugin.getDataFolder()+"/guis", "value.yml");
+        if (!ValueFile.exists()) {
+            ValueFile.getParentFile().mkdirs();
+            plugin.log("gangValue.yml was created successfully");
+            plugin.saveResource("guis/value.yml", false);
+        }
+        ValueConfig = new YamlConfiguration();
+        try {
+            ValueConfig.load(ValueFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadValueFile() { ValueConfig = YamlConfiguration.loadConfiguration(ValueFile); }
+    public void saveValueFile() {
+        try {
+            ValueConfig.save(ValueFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getValueFile() { return ValueConfig; }
 
 }

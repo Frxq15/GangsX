@@ -9,10 +9,8 @@ public class GangUtils {
         this.plugin = plugin;
     }
     public void prepareDisband(Gang gang) {
-        gang.getMembers().forEach(member -> {
-            member.kickFromGang();
-        });
-        plugin.getGangDataFactory().unloadGangDataAsync(gang.getID());
-        plugin.getGangDataFactory().deleteGangDataAsync(gang.getID());
+        gang.disband();
+        plugin.getGangDataFactory().unloadGangData(gang.getID());
+        plugin.getGangDataFactory().deleteGangData(gang.getID());
     }
 }

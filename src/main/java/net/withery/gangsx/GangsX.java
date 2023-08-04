@@ -81,8 +81,7 @@ public final class GangsX extends JavaPlugin {
         apiHooks.initialize();
 
         fileManager = new FileManager(this);
-        fileManager.createShopFile();
-        fileManager.createTopFile();
+        fileManager.generate();
 
         roleManager = new RoleManager(this);
         commandHandler = new CommandHandler(this);

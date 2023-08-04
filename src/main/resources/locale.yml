@@ -10,6 +10,7 @@ TARGET_ALREADY_IN_GANG: '&f[&bGangsX&f] &fThe player you specified is already in
 PLUGIN_VERSION: '&f[&bGangsX&f] &fRunning &bGangsX v%version%-SNAPSHOT'
 SHOP_NOT_ENOUGH_MONEY: '&f[&bGangsX&f] &fYou need &b%amount% &f%currency% &fto purchase this item.'
 SHOP_ITEM_PURCHASED: '&f[&bGangsX&f] &7(%gang%) &b%player% &fpurchased a %item% &ffor &b%amount% &f%currency% from the gang shop.'
+VALUE_ITEM_PURCHASED: '&f[&bGangsX&f] &7(%gang%) &b%player% &fadded an &b%item% &fto your gang value.'
 BLACKLISTED_WORDS: '&f[&bGangsX&f] &fYou text you provided contains blacklisted words.'
 DESCRIPTION_SET: '&f[&bGangsX&f] &b%player% &fset your gang description to: &7%description%'
 GANG_PLAYER_INVITED: '&f[&bGangsX&f] &b%player% &finvited &b%target% &fto join the gang.'

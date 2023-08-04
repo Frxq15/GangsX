@@ -310,9 +310,11 @@ public class Gang {
     public String convertMembersForInfo() {
         ArrayList<String> members = new ArrayList<String>();
         getMembers().forEach(gPlayer -> {
-            members.add(gPlayer.getName());
+            String icon = gPlayer.getRole().getRoleIcon();
+            String display = icon+gPlayer.getName();
+            members.add(display);
         });
-       String m = members.toString().replace("[", "").replace("]", "");
+        String m = members.toString().replace("[", "").replace("]", "");
         return m;
     }
     public String convertOnlineMembersForInfo() {
@@ -334,5 +336,9 @@ public class Gang {
 
         return false;
     }
-
+    public void disband() {
+        getMembers().forEach(member -> {
+            member.kickFromGang();
+        });
+    }
 }

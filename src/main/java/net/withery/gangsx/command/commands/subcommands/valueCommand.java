@@ -3,6 +3,7 @@ package net.withery.gangsx.command.commands.subcommands;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.formatting.number.NumberFormatter;
+import net.withery.gangsx.gui.menus.PurchaseValue;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.command.Command;
@@ -36,9 +37,7 @@ public class valueCommand extends SubCommand {
                 return;
             }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-            p.sendMessage(plugin.getLocaleManager().getMessage("GANG_VALUE")
-                    .replace("%gang%", gang.getName())
-                    .replace("%amount%", NumberFormatter.format(gang.getValue()) + ""));
+            new PurchaseValue(plugin, p, gang).open(p);
             return;
         }
 

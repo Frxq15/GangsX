@@ -33,7 +33,7 @@ VALUE_ITEMS:
       - '&e&l • &fBlocks Mined: &b%blocksmined%'
       - '&e&l • &fKills: &b%kills%'
       - ''
-      - '&e&lClick &fto view their value breakdown'
+      - '&e&lClick &fto view their gang profile'
   GANG_NOT_FOUND:
     NAME: '&e&lGang &bN/A'
     SKULL-TEXTURE: 'https://textures.minecraft.net/texture/b6e522d918252149e6ede2edf3fe0f2c2c58fee6ac11cb88c617207218ae4595'
