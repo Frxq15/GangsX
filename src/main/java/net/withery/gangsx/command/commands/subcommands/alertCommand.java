@@ -33,7 +33,7 @@ public class alertCommand extends SubCommand {
         }
         if(args.length == 0) {
             if(gPlayer.isOnAlertCooldown()) {
-                plugin.getLocaleManager().sendMessage(p, "GANG_COMMAND_ON_COOLDOWN");
+                plugin.getLocaleManager().sendMessage(p, "PLAYER_COMMAND_ON_COOLDOWN");
                 return;
             }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());

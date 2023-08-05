@@ -34,6 +34,8 @@ public class Gang {
     private HashMap<Upgrades, Integer> upgrades;
     private ArrayList<GPlayer> onlinemembers = new ArrayList<>();
 
+    private boolean renameCooldown = false;
+
     public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value) {
         this.plugin = plugin;
         this.id = id;
@@ -53,6 +55,7 @@ public class Gang {
         this.invites = new ArrayList<>();
         this.upgrades = upgrades;
         this.value = value;
+        this.renameCooldown = false;
     }
 
     public Gang(GangsX plugin, final UUID id, String name, UUID leader) {
@@ -77,6 +80,7 @@ public class Gang {
         this.invites = new ArrayList<>();
         this.upgrades = null;
         this.value = 0;
+        this.renameCooldown = false;
     }
 
     public void sendMessage(String message) {
@@ -144,6 +148,8 @@ public class Gang {
         return members;
     }
 
+    public boolean hasRenameCooldown() { return renameCooldown; }
+
     public int getMembersCount() {
         return members.size();
     }
@@ -186,6 +192,8 @@ public class Gang {
 
     public void removeValue(long value) { this.value -= value; }
 
+    public void setRenameCooldown(boolean result) { this.renameCooldown = result; }
+
     public void setCoins(int coins) {
         this.coins = coins;
     }
@@ -206,6 +214,10 @@ public class Gang {
         imported.forEach(member -> {
             addMember(member);
         });
+    }
+
+    public void rename(String name) {
+        setName(name);
     }
 
     public void setDescription(String description) { this.description = description; }

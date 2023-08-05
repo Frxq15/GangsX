@@ -14,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class createCommand extends SubCommand {
     private final GangsX plugin;
@@ -43,7 +45,8 @@ public class createCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "INVALID_NAME_LENGTH");
                 return;
             }
-            if(!name.chars().allMatch(Character::isLetter)) {
+
+            if(!plugin.getGangUtils().matchesRegex(name)) {
                 plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
                 return;
             }

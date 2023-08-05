@@ -15,6 +15,7 @@ gang:
   save-interval: 10 #time in minutes
   leaderboard-interval: 15 #time in minutes
   leaderboard-data-pull-amount: 15 #for gang top, how many of the top gangs data should be loaded?
+  name_regex: '^[a-zA-Z0-9]+$' #so gang names can only be numbers and letters, change this at ur own risk
   blacklisted_names: #applies to gang name
     - nigger
     - fuck
@@ -31,8 +32,10 @@ gang:
     kicked_from_gang: true
     leader_changed: true
     disband_gang: true
+    rename_gang: true
   command_cooldowns: #time in seconds
     alert: 15
+    rename: 300
   roles:
     prefixes:
       leader: '&8[&4Leader&8]'
