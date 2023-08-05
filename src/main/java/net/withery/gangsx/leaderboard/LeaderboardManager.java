@@ -1,4 +1,4 @@
-package net.withery.gangsx.leaerboard;
+package net.withery.gangsx.leaderboard;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.objects.Gang;

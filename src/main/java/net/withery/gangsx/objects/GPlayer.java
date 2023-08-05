@@ -20,6 +20,7 @@ public class GPlayer {
     private boolean hasGang;
 
     private boolean chatEnabled;
+    private boolean allyChatEnabled;
 
     private ArrayList<GPlayer> alertCooldown = new ArrayList<>();
 
@@ -31,6 +32,7 @@ public class GPlayer {
         this.kills = kills;
         this.deaths = deaths;
         this.chatEnabled = chatEnabled;
+        this.allyChatEnabled = false;
 
         if(gangId == null) {
             setGangIdString("N/A");
@@ -55,6 +57,7 @@ public class GPlayer {
         }
         this.alertCooldown = new ArrayList<>();
         this.chatEnabled = false;
+        this.allyChatEnabled = false;
     }
 
     public UUID getID() {
@@ -132,4 +135,8 @@ public class GPlayer {
     public void setChatEnabled(boolean chatEnabled) {
         this.chatEnabled = chatEnabled;
     }
+
+    public boolean hasAllyChatEnabled() { return allyChatEnabled; }
+
+    public void setAllyChatEnabled(boolean chatEnabled) { allyChatEnabled = chatEnabled; }
 }

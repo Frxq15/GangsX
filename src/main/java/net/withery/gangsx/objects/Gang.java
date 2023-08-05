@@ -93,6 +93,14 @@ public class Gang {
             p.sendMessage(plugin.getColorFormatter().format(message).replace("%gang%", this.getName()));
         });
     }
+    public void sendAlliesMessage(String message) {
+        getAllies().forEach(gang -> {
+            gang.getOnlineMembers().forEach(online -> {
+                Player player = Bukkit.getPlayer(online.getID());
+                player.sendMessage(plugin.getColorFormatter().format(message).replace("%gang%", this.getName()));
+            });
+        });
+    }
 
     public UUID getID() {
         return id;
