@@ -98,12 +98,25 @@ public abstract class GangDataFactory {
     public abstract void updateGangData(Gang gang);
 
     /**
+     * Updates the data of the given gang in the storage.
+     * Can block the main thread ({GangDataFactory#updateGangNameAsync(gangId, name)} may be used instead).
+     *
+     * @param gangId uuid of Gang that should be updated
+     * @param name String of the new gang name
+     */
+    public abstract void updateGangName(UUID gangId, String name);
+
+    /**
      * Asynchronously updates the data of the given gang in the storage.
      *
      * @param gang Gang that should be updated
      */
     public void updateGangDataAsync(Gang gang) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> updateGangData(gang));
+    }
+
+    public void updateGangNameAsync(UUID gangId, String name) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> updateGangName(gangId, name));
     }
 
     /**

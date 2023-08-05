@@ -19,15 +19,18 @@ public class GPlayer {
     private String gangIdString;
     private boolean hasGang;
 
+    private boolean chatEnabled;
+
     private ArrayList<GPlayer> alertCooldown = new ArrayList<>();
 
-    public GPlayer(GangsX plugin, final UUID uuid, final String name, final UUID gangId, final Role role, final int kills, final int deaths) {
+    public GPlayer(GangsX plugin, final UUID uuid, final String name, final UUID gangId, final Role role, final int kills, final int deaths, final boolean chatEnabled) {
         this.plugin = plugin;
         this.uuid = uuid;
         this.name = name;
         this.role = role;
         this.kills = kills;
         this.deaths = deaths;
+        this.chatEnabled = chatEnabled;
 
         if(gangId == null) {
             setGangIdString("N/A");
@@ -51,6 +54,7 @@ public class GPlayer {
             setHasGang(false);
         }
         this.alertCooldown = new ArrayList<>();
+        this.chatEnabled = false;
     }
 
     public UUID getID() {
@@ -122,5 +126,10 @@ public class GPlayer {
             gang.removeOnlineMember(this);
         }
     }
-
+    public boolean hasChatEnabled() {
+        return chatEnabled;
+    }
+    public void setChatEnabled(boolean chatEnabled) {
+        this.chatEnabled = chatEnabled;
+    }
 }

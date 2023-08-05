@@ -218,6 +218,7 @@ public class Gang {
 
     public void rename(String name) {
         setName(name);
+        plugin.getGangDataFactory().updateGangNameAsync(getID(), name);
     }
 
     public void setDescription(String description) { this.description = description; }

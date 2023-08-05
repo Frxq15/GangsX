@@ -215,6 +215,21 @@ public class SQLGangDataFactory extends GangDataFactory {
     }
 
     @Override
+    public void updateGangName(UUID gangId, String name) {
+        if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
+            plugin.getLogger().severe("Can't establish a database connection!");
+            return;
+        }
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("UPDATE `" + GANGS_TABLE + "` SET name=? where uuid=?")) {
+            statement.setString(1, name);
+            statement.setString(2, gangId.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean doesGangDataExist(UUID uuid) {
         if (!sqlHandler.isConnected() && !sqlHandler.connect()) {
             plugin.getLogger().severe("Can't establish a database connection!");

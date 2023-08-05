@@ -35,6 +35,7 @@ public class GangCommand extends ParentCommand {
         register(new topCommand(plugin));
         register(new disbandCommand(plugin));
         register(new renameCommand(plugin));
+        register(new chatCommand(plugin));
     }
 
     @Override

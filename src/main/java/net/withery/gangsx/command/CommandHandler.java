@@ -1,5 +1,6 @@
 package net.withery.gangsx.command;
 
+import net.withery.gangsx.command.commands.GangChatCommand;
 import net.withery.gangsx.command.commands.GangCommand;
 import net.withery.gangsx.GangsX;
 import org.bukkit.command.CommandExecutor;
@@ -17,6 +18,7 @@ public record CommandHandler(GangsX plugin) {
 
     private void registerCommands() {
         registerCommand("gang", new GangCommand(plugin));
+        plugin.getCommand("gangchat").setExecutor(new GangChatCommand());
     }
 
     private void registerCommand(@NotNull String name, @NotNull CommandExecutor commandExecutor) {

@@ -16,3 +16,7 @@ commands:
     usage: /<command>
     description: Gang Command
     aliases: [gangs, g]
+  gangchat:
+    usage: /<command>
+    description: Gang chat command
+    aliases: [gc]

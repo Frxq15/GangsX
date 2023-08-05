@@ -14,6 +14,7 @@ import net.withery.gangsx.formatting.number.NumberFormatter;
 import net.withery.gangsx.gui.GUIListeners;
 import net.withery.gangsx.leaerboard.LeaderboardManager;
 import net.withery.gangsx.listener.DataFactoryListener;
+import net.withery.gangsx.listener.PlayerListeners;
 import net.withery.gangsx.managers.FileManager;
 import net.withery.gangsx.managers.RoleManager;
 import net.withery.gangsx.objects.GPlayer;
@@ -93,7 +94,6 @@ public final class GangsX extends JavaPlugin {
 
         gangUtils = new GangUtils(this);
 
-        Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
 
         switch (settings.getStorageType()) {
             case MYSQL -> sqlSetup();
@@ -101,6 +101,8 @@ public final class GangsX extends JavaPlugin {
         }
 
         Bukkit.getPluginManager().registerEvents(new DataFactoryListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new GUIListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListeners(), this);
 
         sVersionChecker = new ServerVersionChecker();
 

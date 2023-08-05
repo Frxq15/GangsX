@@ -36,7 +36,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         }
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + PLAYERS_TABLE + " " +
-                "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), gang VARCHAR(36), role VARCHAR(16), kills INT, deaths INT);")) {
+                "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), gang VARCHAR(36), role VARCHAR(16), kills INT, deaths INT, chatEnabled BOOLEAN);")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,6 +79,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             statement.setString(4, (gPlayer.getRole() == null ? null : gPlayer.getRole().name()));
             statement.setInt(5, gPlayer.getKills());
             statement.setInt(6, gPlayer.getDeaths());
+            statement.setBoolean(7, gPlayer.hasChatEnabled());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,8 +135,9 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
                 Role role = (stringRole == null ? null : Role.valueOf(stringRole));
                 int kills = rs.getInt("kills");
                 int deaths = rs.getInt("deaths");
+                boolean chatEnabled = rs.getBoolean("chatEnabled");
 
-                gPlayer = new GPlayer(plugin, uuidDB, name, gangId, role, kills, deaths);
+                gPlayer = new GPlayer(plugin, uuidDB, name, gangId, role, kills, deaths, chatEnabled);
 
                 if (!players.containsKey(gPlayer.getID()))
                     players.put(gPlayer.getID(), gPlayer);
@@ -157,8 +159,8 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         }
 
         // Insert if not exists, update if exists
-        final String UPDATE_DATA = "INSERT INTO `" + PLAYERS_TABLE + "` (uuid, name, gang, role, kills, deaths) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
-                "UPDATE name = ?, gang = ?, role = ?, kills = ?, deaths = ?;";
+        final String UPDATE_DATA = "INSERT INTO `" + PLAYERS_TABLE + "` (uuid, name, gang, role, kills, deaths, chatEnabled) VALUES (?, ?, ?, ?, ?, ?,?) ON DUPLICATE KEY " +
+                "UPDATE name = ?, gang = ?, role = ?, kills = ?, deaths = ?, chatEnabled = ?;";
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {
             int i = 1;
@@ -170,6 +172,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             statement.setString(i++, (gPlayer.getRole() == null ? null : gPlayer.getRole().name()));
             statement.setInt(i++, gPlayer.getKills());
             statement.setInt(i++, gPlayer.getDeaths());
+            statement.setBoolean(i++, gPlayer.hasChatEnabled());
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
@@ -177,7 +180,8 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
             statement.setString(i++, (gPlayer.getGangId() == null ? null : gPlayer.getGangId().toString()));
             statement.setString(i++, (gPlayer.getRole() == null ? null : gPlayer.getRole().name()));
             statement.setInt(i++, gPlayer.getKills());
-            statement.setInt(i, gPlayer.getDeaths());
+            statement.setInt(i++, gPlayer.getDeaths());
+            statement.setBoolean(i, gPlayer.hasChatEnabled());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
