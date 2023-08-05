@@ -1,6 +1,8 @@
 package net.withery.gangsx.objects;
 
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.enums.Permission;
+import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.formatting.number.NumberFormatter;
 import org.bukkit.Bukkit;
@@ -33,6 +35,8 @@ public class Gang {
     private ArrayList<GPlayer> invites = new ArrayList<>();
     private HashMap<Upgrades, Integer> upgrades;
     private ArrayList<GPlayer> onlinemembers = new ArrayList<>();
+
+    private HashMap<Permission, Role> permissions = new HashMap<>();
 
     private boolean renameCooldown = false;
 
@@ -114,6 +118,12 @@ public class Gang {
         return coins;
     }
 
+    public HashMap<Permission, Role> getPermissions() {
+        return permissions;
+    }
+    public void updatePermission(Permission permission, Role role) {
+        getPermissions().replace(permission, role);
+    }
     public double getBankBalance() {
         return bankBalance;
     }
