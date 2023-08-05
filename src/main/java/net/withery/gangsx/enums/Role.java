@@ -1,6 +1,8 @@
 package net.withery.gangsx.enums;
 
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.objects.GPlayer;
+import net.withery.gangsx.objects.Gang;
 
 public enum Role {
 
@@ -25,6 +27,15 @@ public enum Role {
     }
     public String getRolePrefix() {
         return GangsX.getInstance().getConfig().getString("gang.roles.prefixes."+getName().toLowerCase());
+    }
+    public boolean hasMinimumPermission(GPlayer gPlayer, Permission permission, Role role) {
+        Gang gang = GangsX.getInstance().getGangDataFactory().getGangData(gPlayer.getGangId());
+        Role minimum = gang.getPermissions().get(permission);
+
+        if(minimum.getPriority() >= role.getPriority()) {
+            return true;
+        }
+        return false;
     }
 
     public int getPriority() {
