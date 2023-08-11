@@ -4,20 +4,26 @@ import net.withery.gangsx.GangsX;
 
 public enum Permission {
 
-    BANK_DEPOSIT,
-    BANK_WITHDRAW,
-    CHANGE_DESCRIPTION,
-    MANAGE_RELATIONS,
-    PURCHASE_VALUE,
-    PURCHASE_UPGRADES,
-    LEVELUP,
-    PROMOTE,
-    DEMOTE,
-    MANAGE_FRIENDLY_FIRE,
-    KICK,
-    RENAME,
-    SHOP,
-    INVSEE,
-    INVITE;
+    BANK_DEPOSIT("BANK_DEPOSIT"),
+    BANK_WITHDRAW("BANK_WITHDRAW"),
+    CHANGE_DESCRIPTION("CHANGE_DESCRIPTION"),
+    MANAGE_RELATIONS("MANAGE_RELATIONS"),
+    PURCHASE_VALUE("PURCHASE_VALUE"),
+    PURCHASE_UPGRADES("PURCHASE_UPGRADES"),
+    PROMOTE("PROMOTE"),
+    DEMOTE("DEMOTE"),
+    MANAGE_FRIENDLY_FIRE("MANAGE_FRIENDLY_FIRE"),
+    KICK("KICK"),
+    RENAME_GANG("RENAME_GANG"),
+    SHOP("SHOP"),
+    INVSEE("INVSEE"),
+    INVITE("INVITE");
 
+    private final String name;
+
+    Permission(String name) { this.name = name; }
+
+    public String getName() {
+        return name;
+    }
 }

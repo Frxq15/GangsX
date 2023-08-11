@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.gui.menus.GangInvsee;
 import net.withery.gangsx.gui.menus.Shop;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
@@ -23,16 +24,8 @@ public class testCommand extends SubCommand {
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player p = (Player) sender;
-
-        if(args.length == 0) {
-            boolean t = plugin.getLeaderboardManager().getGangByPosition(0) == null;
-            Bukkit.broadcastMessage(t+"");
-        }
-        if(args.length == 1) {
-            Bukkit.broadcastMessage(plugin.getLeaderboardManager().top_values.toString());
-        }
-        if(args.length == 2) {
-            plugin.getGangDataFactory().updateLeaderboardTopValues();
-        }
+        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        Bukkit.broadcastMessage(gang.getPermissions().toString());
     }
 }

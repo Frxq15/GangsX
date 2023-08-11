@@ -5,6 +5,7 @@ import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.formatting.number.NumberFormatter;
+import net.withery.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -40,8 +41,11 @@ public class Gang {
 
     private boolean renameCooldown = false;
 
-    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value) {
+    private final GangUtils gangUtils;
+
+    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value, HashMap<Permission, Role> permissions) {
         this.plugin = plugin;
+        this.gangUtils = plugin.getGangUtils();
         this.id = id;
         this.name = name;
         this.description = description;
@@ -60,10 +64,12 @@ public class Gang {
         this.upgrades = upgrades;
         this.value = value;
         this.renameCooldown = false;
+        this.permissions = permissions;
     }
 
     public Gang(GangsX plugin, final UUID id, String name, UUID leader) {
         this.plugin = plugin;
+        this.gangUtils = plugin.getGangUtils();
         this.id = id;
         this.name = name;
         this.description = plugin.getConfig().getString("gang.default_description");
@@ -85,6 +91,7 @@ public class Gang {
         this.upgrades = null;
         this.value = 0;
         this.renameCooldown = false;
+        this.permissions = gangUtils.getDefaultPermissions();
     }
 
     public void sendMessage(String message) {
@@ -128,6 +135,10 @@ public class Gang {
 
     public HashMap<Permission, Role> getPermissions() {
         return permissions;
+    }
+
+    public Role getRequiredRole(Permission permission) {
+        return getPermissions().get(permission);
     }
     public void updatePermission(Permission permission, Role role) {
         getPermissions().replace(permission, role);

@@ -81,7 +81,7 @@ public class FileManager {
         ValueFile = new File(plugin.getDataFolder()+"/guis", "value.yml");
         if (!ValueFile.exists()) {
             ValueFile.getParentFile().mkdirs();
-            plugin.log("gangValue.yml was created successfully");
+            plugin.log("value.yml was created successfully");
             plugin.saveResource("guis/value.yml", false);
         }
         ValueConfig = new YamlConfiguration();

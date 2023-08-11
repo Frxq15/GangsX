@@ -72,7 +72,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
 
         if (doesGPlayerDataExist(gPlayer.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + PLAYERS_TABLE + " " +
-                "(uuid, name, gang, role, kills, deaths) VALUES (?, ?, ?, ?, ?, ?);")) {
+                "(uuid, name, gang, role, kills, deaths, chatEnabled) VALUES (?, ?, ?, ?, ?, ?, ?);")) {
             statement.setString(1, (gPlayer.getID() == null ? null : gPlayer.getID().toString()));
             statement.setString(2, gPlayer.getName());
             statement.setString(3, (gPlayer.getGangId() == null ? null : gPlayer.getGangId().toString()));
@@ -159,7 +159,7 @@ public class SQLGPlayerDataFactory extends GPlayerDataFactory {
         }
 
         // Insert if not exists, update if exists
-        final String UPDATE_DATA = "INSERT INTO `" + PLAYERS_TABLE + "` (uuid, name, gang, role, kills, deaths, chatEnabled) VALUES (?, ?, ?, ?, ?, ?,?) ON DUPLICATE KEY " +
+        final String UPDATE_DATA = "INSERT INTO `" + PLAYERS_TABLE + "` (uuid, name, gang, role, kills, deaths, chatEnabled) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, gang = ?, role = ?, kills = ?, deaths = ?, chatEnabled = ?;";
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {

@@ -9,7 +9,7 @@ public enum Role {
     RECRUIT("Recruit"),
     MEMBER("Member"),
     MOD("Mod"),
-    CO_LEADER("Co Leader"),
+    CO_LEADER("Co-Leader"),
     LEADER("Leader");
 
     private final String name;

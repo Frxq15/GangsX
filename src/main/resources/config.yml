@@ -16,16 +16,20 @@ gang:
   leaderboard-interval: 15 #time in minutes
   leaderboard-data-pull-amount: 15 #for gang top, how many of the top gangs data should be loaded?
   name_regex: '^[a-zA-Z0-9]+$' #so gang names can only be numbers and letters, change this at ur own risk
+  command:
+    enable_invsee: true #Enable the /gang invsee command?
   blacklisted_names: #applies to gang name
     - nigger
     - fuck
     - shit
     - cunt
+    - dickhead
   blacklisted_words: #applies to gang description
     - nigger
     - fuck
     - shit
     - cunt
+    - n11ga
   player_actions: #should GangsX globally broadcast these actions?
     join_gang: true
     leave_gang: true
@@ -52,13 +56,31 @@ gang:
   name_min_length: 3
   name_max_length: 16
   bank:
-    limit_enabled: false #should we limit the amount that gangs can store inside the gang bank?
+    #Should we limit the amount that gangs can store inside the gang bank?
+    #NOTE: this value shouldn't be below the maximum upgrade value
+    limit_enabled: false
     limit: 1000000000000
   maximum_level: 5
   default_description: 'No description set :('
   ally_chat_format: "&f[&dAlly-Chat&f] &7(%gang%) &7%player%: &d%message%"
   chat_format: "&f[&bGang-Chat&f] &7%role% &7%player%: &b%message%"
   social_spy_format: "&f[&bGang-Spy&f] &7(%gang%) %role% &7%player%&7: &b%message%"
+  default_permissions:
+    BANK_DEPOSIT: 'MOD'
+    BANK_WITHDRAW: 'MOD'
+    CHANGE_DESCRIPTION: 'MOD'
+    MANAGE_RELATIONS: 'CO_LEADER'
+    PURCHASE_VALUE: 'MOD'
+    PURCHASE_UPGRADES: 'CO_LEADER'
+    PROMOTE: 'CO_LEADER'
+    DEMOTE: 'CO_LEADER'
+    MANAGE_FRIENDLY_FIRE: 'LEADER'
+    KICK: 'CO_LEADER'
+    RENAME_GANG: 'LEADER'
+    SHOP: 'MOD'
+    INVSEE: 'MEMBER'
+    INVITE: 'CO_LEADER'
+
 
 shop:
   #what should the currency for the shop be? (coins or bankBalance)
