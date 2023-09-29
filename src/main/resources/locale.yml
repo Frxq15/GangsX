@@ -5,7 +5,7 @@ BLACKLISTED_WORDS: '&f[&bGangsX&f] &fYou text you provided contains blacklisted 
 BROADCAST_GANG_DISBANDED: '&f[&bGangsX&f] &fThe gang &b%gang% &fwas disbanded.'
 BROADCAST_GANG_JOINED: '&f[&bGangsX&f] &b%player% &fjoined the gang &b%gang%&f.'
 BROADCAST_GANG_KICKED: '&f[&bGangsX&f] &b%target% &fwas kicked from &b%gang%&f.'
-BROADCAST_GANG_LEADER_CHANGED: '&f[&bGangsX&f] &b%player% &fgave &b%target% &fownership of the gang &b%gang'
+BROADCAST_GANG_LEADER_CHANGED: '&f[&bGangsX&f] &b%player% &fgave &b%target% &fownership of the gang &b%gang%'
 BROADCAST_GANG_RENAME: '&f[&bGangsX&f] &fThe gang &b%gang% &fwas renamed to &b%new%'
 DEPOSIT_FAIL_AMOUNT: '&f[&bGangsX&f] &fThe amount you are trying to deposit cannot be greater than your personal balance.'
 DEPOSIT_SUCCESS: '&f[&bGangsX&f] &b%player% &fdeposited &b$%amount% &finto the gang bank.'
