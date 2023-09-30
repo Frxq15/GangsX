@@ -13,6 +13,12 @@ public class FileManager {
     public File ShopFile;
     public FileConfiguration ShopConfig;
 
+    public File permissionsFile;
+    public FileConfiguration permissionsConfig;
+
+    public File permissionsManagerFile;
+    public FileConfiguration permissionsManagerConfig;
+
     public File TopFile;
     public FileConfiguration TopConfig;
 
@@ -27,6 +33,8 @@ public class FileManager {
         createShopFile();
         createValueFile();
         createTopFile();
+        createPermissionsFile();
+        createPermissionsManagerFile();
     }
 
     public void createShopFile() {
@@ -101,4 +109,51 @@ public class FileManager {
     }
     public FileConfiguration getValueFile() { return ValueConfig; }
 
+    public void createPermissionsFile() {
+        permissionsFile = new File(plugin.getDataFolder()+"/guis", "permissions.yml");
+        if (!permissionsFile.exists()) {
+            permissionsFile.getParentFile().mkdirs();
+            plugin.log("permissions.yml was created successfully");
+            plugin.saveResource("guis/permissions.yml", false);
+        }
+        permissionsConfig = new YamlConfiguration();
+        try {
+            permissionsConfig.load(permissionsFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadPermissionsFile() { permissionsConfig = YamlConfiguration.loadConfiguration(permissionsFile); }
+    public void savePermissionsFile() {
+        try {
+            permissionsConfig.save(permissionsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getPermissionsFile() { return permissionsConfig; }
+
+    public void createPermissionsManagerFile() {
+        permissionsManagerFile = new File(plugin.getDataFolder()+"/guis", "permissions-select.yml");
+        if (!permissionsManagerFile.exists()) {
+            permissionsManagerFile.getParentFile().mkdirs();
+            plugin.log("permissionss-select.yml was created successfully");
+            plugin.saveResource("guis/permissions-select.yml", false);
+        }
+        permissionsManagerConfig = new YamlConfiguration();
+        try {
+            permissionsManagerConfig.load(permissionsManagerFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadPermissionsManagerFile() { permissionsManagerConfig = YamlConfiguration.loadConfiguration(permissionsManagerFile); }
+    public void savePermissionsManagerFile() {
+        try {
+            permissionsManagerConfig.save(permissionsManagerFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getPermissionsManagerFile() { return permissionsManagerConfig; }
 }

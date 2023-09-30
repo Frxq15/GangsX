@@ -179,6 +179,21 @@ public class Gang {
 
     public boolean hasRenameCooldown() { return renameCooldown; }
 
+    public boolean roleHasPermission(Role role, Permission permission) {
+        Role req = getPermissions().get(permission);
+        if(role.getPriority() < req.getPriority()) {
+            return false;
+        }
+        return true;
+    }
+    public String getPermissionOutput(Role role, Permission permission) {
+        boolean output = roleHasPermission(role, permission);
+        if(output) {
+            return plugin.getFileManager().getPermissionsFile().getString("PERMISSION_OUTPUTS.true");
+        }
+        return plugin.getFileManager().getPermissionsFile().getString("PERMISSION_OUTPUTS.false");
+    }
+
     public int getMembersCount() {
         return members.size();
     }

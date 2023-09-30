@@ -116,7 +116,7 @@ public class PurchaseValue extends GUITemplate {
             lore.add(plugin.getColorFormatter().format(lines));
         }
         meta.setDisplayName(plugin.getColorFormatter().format(name));
-        if (hasGlow(item, true)) {
+        if (hasGlow(item, false)) {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }

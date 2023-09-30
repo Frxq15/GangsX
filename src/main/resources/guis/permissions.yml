@@ -1,0 +1,253 @@
+ROWS: 4
+TITLE: "&8Gang Permissions"
+PERMISSION_OUTPUTS:
+  true: '&aYes'
+  false: '&cNo'
+ITEMS:
+  BANK_DEPOSIT:
+    SLOT: 0
+    MATERIAL: GOLD_NUGGET
+    AMOUNT: 1
+    NAME: "&aBank Deposit"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to deposit funds into your gang bank"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  BANK_WITHDRAW:
+    SLOT: 1
+    MATERIAL: GOLD_INGOT
+    AMOUNT: 1
+    NAME: "&aBank Withdraw"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to withdraw funds from your gang bank"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  CHANGE_DESCRIPTION:
+    SLOT: 2
+    MATERIAL: WRITABLE_BOOK
+    AMOUNT: 1
+    NAME: "&aChange Description"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to change your gang description"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  MANAGE_RELATIONS:
+    SLOT: 3
+    MATERIAL: ENDER_EYE
+    AMOUNT: 1
+    NAME: "&aManage Relations"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to manage your gang relations"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  PURCHASE_VALUE:
+    SLOT: 4
+    MATERIAL: DIAMOND
+    AMOUNT: 1
+    NAME: "&aPurchase Value"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to purchase gang value"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  PURCHASE_UPGRADES:
+    SLOT: 5
+    MATERIAL: CHEST
+    AMOUNT: 1
+    NAME: "&aPurchase Upgrades"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to purchase gang upgrades"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  PROMOTE:
+    SLOT: 6
+    MATERIAL: SLIME_BALL
+    AMOUNT: 1
+    NAME: "&aPromote"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to promote players in your gang"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  DEMOTE:
+    SLOT: 7
+    MATERIAL: MAGMA_CREAM
+    AMOUNT: 1
+    NAME: "&aDemote"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to demote players in your gang"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  MANAGE_FRIENDLY_FIRE:
+    SLOT: 8
+    MATERIAL: DIAMOND_SWORD
+    AMOUNT: 1
+    NAME: "&aManage Friendly Fire"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to manage friendly fire"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  INVITE:
+    SLOT: 9
+    MATERIAL: GLOWSTONE_DUST
+    AMOUNT: 1
+    NAME: "&aInvite"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to invite players to your gang"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  KICK:
+    SLOT: 10
+    MATERIAL: REDSTONE
+    AMOUNT: 1
+    NAME: "&aKick"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to kick players from your gang"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  RENAME_GANG:
+    SLOT: 11
+    MATERIAL: NAME_TAG
+    AMOUNT: 1
+    NAME: "&aRename"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to rename your gang"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  SHOP:
+    SLOT: 12
+    MATERIAL: SUNFLOWER
+    AMOUNT: 1
+    NAME: "&aUse Shop"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to purchase items from the gang shop"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+  INVSEE:
+    SLOT: 13
+    MATERIAL: PLAYER_HEAD
+    AMOUNT: 1
+    NAME: "&aInvsee"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to view other gang members inventories"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
+MISC_ITEMS:
+  1:
+    SLOT: 31
+    MATERIAL: ARROW
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&cExit'
+    CLOSE_INVENTORY: true
+    LORE: []

@@ -40,6 +40,11 @@ public class kickCommand extends SubCommand {
                 return;
             }
 
+            if(p.getName().equalsIgnoreCase(args[0])) {
+                plugin.getLocaleManager().sendMessage(p, "CANNOT_PERFORM_ACTION_ON_SELF");
+                return;
+            }
+
             GPlayer tPlayer = plugin.getGPlayerDataFactory().getGPlayerData(uuid);
 
             if(tPlayer.getGangId() == null || !tPlayer.getGangId().equals(gPlayer.getGangId())) {

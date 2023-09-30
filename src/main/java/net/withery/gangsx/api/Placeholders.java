@@ -55,11 +55,11 @@ public class Placeholders extends PlaceholderExpansion {
             case "coins":
                 return String.valueOf(gang.getCoins());
             case "coins_formatted":
-                return String.format("%,d", String.valueOf(gang.getCoins()));
+                return String.format("%,d", gang.getCoins());
             case "balance":
                 return String.valueOf(gang.getBankBalance());
             case "balance_formatted":
-                return String.format("%,d", String.valueOf(gang.getBankBalance()));
+                return String.format("%,d", gang.getBankBalance());
             case "kills":
                 return String.valueOf(gang.getKills());
             case "deaths":
