@@ -38,6 +38,7 @@ public class GangCommand extends ParentCommand {
         register(new chatCommand(plugin));
         register(new permissionsCommand(plugin));
         register(new InvseeCommand(plugin));
+        register(new friendlyFireCommand(plugin));
     }
 
     @Override

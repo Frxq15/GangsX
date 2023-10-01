@@ -1,5 +1,6 @@
 package net.withery.gangsx.command.commands;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
