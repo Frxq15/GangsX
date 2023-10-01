@@ -1,0 +1,94 @@
+TITLE: '&8%player%''s Inventory'
+ITEMS: #default items if armor is not being worn, items will default to the armor itemstack if they are.
+  HELMET:
+    SLOT: 1
+    MATERIAL: BARRIER
+    GLOW: false
+    NAME: '&cNot wearing a helmet'
+    LORE:
+      - '&7This player has no helmet active.'
+  CHESTPLATE:
+    SLOT: 3
+    MATERIAL: BARRIER
+    GLOW: false
+    NAME: '&cNot wearing a chestplate'
+    LORE:
+      - '&7This player has no chestplate active.'
+  LEGGINGS:
+    SLOT: 5
+    MATERIAL: BARRIER
+    GLOW: false
+    NAME: '&cNot wearing leggings'
+    LORE:
+      - '&7This player has no leggings active.'
+  BOOTS:
+    SLOT: 7
+    MATERIAL: BARRIER
+    GLOW: false
+    NAME: '&cNot wearing boots'
+    LORE:
+      - '&7This player has no boots active.'
+MISC_ITEMS:
+  1:
+    SLOT: 9
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  2:
+    SLOT: 10
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  3:
+    SLOT: 11
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  4:
+    SLOT: 12
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  5:
+    SLOT: 13
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  6:
+    SLOT: 14
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  7:
+    SLOT: 15
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  8:
+    SLOT: 16
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []
+  9:
+    SLOT: 17
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: ''
+    LORE: []

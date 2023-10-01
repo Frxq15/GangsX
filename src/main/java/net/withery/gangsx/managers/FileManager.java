@@ -25,6 +25,9 @@ public class FileManager {
     public File ValueFile;
     public FileConfiguration ValueConfig;
 
+    public File InvseeFile;
+    public FileConfiguration InvseeConfig;
+
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
     }
@@ -35,6 +38,7 @@ public class FileManager {
         createTopFile();
         createPermissionsFile();
         createPermissionsManagerFile();
+        createInvseeFile();
     }
 
     public void createShopFile() {
@@ -156,4 +160,28 @@ public class FileManager {
         }
     }
     public FileConfiguration getPermissionsManagerFile() { return permissionsManagerConfig; }
+
+    public void createInvseeFile() {
+        InvseeFile = new File(plugin.getDataFolder()+"/guis", "invsee.yml");
+        if (!InvseeFile.exists()) {
+            InvseeFile.getParentFile().mkdirs();
+            plugin.log("invsee.yml was created successfully");
+            plugin.saveResource("guis/invsee.yml", false);
+        }
+        InvseeConfig = new YamlConfiguration();
+        try {
+            InvseeConfig.load(InvseeFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadInvseeFile() { InvseeConfig = YamlConfiguration.loadConfiguration(InvseeFile); }
+    public void saveInvseeFile() {
+        try {
+            InvseeConfig.save(InvseeFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getInvseeFile() { return InvseeConfig; }
 }
