@@ -8,6 +8,19 @@ ITEMS:
     NAME: "&ctest item"
     GLOW: true
     COST: 10 #In gang coins
+    CURRENCY: coins
+    LORE:
+      - '&7Purchase this item for &b%cost% &7coins.'
+    COMMANDS: #%player%, %gang% and %cost% placeholders available.
+      - 'give %player% dirt 1'
+  2:
+    SLOT: 1
+    MATERIAL: EMERALD
+    AMOUNT: 1
+    NAME: "&aEmerald"
+    GLOW: true
+    COST: 10 #In gang balance
+    CURRENCY: bankBalance
     LORE:
       - '&7Purchase this item for &b%cost% &7coins.'
     COMMANDS: #%player%, %gang% and %cost% placeholders available.

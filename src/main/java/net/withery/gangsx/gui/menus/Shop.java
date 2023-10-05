@@ -51,7 +51,7 @@ public class Shop extends GUITemplate {
     }
 
     public void takeBalance(String item) {
-        String selection = plugin.getConfig().getString("shop.currency");
+        String selection = getItemCurrency(item);
         switch (selection.toLowerCase()) {
             case "coins":
                 gang.removeCoins(getItemCost(item));
@@ -62,6 +62,9 @@ public class Shop extends GUITemplate {
             default:
                 gang.removeCoins(getItemCost(item));
         }
+    }
+    public String getItemCurrency(String item) {
+        return shop.getString("ITEMS."+item+".CURRENCY");
     }
 
     void initialize() {
