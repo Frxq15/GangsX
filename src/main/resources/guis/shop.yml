@@ -22,7 +22,7 @@ ITEMS:
     COST: 10 #In gang balance
     CURRENCY: bankBalance
     LORE:
-      - '&7Purchase this item for &b%cost% &7coins.'
+      - '&7Purchase this item for &b$%cost%'
     COMMANDS: #%player%, %gang% and %cost% placeholders available.
       - 'give %player% dirt 1'
 SHOP_MISC_ITEMS:

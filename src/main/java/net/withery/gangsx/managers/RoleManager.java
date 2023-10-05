@@ -6,37 +6,30 @@ import net.withery.gangsx.objects.GPlayer;
 
 public class RoleManager {
     private GangsX plugin;
-    private GPlayer gPlayer;
-    private Role role;
 
     public RoleManager(GangsX plugin) {
         this.plugin = plugin;
     }
-    public RoleManager(GangsX plugin, GPlayer gPlayer) {
-        this.plugin = plugin;
-        this.gPlayer = gPlayer;
-        this.role = gPlayer.getRole();
-    }
-    public boolean canManage(Role promotion) {
-        if(gPlayer.getRole().equals(Role.LEADER)) { return false; }
-        if(promotion.getPriority() >= role.getPriority()) { return false; }
+    public boolean canManage(Role promotion, GPlayer gPlayer, GPlayer tPlayer) {
+        if(tPlayer.getRole().equals(Role.LEADER)) { return false; }
+        if(promotion.getPriority() >= gPlayer.getRole().getPriority()) { return false; }
         return true;
     }
-    public Role getNextRole() {
+    public Role getNextRole(GPlayer gPlayer) {
         Role[] roles = Role.values();
-        return roles[Math.min(roles.length -1, role.ordinal() + 1)];
+        return roles[Math.min(roles.length -1, gPlayer.getRole().ordinal() + 1)];
     }
-    public Role getPreviousRole() {
+    public Role getPreviousRole(GPlayer gPlayer) {
         Role[] roles = Role.values();
-        if(role.getPriority() == 0) {
+        if(gPlayer.getRole().getPriority() == 0) {
             return Role.RECRUIT;
         }
-        return roles[Math.max(0, role.ordinal() - 1)];
+        return roles[Math.max(0, gPlayer.getRole().ordinal() - 1)];
     }
-    public void promotePlayer() {
-        gPlayer.setRole(getNextRole());
+    public void promotePlayer(GPlayer gPlayer) {
+        gPlayer.setRole(getNextRole(gPlayer));
     }
-    public void demotePlayer() {
-        gPlayer.setRole(getPreviousRole());
+    public void demotePlayer(GPlayer gPlayer) {
+        gPlayer.setRole(getPreviousRole(gPlayer));
     }
 }
