@@ -28,6 +28,9 @@ public class FileManager {
     public File InvseeFile;
     public FileConfiguration InvseeConfig;
 
+    public File LevelFile;
+    public FileConfiguration LevelConfig;
+
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
     }
@@ -39,6 +42,7 @@ public class FileManager {
         createPermissionsFile();
         createPermissionsManagerFile();
         createInvseeFile();
+        createLevelFile();
     }
 
     public void createShopFile() {
@@ -184,4 +188,28 @@ public class FileManager {
         }
     }
     public FileConfiguration getInvseeFile() { return InvseeConfig; }
+
+    public void createLevelFile() {
+        LevelFile = new File(plugin.getDataFolder()+"/guis", "level.yml");
+        if (!LevelFile.exists()) {
+            LevelFile.getParentFile().mkdirs();
+            plugin.log("Level.yml was created successfully");
+            plugin.saveResource("guis/level.yml", false);
+        }
+        LevelConfig = new YamlConfiguration();
+        try {
+            LevelConfig.load(LevelFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadLevelFile() { LevelConfig = YamlConfiguration.loadConfiguration(LevelFile); }
+    public void saveLevelFile() {
+        try {
+            LevelConfig.save(LevelFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getLevelFile() { return LevelConfig; }
 }
