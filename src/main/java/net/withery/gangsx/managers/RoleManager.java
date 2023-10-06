@@ -10,9 +10,19 @@ public class RoleManager {
     public RoleManager(GangsX plugin) {
         this.plugin = plugin;
     }
-    public boolean canManage(Role promotion, GPlayer gPlayer, GPlayer tPlayer) {
+    public boolean canPromote(Role promotion, GPlayer gPlayer, GPlayer tPlayer) {
         if(tPlayer.getRole().equals(Role.LEADER)) { return false; }
         if(promotion.getPriority() >= gPlayer.getRole().getPriority()) { return false; }
+        return true;
+    }
+    public boolean canDemote(GPlayer gPlayer, GPlayer tPlayer) {
+        if(tPlayer.getRole().equals(Role.LEADER)) { return false; }
+        if(tPlayer.getRole().getPriority() >= gPlayer.getRole().getPriority()) { return false; }
+        return true;
+    }
+    public boolean canManage(GPlayer gPlayer, GPlayer tPlayer) {
+        if(tPlayer.getRole().equals(Role.LEADER)) { return false; }
+        if(tPlayer.getRole().getPriority() >= gPlayer.getRole().getPriority()) { return false; }
         return true;
     }
     public Role getNextRole(GPlayer gPlayer) {

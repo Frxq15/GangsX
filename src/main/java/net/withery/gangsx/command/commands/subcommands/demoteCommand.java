@@ -16,11 +16,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class promoteCommand extends SubCommand {
+public class demoteCommand extends SubCommand {
     private final GangsX plugin;
 
-    public promoteCommand(GangsX plugin) {
-        super("promote", "gangsx.command.promote", "/gang promote <player>", null);
+    public demoteCommand(GangsX plugin) {
+        super("demote", "gangsx.command.demote", "/gang demote <player>", null);
         this.plugin = plugin;
     }
 
@@ -55,29 +55,29 @@ public class promoteCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_YOUR_GANG");
                 return;
             }
-            if(tPlayer.getRole() == Role.CO_LEADER || tPlayer.getRole() == Role.LEADER) {
+            if(tPlayer.getRole() == Role.LEADER) {
                 plugin.getLocaleManager().sendMessage(p, "CANNOT_PERFORM_ACTION_ON_OTHER");
                 return;
             }
-            if(!plugin.getRoleManager().canPromote(plugin.getRoleManager().getNextRole(tPlayer), gPlayer, tPlayer)) {
+            if(!plugin.getRoleManager().canDemote(gPlayer, tPlayer)) {
                 plugin.getLocaleManager().sendMessage(p, "CANNOT_PERFORM_ACTION_ON_OTHER");
                 return;
             }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-            gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_PLAYER_PROMOTED")
+            gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_PLAYER_DEMOTED")
                     .replace("%target%", tPlayer.getName())
                     .replace("%role%", plugin.getRoleManager().getNextRole(tPlayer).getName().toLowerCase())
                     .replace("%player%", p.getName()));
 
             if(Bukkit.getPlayer(tPlayer.getName()) != null) {
-                Bukkit.getPlayer(tPlayer.getName()).sendMessage(plugin.getLocaleManager().getMessage("PLAYER_PROMOTED")
+                Bukkit.getPlayer(tPlayer.getName()).sendMessage(plugin.getLocaleManager().getMessage("PLAYER_DEMOTED")
                         .replace("%target%", tPlayer.getName())
                         .replace("%role%", plugin.getRoleManager().getNextRole(tPlayer).getName().toLowerCase())
                         .replace("%player%", p.getName()));
             }
-            plugin.getRoleManager().promotePlayer(tPlayer);
+            plugin.getRoleManager().demotePlayer(tPlayer);
             return;
         }
-        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang promote <player>");
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang demote <player>");
     }
 }
