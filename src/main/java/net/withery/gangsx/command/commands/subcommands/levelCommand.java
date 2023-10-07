@@ -4,6 +4,7 @@ import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
 import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.formatting.number.NumberFormatter;
+import net.withery.gangsx.gui.menus.Level;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
@@ -37,6 +38,7 @@ public class levelCommand extends SubCommand {
         }
         if(args.length == 0) {
             //levels menu
+            new Level(plugin, p).open(p);
             return;
         }
         if(args.length == 1) {
@@ -50,6 +52,7 @@ public class levelCommand extends SubCommand {
                     p.sendMessage(plugin.getLocaleManager().getMessage("GANG_LEVEL")
                             .replace("%gang%", gang.getName())
                             .replace("%level%", gang.getLevel() + ""));
+                    return;
                     }
                 plugin.getLocaleManager().sendMessage(p, "GANG_NOT_FOUND");
                 });

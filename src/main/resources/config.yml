@@ -60,7 +60,7 @@ gang:
     #NOTE: this value shouldn't be below the maximum upgrade value
     limit_enabled: false
     limit: 1000000000000
-  maximum_level: 5
+  maximum_level: 10
   default_description: 'No description set :('
   ally_chat_format: "&f[&dAlly-Chat&f] &7(%gang%) &7%player%: &d%message%"
   chat_format: "&f[&bGang-Chat&f] &7%role% &7%player%: &b%message%"
@@ -91,3 +91,36 @@ upgrades:
       2:
         value: 5
         cost: 250000
+levels:
+  2:
+    requirements:
+      blocksmined: 1000
+      playerkills: 5
+      bankbalance: 1000000
+    requirements-message:
+      - ''
+      - '&c&lGang Levelup Failure'
+      - '&fYou need the following for this level:'
+      - '&e&l • &fBank Balance: &e$1M'
+      - '&e&l • &fBlocks Mined: &e1k'
+      - '&e&l • &fPlayer Kills: &e5'
+      - ''
+    levelup_commands:
+      - 'gadmin setmaxmembers %gang% 6'
+      - 'gadmin addcoins %gang% 5'
+  3:
+    requirements:
+      blocksmined: 2500
+      playerkills: 15
+      bankbalance: 2500000
+    requirements-message:
+      - ''
+      - '&c&lGang Levelup Failure'
+      - '&fYou need the following for this level:'
+      - '&e&l • &fBank Balance: &e$5M'
+      - '&e&l • &fBlocks Mined: &e10k'
+      - '&e&l • &fPlayer Kills: &e25'
+      - ''
+    levelup_commands:
+      - 'gadmin setmaxhomes %gang% 2'
+      - 'gadmin addcoins %gang% 15'

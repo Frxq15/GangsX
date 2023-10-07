@@ -76,7 +76,7 @@ public class Gang {
         this.created = System.currentTimeMillis();
         this.leader = leader;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(leader);
-        this.level = 0;
+        this.level = 1;
         this.coins = 0;
         this.bankBalance = 0;
         this.kills = 0;

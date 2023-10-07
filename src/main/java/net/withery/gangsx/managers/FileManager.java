@@ -193,7 +193,7 @@ public class FileManager {
         LevelFile = new File(plugin.getDataFolder()+"/guis", "level.yml");
         if (!LevelFile.exists()) {
             LevelFile.getParentFile().mkdirs();
-            plugin.log("Level.yml was created successfully");
+            plugin.log("level.yml was created successfully");
             plugin.saveResource("guis/level.yml", false);
         }
         LevelConfig = new YamlConfiguration();
