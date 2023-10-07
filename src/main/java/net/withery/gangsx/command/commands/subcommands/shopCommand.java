@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.gui.menus.Shop;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
@@ -30,6 +31,11 @@ public class shopCommand extends SubCommand {
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         if(!gPlayer.hasGang()) {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
+            return;
+        }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.SHOP)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
             return;
         }
         if(args.length == 0) {

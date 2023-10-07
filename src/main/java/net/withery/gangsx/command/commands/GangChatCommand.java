@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.withery.gangsx.GangsX;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.command.Command;
@@ -24,6 +25,11 @@ public class GangChatCommand implements CommandExecutor {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return true;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.GANG_CHAT)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return true;
+        }
         if (args.length == 0) {
             if (gPlayer.hasChatEnabled()) {
                 gPlayer.setChatEnabled(false);
@@ -35,7 +41,6 @@ public class GangChatCommand implements CommandExecutor {
             return true;
         }
         if (args.length > 0) {
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             String message = plugin.getCommandUtils().getFinalArg(args, 0);
 
             gang.sendMessage(plugin.getConfig().getString("gang.chat_format")

@@ -2,6 +2,8 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
+import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
@@ -32,6 +34,11 @@ public class kickCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.KICK)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length == 1) {
             UUID uuid = Bukkit.getOfflinePlayer(args[0]).getUniqueId();
 
@@ -51,8 +58,15 @@ public class kickCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_YOUR_GANG");
                 return;
             }
+            if(tPlayer.getRole() == Role.LEADER) {
+                plugin.getLocaleManager().sendMessage(p, "CANNOT_PERFORM_ACTION_ON_OTHER");
+                return;
+            }
+            if(!plugin.getRoleManager().canDemote(gPlayer, tPlayer)) {
+                plugin.getLocaleManager().sendMessage(p, "CANNOT_PERFORM_ACTION_ON_OTHER");
+                return;
+            }
             tPlayer.kickFromGang();
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
 
             gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_PLAYER_KICKED")
                     .replace("%player%", p.getName())

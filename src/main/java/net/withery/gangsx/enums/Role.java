@@ -32,7 +32,7 @@ public enum Role {
         Gang gang = GangsX.getInstance().getGangDataFactory().getGangData(gPlayer.getGangId());
         Role minimum = gang.getPermissions().get(permission);
 
-        if(minimum.getPriority() >= role.getPriority()) {
+        if(minimum.getPriority() <= role.getPriority()) {
             return true;
         }
         return false;

@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
@@ -35,6 +36,11 @@ public class renameCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.RENAME_GANG)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length == 1) {
             String name = args[0];
 
@@ -50,7 +56,6 @@ public class renameCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "GANG_ALREADY_EXISTS");
                 return;
             }
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             if(gang.hasRenameCooldown()) {
                 plugin.getLocaleManager().sendMessage(p, "GANG_COMMAND_ON_COOLDOWN");
                 return;

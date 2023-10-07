@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
@@ -33,6 +34,10 @@ public class inviteCommand extends SubCommand {
             return;
         }
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.INVITE)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length == 1) {
             if(Bukkit.getPlayer(args[0]) == null) {
                 plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_FOUND");

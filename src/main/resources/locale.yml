@@ -48,6 +48,7 @@ PLAYER_GANG_CREATED: '&f[&bGangsX&f] &fYou created the gang &b%gang% &fsuccessfu
 PLAYER_GANG_INVITED: '&f[&bGangsX&f] &b%player% &finvited you to join &b%gang%. &fJoin using &b/gang join %gang%'
 PLAYER_GANG_KICKED: '&f[&bGangsX&f] &b%player% &fkicked you from your gang.'
 PLAYER_GIVEN_LEADER: '&f[&bGangsX&f] &b%player% &fgave you ownership of your gang.'
+PLAYER_GANG_NO_PERMISSION: '&f[&bGangsX&f] &fYou dont have the gang permission to use this.'
 PLAYER_NOT_FOUND: '&f[&bGangsX&f] &fThe player you specified could not be found.'
 PLAYER_NOT_IN_A_GANG: '&f[&bGangsX&f] &fYou are not in a gang.'
 PLAYER_NOT_IN_YOUR_GANG: '&f[&bGangsX&f] &fThis player is not in your gang.'

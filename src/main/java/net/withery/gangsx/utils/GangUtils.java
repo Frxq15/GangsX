@@ -3,6 +3,7 @@ package net.withery.gangsx.utils;
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.enums.Role;
+import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 
@@ -58,5 +59,12 @@ public class GangUtils {
         permissions.put(Permission.INVITE, getDefaultRolePermission(Permission.INVITE));
 
         return permissions;
+    }
+    public boolean playerHasGangPermission(GPlayer gPlayer, Gang gang, Permission permission) {
+        Role minimum = gang.getPermissions().get(permission);
+        if(minimum.getPriority() <= gPlayer.getRole().getPriority()) {
+            return true;
+        }
+        return false;
     }
 }

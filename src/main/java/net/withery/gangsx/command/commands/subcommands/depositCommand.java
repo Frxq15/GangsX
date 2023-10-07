@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.formatting.number.NumberFormatter;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
@@ -31,6 +32,11 @@ public class depositCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.BANK_DEPOSIT)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length == 1) {
             double balance = plugin.getAPIHooks().getEconomy().getBalance(p);
             if(!args[0].chars().allMatch(Character::isDigit)) {
@@ -48,7 +54,6 @@ public class depositCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "DEPOSIT_FAIL_AMOUNT");
                 return;
             }
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             if(plugin.getConfig().getBoolean("gang.bank.limit_enabled")) {
                 if(amount+(int)gang.getBankBalance() > plugin.getConfig().getInt("gang.bank.bank_limit")) {
                     plugin.getLocaleManager().sendMessage(p, "BANK_BALANCE_EXCEED");

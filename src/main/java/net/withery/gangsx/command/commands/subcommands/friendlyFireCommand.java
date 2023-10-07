@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
 import org.bukkit.command.Command;
@@ -32,6 +33,10 @@ public class friendlyFireCommand extends SubCommand {
             return;
         }
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.MANAGE_FRIENDLY_FIRE)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if (args.length == 0) {
             if (gang.hasFriendlyFire()) {
                 gang.setFriendlyFire(false);

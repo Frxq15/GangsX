@@ -9,7 +9,7 @@ public enum Permission {
     CHANGE_DESCRIPTION("CHANGE_DESCRIPTION"),
     MANAGE_RELATIONS("MANAGE_RELATIONS"),
     PURCHASE_VALUE("PURCHASE_VALUE"),
-    PURCHASE_UPGRADES("PURCHASE_UPGRADES"),
+    PURCHASE_UPGRADES("PURCHASE_UPGRADES"), //change to levelup
     PROMOTE("PROMOTE"),
     DEMOTE("DEMOTE"),
     MANAGE_FRIENDLY_FIRE("MANAGE_FRIENDLY_FIRE"),
@@ -17,6 +17,13 @@ public enum Permission {
     RENAME_GANG("RENAME_GANG"),
     SHOP("SHOP"),
     INVSEE("INVSEE"),
+
+    //new ones to add to everything
+
+    ALERT("ALERT"),
+
+    GANG_CHAT("GANG_CHAT"),
+
     INVITE("INVITE");
 
     private final String name;

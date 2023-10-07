@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.managers.RoleManager;
 import net.withery.gangsx.objects.GPlayer;
@@ -36,6 +37,11 @@ public class promoteCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.PROMOTE)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length == 1) {
             UUID uuid = Bukkit.getOfflinePlayer(args[0]).getUniqueId();
 
@@ -63,7 +69,6 @@ public class promoteCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "CANNOT_PERFORM_ACTION_ON_OTHER");
                 return;
             }
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             gang.sendMessage(plugin.getLocaleManager().getMessage("GANG_PLAYER_PROMOTED")
                     .replace("%target%", tPlayer.getName())
                     .replace("%role%", plugin.getRoleManager().getNextRole(tPlayer).getName().toLowerCase())

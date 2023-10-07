@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.gui.menus.Shop;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
@@ -32,6 +33,11 @@ public class setdescriptionCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.CHANGE_DESCRIPTION)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length > 0) {
             String description = plugin.getCommandUtils().getFinalArg(args, 0);
 
@@ -39,12 +45,11 @@ public class setdescriptionCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "BLACKLISTED_WORDS");
                 return;
             }
-            if(!p.hasPermission("gangsx.command.setdescription.color")) {
+            if(!p.hasPermission("gangsx.command.setdescription.color")) { //change to upgrade
                 if(description.contains("&")) {
                     plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
                 }
             }
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             gang.setDescription(description);
             gang.sendMessage(plugin.getLocaleManager().getMessage("DESCRIPTION_SET")
                     .replace("%description%", description)

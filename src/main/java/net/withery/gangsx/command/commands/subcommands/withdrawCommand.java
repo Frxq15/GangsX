@@ -2,6 +2,7 @@ package net.withery.gangsx.command.commands.subcommands;
 
 import net.withery.gangsx.GangsX;
 import net.withery.gangsx.command.SubCommand;
+import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.formatting.number.NumberFormatter;
 import net.withery.gangsx.objects.GPlayer;
 import net.withery.gangsx.objects.Gang;
@@ -31,9 +32,12 @@ public class withdrawCommand extends SubCommand {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
             return;
         }
+        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.BANK_WITHDRAW)) {
+            plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
+            return;
+        }
         if(args.length == 1) {
-            double balance = plugin.getAPIHooks().getEconomy().getBalance(p);
-            Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
             int amount = 0;
             try {
                 amount = Integer.parseInt(args[0]);
