@@ -97,30 +97,76 @@ levels:
       blocksmined: 1000
       playerkills: 5
       bankbalance: 1000000
-    requirements-message:
+      kothwins: 0
+    requirements_message:
       - ''
       - '&c&lGang Levelup Failure'
       - '&fYou need the following for this level:'
-      - '&e&l • &fBank Balance: &e$1M'
-      - '&e&l • &fBlocks Mined: &e1k'
-      - '&e&l • &fPlayer Kills: &e5'
+      - ''
+      - '&c&l | &fBank Balance: &c$1M'
+      - '&c&l | &fBlocks Mined: &c1k'
+      - '&c&l | &fPlayer Kills: &c5'
       - ''
     levelup_commands:
       - 'gadmin setmaxmembers %gang% 6'
       - 'gadmin addcoins %gang% 5'
+    levelup_message:
+      - ''
+      - '&a&lGang Levelup &8- &5&lLevel 2'
+      - '&fCongrats on leveling up, you have unlocked:'
+      - ''
+      - '&d&l | &f6 Gang Member Limit'
+      - '&d&l | &f10x Gang Coins'
+      - ''
   3:
     requirements:
-      blocksmined: 2500
-      playerkills: 15
-      bankbalance: 2500000
-    requirements-message:
+      blocksmined: 10000
+      playerkills: 25
+      bankbalance: 5000000
+      kothwins: 0
+    requirements_message:
       - ''
       - '&c&lGang Levelup Failure'
       - '&fYou need the following for this level:'
-      - '&e&l • &fBank Balance: &e$5M'
-      - '&e&l • &fBlocks Mined: &e10k'
-      - '&e&l • &fPlayer Kills: &e25'
+      - ''
+      - '&c&l | &fBank Balance: &c$5M'
+      - '&c&l | &fBlocks Mined: &c10k'
+      - '&c&l | &fPlayer Kills: &c25'
       - ''
     levelup_commands:
       - 'gadmin setmaxhomes %gang% 2'
       - 'gadmin addcoins %gang% 15'
+    levelup_message:
+      - ''
+      - '&a&lGang Levelup &8- &3&lLevel 3'
+      - '&fCongrats on leveling up, you have unlocked:'
+      - ''
+      - '&b&l | &f2 Gang Homes'
+      - '&b&l | &f15x Gang Coins'
+      - ''
+  4:
+    requirements:
+      blocksmined: 50000
+      playerkills: 50
+      bankbalance: 25000000
+      kothwins: 0
+    requirements_message:
+      - ''
+      - '&c&lGang Levelup Failure'
+      - '&fYou need the following for this level:'
+      - ''
+      - '&c&l | &fBank Balance: &c$25M'
+      - '&c&l | &fBlocks Mined: &c50k'
+      - '&c&l | &fPlayer Kills: &c50'
+      - ''
+    levelup_commands:
+      - 'gadmin giveupgrade colourdescription'
+      - 'gadmin addcoins %gang% 15'
+    levelup_message:
+      - ''
+      - '&a&lGang Levelup &8- &6&lLevel 4'
+      - '&fCongrats on leveling up, you have unlocked:'
+      - ''
+      - '&e&l | &cC&6o&el&ao&3u&9r&5e&cd &fGang Description'
+      - '&e&l | &f15x Gang Coins'
+      - ''

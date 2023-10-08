@@ -24,6 +24,8 @@ public enum Permission {
 
     GANG_CHAT("GANG_CHAT"),
 
+    ALLY_CHAT("ALLY_CHAT"),
+
     INVITE("INVITE");
 
     private final String name;

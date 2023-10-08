@@ -67,4 +67,58 @@ public class GangUtils {
         }
         return false;
     }
+    public boolean canLevelup(Gang gang) {
+        if(isMaxGangLevel(gang)) {
+            return false;
+        }
+        int level = gang.getLevel();
+        String levelName = String.valueOf((level+1));
+        int rBlocks = plugin.getConfig().getInt("levels."+levelName+".requirements.blocksmined");
+        int rKills = plugin.getConfig().getInt("levels."+levelName+".requirements.playerkills");
+        int rBankBalance = plugin.getConfig().getInt("levels."+levelName+".requirements.bankbalance");
+
+        if(compareStatistic(gang, "blocksmined", rBlocks) &&
+                compareStatistic(gang, "playerkills", rKills) &&
+                        compareStatistic(gang, "bankbalance", rBankBalance)) {
+            return true;
+        }
+        return false;
+    }
+    public int getRequiredLevelupMoney(Gang gang) {
+        int level = gang.getLevel();
+        String levelName = String.valueOf((level+1));
+        return plugin.getConfig().getInt("levels."+levelName+".requirements.bankbalance");
+    }
+    public boolean isMaxGangLevel(Gang gang) {
+        if(gang.getLevel() >= plugin.getConfig().getInt("gang.maximum_level")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean compareStatistic(Gang gang, String statistic, int value) {
+        switch (statistic.toLowerCase()) {
+            case "blocksmined":
+                int blocksmined = gang.getBlocksBroken();
+                if(blocksmined < value) {
+                    return false;
+                }
+                return true;
+            case "playerkills":
+                int playerkills = gang.getKills();
+                if(playerkills < value) {
+                    return false;
+                }
+                return true;
+            case "bankbalance":
+                int bankbalance = (int)gang.getBankBalance();
+                if(bankbalance < value) {
+                    return false;
+                }
+                return true;
+
+            default:
+                return false;
+
+        }
+    }
 }

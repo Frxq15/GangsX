@@ -19,6 +19,7 @@ public class APIHooks {
     }
     public boolean setupEconomy() {
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+            plugin.log("Vault not found, economy commands will not be enabled.");
             return false;
         }
         RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);

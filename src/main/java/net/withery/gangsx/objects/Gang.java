@@ -157,6 +157,16 @@ public class Gang {
         return deaths;
     }
 
+    public String getValueFormatted() {
+        return plugin.getCommandUtils().formatNumber(getValue());
+    }
+    public String getBlocksMinedFormatted() {
+        return plugin.getCommandUtils().formatNumber(getBlocksBroken());
+    }
+    public String getBalanceFormatted() {
+        return plugin.getCommandUtils().formatNumber(getBankBalance());
+    }
+
     public int getBlocksBroken() { return blocksbroken; }
 
     public boolean hasFriendlyFire() {
@@ -217,6 +227,8 @@ public class Gang {
     public int getUpgradesCount() {
         return upgrades.size();
     }
+
+    public void applyLevelup() { this.level += 1; }
 
     public void setName(String name) {
         this.name = name;

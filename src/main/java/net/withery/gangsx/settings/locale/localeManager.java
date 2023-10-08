@@ -77,12 +77,12 @@ public class localeManager {
                             .replace("%description%", gang.getDescription())
                             .replace("%kills%", gang.getKills()+"")
                             .replace("%deaths%", gang.getDeaths()+"")
-                            .replace("%blocksbroken%", gang.getBlocksBroken()+"")
+                            .replace("%blocksbroken%", gang.getBlocksMinedFormatted()+"")
                             .replace("%members%", gang.convertMembersForInfo())
                             .replace("%allies%", "&dinsert allies")
                             .replace("%coins%", gang.getCoins()+"")
-                            .replace("%bank%", gang.getBankBalanceFormatted())
-                                    .replace("%value%", NumberFormatter.format(gang.getValue()))
+                            .replace("%bank%", gang.getBalanceFormatted())
+                                    .replace("%value%", gang.getValueFormatted())
                                     .replace("%totalmembers%", gang.getMembersCount()+"");
             sendRawMessage(sender, line);
         });

@@ -26,6 +26,6 @@ public class testCommand extends SubCommand {
         Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-        Bukkit.broadcastMessage(gang.getPermissions().toString());
+        Bukkit.broadcastMessage(plugin.getGangUtils().canLevelup(gang)+"");
     }
 }

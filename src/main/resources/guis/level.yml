@@ -4,7 +4,7 @@ USE-SKULL-TEXTURES: true
 LORE_OUTCOMES:
   pass: '&aYou have completed this level.'
   fail: '&cYou have not unlocked this level.'
-ITEMS:
+ITEMS: #item name must be the id of the level
   1:
     SLOT: 11
     MATERIAL: PLAYER_HEAD
@@ -31,7 +31,7 @@ ITEMS:
       - '&d| &fPlayer Kills: &d5'
       - ''
       - '&5Unlocks:'
-      - '&d| &f6 Member Limit'
+      - '&d| &f6 Gang Member Limit'
       - '&d| &f10x Gang Coins'
       - ''
       - '%lore_outcome%'
@@ -67,7 +67,7 @@ ITEMS:
       - ''
       - '&6Requirements:'
       - '&e| &fMoney: &e$25M'
-      - '&e| &fBlocks Mined: &e25k'
+      - '&e| &fBlocks Mined: &e50k'
       - '&e| &fPlayer Kills: &e50'
       - ''
       - '&6Unlocks:'

@@ -25,6 +25,7 @@ GANG_FRIENDLYFIRE_ON: '&f[&bGangsX&f] &b%player% &ftoggled &aon &fgang friendlyf
 GANG_HELP_INVALID_CATEGORY: '&f[&bGangsX&f] &fInvalid category provided, Available Categories: &bplayer, manage, social, currency'
 GANG_LEADER_CHANGED: '&f[&bGangsX&f] &b%player% &fgave &b%target% &fownership of your gang.'
 GANG_LEVEL: '&f[&bGangsX&f] The gang &b%gang% &fis level &b%level%'
+GANG_MAXIMUM_LEVEL: '&f[&bGangsX&f] &fYour gang is already the maximum level.'
 GANG_NOT_FOUND: '&f[&bGangsX&f] &fThe gang you specified could not be found.'
 GANG_ONLINE: '&f[&bGangsX&f] &fCurrent online members of &b%gang%&f: &b%members%'
 GANG_PLAYER_DEMOTED: '&f[&bGangsX&f] &b%target% &fwas demoted to &b%role% &fin your gang.'
