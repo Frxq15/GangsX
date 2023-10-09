@@ -14,6 +14,7 @@ gang:
   #how often should gang data be backed up?
   save-interval: 10 #time in minutes
   leaderboard-interval: 15 #time in minutes
+  use-disband-gui: true
   leaderboard-data-pull-amount: 15 #for gang top, how many of the top gangs data should be loaded?
   name_regex: '^[a-zA-Z0-9]+$' #so gang names can only be numbers and letters, change this at ur own risk
   command:

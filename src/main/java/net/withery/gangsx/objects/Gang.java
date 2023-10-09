@@ -5,6 +5,7 @@ import net.withery.gangsx.enums.Permission;
 import net.withery.gangsx.enums.Role;
 import net.withery.gangsx.enums.Upgrades;
 import net.withery.gangsx.formatting.number.NumberFormatter;
+import net.withery.gangsx.gui.GUITemplate;
 import net.withery.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -404,6 +405,13 @@ public class Gang {
         return false;
     }
     public void disband() {
+        List<GPlayer> gOnline = new ArrayList<>(getOnlineMembers());
+        for(GPlayer gOnl : gOnline) {
+            Player gP = Bukkit.getPlayer(gOnl.getID());
+            if(GUITemplate.openInventories.containsKey(gP.getUniqueId())) {
+                gP.getOpenInventory().close();
+            }
+        }
         List<GPlayer> gPlayers = new ArrayList<>(getMembers());
         for (GPlayer gPlayer : gPlayers) {
             gPlayer.kickFromGang();

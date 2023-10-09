@@ -30,6 +30,8 @@ public class FileManager {
 
     public File LevelFile;
     public FileConfiguration LevelConfig;
+    public File DisbandFile;
+    public FileConfiguration DisbandConfig;
 
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
@@ -43,6 +45,7 @@ public class FileManager {
         createPermissionsManagerFile();
         createInvseeFile();
         createLevelFile();
+        createDisbandFile();
     }
 
     public void createShopFile() {
@@ -212,4 +215,28 @@ public class FileManager {
         }
     }
     public FileConfiguration getLevelFile() { return LevelConfig; }
+
+    public void createDisbandFile() {
+        DisbandFile = new File(plugin.getDataFolder()+"/guis", "disband.yml");
+        if (!DisbandFile.exists()) {
+            DisbandFile.getParentFile().mkdirs();
+            plugin.log("disband.yml was created successfully");
+            plugin.saveResource("guis/disband.yml", false);
+        }
+        DisbandConfig = new YamlConfiguration();
+        try {
+            DisbandConfig.load(DisbandFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadDisbandFile() { DisbandConfig = YamlConfiguration.loadConfiguration(DisbandFile); }
+    public void saveDisbandFile() {
+        try {
+            DisbandConfig.save(DisbandFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getDisbandFile() { return DisbandConfig; }
 }

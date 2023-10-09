@@ -1,0 +1,52 @@
+ROWS: 1
+TITLE: "&8Gang Disband"
+ITEMS:
+  CONFIRM:
+    SLOTS:
+      - 0
+      - 1
+      - 2
+      - 3
+    MATERIAL: "GREEN_STAINED_GLASS_PANE"
+    AMOUNT: 1
+    NAME: "&aConfirm Disband"
+    GLOW: false
+    LORE:
+      - '&fThis will confirm the disband of your gang'
+      - ''
+      - '&c&lWarning: &fOnce a gang is disbanded, this'
+      - '&faction is irreversible and cannot be undone.'
+      - ''
+      - '&e&lClick &fto confirm this action'
+  CANCEL:
+    SLOTS:
+      - 5
+      - 6
+      - 7
+      - 8
+    MATERIAL: "RED_STAINED_GLASS_PANE"
+    AMOUNT: 1
+    NAME: "&cCancel Disband"
+    GLOW: false
+    LORE:
+      - '&fThis will cancel the disband of your gang'
+      - ''
+      - '&c&lWarning: &fOnce a gang is disbanded, this'
+      - '&faction is irreversible and cannot be undone.'
+      - ''
+      - '&e&lClick &fto cancel this action'
+MISC_ITEMS:
+  1:
+    SLOT: 4
+    MATERIAL: "CHEST"
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&e&lDisbanding &b%gang%'
+    LORE:
+      - '&fConfirming this action will automatically'
+      - '&fdelete all data related to your gang.'
+      - ''
+      - '&c&lWarning: &fOnce a gang is disbanded, this'
+      - '&faction is irreversible and cannot be undone.'
+      - ''
+      - '&e&lPlease &fselect an option carefully'

@@ -97,6 +97,8 @@ public class GPlayer {
     }
     public void removeAlertCooldown() { this.alertCooldown.remove(this); }
 
+
+
     public void setGangId(UUID gangId) {
         this.gangId = gangId;
     }
