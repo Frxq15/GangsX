@@ -15,7 +15,7 @@ commands:
   gang:
     usage: /<command>
     description: Gang Command
-    aliases: [gangs, g]
+    aliases: [gangs, g, gangsx]
   gangchat:
     usage: /<command>
     description: Gang chat command
@@ -24,3 +24,11 @@ commands:
     usage: /<command>
     description: Ally chat command
     aliases: [ac]
+  fight:
+    usage: /<command>
+    description: Fight command
+    aliases: [gangfight, gfight]
+  gadmin:
+    usage: /<command>
+    description: Gang admin command
+    aliases: [gangadmin]
