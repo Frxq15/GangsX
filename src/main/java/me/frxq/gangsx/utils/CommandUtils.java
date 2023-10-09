@@ -1,8 +1,16 @@
 package me.frxq.gangsx.utils;
 
 import me.frxq.gangsx.GangsX;
+import me.frxq.gangsx.objects.GPlayer;
+import me.frxq.gangsx.objects.Gang;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CommandUtils {
     private GangsX plugin = GangsX.getInstance();
@@ -42,5 +50,30 @@ public class CommandUtils {
             r = r.substring(0, r.length()-2) + r.substring(r.length() - 1);
         }
         return r;
+    }
+    public boolean isRosterOnline(String arg) {
+        AtomicBoolean status = new AtomicBoolean(true);
+        String[] provided = arg.split(",");
+        Arrays.stream(provided).forEach(member -> {
+            if(Bukkit.getPlayer(member) == null) {
+                status.set(false);
+            }
+        });
+        status.set(true);
+        return status.get();
+    }
+    public boolean isRosterInGang(String arg, Gang gang) {
+        List<GPlayer> members = gang.getOnlineMembers();
+        AtomicBoolean status = new AtomicBoolean(true);
+        String[] provided = arg.split(",");
+        Arrays.stream(provided).forEach(member -> {
+            Player p = Bukkit.getPlayer(member);
+            GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
+            if(!members.contains(gPlayer)) {
+                status.set(false);
+            }
+        });
+        status.set(true);
+        return status.get();
     }
 }

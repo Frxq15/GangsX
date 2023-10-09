@@ -122,7 +122,7 @@ GANG_HELP_FIGHT_MAIN:
   - '&e&l • &f/fight accept <gang> &8- &bAccept a fight invitation.'
   - '&e&l • &f/fight status &8- &bView your fight status.'
   - '&e&l • &f/fight roster &8- &bView your fight roster.'
-  - '&e&l • &f/fight setroster <member1|member2|member3> &8- &bSet your fight roster.'
+  - '&e&l • &f/fight setroster <member1,member2,member3> &8- &bSet your fight roster.'
   - ''
 GANG_HELP_CURRENCY_MAIN:
   - ''
