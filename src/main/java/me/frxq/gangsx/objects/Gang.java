@@ -174,6 +174,8 @@ public class Gang {
 
     public void addToFightRoster(GPlayer player) { this.roster.add(player); }
 
+    public void removeFromFightRoster(GPlayer player) { this.roster.remove(player); }
+
     public String getValueFormatted() {
         return plugin.getCommandUtils().formatNumber(getValue());
     }

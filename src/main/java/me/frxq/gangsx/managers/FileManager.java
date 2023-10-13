@@ -36,6 +36,11 @@ public class FileManager {
     public File ArenaFile;
     public FileConfiguration ArenaConfig;
 
+    public File RosterFile;
+    public FileConfiguration RosterConfig;
+    public File addToRosterFile;
+    public FileConfiguration addToRosterConfig;
+
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
     }
@@ -50,6 +55,8 @@ public class FileManager {
         createLevelFile();
         createDisbandFile();
         createArenaFile();
+        createRosterFile();
+        createAddToRosterFile();
     }
 
     public void createShopFile() {
@@ -268,4 +275,52 @@ public class FileManager {
         }
     }
     public FileConfiguration getArenaFile() { return ArenaConfig; }
+
+    public void createRosterFile() {
+        RosterFile = new File(plugin.getDataFolder()+"/guis", "roster.yml");
+        if (!RosterFile.exists()) {
+            RosterFile.getParentFile().mkdirs();
+            plugin.log("roster.yml was created successfully");
+            plugin.saveResource("guis/roster.yml", false);
+        }
+        RosterConfig = new YamlConfiguration();
+        try {
+            RosterConfig.load(RosterFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadRosterFile() { RosterConfig = YamlConfiguration.loadConfiguration(RosterFile); }
+    public void saveRosterFile() {
+        try {
+            RosterConfig.save(RosterFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getRosterFile() { return RosterConfig; }
+
+    public void createAddToRosterFile() {
+        addToRosterFile = new File(plugin.getDataFolder()+"/guis", "add-to-roster.yml");
+        if (!addToRosterFile.exists()) {
+            addToRosterFile.getParentFile().mkdirs();
+            plugin.log("add-to-roster.yml was created successfully");
+            plugin.saveResource("guis/add-to-roster.yml", false);
+        }
+        addToRosterConfig = new YamlConfiguration();
+        try {
+            addToRosterConfig.load(addToRosterFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadAddToRosterFile() { addToRosterConfig = YamlConfiguration.loadConfiguration(addToRosterFile); }
+    public void saveAddToRosterFile() {
+        try {
+            addToRosterConfig.save(addToRosterFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getAddToRosterFile() { return addToRosterConfig; }
 }

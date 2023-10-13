@@ -43,6 +43,7 @@ public class GangCommand extends ParentCommand {
         register(new demoteCommand(plugin));
         register(new levelCommand(plugin));
         register(new levelupCommand(plugin));
+        register(new rosterCommand(plugin));
     }
 
     @Override

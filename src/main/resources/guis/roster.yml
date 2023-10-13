@@ -1,0 +1,33 @@
+ROWS: 4
+TITLE: "&8Gang Roster"
+
+ITEMS:
+  MEMBER_CURRENT:
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&a%player%'
+    LORE:
+      - '&fThis player is currently part of your gang roster'
+      - '&fwhich is used for gang duels.'
+      - ''
+      - '&2Stats:'
+      - '&a| &fKills: &a%kills%'
+      - '&a| &fDeaths: &a%deaths%'
+      - ''
+      - '&e&lClick &fto remove this player from the roster'
+  NO_PLAYER_SELECTED:
+    AMOUNT: 1
+    GLOW: false
+    MATERIAL: 'RED_DYE'
+    NAME: '&cSlot Available'
+    LORE:
+      - '&fThis roster spot is currently empty.'
+      - ''
+      - '&c| &fDuels do not affect PvP statistics'
+      - ''
+      - '&e&lClick &fto add a player to the roster'
+  CLOSE_MENU:
+    SLOT: 31
+    NAME: '&cExit'
+    MATERIAL: 'ARROW'
+MISC_ITEMS: []
