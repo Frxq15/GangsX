@@ -46,6 +46,10 @@ public class Gang {
 
     private final List<GPlayer> roster;
 
+    private final List<Gang> fight_requests;
+
+    private final boolean isInFight;
+
     public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value, HashMap<Permission, Role> permissions) {
         this.plugin = plugin;
         this.gangUtils = plugin.getGangUtils();
@@ -68,7 +72,9 @@ public class Gang {
         this.value = value;
         this.renameCooldown = false;
         this.permissions = permissions;
-        this.roster = new ArrayList<GPlayer>();
+        this.roster = new ArrayList<>();
+        this.fight_requests = new ArrayList<>();
+        this.isInFight = false;
     }
 
     public Gang(GangsX plugin, final UUID id, String name, UUID leader) {
@@ -96,7 +102,9 @@ public class Gang {
         this.value = 0;
         this.renameCooldown = false;
         this.permissions = gangUtils.getDefaultPermissions();
-        this.roster = new ArrayList<GPlayer>();
+        this.roster = new ArrayList<>();
+        this.fight_requests = new ArrayList<>();
+        this.isInFight = false;
     }
 
     public void sendMessage(String message) {

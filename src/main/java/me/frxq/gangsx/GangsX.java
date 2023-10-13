@@ -22,6 +22,7 @@ import me.frxq.gangsx.settings.Settings;
 import me.frxq.gangsx.settings.locale.localeManager;
 import me.frxq.gangsx.settings.version.ServerVersion;
 import me.frxq.gangsx.settings.version.ServerVersionChecker;
+import me.frxq.gangsx.utils.ArenaUtils;
 import me.frxq.gangsx.utils.CommandUtils;
 import me.frxq.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
@@ -44,6 +45,7 @@ public final class GangsX extends JavaPlugin {
     private LeaderboardManager leaderboardManager;
 
     private GangUtils gangUtils;
+    private ArenaUtils arenaUtils;
 
     public static GangsX instance;
 
@@ -93,6 +95,7 @@ public final class GangsX extends JavaPlugin {
         leaderboardManager = new LeaderboardManager(this);
 
         gangUtils = new GangUtils(this);
+        arenaUtils = new ArenaUtils();
 
 
         switch (settings.getStorageType()) {
@@ -180,6 +183,8 @@ public final class GangsX extends JavaPlugin {
     public RoleManager getRoleManager() { return roleManager; }
 
     public LeaderboardManager getLeaderboardManager() { return leaderboardManager; }
+
+    public ArenaUtils getArenaUtils() { return arenaUtils; }
 
     public GangUtils getGangUtils() { return gangUtils; }
 

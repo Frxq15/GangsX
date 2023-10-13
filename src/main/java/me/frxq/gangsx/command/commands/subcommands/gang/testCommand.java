@@ -20,8 +20,6 @@ public class testCommand extends SubCommand {
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player p = (Player) sender;
-        GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
-        Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-        Bukkit.broadcastMessage(plugin.getGangUtils().canLevelup(gang)+"");
+        p.teleport(plugin.getArenaUtils().getArenaCenter());
     }
 }

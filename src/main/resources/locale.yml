@@ -13,6 +13,7 @@ DEPOSIT_FAIL_AMOUNT: '&f[&bGangsX&f] &fThe amount you are trying to deposit cann
 DEPOSIT_SUCCESS: '&f[&bGangsX&f] &b%player% &fdeposited &b$%amount% &finto the gang bank.'
 DESCRIPTION_SET: '&f[&bGangsX&f] &b%player% &fset your gang description to: &7%description%'
 FEATURE_DISABLED: '&f[&bGangsX&f] &cThis feature is disabled.'
+GANG_ADMIN_ARENA_SET: '&f[&bGangsX&f] &fYou set the gang arena &b%position% &fposition to your location.'
 GANG_ALERT: '&f[&bGangsX&f] &c&lALERT: &b%player% &fneeds help at &b%x%&7, &b%y%&7, &b%z% &fin &b%world%&f.'
 GANG_ALREADY_EXISTS: '&f[&bGangsX&f] &fA gang with this name already exists.'
 GANG_BANK_BALANCE: '&f[&bGangsX&f] Your gang bank contains &b$%balance%'

@@ -22,6 +22,10 @@ public enum Permission {
 
     GANG_CHAT("GANG_CHAT"),
 
+    GANG_FIGHTS("GANG_FIGHTS"),
+
+    SET_ROSTER("SET_ROSTER"),
+
     ALLY_CHAT("ALLY_CHAT"),
 
     INVITE("INVITE");
