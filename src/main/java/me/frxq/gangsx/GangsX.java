@@ -54,6 +54,7 @@ public final class GangsX extends JavaPlugin {
     public void onEnable() {
         instance = this;
         // Initialization logic here
+        //getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         registry();
         if (gangDataFactory == null) return;

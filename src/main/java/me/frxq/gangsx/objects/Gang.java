@@ -48,6 +48,8 @@ public class Gang {
 
     private final List<Gang> fight_requests;
 
+    private final List<Gang> sent_fight_requests;
+
     private final boolean isInFight;
 
     public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value, HashMap<Permission, Role> permissions) {
@@ -74,6 +76,7 @@ public class Gang {
         this.permissions = permissions;
         this.roster = new ArrayList<>();
         this.fight_requests = new ArrayList<>();
+        this.sent_fight_requests = new ArrayList<>();
         this.isInFight = false;
     }
 
@@ -104,6 +107,7 @@ public class Gang {
         this.permissions = gangUtils.getDefaultPermissions();
         this.roster = new ArrayList<>();
         this.fight_requests = new ArrayList<>();
+        this.sent_fight_requests = new ArrayList<>();
         this.isInFight = false;
     }
 
@@ -434,5 +438,35 @@ public class Gang {
         for (GPlayer gPlayer : gPlayers) {
             gPlayer.kickFromGang();
         }
+    }
+    public void sendFightRequest(Gang gang) {
+        this.sent_fight_requests.add(gang);
+        gang.addFightRequest(this);
+    }
+    public void addFightRequest(Gang gang) {
+        this.fight_requests.add(gang);
+    }
+    public List<Gang> getFightRequests() {
+        return this.fight_requests;
+    }
+    public List<Gang> getSentFightRequests() {
+        return this.sent_fight_requests;
+    }
+    public boolean hasAnyRequests() {
+        if(getFightRequests().size() > 1 || (getSentFightRequests().size() > 1)) {
+            return true;
+        }
+        return false;
+    }
+    public void clearRequests() {
+        getFightRequests().clear();
+        getSentFightRequests().clear();
+    }
+    public void removeSentRequest(Gang gang) {
+        this.sent_fight_requests.remove(gang);
+        removeFightRequest(gang);
+    }
+    public void removeFightRequest(Gang gang) {
+        gang.fight_requests.remove(this);
     }
 }
