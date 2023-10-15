@@ -59,25 +59,24 @@ public class ArenaUtils {
         return true;
     }
     public boolean isChallengerPositionSet(String name) {
-        if(arena.getString("ARENAS."+name+".CHALLENGER_POSITION.world") == null) {
+        if(!arena.isDouble("ARENAS."+name+".CHALLENGER_POSITION.x")) {
             return false;
         }
         return true;
     }
     public boolean isOpponentPositionSet(String name) {
-        if(arena.getString("ARENAS."+name+".OPPONENT_POSITION.world") == null) {
+        if(!arena.isDouble("ARENAS."+name+".OPPONENT_POSITION.x")) {
             return false;
         }
         return true;
     }
     public boolean isCenterPositionSet(String name) {
-        if(arena.getString("ARENAS."+name+".ARENA_CENTER.world") == null) {
+        if(!arena.isDouble("ARENAS."+name+".ARENA_CENTER.x")) {
             return false;
         }
         return true;
     }
     public void createArena(String name, Location location) {
-        setArenaCenter(name, location);
         List<String> lore = new ArrayList<>();
         lore.add("&fThis is the default lore for this arena");
         lore.add("&fYou can change this in arena.yml");
@@ -86,6 +85,7 @@ public class ArenaUtils {
         arena.set("ARENAS."+name+".ITEM.DISPLAY_NAME", "&b"+name);
         arena.set("ARENAS."+name+".ITEM.MATERIAL", "MAP");
         arena.set("ARENAS."+name+".ITEM.LORE", lore);
+        setArenaCenter(name, location);
 
         plugin.getFileManager().saveArenaFile();
         plugin.getFileManager().reloadArenaFile();
