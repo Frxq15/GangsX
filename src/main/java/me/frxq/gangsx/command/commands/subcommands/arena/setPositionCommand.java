@@ -38,22 +38,19 @@ public class setPositionCommand extends SubCommand {
             switch (type.toLowerCase()) {
                 case "challenger":
                     arenaUtils.setChallengerPosition(arena, p.getLocation());
-                    plugin.getFileManager().saveArenaFile();
-                    plugin.getFileManager().reloadArenaFile();
+                    arenaUtils.updateArenasFile();
                     p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_SET")
                             .replace("%position%", "challenger").replace("%arena%", arena));
                     return;
                     case "opponent":
                         arenaUtils.setOpponentPosition(arena, p.getLocation());
-                        plugin.getFileManager().saveArenaFile();
-                        plugin.getFileManager().reloadArenaFile();
+                        arenaUtils.updateArenasFile();
                         p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_SET")
                                 .replace("%position%", "opponent").replace("%arena%", arena));
                         return;
                 case "center":
                     arenaUtils.setArenaCenter(arena, p.getLocation());
-                    plugin.getFileManager().saveArenaFile();
-                    plugin.getFileManager().reloadArenaFile();
+                    arenaUtils.updateArenasFile();
                     p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_SET")
                             .replace("%position%", "center").replace("%arena%", arena));
                     return;

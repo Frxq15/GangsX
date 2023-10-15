@@ -16,6 +16,12 @@ public class ArenaUtils {
     private GangsX plugin = GangsX.getInstance();
     private FileConfiguration arena = plugin.getFileManager().getArenaFile();
 
+    public void updateArenasFile() {
+        plugin.getFileManager().saveArenaFile();
+        plugin.getFileManager().reloadArenaFile();
+        arena = plugin.getFileManager().getArenaFile();
+    }
+
     public void setChallengerPosition(String name, Location location) {
         arena.set("ARENAS."+name+".CHALLENGER_POSITION", location.serialize());
     }
@@ -87,8 +93,7 @@ public class ArenaUtils {
         arena.set("ARENAS."+name+".ITEM.LORE", lore);
         setArenaCenter(name, location);
 
-        plugin.getFileManager().saveArenaFile();
-        plugin.getFileManager().reloadArenaFile();
+        updateArenasFile();
     }
     public ItemStack getArenaItem(String name) {
         //normal item creation
