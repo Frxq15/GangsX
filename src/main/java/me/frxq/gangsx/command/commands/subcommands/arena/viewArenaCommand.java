@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-public class viewArena extends SubCommand {
+public class viewArenaCommand extends SubCommand {
     private final GangsX plugin;
 
-    public viewArena(GangsX plugin) {
+    public viewArenaCommand(GangsX plugin) {
         super("viewarena", "gangsx.command.viewarena", "/gadmin viewarena", Arrays.asList("tp, viewposition"));
         this.plugin = plugin;
     }
@@ -24,14 +24,14 @@ public class viewArena extends SubCommand {
             plugin.log("This command cannot be executed from console.");
             return;
         }
-        if (args.length == 1) {
+        if (args.length == 2) {
             ArenaUtils arenaUtils = plugin.getArenaUtils();
             String arena = args[0];
             String type = args[1];
 
             if(!arenaUtils.doesArenaExist(arena)) {
                 p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_NOT_FOUND")
-                        .replace("%position%", "challenger"));
+                        .replace("%arena%", arena));
                 return;
             }
 

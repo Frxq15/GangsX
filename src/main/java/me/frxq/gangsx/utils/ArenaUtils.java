@@ -18,18 +18,12 @@ public class ArenaUtils {
 
     public void setChallengerPosition(String name, Location location) {
         arena.set("ARENAS."+name+".CHALLENGER_POSITION", location.serialize());
-        plugin.getFileManager().saveArenaFile();
-        plugin.getFileManager().reloadArenaFile();
     }
     public void setOpponentPosition(String name, Location location) {
         arena.set("ARENAS."+name+".OPPONENT_POSITION", location.serialize());
-        plugin.getFileManager().saveArenaFile();
-        plugin.getFileManager().reloadArenaFile();
     }
     public void setArenaCenter(String name, Location location) {
         arena.set("ARENAS."+name+".ARENA_CENTER", location.serialize());
-        plugin.getFileManager().saveArenaFile();
-        plugin.getFileManager().reloadArenaFile();
     }
     public Location getArenaCenter(String name) {
         Location loc = new Location(Bukkit.getWorld(arena.getString("ARENAS."+name+".ARENA_CENTER.world")),
@@ -89,9 +83,9 @@ public class ArenaUtils {
         lore.add("&fYou can change this in arena.yml");
         lore.add("");
         lore.add("&e| &fIn Use: %inuse%");
-        arena.set("ARENAS."+name+".DISPLAY_NAME", "&b"+name);
-        arena.set("ARENAS."+name+".MATERIAL", "FILLED_MAP");
-        arena.set("ARENAS."+name+".LORE", lore);
+        arena.set("ARENAS."+name+".ITEM.DISPLAY_NAME", "&b"+name);
+        arena.set("ARENAS."+name+".ITEM.MATERIAL", "MAP");
+        arena.set("ARENAS."+name+".ITEM.LORE", lore);
 
         plugin.getFileManager().saveArenaFile();
         plugin.getFileManager().reloadArenaFile();
@@ -101,12 +95,12 @@ public class ArenaUtils {
         List<String> lore = new ArrayList<String>();
 
 
-        String material = arena.getString("ARENAS." + name + ".MATERIAL");
+        String material = arena.getString("ARENAS." + name + ".ITEM.MATERIAL");
         final ItemStack i = new ItemStack(Material.valueOf(material), 1);
-        String display = arena.getString("ARENAS." + name + ".NAME");
+        String display = arena.getString("ARENAS." + name + ".ITEM.NAME");
 
         final ItemMeta meta = i.getItemMeta();
-        for (String lines : arena.getStringList("ARENAS." + name + ".LORE")) {
+        for (String lines : arena.getStringList("ARENAS." + name + ".ITEM.LORE")) {
             lines = lines.replace("%inuse%", replaceBoolean(plugin.getArenaManager().isInUse(name)));
             lore.add(plugin.getColorFormatter().format(lines));
         }

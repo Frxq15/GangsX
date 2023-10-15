@@ -3,8 +3,6 @@ package me.frxq.gangsx.command.commands;
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.ParentCommand;
 import me.frxq.gangsx.command.SubCommand;
-import me.frxq.gangsx.command.commands.subcommands.arena.setPositionCommand;
-import me.frxq.gangsx.command.commands.subcommands.arena.viewArena;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -15,8 +13,6 @@ public class GangAdminCommand extends ParentCommand {
 
     public GangAdminCommand(GangsX plugin) {
         super(plugin, "gadmin", "gangsx.command.gangadmin");
-        register(new setPositionCommand(plugin));
-        register(new viewArena(plugin));
     }
 
     @Override

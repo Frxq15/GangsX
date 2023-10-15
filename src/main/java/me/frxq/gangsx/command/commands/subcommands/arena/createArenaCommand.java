@@ -38,7 +38,7 @@ public class createArenaCommand extends SubCommand {
                 return;
             }
             arenaUtils.createArena(arenaName, p.getLocation());
-            p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_CREATED").replace("%arean%", arenaName));
+            p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_CREATED").replace("%arena%", arenaName));
             return;
 
         }
