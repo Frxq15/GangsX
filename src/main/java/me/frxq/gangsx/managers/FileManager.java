@@ -41,6 +41,8 @@ public class FileManager {
     public File addToRosterFile;
     public FileConfiguration addToRosterConfig;
 
+    public File duelFile;
+    public FileConfiguration duelConfig;
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
     }
@@ -57,6 +59,7 @@ public class FileManager {
         createArenaFile();
         createRosterFile();
         createAddToRosterFile();
+        createDuelFile();
     }
 
     public void createShopFile() {
@@ -323,4 +326,28 @@ public class FileManager {
         }
     }
     public FileConfiguration getAddToRosterFile() { return addToRosterConfig; }
+
+    public void createDuelFile() {
+        duelFile = new File(plugin.getDataFolder()+"/guis", "duel.yml");
+        if (!duelFile.exists()) {
+            duelFile.getParentFile().mkdirs();
+            plugin.log("duel.yml was created successfully");
+            plugin.saveResource("guis/duel.yml", false);
+        }
+        duelConfig = new YamlConfiguration();
+        try {
+            duelConfig.load(duelFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void reloadDuelFile() { duelConfig = YamlConfiguration.loadConfiguration(duelFile); }
+    public void saveDuelFile() {
+        try {
+            duelConfig.save(duelFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public FileConfiguration getDuelFile() { return duelConfig; }
 }

@@ -1,0 +1,188 @@
+TITLE: '&8Dueling | %gang%'
+ROWS: 5
+colour-percentages: true #if set to true, win % will be formatted to &c for below 20, &efor below 60 and &a for above 60
+enable-animation: true
+enable-animation-sound: true
+ITEMS:
+  CHALLENGER:
+    SLOT: 1
+    GLOW: false
+    NAME: '&a&lChallenger &b%gang%'
+    LORE:
+      - '&fThis gang is the challenger.'
+      - ''
+      - '&2Stats:'
+      - '&a| &fFights Won: &a0'
+      - '&a| &fFights Lost: &a0'
+      - '&a| &fWin Percentage: &a0%'
+      - ''
+      - '&a| &fKills: &a%kills%'
+      - '&a| &fDeaths: &a%deaths%'
+      - '&a| &fKDR: &a%kdr%'
+  OPPONENT:
+    SLOT: 7
+    GLOW: false
+    NAME: '&c&lOpponent &b%gang%'
+    LORE:
+      - '&fThis gang is the opponent.'
+      - ''
+      - '&4Stats:'
+      - '&c| &fFights Won: &c0'
+      - '&c| &fFights Lost: &c0'
+      - '&c| &fWin Percentage: &c0%'
+      - ''
+      - '&c| &fKills: &c%kills%'
+      - '&c| &fDeaths: &c%deaths%'
+      - '&c| &fKDR: &c%kdr%'
+  KIT:
+    SLOT: 3
+    GLOW: false
+    MATERIAL: 'DIAMOND_CHESTPLATE'
+    NAME: '&b&lKit &e%kit%'
+    LORE:
+      - '&fThis is the selected kit.'
+      - ''
+      - '&b| &fInventory items will be returned to'
+      - '&b| &fplayers after the fight has ended.'
+      - ''
+      - '&e&lClick &fto change the selected kit'
+  ARENA:
+    SLOT: 5
+    GLOW: false
+    MATERIAL: 'MAP'
+    NAME: '&b&lArena &e%arena%'
+    LORE:
+      - '&fThis is the selected arena.'
+      - ''
+      - '&b| &fCommands are disabled inside of the'
+      - '&b| &farena to prevent exploit methods.'
+      - ''
+      - '&e&lClick &fto change the selected arena'
+  INFO:
+    SLOT: 4
+    GLOW: false
+    MATERIAL: 'NETHER_STAR'
+    NAME: '&eFight Information'
+    LORE:
+      - '&fYou are viewing all information for this fight.'
+      - ''
+      - '&a| &fChallenger: &a%challenger%'
+      - '&c| &fOpponent: &c%opponent%'
+      - ''
+      - '&6Fight Information:'
+      - '&e| &fType: &e%type%' #referring to roster size
+      - '&e| &fArena: &e%arena%'
+      - '&e| &fKit: &e%kit%'
+      - ''
+      - '&e&lClose &fthe menu to cancel this fight request'
+  ACCEPT:
+    SLOTS:
+      - 42
+      - 43
+      - 44
+    GLOW: false
+    MATERIAL: 'EMERALD_BLOCK'
+    NAME: '&aConfirm Request'
+    LORE:
+      - '&fThis will send your fight request'
+      - ''
+      - '&a| &fPlayers must be at spawn to accept'
+      - ''
+      - '&e&lClick &fto send the fight request.'
+  CANCEL:
+    SLOTS:
+      - 36
+      - 37
+      - 38
+    GLOW: false
+    MATERIAL: 'REDSTONE_BLOCK'
+    NAME: '&cCancel Request'
+    LORE:
+      - '&fThis will cancel your fight request'
+      - ''
+      - '&c| &fNothing will be lost from this action'
+      - ''
+      - '&e&lClick &fto cancel your fight request.'
+  CHALLENGER_ROSTER:
+    SLOTS: #slots work in priority order for roster size
+      - 18
+      - 19
+      - 20
+      - 21
+      - 27
+      - 28
+      - 29
+      - 30
+      - 39
+    NAME: '&a%player%'
+    LORE:
+      - '&fThis player is part of the challenger roster.'
+      - ''
+      - '&a| &fGang: &a%gang%'
+      - ''
+      - '&2Stats:'
+      - '&a| &fKills: &a%kills%'
+      - '&a| &fDeaths: &a%deaths%'
+      - '&a| &fKDR: &a%kdr%'
+  OPPONENT_ROSTER:
+    SLOTS: #slots work in priority order for roster size
+      - 23
+      - 24
+      - 25
+      - 26
+      - 32
+      - 33
+      - 34
+      - 35
+      - 41
+    NAME: '&c%player%'
+    LORE:
+      - '&fThis player is part of the opponent roster.'
+      - ''
+      - '&c| &fGang: &c%gang%'
+      - ''
+      - '&4Stats:'
+      - '&c| &fKills: &c%kills%'
+      - '&c| &fDeaths: &c%deaths%'
+      - '&c| &fKDR: &c%kdr%'
+MISC_ITEMS:
+  1:
+    SLOT: 10
+    MATERIAL: GREEN_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&aChallenger Roster'
+    LORE:
+      - '&a&l↓ &fShowing the challenger roster &a&l↓'
+  2:
+    SLOT: 16
+    MATERIAL: RED_STAINED_GLASS_PANE
+    AMOUNT: 1
+    GLOW: false
+    NAME: '&cOpponent Roster'
+    LORE:
+      - '&c&l↓ &fShowing the opponent roster &c&l↓'
+ANIMATED_ITEMS: #if animation is enabled, these items will change to the animated item when confirming the duel
+  ITEM:
+    SLOTS:
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 22
+      - 31
+      - 40
+    MATERIAL: BLACK_STAINED_GLASS_PANE
+    AMOUNT: 1
+    NAME: ''
+    LORE: []
+  ANIMATED_ITEM:
+    MATERIAL: GREEN_STAINED_GLASS_PANE
+    AMOUNT: 1
+    NAME: '&aSending Request..'
+    LORE: []

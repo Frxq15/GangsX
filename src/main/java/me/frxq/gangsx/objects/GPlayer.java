@@ -4,6 +4,7 @@ import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.enums.Role;
 import org.bukkit.Bukkit;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -141,4 +142,24 @@ public class GPlayer {
     public boolean hasAllyChatEnabled() { return allyChatEnabled; }
 
     public void setAllyChatEnabled(boolean chatEnabled) { allyChatEnabled = chatEnabled; }
+
+    public Integer getKDR() {
+        if(getKills() == 0) {
+            return 0;
+        }
+        if(getDeaths() == 0) {
+            return getKills();
+        }
+        return (getKills()/getDeaths());
+    }
+    public String getKDRString() {
+        if(getKills() == 0) {
+            return "0";
+        }
+        if(getDeaths() == 0) {
+            return getKills()+"";
+        }
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(getKills()/getDeaths());
+    }
 }

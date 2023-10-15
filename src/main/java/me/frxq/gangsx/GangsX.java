@@ -1,6 +1,7 @@
 package me.frxq.gangsx;
 
 import me.frxq.gangsx.api.APIHooks;
+import me.frxq.gangsx.fight.ArenaManager;
 import me.frxq.gangsx.listener.PlayerListeners;
 import me.frxq.gangsx.command.CommandHandler;
 import me.frxq.gangsx.datafactory.gang.GangDataFactory;
@@ -46,6 +47,7 @@ public final class GangsX extends JavaPlugin {
 
     private GangUtils gangUtils;
     private ArenaUtils arenaUtils;
+    private ArenaManager arenaManager;
 
     public static GangsX instance;
 
@@ -97,6 +99,7 @@ public final class GangsX extends JavaPlugin {
 
         gangUtils = new GangUtils(this);
         arenaUtils = new ArenaUtils();
+        arenaManager = new ArenaManager(this);
 
 
         switch (settings.getStorageType()) {
@@ -178,6 +181,8 @@ public final class GangsX extends JavaPlugin {
     public localeManager getLocaleManager() {
         return localeManager;
     }
+
+    public ArenaManager getArenaManager() { return arenaManager; }
 
     public CommandUtils getCommandUtils() { return commandUtils; }
 

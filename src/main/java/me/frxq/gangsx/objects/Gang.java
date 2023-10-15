@@ -2,6 +2,7 @@ package me.frxq.gangsx.objects;
 
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.enums.Permission;
+import me.frxq.gangsx.fight.Fight;
 import me.frxq.gangsx.formatting.number.NumberFormatter;
 import me.frxq.gangsx.enums.Role;
 import me.frxq.gangsx.enums.Upgrades;
@@ -10,6 +11,7 @@ import me.frxq.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -50,6 +52,8 @@ public class Gang {
 
     private final List<Gang> sent_fight_requests;
 
+    private final UUID active_fight;
+
     private final boolean isInFight;
 
     public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value, HashMap<Permission, Role> permissions) {
@@ -77,6 +81,7 @@ public class Gang {
         this.roster = new ArrayList<>();
         this.fight_requests = new ArrayList<>();
         this.sent_fight_requests = new ArrayList<>();
+        this.active_fight = null;
         this.isInFight = false;
     }
 
@@ -108,6 +113,7 @@ public class Gang {
         this.roster = new ArrayList<>();
         this.fight_requests = new ArrayList<>();
         this.sent_fight_requests = new ArrayList<>();
+        this.active_fight = null;
         this.isInFight = false;
     }
 
@@ -468,5 +474,31 @@ public class Gang {
     }
     public void removeFightRequest(Gang gang) {
         gang.fight_requests.remove(this);
+    }
+    public Integer getFightWinPercentage() {
+        // = wins / totalgames * 100
+        return 0;
+    }
+    public Integer getKDR() {
+        if(getKills() == 0) {
+            return 0;
+        }
+        if(getDeaths() == 0) {
+            return getKills();
+        }
+        return (getKills()/getDeaths());
+    }
+    public String getKDRString() {
+        if(getKills() == 0) {
+            return "0";
+        }
+        if(getDeaths() == 0) {
+            return getKills()+"";
+        }
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(getKills()/getDeaths());
+    }
+    public UUID getActiveFight() {
+        return getActiveFight();
     }
 }

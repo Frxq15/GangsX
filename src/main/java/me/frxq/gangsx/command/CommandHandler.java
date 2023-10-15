@@ -19,6 +19,7 @@ public record CommandHandler(GangsX plugin) {
         registerCommand("gang", new GangCommand(plugin));
         registerCommand("fight", new FightCommand(plugin));
         registerCommand("gadmin", new GangAdminCommand(plugin));
+        registerCommand("garena", new GangArenaCommand(plugin));
         plugin.getCommand("gangchat").setExecutor(new GangChatCommand());
         plugin.getCommand("allychat").setExecutor(new AllyChatCommand());
     }

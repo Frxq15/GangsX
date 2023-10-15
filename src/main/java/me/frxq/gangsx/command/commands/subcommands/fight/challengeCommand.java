@@ -4,7 +4,10 @@ import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.SubCommand;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -25,11 +28,10 @@ public class challengeCommand extends SubCommand {
 
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!(sender instanceof Player)) {
+        if(!(sender instanceof Player p)) {
             plugin.log("This command cannot be executed from console.");
             return;
         }
-        Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         if(!gPlayer.hasGang()) {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");
@@ -48,8 +50,10 @@ public class challengeCommand extends SubCommand {
             Gang tGang = plugin.getGangDataFactory().getGangData(uuid);
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
 
-            TextComponent textComponent = new TextComponent("&aClick Here");
+            TextComponent textComponent = new TextComponent("Click Here");
             textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "fight accept "+gang.getName()));
+            textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to accept this request").create()));
+            textComponent.setColor(ChatColor.GREEN);
 
             tGang.getFightRoster().forEach(r -> {
                 Player t = Bukkit.getPlayer(r.getID());
