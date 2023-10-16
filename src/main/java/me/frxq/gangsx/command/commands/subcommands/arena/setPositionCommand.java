@@ -14,7 +14,7 @@ public class setPositionCommand extends SubCommand {
     private final GangsX plugin;
 
     public setPositionCommand(GangsX plugin) {
-        super("setposition", "gangsx.command.setposition", "/gadmin setposition", Arrays.asList("setloc"));
+        super("setposition", "gangsx.command.setposition", "/gadmin setposition", Arrays.asList("setloc", "setpos"));
         this.plugin = plugin;
     }
 

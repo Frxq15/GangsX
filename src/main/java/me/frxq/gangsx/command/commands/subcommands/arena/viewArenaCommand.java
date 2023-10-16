@@ -14,7 +14,7 @@ public class viewArenaCommand extends SubCommand {
     private final GangsX plugin;
 
     public viewArenaCommand(GangsX plugin) {
-        super("viewarena", "gangsx.command.viewarena", "/gadmin viewarena", Arrays.asList("tp, viewposition"));
+        super("viewarena", "gangsx.command.viewarena", "/gadmin viewarena", Arrays.asList("tp", "viewposition"));
         this.plugin = plugin;
     }
 

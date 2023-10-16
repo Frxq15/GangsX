@@ -9,28 +9,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class Fight {
-
+public class FightRequest {
     private final GangsX plugin;
 
-    private final static Map<UUID, Fight> fights = new HashMap<>();
+    private final static Map<UUID, FightRequest> requests = new HashMap<>();
     private Gang challenger;
 
     private UUID fightID;
     private Gang opponent;
 
-    public Fight(GangsX plugin) {
+    private String arena;
+    private String kit;
+
+    private List<GPlayer> has_accepted;
+
+    public FightRequest(GangsX plugin) {
         this.plugin = plugin;
         this.fightID = UUID.randomUUID();
-        fights.put(fightID, this);
+        requests.put(fightID, this);
     }
-    public static Fight getActiveFightData(GangsX plugin, Gang challenger) {
+    public static FightRequest getFightRequest(GangsX plugin, Gang challenger) {
         UUID fightID = challenger.getActiveFight();
-        if(!fights.containsKey(fightID) || fightID == null) {
-            Fight fight = new Fight(plugin);
-            fight.setChallenger(challenger);
+        if(!requests.containsKey(fightID) || fightID == null) {
+            FightRequest fr = new FightRequest(plugin);
+            fr.setChallenger(challenger);
         }
-        return fights.get(fightID);
+        return requests.get(fightID);
     }
     public List<GPlayer> getChallengerRoster() { return challenger.getFightRoster(); }
 
@@ -45,9 +49,14 @@ public class Fight {
     public Gang getChallenger() { return challenger; }
     public Gang getOpponent() { return opponent; }
 
-    public static Map<UUID, Fight> getAllFightData() {
-        return fights;
+    public static Map<UUID, FightRequest> getAllFightRequests() {
+        return requests;
     }
-    public static void removeFight(UUID uuid) { fights.remove(uuid); }
+    public static void removeRequest(UUID uuid) { requests.remove(uuid); }
     public UUID getFightID() { return fightID;}
+    public void addAcceptedPlayer(GPlayer gPlayer) { has_accepted.add(gPlayer); }
+    public void declineRequest() {
+        requests.remove(this);
+    }
+    public void setID(UUID uuid) { this.fightID = uuid; }
 }

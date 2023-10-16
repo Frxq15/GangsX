@@ -19,7 +19,7 @@ public class createArenaCommand extends SubCommand {
     private final GangsX plugin;
 
     public createArenaCommand(GangsX plugin) {
-        super("createarena", "gangsx.command.createarena", "/gadmin createarena <arena>", Arrays.asList("createfightarena"));
+        super("createarena", "gangsx.command.createarena", "/gadmin createarena <arena>", Arrays.asList("create"));
         this.plugin = plugin;
     }
 
