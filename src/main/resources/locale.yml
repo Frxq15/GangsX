@@ -25,6 +25,7 @@ GANG_COINS_BALANCE: '&f[&bGangsX&f] Your gang has &b%coins% &fgang coins.'
 GANG_CREATED: '&f[&bGangsX&f] &fThe gang &b%gang% &fwas created by &b%player%.'
 GANG_COMMAND_ON_COOLDOWN: '&f[&bGangsX&f] &fYour gang is currently on cooldown for this command.'
 GANG_DISBANDED: '&f[&bGangsX&f] &fYour gang was disbanded.'
+GANG_FIGHT_REQUEST_EXPIRED: '&f[&bGangsX&f] &fYour fight request to &b%gang% &fhas expired.'
 GANG_FRIENDLYFIRE_OFF: '&f[&bGangsX&f] &b%player% &ftoggled &coff &fgang friendlyfire.'
 GANG_FRIENDLYFIRE_ON: '&f[&bGangsX&f] &b%player% &ftoggled &aon &fgang friendlyfire.'
 GANG_HELP_INVALID_CATEGORY: '&f[&bGangsX&f] &fInvalid category provided, Available Categories: &bplayer, manage, social, currency'
@@ -188,3 +189,15 @@ GANG_FIGHT_REQUEST_SENT:
   - '&e| &fArena: &e%arena%'
   - '&e| &fKit: &e%kit%'
   - ''
+GANG_FIGHT_REQUEST_RECEIVED:
+  - ''
+  - '&b&lFight Request Received &8- &e%gang%'
+  - '&fSent By: &e%player%'
+  - ''
+  - '&6Fight Information:'
+  - '&e| &fOpponent: &e%opponent%'
+  - '&e| &fType: &e%type%' #referring to roster size
+  - '&e| &fArena: &e%arena%'
+  - '&e| &fKit: &e%kit%'
+  - ''
+#click to accept line will be sent after

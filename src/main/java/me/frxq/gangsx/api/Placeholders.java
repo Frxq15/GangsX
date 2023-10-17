@@ -41,6 +41,21 @@ public class Placeholders extends PlaceholderExpansion {
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(player.getUniqueId());
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
 
+        if(identifier.startsWith("top_name")){
+           String pos = identifier.replace("top_name_", "");
+            if(Integer.parseInt(pos) < plugin.getConfig().getInt("gang.leaderboard-data-pull-amount")){
+                int p = Integer.parseInt(pos);
+                return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p));
+            } else return "None";
+        }
+        if(identifier.startsWith("top_value")){
+            String pos = identifier.replace("top_value_", "");
+            if(Integer.parseInt(pos) < plugin.getConfig().getInt("gang.leaderboard-data-pull-amount")){
+                int p = Integer.parseInt(pos);
+                return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p).getValue());
+            } else return "None";
+        }
+
         if (gang == null) return "No Gang";
         switch (identifier) {
 
@@ -88,6 +103,8 @@ public class Placeholders extends PlaceholderExpansion {
                 return sql query to get amount of gangs;
 
             // GANG TOP PLACEHOLDERS
+
+
 
                  */
 

@@ -10,6 +10,14 @@ database:
   mongodb:
     connection-string: ""
 
+locale:
+  clickable-text:
+    accept:
+     - '&fClick to &a&lAccept &fthis request.'
+
+fight:
+  request-timeout: 60
+
 gang:
   #how often should gang data be backed up?
   save-interval: 10 #time in minutes

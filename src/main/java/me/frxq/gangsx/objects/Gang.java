@@ -46,15 +46,15 @@ public class Gang {
 
     private final GangUtils gangUtils;
 
-    private final List<GPlayer> roster;
+    private List<GPlayer> roster;
 
-    private final List<Gang> fight_requests;
+    private List<Gang> fight_requests;
 
-    private final List<Gang> sent_fight_requests;
+    private List<Gang> sent_fight_requests;
 
-    private final UUID active_fight;
+    private UUID active_fight;
 
-    private final boolean isInFight;
+    private boolean isInFight;
 
     public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value, HashMap<Permission, Role> permissions) {
         this.plugin = plugin;
@@ -499,6 +499,9 @@ public class Gang {
         return df.format(getKills()/getDeaths());
     }
     public UUID getActiveFight() {
-        return getActiveFight();
+        return active_fight;
+    }
+    public void setActiveFight(UUID activeFight) {
+        this.active_fight = activeFight;
     }
 }
