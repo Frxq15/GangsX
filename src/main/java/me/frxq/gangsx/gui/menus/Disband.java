@@ -61,7 +61,8 @@ public class Disband extends GUITemplate {
 
         String material = disband.getString("ITEMS." + item + ".MATERIAL");
         Integer amount = disband.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = disband.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = disband.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -89,7 +90,8 @@ public class Disband extends GUITemplate {
 
         String material = disband.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = disband.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = disband.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = disband.getString("MISC_ITEMS." + item + ".NAME");
         name = name.replace("%gang%", gang.getName());
 

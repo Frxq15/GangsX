@@ -5,7 +5,7 @@ ITEMS:
   RECRUIT:
     SLOT: 11
     MATERIAL: PLAYER_HEAD
-    TEXTURE: "https://textures.minecraft.net/texture/1beba1feee05b4d02a7c51a4ec3ee8c4f5ebb69eb553e450ce810d5bce28d3ac" #green
+    SKULL-OWNER: 'MHF_QUESTION'
     AMOUNT: 1
     NAME: "&aRecruit"
     GLOW: false
@@ -19,7 +19,7 @@ ITEMS:
   MEMBER:
     SLOT: 12
     MATERIAL: PLAYER_HEAD
-    TEXTURE: "https://textures.minecraft.net/texture/5d4315250c628c6760ae26a5e2735a85728ba52eb05e7f2dad34c845925abaec" #blue
+    SKULL-OWNER: 'MHF_QUESTION'
     AMOUNT: 1
     NAME: "&aMember"
     GLOW: false
@@ -33,7 +33,7 @@ ITEMS:
   MOD:
     SLOT: 13
     MATERIAL: PLAYER_HEAD
-    TEXTURE: "https://textures.minecraft.net/texture/7e52be24b9dcd2f8ffb1957558526bd1977ebb74e763c5bb0cbfcc081f452432" #pink
+    SKULL-OWNER: 'MHF_QUESTION'
     AMOUNT: 1
     NAME: "&aMod"
     GLOW: false
@@ -47,7 +47,7 @@ ITEMS:
   CO_LEADER:
     SLOT: 14
     MATERIAL: PLAYER_HEAD
-    TEXTURE: "https://textures.minecraft.net/texture/fac726c547b362db901e0ad9200fe5d2164d2f83d1aa9d8f469096d9d158f693" #orange
+    SKULL-OWNER: 'MHF_QUESTION'
     AMOUNT: 1
     NAME: "&aCo-Leader"
     GLOW: false
@@ -61,7 +61,7 @@ ITEMS:
   LEADER:
     SLOT: 15
     MATERIAL: PLAYER_HEAD
-    TEXTURE: "https://textures.minecraft.net/texture/ec730446ea0259ad3f491ad635833a48acddfbc37b36d24fd901f105bbc3fa44" #grey
+    SKULL-OWNER: 'MHF_QUESTION'
     AMOUNT: 1
     NAME: "&aLeader"
     GLOW: false
@@ -76,6 +76,7 @@ MISC_ITEMS:
   1:
     SLOT: 31
     MATERIAL: ARROW
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&cReturn'

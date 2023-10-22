@@ -11,7 +11,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&a&lLevel 1'
-    TEXTURE: 'https://textures.minecraft.net/texture/e0a4c94dd65a7cadc4172cedf3990a8542772bb113cdf1a0f78ef652c6abe6cb'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&fThis level is unlocked by default, upgrade'
       - '&fyour gang level to unlock different perks.'
@@ -21,18 +21,18 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&5&lLevel 2'
-    TEXTURE: 'https://textures.minecraft.net/texture/a47c55064f1d07625af05cdbc0fc7c84173b10541024c8855ed7132ca7767246'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&fProgress through gang levels to upgrade your gang.'
       - ''
       - '&5Requirements:'
-      - '&d| &fMoney: &d$1M'
-      - '&d| &fBlocks Mined: &d1k'
-      - '&d| &fPlayer Kills: &d5'
+      - '&d┃ &fMoney: &d$1M'
+      - '&d┃ &fBlocks Mined: &d1k'
+      - '&d┃ &fPlayer Kills: &d5'
       - ''
       - '&5Unlocks:'
-      - '&d| &f6 Gang Member Limit'
-      - '&d| &f10x Gang Coins'
+      - '&d┃ &f6 Gang Member Limit'
+      - '&d┃ &f10x Gang Coins'
       - ''
       - '%lore_outcome%'
   3:
@@ -41,18 +41,18 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&3&lLevel 3'
-    TEXTURE: 'https://textures.minecraft.net/texture/d9cb94d8729197a18a76882c24918a8c04494d34727f4df060fb7a45a1ff8537'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&fProgress through gang levels to upgrade your gang.'
       - ''
       - '&3Requirements:'
-      - '&b| &fMoney: &b$5M'
-      - '&b| &fBlocks Mined: &b10k'
-      - '&b| &fPlayer Kills: &b25'
+      - '&b┃ &fMoney: &b$5M'
+      - '&b┃ &fBlocks Mined: &b10k'
+      - '&b┃ &fPlayer Kills: &b25'
       - ''
       - '&3Unlocks:'
-      - '&b| &f2 Gang Homes'
-      - '&b| &f15x Gang Coins'
+      - '&b┃ &f2 Gang Homes'
+      - '&b┃ &f15x Gang Coins'
       - ''
       - '%lore_outcome%'
   4:
@@ -61,18 +61,18 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&6&lLevel 4'
-    TEXTURE: 'https://textures.minecraft.net/texture/36ad7565fa68942d2ff5f04efda80d9e9f88d33401680f182e0f37af32b8c294'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&fProgress through gang levels to upgrade your gang.'
       - ''
       - '&6Requirements:'
-      - '&e| &fMoney: &e$25M'
-      - '&e| &fBlocks Mined: &e50k'
-      - '&e| &fPlayer Kills: &e50'
+      - '&e┃ &fMoney: &e$25M'
+      - '&e┃ &fBlocks Mined: &e50k'
+      - '&e┃ &fPlayer Kills: &e50'
       - ''
       - '&6Unlocks:'
-      - '&e| &cC&6o&el&ao&3u&9r&5e&cd &fGang Description'
-      - '&e| &f15x Gang Coins'
+      - '&e┃ &cC&6o&el&ao&3u&9r&5e&cd &fGang Description'
+      - '&e┃ &f15x Gang Coins'
       - ''
       - '%lore_outcome%'
   5:
@@ -81,7 +81,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&9&lLevel 5'
-    TEXTURE: 'https://textures.minecraft.net/texture/d0203b124acefd08c446a0492a5c9d800ee0cd8c260c3c12377731659251ad4e'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&7You will automatically unlock this level and its perks'
       - '&7after you have earned the required amount of level experience.'
@@ -100,7 +100,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&d&lLevel 6'
-    TEXTURE: 'https://textures.minecraft.net/texture/e491017fd5267fc9a641cce0250d4683804e3b1399b2b5b58f130f5774de2821'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&7You will automatically unlock this level and its perks'
       - '&7after you have earned the required amount of level experience.'
@@ -119,7 +119,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&c&lLevel 7'
-    TEXTURE: 'https://textures.minecraft.net/texture/8425acc42caf8b1e95ccb16d379af0b76f95ed29ef2a494073d0b07b15dc22fd'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&7You will automatically unlock this level and its perks'
       - '&7after you have earned the required amount of level experience.'
@@ -138,7 +138,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&5&lLevel 8'
-    TEXTURE: 'https://textures.minecraft.net/texture/b4904d5dee3782d4d6c6febe72783d96148277efbe78c1514cc20088d8ff0d09'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&7You will automatically unlock this level and its perks'
       - '&7after you have earned the required amount of level experience.'
@@ -157,7 +157,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&b&lLevel 9'
-    TEXTURE: 'https://textures.minecraft.net/texture/6adc65c3b896ab66df1ed7ba4250d16bb8352a6d285a54c00218ea72a4bb7149'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&7You will automatically unlock this level and its perks'
       - '&7after you have earned the required amount of level experience.'
@@ -176,7 +176,7 @@ ITEMS: #item name must be the id of the level
     AMOUNT: 1
     GLOW: false
     NAME: '&3&lLevel 10'
-    TEXTURE: 'https://textures.minecraft.net/texture/abd267503356c851f739556847575b5e338814a73b3ae8abc65ae40cf16cc333'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - '&7You will automatically unlock this level and its perks'
       - '&7after you have earned the required amount of level experience.'

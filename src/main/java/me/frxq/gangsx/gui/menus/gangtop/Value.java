@@ -95,7 +95,7 @@ public class Value extends GUITemplate {
 
         ItemStack i = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
-        meta.setOwner("MHF_Question");
+        meta.setOwner(gangtop.getString("VALUE_ITEMS.GANG_NOT_FOUND.SKULL-OWNER"));
         String name = gangtop.getString("VALUE_ITEMS.GANG_NOT_FOUND.NAME")
                 .replace("%gang%", "None").replace("%place%", position+"");
 
@@ -109,7 +109,8 @@ public class Value extends GUITemplate {
         return i;
     }
     public ItemStack createCloseItem() {
-        ItemStack i = new ItemStack(Material.getMaterial(gangtop.getString("VALUE_ITEMS.CLOSE_MENU.MATERIAL")), 1);
+        Integer data = gangtop.getInt("VALUE_MISC_ITEMS.CLOSE_MENU.DATA");
+        ItemStack i = new ItemStack(Material.getMaterial(gangtop.getString("VALUE_ITEMS.CLOSE_MENU.MATERIAL")), 1, data.shortValue());
         String name = gangtop.getString("VALUE_ITEMS.CLOSE_MENU.NAME");
         ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(plugin.getColorFormatter().format(name));
@@ -122,7 +123,8 @@ public class Value extends GUITemplate {
 
         String material = gangtop.getString("VALUE_MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = gangtop.getInt("VALUE_MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = gangtop.getInt("VALUE_MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = gangtop.getString("VALUE_MISC_ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();

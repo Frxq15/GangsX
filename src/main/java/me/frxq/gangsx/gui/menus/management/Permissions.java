@@ -53,7 +53,8 @@ public class Permissions extends GUITemplate {
 
         String material = permissions.getString("ITEMS." + item + ".MATERIAL");
         Integer amount = permissions.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = permissions.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = permissions.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -85,7 +86,8 @@ public class Permissions extends GUITemplate {
 
         String material = permissions.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = permissions.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = permissions.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = permissions.getString("MISC_ITEMS." + item + ".NAME");
         final ItemMeta meta = i.getItemMeta();
         for (String lines : permissions.getStringList("MISC_ITEMS." + item + ".LORE")) {

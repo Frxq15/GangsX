@@ -7,6 +7,7 @@ ITEMS:
   BANK_DEPOSIT:
     SLOT: 0
     MATERIAL: GOLD_NUGGET
+    DATA: 0
     AMOUNT: 1
     NAME: "&aBank Deposit"
     GLOW: false
@@ -24,6 +25,7 @@ ITEMS:
   BANK_WITHDRAW:
     SLOT: 1
     MATERIAL: GOLD_INGOT
+    DATA: 0
     AMOUNT: 1
     NAME: "&aBank Withdraw"
     GLOW: false
@@ -40,7 +42,8 @@ ITEMS:
       - '&e&lClick &fto modify this permission.'
   CHANGE_DESCRIPTION:
     SLOT: 2
-    MATERIAL: WRITABLE_BOOK
+    MATERIAL: BOOK_AND_QUILL
+    DATA: 0
     AMOUNT: 1
     NAME: "&aChange Description"
     GLOW: false
@@ -57,7 +60,8 @@ ITEMS:
       - '&e&lClick &fto modify this permission.'
   MANAGE_RELATIONS:
     SLOT: 3
-    MATERIAL: ENDER_EYE
+    MATERIAL: EYE_OF_ENDER
+    DATA: 0
     AMOUNT: 1
     NAME: "&aManage Relations"
     GLOW: false
@@ -75,6 +79,7 @@ ITEMS:
   PURCHASE_VALUE:
     SLOT: 4
     MATERIAL: DIAMOND
+    DATA: 0
     AMOUNT: 1
     NAME: "&aPurchase Value"
     GLOW: false
@@ -92,6 +97,7 @@ ITEMS:
   PURCHASE_UPGRADES:
     SLOT: 5
     MATERIAL: CHEST
+    DATA: 0
     AMOUNT: 1
     NAME: "&aPurchase Upgrades"
     GLOW: false
@@ -109,6 +115,7 @@ ITEMS:
   PROMOTE:
     SLOT: 6
     MATERIAL: SLIME_BALL
+    DATA: 0
     AMOUNT: 1
     NAME: "&aPromote"
     GLOW: false
@@ -126,6 +133,7 @@ ITEMS:
   DEMOTE:
     SLOT: 7
     MATERIAL: MAGMA_CREAM
+    DATA: 0
     AMOUNT: 1
     NAME: "&aDemote"
     GLOW: false
@@ -143,6 +151,7 @@ ITEMS:
   MANAGE_FRIENDLY_FIRE:
     SLOT: 8
     MATERIAL: DIAMOND_SWORD
+    DATA: 0
     AMOUNT: 1
     NAME: "&aManage Friendly Fire"
     GLOW: false
@@ -160,6 +169,7 @@ ITEMS:
   INVITE:
     SLOT: 9
     MATERIAL: GLOWSTONE_DUST
+    DATA: 0
     AMOUNT: 1
     NAME: "&aInvite"
     GLOW: false
@@ -177,6 +187,7 @@ ITEMS:
   KICK:
     SLOT: 10
     MATERIAL: REDSTONE
+    DATA: 0
     AMOUNT: 1
     NAME: "&aKick"
     GLOW: false
@@ -194,6 +205,7 @@ ITEMS:
   RENAME_GANG:
     SLOT: 11
     MATERIAL: NAME_TAG
+    DATA: 0
     AMOUNT: 1
     NAME: "&aRename"
     GLOW: false
@@ -210,7 +222,8 @@ ITEMS:
       - '&e&lClick &fto modify this permission.'
   SHOP:
     SLOT: 12
-    MATERIAL: SUNFLOWER
+    MATERIAL: DOUBLE_PLANT
+    DATA: 0
     AMOUNT: 1
     NAME: "&aUse Shop"
     GLOW: false
@@ -227,7 +240,8 @@ ITEMS:
       - '&e&lClick &fto modify this permission.'
   INVSEE:
     SLOT: 13
-    MATERIAL: PLAYER_HEAD
+    MATERIAL: SKULL_ITEM
+    DATA: 3
     AMOUNT: 1
     NAME: "&aInvsee"
     GLOW: false
@@ -246,6 +260,7 @@ MISC_ITEMS:
   1:
     SLOT: 31
     MATERIAL: ARROW
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&cExit'

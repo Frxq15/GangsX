@@ -7,7 +7,8 @@ ITEMS:
       - 1
       - 2
       - 3
-    MATERIAL: "GREEN_STAINED_GLASS_PANE"
+    MATERIAL: "STAINED_GLASS_PANE"
+    DATA: 5
     AMOUNT: 1
     NAME: "&aConfirm Disband"
     GLOW: false
@@ -24,7 +25,8 @@ ITEMS:
       - 6
       - 7
       - 8
-    MATERIAL: "RED_STAINED_GLASS_PANE"
+    MATERIAL: "STAINED_GLASS_PANE"
+    DATA: 14
     AMOUNT: 1
     NAME: "&cCancel Disband"
     GLOW: false
@@ -39,6 +41,7 @@ MISC_ITEMS:
   1:
     SLOT: 4
     MATERIAL: "CHEST"
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&e&lDisbanding &b%gang%'

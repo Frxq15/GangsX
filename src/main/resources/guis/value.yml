@@ -4,6 +4,7 @@ ITEMS:
   1:
     SLOT: 11
     MATERIAL: IRON_INGOT
+    DATA: 0
     AMOUNT: 1
     NAME: "&fIron Shell"
     GLOW: false
@@ -20,6 +21,7 @@ ITEMS:
   2:
     SLOT: 12
     MATERIAL: GOLD_INGOT
+    DATA: 0
     AMOUNT: 1
     NAME: "&eGolden Fragment"
     GLOW: false
@@ -36,6 +38,7 @@ ITEMS:
   3:
     SLOT: 13
     MATERIAL: DIAMOND
+    DATA: 0
     AMOUNT: 1
     NAME: "&bDiamond Gemstone"
     GLOW: false
@@ -52,6 +55,7 @@ ITEMS:
   4:
     SLOT: 14
     MATERIAL: EMERALD
+    DATA: 0
     AMOUNT: 1
     NAME: "&aEmerald"
     GLOW: false
@@ -67,7 +71,8 @@ ITEMS:
       - '&e&lClick &fto purchase this item.'
   5:
     SLOT: 15
-    MATERIAL: MEDIUM_AMETHYST_BUD
+    MATERIAL: OBSIDIAN
+    DATA: 0
     AMOUNT: 1
     NAME: "&dSapphire Element"
     GLOW: false
@@ -84,6 +89,7 @@ ITEMS:
   6:
     SLOT: 21
     MATERIAL: GOLD_BLOCK
+    DATA: 0
     AMOUNT: 1
     NAME: "&eGold Slice"
     GLOW: false
@@ -100,6 +106,7 @@ ITEMS:
   7:
     SLOT: 22
     MATERIAL: DIAMOND_BLOCK
+    DATA: 0
     AMOUNT: 1
     NAME: "&bDiamond Complex"
     GLOW: false
@@ -116,6 +123,7 @@ ITEMS:
   8:
     SLOT: 23
     MATERIAL: EMERALD_BLOCK
+    DATA: 0
     AMOUNT: 1
     NAME: "&aEmerald Cube"
     GLOW: false
@@ -132,7 +140,8 @@ ITEMS:
 VALUE_MISC_ITEMS:
   1:
     SLOT: 4
-    MATERIAL: "WRITABLE_BOOK"
+    MATERIAL: "BOOK_AND_QUILL"
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&e&lGang Value'

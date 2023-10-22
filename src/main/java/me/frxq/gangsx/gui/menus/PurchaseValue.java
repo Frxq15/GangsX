@@ -104,7 +104,8 @@ public class PurchaseValue extends GUITemplate {
 
         String material = value.getString("ITEMS." + item + ".MATERIAL");
         Integer amount = value.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = value.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = value.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -130,7 +131,8 @@ public class PurchaseValue extends GUITemplate {
 
         String material = value.getString("VALUE_MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = value.getInt("VALUE_MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = value.getInt("VALUE_MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = value.getString("VALUE_MISC_ITEMS." + item + ".NAME");
         String fvalue = String.format("%,d", gang.getValue());
         final ItemMeta meta = i.getItemMeta();

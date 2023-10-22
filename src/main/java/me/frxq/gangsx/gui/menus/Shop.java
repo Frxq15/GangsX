@@ -135,7 +135,8 @@ public class Shop extends GUITemplate {
 
         String material = shop.getString("ITEMS." + item + ".MATERIAL");
         Integer amount = shop.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = shop.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = shop.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -160,7 +161,8 @@ public class Shop extends GUITemplate {
 
         String material = shop.getString("SHOP_MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = shop.getInt("SHOP_MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = shop.getInt("SHOP_MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = shop.getString("SHOP_MISC_ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();

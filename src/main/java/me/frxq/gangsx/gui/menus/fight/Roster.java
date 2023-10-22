@@ -81,7 +81,8 @@ public class Roster extends GUITemplate {
 
         String material = roster.getString("ITEMS.NO_PLAYER_SELECTED.MATERIAL");
         Integer amount = roster.getInt("ITEMS.NO_PLAYER_SELECTED.AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = roster.getInt("ITEMS.NO_PLAYER_SELECTED.DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), 1, data.shortValue());
         String name = roster.getString("ITEMS.NO_PLAYER_SELECTED.NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -133,7 +134,8 @@ public class Roster extends GUITemplate {
         return i;
     }
     public ItemStack createCloseItem() {
-        ItemStack i = new ItemStack(Material.getMaterial(roster.getString("ITEMS.CLOSE_MENU.MATERIAL")), 1);
+        Integer data = roster.getInt("ITEMS.CLOSE_MENU.DATA");
+        ItemStack i = new ItemStack(Material.getMaterial(roster.getString("ITEMS.CLOSE_MENU.MATERIAL")), 1, data.shortValue());
         String name = roster.getString("ITEMS.CLOSE_MENU.NAME");
         ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(plugin.getColorFormatter().format(name));
@@ -146,7 +148,8 @@ public class Roster extends GUITemplate {
 
         String material = roster.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = roster.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = roster.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), 1, data.shortValue());
         String name = roster.getString("MISC_ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();

@@ -9,8 +9,8 @@ ITEMS:
       - '&fThis player is not currently part of your gang roster'
       - ''
       - '&6Stats:'
-      - '&e| &fKills: &e%kills%'
-      - '&e| &fDeaths: &e%deaths%'
+      - '&e┃ &fKills: &e%kills%'
+      - '&e┃ &fDeaths: &e%deaths%'
       - ''
       - '&e&lClick &fto add this player to the roster'
   NONE_AVAILABLE:
@@ -19,10 +19,12 @@ ITEMS:
     SLOT: 13
     NAME: '&cNobody''s Home :('
     MATERIAL: 'BARRIER'
+    DATA: 0
     LORE:
       - '&fYou have no members available.'
   CLOSE_MENU:
     SLOT: 31
     NAME: '&cReturn'
     MATERIAL: 'ARROW'
+    DATA: 0
 MISC_ITEMS: []

@@ -74,7 +74,8 @@ public class PermissionsSetter extends GUITemplate {
 
         String material = permissions.getString("ITEMS." + item + ".MATERIAL");
         Integer amount = permissions.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = permissions.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = permissions.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -98,7 +99,7 @@ public class PermissionsSetter extends GUITemplate {
         Integer amount = permissions.getInt("ITEMS." + item + ".AMOUNT");
         ItemStack i = new ItemStack(Material.SKULL_ITEM, amount, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
-        meta.setOwner("MHF_Question");
+        meta.setOwner(permissions.getString("ITEMS." + item + ".SKULL-OWNER"));
         String name = permissions.getString("ITEMS." + item + ".NAME");
 
         for (String lines : permissions.getStringList("ITEMS." + item + ".LORE")) {
@@ -126,7 +127,8 @@ public class PermissionsSetter extends GUITemplate {
 
         String material = permissions.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = permissions.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = permissions.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = permissions.getString("MISC_ITEMS." + item + ".NAME");
         final ItemMeta meta = i.getItemMeta();
         for (String lines : permissions.getStringList("MISC_ITEMS." + item + ".LORE")) {

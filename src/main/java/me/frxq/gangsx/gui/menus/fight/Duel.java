@@ -171,13 +171,11 @@ public class Duel extends GUITemplate {
         List<String> lore = new ArrayList<String>();
 
         String material = duel.getString("ITEMS." + item + ".MATERIAL");
-        final ItemStack i = new ItemStack(Material.valueOf(material), 1);
+        Integer data = duel.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), 1, data.shortValue());
         String name = duel.getString("ITEMS." + item + ".NAME").replace("%kit%", kit).replace("%arena%", arena);
 
         final ItemMeta meta = i.getItemMeta();
-        Byte data = (Byte) duel.get("MISC_ITEMS." + item + ".DATA");
-        MaterialData materialData = new MaterialData(Integer.parseInt(material), data);
-        i.setData(materialData);
         for (String lines : duel.getStringList("ITEMS." + item + ".LORE")) {
             lines= lines.replace("%kit%", kit).replace("%arena%", arena);
             lore.add(plugin.getColorFormatter().format(lines));
@@ -196,12 +194,10 @@ public class Duel extends GUITemplate {
         List<String> lore = new ArrayList<String>();
 
         String material = duel.getString("ITEMS." + item + ".MATERIAL");
-        final ItemStack i = new ItemStack(Material.valueOf(material), 1);
+        Integer data = duel.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), 1, data.shortValue());
         String name = duel.getString("ITEMS." + item + ".NAME").replace("%challenger%", challenger.getName())
                 .replace("%opponent%", opponent.getName());
-        Byte data = (Byte) duel.get("ITEMS." + item + ".DATA");
-        MaterialData materialData = new MaterialData(Integer.parseInt(material), data);
-        i.setData(materialData);
         final ItemMeta meta = i.getItemMeta();
 
         for (String lines : duel.getStringList("ITEMS." + item + ".LORE")) {
@@ -227,11 +223,9 @@ public class Duel extends GUITemplate {
 
         String material = duel.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = duel.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = duel.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = duel.getString("MISC_ITEMS." + item + ".NAME");
-        Byte data = (Byte) duel.get("MISC_ITEMS." + item + ".DATA");
-        MaterialData materialData = new MaterialData(Integer.parseInt(material), data);
-        i.setData(materialData);
 
         final ItemMeta meta = i.getItemMeta();
         for (String lines : duel.getStringList("MISC_ITEMS." + item + ".LORE")) {
@@ -252,11 +246,9 @@ public class Duel extends GUITemplate {
 
         String material = duel.getString("ANIMATED_ITEMS.ITEM.MATERIAL");
         Integer amount = duel.getInt("ANIMATED_ITEMS.ITEM.AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = duel.getInt("ANIMATED_ITEMS.ITEM.DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = duel.getString("ANIMATED_ITEMS.ITEM.NAME");
-        Byte data = (Byte) duel.get("ANIMATED_ITEMS.ITEM.DATA");
-        MaterialData materialData = new MaterialData(Integer.parseInt(material), data);
-        i.setData(materialData);
 
         final ItemMeta meta = i.getItemMeta();
         for (String lines : duel.getStringList("ANIMATED_ITEMS.ITEM.LORE")) {
@@ -273,10 +265,8 @@ public class Duel extends GUITemplate {
 
         String material = duel.getString("ANIMATED_ITEMS.ANIMATED_ITEM.MATERIAL");
         Integer amount = duel.getInt("ANIMATED_ITEMS.ANIMATED_ITEM.AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
-        Byte data = (Byte) duel.get("ANIMATED_ITEMS.ANIMATED_ITEM.DATA");
-        MaterialData materialData = new MaterialData(Integer.parseInt(material), data);
-        i.setData(materialData);
+        Integer data = duel.getInt("ANIMATED_ITEMS.ANIMATED_ITEM.DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = duel.getString("ANIMATED_ITEMS.ANIMATED_ITEM.NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -319,8 +309,19 @@ public class Duel extends GUITemplate {
         challenger.getFightRoster().forEach(roster -> {
             Player u = Bukkit.getPlayer(roster.getID());
             for(String lines : plugin.getLocaleManager().getLocaleFile().getStringList("GANG_FIGHT_REQUEST_SENT")) {
-                lines= lines.replace("%challenger%", challenger.getName())
+                lines = lines.replace("%challenger%", challenger.getName())
                         .replace("%opponent%", opponent.getName())
+                        .replace("%type%", challenger.getFightRoster().size()+"v"+challenger.getFightRoster().size())
+                        .replace("%kit%", kit)
+                        .replace("%arena%", arena).replace("%player%", player.getName()).replace("%gang%", challenger.getName());
+                plugin.getLocaleManager().sendRawMessage(u, lines);
+            }
+        });
+        opponent.getFightRoster().forEach(roster -> {
+            Player u = Bukkit.getPlayer(roster.getID());
+            for(String lines : plugin.getLocaleManager().getLocaleFile().getStringList("GANG_FIGHT_REQUEST_RECEIVED")) {
+                lines = lines.replace("%opponent%", challenger.getName())
+                        .replace("%gang%", opponent.getName())
                         .replace("%type%", challenger.getFightRoster().size()+"v"+challenger.getFightRoster().size())
                         .replace("%kit%", kit)
                         .replace("%arena%", arena).replace("%player%", player.getName()).replace("%gang%", challenger.getName());

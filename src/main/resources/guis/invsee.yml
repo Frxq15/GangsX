@@ -3,6 +3,7 @@ ITEMS: #default items if armor is not being worn, items will default to the armo
   HELMET:
     SLOT: 1
     MATERIAL: BARRIER
+    DATA: 0
     GLOW: false
     NAME: '&cNot wearing a helmet'
     LORE:
@@ -10,6 +11,7 @@ ITEMS: #default items if armor is not being worn, items will default to the armo
   CHESTPLATE:
     SLOT: 3
     MATERIAL: BARRIER
+    DATA: 0
     GLOW: false
     NAME: '&cNot wearing a chestplate'
     LORE:
@@ -17,6 +19,7 @@ ITEMS: #default items if armor is not being worn, items will default to the armo
   LEGGINGS:
     SLOT: 5
     MATERIAL: BARRIER
+    DATA: 0
     GLOW: false
     NAME: '&cNot wearing leggings'
     LORE:
@@ -24,6 +27,7 @@ ITEMS: #default items if armor is not being worn, items will default to the armo
   BOOTS:
     SLOT: 7
     MATERIAL: BARRIER
+    DATA: 0
     GLOW: false
     NAME: '&cNot wearing boots'
     LORE:
@@ -31,63 +35,72 @@ ITEMS: #default items if armor is not being worn, items will default to the armo
 MISC_ITEMS:
   1:
     SLOT: 9
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   2:
     SLOT: 10
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   3:
     SLOT: 11
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   4:
     SLOT: 12
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   5:
     SLOT: 13
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   6:
     SLOT: 14
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   7:
     SLOT: 15
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   8:
     SLOT: 16
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   9:
     SLOT: 17
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     GLOW: false
     NAME: ''

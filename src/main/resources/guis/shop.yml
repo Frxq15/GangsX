@@ -3,7 +3,8 @@ TITLE: "&8Gang Shop"
 ITEMS:
   1:
     SLOT: 0
-    MATERIAL: GRASS_BLOCK
+    MATERIAL: GRASS
+    DATA: 0
     AMOUNT: 1
     NAME: "&ctest item"
     GLOW: true
@@ -16,6 +17,7 @@ ITEMS:
   2:
     SLOT: 1
     MATERIAL: EMERALD
+    DATA: 0
     AMOUNT: 1
     NAME: "&aEmerald"
     GLOW: true
@@ -28,14 +30,16 @@ ITEMS:
 SHOP_MISC_ITEMS:
   1:
     SLOT: 39
-    MATERIAL: "WHITE_STAINED_GLASS_PANE"
+    MATERIAL: "STAINED_GLASS_PANE"
+    DATA: 1
     AMOUNT: 1
     GLOW: false
     NAME: ''
     LORE: []
   2:
     SLOT: 41
-    MATERIAL: "WHITE_STAINED_GLASS_PANE"
+    MATERIAL: "STAINED_GLASS_PANE"
+    DATA: 1
     AMOUNT: 1
     GLOW: false
     NAME: ''

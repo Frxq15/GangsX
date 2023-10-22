@@ -68,7 +68,8 @@ public class Level extends GUITemplate {
 
         String material = level.getString("ITEMS." + item + ".MATERIAL");
         Integer amount = level.getInt("ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = level.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = level.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -92,7 +93,7 @@ public class Level extends GUITemplate {
         Integer amount = level.getInt("ITEMS." + item + ".AMOUNT");
         ItemStack i = new ItemStack(Material.SKULL_ITEM, amount, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
-        meta.setOwner("MHF_Question");
+        meta.setOwner(level.getString("ITEMS." + item + ".SKULL-OWNER"));
         String name = level.getString("ITEMS." + item + ".NAME");
 
         for (String lines : level.getStringList("ITEMS." + item + ".LORE")) {
@@ -127,7 +128,8 @@ public class Level extends GUITemplate {
 
         String material = level.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = level.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = level.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = level.getString("MISC_ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();

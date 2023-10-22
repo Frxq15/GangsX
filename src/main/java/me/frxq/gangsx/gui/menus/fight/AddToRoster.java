@@ -102,7 +102,8 @@ public class AddToRoster extends GUITemplate {
         return i;
     }
     public ItemStack createCloseItem() {
-        ItemStack i = new ItemStack(Material.getMaterial(roster.getString("ITEMS.CLOSE_MENU.MATERIAL")), 1);
+        Integer data = roster.getInt("ITEMS.CLOSE_MENU.DATA");
+        ItemStack i = new ItemStack(Material.getMaterial(roster.getString("ITEMS.CLOSE_MENU.MATERIAL")), 1, data.shortValue());
         String name = roster.getString("ITEMS.CLOSE_MENU.NAME");
         ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(plugin.getColorFormatter().format(name));
@@ -111,7 +112,8 @@ public class AddToRoster extends GUITemplate {
     }
     public ItemStack createEmptyItem() {
         List<String> lore = new ArrayList<String>();
-        ItemStack i = new ItemStack(Material.getMaterial(roster.getString("ITEMS.NONE_AVAILABLE.MATERIAL")), 1);
+        Integer data = roster.getInt("ITEMS.NONE_AVAILABLE.DATA");
+        ItemStack i = new ItemStack(Material.getMaterial(roster.getString("ITEMS.NONE_AVAILABLE.MATERIAL")), 1, data.shortValue());
         String name = roster.getString("ITEMS.NONE_AVAILABLE.NAME");
         ItemMeta meta = i.getItemMeta();
         for (String lines : roster.getStringList("ITEMS.NONE_AVAILABLE.LORE")) {
@@ -132,7 +134,8 @@ public class AddToRoster extends GUITemplate {
 
         String material = roster.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = roster.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = roster.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = roster.getString("MISC_ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();

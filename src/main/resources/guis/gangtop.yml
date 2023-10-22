@@ -36,7 +36,7 @@ VALUE_ITEMS:
       - '&e&lClick &fto view their gang profile'
   GANG_NOT_FOUND:
     NAME: '&e&lGang &bN/A'
-    SKULL-TEXTURE: 'https://textures.minecraft.net/texture/b6e522d918252149e6ede2edf3fe0f2c2c58fee6ac11cb88c617207218ae4595'
+    SKULL-OWNER: 'MHF_QUESTION'
     LORE:
       - ''
       - '&e&l • &fPlace: &b#%place%'
@@ -54,10 +54,12 @@ VALUE_ITEMS:
     SLOT: 41
     NAME: '&cExit'
     MATERIAL: 'ARROW'
+    DATA: 0
 VALUE_MISC_ITEMS:
   1:
     SLOT: 39
     MATERIAL: "BOOK_AND_QUILL"
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&eGang Top Rewards'

@@ -12,13 +12,13 @@ ITEMS:
       - '&fThis gang is the challenger.'
       - ''
       - '&2Stats:'
-      - '&a| &fFights Won: &a0'
-      - '&a| &fFights Lost: &a0'
-      - '&a| &fWin Percentage: &a0%'
+      - '&a┃ &fFights Won: &a0'
+      - '&a┃ &fFights Lost: &a0'
+      - '&a┃ &fWin Percentage: &a0%'
       - ''
-      - '&a| &fKills: &a%kills%'
-      - '&a| &fDeaths: &a%deaths%'
-      - '&a| &fKDR: &a%kdr%'
+      - '&a┃ &fKills: &a%kills%'
+      - '&a┃ &fDeaths: &a%deaths%'
+      - '&a┃ &fKDR: &a%kdr%'
   OPPONENT:
     SLOT: 7
     GLOW: false
@@ -27,13 +27,13 @@ ITEMS:
       - '&fThis gang is the opponent.'
       - ''
       - '&4Stats:'
-      - '&c| &fFights Won: &c0'
-      - '&c| &fFights Lost: &c0'
-      - '&c| &fWin Percentage: &c0%'
+      - '&c┃ &fFights Won: &c0'
+      - '&c┃ &fFights Lost: &c0'
+      - '&c┃ &fWin Percentage: &c0%'
       - ''
-      - '&c| &fKills: &c%kills%'
-      - '&c| &fDeaths: &c%deaths%'
-      - '&c| &fKDR: &c%kdr%'
+      - '&c┃ &fKills: &c%kills%'
+      - '&c┃ &fDeaths: &c%deaths%'
+      - '&c┃ &fKDR: &c%kdr%'
   KIT:
     SLOT: 3
     GLOW: false
@@ -43,21 +43,21 @@ ITEMS:
     LORE:
       - '&fThis is the selected kit.'
       - ''
-      - '&b| &fInventory items will be returned to'
-      - '&b| &fplayers after the fight has ended.'
+      - '&b┃ &fInventory items will be returned to'
+      - '&b┃ &fplayers after the fight has ended.'
       - ''
       - '&e&lClick &fto change the selected kit'
   ARENA:
     SLOT: 5
     GLOW: false
-    MATERIAL: 'MAP'
+    MATERIAL: 'EMPTY_MAP'
     DATA: 0
     NAME: '&b&lArena &e%arena%'
     LORE:
       - '&fThis is the selected arena.'
       - ''
-      - '&b| &fCommands are disabled inside of the'
-      - '&b| &farena to prevent exploit methods.'
+      - '&b┃ &fCommands are disabled inside of the'
+      - '&b┃ &farena to prevent exploit methods.'
       - ''
       - '&e&lClick &fto change the selected arena'
   INFO:
@@ -69,13 +69,13 @@ ITEMS:
     LORE:
       - '&fYou are viewing all information for this fight.'
       - ''
-      - '&a| &fChallenger: &a%challenger%'
-      - '&c| &fOpponent: &c%opponent%'
+      - '&a┃ &fChallenger: &a%challenger%'
+      - '&c┃ &fOpponent: &c%opponent%'
       - ''
       - '&6Fight Information:'
-      - '&e| &fType: &e%type%' #referring to roster size
-      - '&e| &fArena: &e%arena%'
-      - '&e| &fKit: &e%kit%'
+      - '&e┃ &fType: &e%type%' #referring to roster size
+      - '&e┃ &fArena: &e%arena%'
+      - '&e┃ &fKit: &e%kit%'
       - ''
       - '&e&lClose &fthe menu to cancel this fight request'
   ACCEPT:
@@ -90,7 +90,7 @@ ITEMS:
     LORE:
       - '&fThis will send your fight request'
       - ''
-      - '&a| &fPlayers must be at spawn to accept'
+      - '&a┃ &fPlayers must be at spawn to accept'
       - ''
       - '&e&lClick &fto send the fight request.'
   CANCEL:
@@ -105,7 +105,7 @@ ITEMS:
     LORE:
       - '&fThis will cancel your fight request'
       - ''
-      - '&c| &fNothing will be lost from this action'
+      - '&c┃ &fNothing will be lost from this action'
       - ''
       - '&e&lClick &fto cancel your fight request.'
   CHALLENGER_ROSTER:
@@ -123,12 +123,12 @@ ITEMS:
     LORE:
       - '&fThis player is part of the challenger roster.'
       - ''
-      - '&a| &fGang: &a%gang%'
+      - '&a┃ &fGang: &a%gang%'
       - ''
       - '&2Stats:'
-      - '&a| &fKills: &a%kills%'
-      - '&a| &fDeaths: &a%deaths%'
-      - '&a| &fKDR: &a%kdr%'
+      - '&a┃ &fKills: &a%kills%'
+      - '&a┃ &fDeaths: &a%deaths%'
+      - '&a┃ &fKDR: &a%kdr%'
   OPPONENT_ROSTER:
     SLOTS: #slots work in priority order for roster size
       - 23
@@ -144,17 +144,17 @@ ITEMS:
     LORE:
       - '&fThis player is part of the opponent roster.'
       - ''
-      - '&c| &fGang: &c%gang%'
+      - '&c┃ &fGang: &c%gang%'
       - ''
       - '&4Stats:'
-      - '&c| &fKills: &c%kills%'
-      - '&c| &fDeaths: &c%deaths%'
-      - '&c| &fKDR: &c%kdr%'
+      - '&c┃ &fKills: &c%kills%'
+      - '&c┃ &fDeaths: &c%deaths%'
+      - '&c┃ &fKDR: &c%kdr%'
 MISC_ITEMS:
   1:
     SLOT: 10
     MATERIAL: STAINED_GLASS_PANE
-    DATA: 0
+    DATA: 5
     AMOUNT: 1
     GLOW: false
     NAME: '&aChallenger Roster'
@@ -163,7 +163,7 @@ MISC_ITEMS:
   2:
     SLOT: 16
     MATERIAL: STAINED_GLASS_PANE
-    DATA: 0
+    DATA: 14
     AMOUNT: 1
     GLOW: false
     NAME: '&cOpponent Roster'

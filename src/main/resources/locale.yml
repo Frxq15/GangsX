@@ -184,10 +184,10 @@ GANG_FIGHT_REQUEST_SENT:
   - '&fSent By: &e%player%'
   - ''
   - '&6Fight Information:'
-  - '&e| &fOpponent: &e%opponent%'
-  - '&e| &fType: &e%type%' #referring to roster size
-  - '&e| &fArena: &e%arena%'
-  - '&e| &fKit: &e%kit%'
+  - '&e┃ &fOpponent: &e%opponent%'
+  - '&e┃ &fType: &e%type%' #referring to roster size
+  - '&e┃ &fArena: &e%arena%'
+  - '&e┃ &fKit: &e%kit%'
   - ''
 GANG_FIGHT_REQUEST_RECEIVED:
   - ''
@@ -195,9 +195,11 @@ GANG_FIGHT_REQUEST_RECEIVED:
   - '&fSent By: &e%player%'
   - ''
   - '&6Fight Information:'
-  - '&e| &fOpponent: &e%opponent%'
-  - '&e| &fType: &e%type%' #referring to roster size
-  - '&e| &fArena: &e%arena%'
-  - '&e| &fKit: &e%kit%'
+  - '&e┃ &fOpponent: &e%opponent%'
+  - '&e┃ &fType: &e%type%' #referring to roster size
+  - '&e┃ &fArena: &e%arena%'
+  - '&e┃ &fKit: &e%kit%'
+  - ''
+  - '&fType &e/gang accept %opponent% &fto accept.'
   - ''
 #click to accept line will be sent after

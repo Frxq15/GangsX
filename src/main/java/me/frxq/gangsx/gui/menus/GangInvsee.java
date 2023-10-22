@@ -77,7 +77,8 @@ public class GangInvsee extends GUITemplate {
         List<String> lore = new ArrayList<String>();
 
         String material = invsee.getString("ITEMS." + item + ".MATERIAL");
-        final ItemStack i = new ItemStack(Material.valueOf(material), 1);
+        Integer data = invsee.getInt("ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), 1, data.shortValue());
         String name = invsee.getString("ITEMS." + item + ".NAME");
 
         final ItemMeta meta = i.getItemMeta();
@@ -105,7 +106,8 @@ public class GangInvsee extends GUITemplate {
 
         String material = invsee.getString("MISC_ITEMS." + item + ".MATERIAL");
         Integer amount = invsee.getInt("MISC_ITEMS." + item + ".AMOUNT");
-        final ItemStack i = new ItemStack(Material.valueOf(material), amount);
+        Integer data = invsee.getInt("MISC_ITEMS." + item + ".DATA");
+        final ItemStack i = new ItemStack(Material.valueOf(material), amount, data.shortValue());
         String name = invsee.getString("MISC_ITEMS." + item + ".NAME");
         final ItemMeta meta = i.getItemMeta();
         for (String lines : invsee.getStringList("MISC_ITEMS." + item + ".LORE")) {
