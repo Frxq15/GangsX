@@ -19,13 +19,18 @@ public class Settings {
     public StorageType getStorageType() {
         StorageType storageType;
         switch (plugin.getConfig().getString("storage-method", "mariadb").toLowerCase(Locale.ENGLISH)) {
-            case "mysql" -> {
+            case "mysql":
                 storageType = StorageType.MYSQL;
                 setSqlDetails();
-            }
-            case "mariadb" -> storageType = StorageType.MARIADB;
-            case "mongodb" -> storageType = StorageType.MONGODB;
-            default -> storageType = null;
+                break;
+            case "mariadb":
+                storageType = StorageType.MARIADB;
+                break;
+            case "mongodb":
+                storageType = StorageType.MONGODB;
+                break;
+            default:
+                storageType = null;
         }
 
         return storageType;

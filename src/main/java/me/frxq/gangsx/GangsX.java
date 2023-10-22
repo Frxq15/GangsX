@@ -10,8 +10,6 @@ import me.frxq.gangsx.datafactory.player.sql.SQLGPlayerDataFactory;
 import me.frxq.gangsx.formatting.color.ColorFormatter;
 import me.frxq.gangsx.datafactory.gang.sql.SQLGangDataFactory;
 import me.frxq.gangsx.datafactory.sql.SQLHandler;
-import me.frxq.gangsx.formatting.color.colorformatter.ColorFormatter_1_16;
-import me.frxq.gangsx.formatting.color.colorformatter.ColorFormatter_LEGACY;
 import me.frxq.gangsx.gui.GUIListeners;
 import me.frxq.gangsx.leaderboard.LeaderboardManager;
 import me.frxq.gangsx.listener.DataFactoryListener;
@@ -103,8 +101,12 @@ public final class GangsX extends JavaPlugin {
 
 
         switch (settings.getStorageType()) {
-            case MYSQL -> sqlSetup();
-            case MONGODB -> getLogger().warning("MongoDB not supported yet.");
+            case MYSQL:
+                sqlSetup();
+                break;
+            case MONGODB:
+                getLogger().warning("MongoDB not supported yet.");
+                break;
         }
 
         Bukkit.getPluginManager().registerEvents(new DataFactoryListener(this), this);
@@ -115,12 +117,12 @@ public final class GangsX extends JavaPlugin {
 
         if (sVersionChecker.isServerAbove(ServerVersion.VERSION_1_16)) {
             log("Assigning to spigot version: "+sVersionChecker.getVersion());
-            colorFormatter = new ColorFormatter_1_16();
+            colorFormatter = new ColorFormatter();
         }
 
         else if (sVersionChecker.isServerAbove(ServerVersion.LEGACY)) {
             log("Assigning to spigot version: "+sVersionChecker.getVersion()+" (LEGACY BUILD)");
-            colorFormatter = new ColorFormatter_LEGACY();
+            colorFormatter = new ColorFormatter();
         }
 
         else {

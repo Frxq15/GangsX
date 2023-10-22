@@ -2,6 +2,7 @@ package me.frxq.gangsx.command;
 
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.commands.*;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
@@ -9,7 +10,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
-public record CommandHandler(GangsX plugin) {
+public class CommandHandler {
+    private final GangsX plugin;
+    public CommandHandler(GangsX plugin) {
+        this.plugin = plugin;
+    }
 
     public void load() {
         registerCommands();

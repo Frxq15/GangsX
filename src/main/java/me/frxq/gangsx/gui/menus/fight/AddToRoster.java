@@ -82,7 +82,7 @@ public class AddToRoster extends GUITemplate {
         //normal item creation
         List<String> lore = new ArrayList<String>();
 
-        ItemStack i = new ItemStack(Material.PLAYER_HEAD, 1, (short) SkullType.PLAYER.ordinal());
+        ItemStack i = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
         meta.setOwner(gPlayer.getName());
         String name = roster.getString("ITEMS.MEMBERS.NAME")

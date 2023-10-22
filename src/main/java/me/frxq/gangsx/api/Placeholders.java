@@ -45,7 +45,7 @@ public class Placeholders extends PlaceholderExpansion {
            String pos = identifier.replace("top_name_", "");
             if(Integer.parseInt(pos) < plugin.getConfig().getInt("gang.leaderboard-data-pull-amount")){
                 int p = Integer.parseInt(pos);
-                return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p));
+                return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p).getName());
             } else return "None";
         }
         if(identifier.startsWith("top_value")){
@@ -61,9 +61,11 @@ public class Placeholders extends PlaceholderExpansion {
 
             // GANG PLACEHOLDERS
 
-            case "gang", "gangname":
+                case "gang":
+                case "gangname":
                 return gang.getName();
-            case "leader", "owner":
+                case "leader":
+                case "owner":
                 return Bukkit.getOfflinePlayer(gang.getLeader()).getName();
             case "level":
                 return String.valueOf(gang.getLevel());

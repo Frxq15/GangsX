@@ -39,27 +39,29 @@ public class Shop extends GUITemplate {
     public Integer getBalance() {
         String selection = plugin.getConfig().getString("shop.currency");
         switch (selection.toLowerCase()) {
-            case "coins":
-                return coins;
-            case "bankBalance", "balance":
-                return balance.intValue();
-            default:
-                plugin.log("An error occurred whilst setting currency type for gang shop, coins has been selected by default, please check your config.yml");
-                return coins;
+                case "coins":
+                    return coins;
+                case "bankBalance":
+                case "balance":
+                    return balance.intValue();
+                default:
+                    plugin.log("An error occurred whilst setting currency type for gang shop, coins has been selected by default, please check your config.yml");
+                    return coins;
         }
     }
 
     public void takeBalance(String item) {
         String selection = getItemCurrency(item);
         switch (selection.toLowerCase()) {
-            case "coins":
-                gang.removeCoins(getItemCost(item));
-                return;
-            case "bankBalance", "balance":
-                gang.removeBankMoney(getItemCost(item));
-                return;
-            default:
-                gang.removeCoins(getItemCost(item));
+                case "coins":
+                    gang.removeCoins(getItemCost(item));
+                    return;
+                case "bankBalance":
+                case "balance":
+                    gang.removeBankMoney(getItemCost(item));
+                    return;
+                default:
+                    gang.removeCoins(getItemCost(item));
         }
     }
     public String getItemCurrency(String item) {

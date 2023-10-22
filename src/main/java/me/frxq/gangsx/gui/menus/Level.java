@@ -14,8 +14,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -92,19 +90,9 @@ public class Level extends GUITemplate {
         List<String> lore = new ArrayList<String>();
 
         Integer amount = level.getInt("ITEMS." + item + ".AMOUNT");
-        ItemStack i = new ItemStack(Material.PLAYER_HEAD, amount, (short) SkullType.PLAYER.ordinal());
+        ItemStack i = new ItemStack(Material.SKULL_ITEM, amount, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
-        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
-        PlayerTextures textures = profile.getTextures();
-        URL l;
-
-        try {
-            l = new URL(level.getString("ITEMS."+item+".TEXTURE"));
-        } catch (MalformedURLException e) {
-            l = null;
-        }
-        textures.setSkin(l);
-        meta.setOwnerProfile(profile);
+        meta.setOwner("MHF_Question");
         String name = level.getString("ITEMS." + item + ".NAME");
 
         for (String lines : level.getStringList("ITEMS." + item + ".LORE")) {

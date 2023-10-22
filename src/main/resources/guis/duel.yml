@@ -38,6 +38,7 @@ ITEMS:
     SLOT: 3
     GLOW: false
     MATERIAL: 'DIAMOND_CHESTPLATE'
+    DATA: 0
     NAME: '&b&lKit &e%kit%'
     LORE:
       - '&fThis is the selected kit.'
@@ -50,6 +51,7 @@ ITEMS:
     SLOT: 5
     GLOW: false
     MATERIAL: 'MAP'
+    DATA: 0
     NAME: '&b&lArena &e%arena%'
     LORE:
       - '&fThis is the selected arena.'
@@ -62,6 +64,7 @@ ITEMS:
     SLOT: 4
     GLOW: false
     MATERIAL: 'NETHER_STAR'
+    DATA: 0
     NAME: '&eFight Information'
     LORE:
       - '&fYou are viewing all information for this fight.'
@@ -82,6 +85,7 @@ ITEMS:
       - 44
     GLOW: false
     MATERIAL: 'EMERALD_BLOCK'
+    DATA: 0
     NAME: '&aConfirm Request'
     LORE:
       - '&fThis will send your fight request'
@@ -96,6 +100,7 @@ ITEMS:
       - 38
     GLOW: false
     MATERIAL: 'REDSTONE_BLOCK'
+    DATA: 0
     NAME: '&cCancel Request'
     LORE:
       - '&fThis will cancel your fight request'
@@ -148,7 +153,8 @@ ITEMS:
 MISC_ITEMS:
   1:
     SLOT: 10
-    MATERIAL: GREEN_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&aChallenger Roster'
@@ -156,7 +162,8 @@ MISC_ITEMS:
       - '&a&l↓ &fShowing the challenger roster &a&l↓'
   2:
     SLOT: 16
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 0
     AMOUNT: 1
     GLOW: false
     NAME: '&cOpponent Roster'
@@ -177,12 +184,14 @@ ANIMATED_ITEMS: #if animation is enabled, these items will change to the animate
       - 22
       - 31
       - 40
-    MATERIAL: BLACK_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 15
     AMOUNT: 1
     NAME: ''
     LORE: []
   ANIMATED_ITEM:
-    MATERIAL: GREEN_STAINED_GLASS_PANE
+    MATERIAL: STAINED_GLASS_PANE
+    DATA: 5
     AMOUNT: 1
     NAME: '&aSending Request..'
     LORE: []

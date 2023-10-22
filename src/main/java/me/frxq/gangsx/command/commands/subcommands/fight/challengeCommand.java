@@ -28,10 +28,11 @@ public class challengeCommand extends SubCommand {
 
     @Override
     public @NotNull void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!(sender instanceof Player p)) {
+        if(!(sender instanceof Player)) {
             plugin.log("This command cannot be executed from console.");
             return;
         }
+        Player p = (Player)sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         if(!gPlayer.hasGang()) {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_NOT_IN_A_GANG");

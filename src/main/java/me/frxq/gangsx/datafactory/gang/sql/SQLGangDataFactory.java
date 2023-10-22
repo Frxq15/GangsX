@@ -181,20 +181,20 @@ public class SQLGangDataFactory extends GangDataFactory {
 
             if (rs.next()) {
                 HashMap<Permission, Role> permissions = new HashMap<>();
-                permissions.put(Permission.BANK_DEPOSIT, Role.valueOf(rs.getString("BANK_DEPOSIT")));
-                permissions.put(Permission.BANK_WITHDRAW, Role.valueOf(rs.getString("BANK_WITHDRAW")));
-                permissions.put(Permission.CHANGE_DESCRIPTION, Role.valueOf(rs.getString("CHANGE_DESCRIPTION")));
-                permissions.put(Permission.MANAGE_RELATIONS, Role.valueOf(rs.getString("MANAGE_RELATIONS")));
-                permissions.put(Permission.PURCHASE_VALUE, Role.valueOf(rs.getString("PURCHASE_VALUE")));
-                permissions.put(Permission.PURCHASE_UPGRADES, Role.valueOf(rs.getString("PURCHASE_UPGRADES")));
-                permissions.put(Permission.PROMOTE, Role.valueOf(rs.getString("PROMOTE")));
-                permissions.put(Permission.DEMOTE, Role.valueOf(rs.getString("DEMOTE")));
-                permissions.put(Permission.MANAGE_FRIENDLY_FIRE, Role.valueOf(rs.getString("MANAGE_FRIENDLY_FIRE")));
-                permissions.put(Permission.KICK, Role.valueOf(rs.getString("KICK")));
-                permissions.put(Permission.RENAME_GANG, Role.valueOf(rs.getString("RENAME_GANG")));
-                permissions.put(Permission.SHOP, Role.valueOf(rs.getString("SHOP")));
-                permissions.put(Permission.INVSEE, Role.valueOf(rs.getString("INVSEE")));
-                permissions.put(Permission.INVITE, Role.valueOf(rs.getString("INVITE")));
+                permissions.put(Permission.BANK_DEPOSIT, Role.valueOf(rs.getString("BANK_DEPOSIT").toUpperCase()));
+                permissions.put(Permission.BANK_WITHDRAW, Role.valueOf(rs.getString("BANK_WITHDRAW").toUpperCase()));
+                permissions.put(Permission.CHANGE_DESCRIPTION, Role.valueOf(rs.getString("CHANGE_DESCRIPTION").toUpperCase()));
+                permissions.put(Permission.MANAGE_RELATIONS, Role.valueOf(rs.getString("MANAGE_RELATIONS").toUpperCase()));
+                permissions.put(Permission.PURCHASE_VALUE, Role.valueOf(rs.getString("PURCHASE_VALUE").toUpperCase()));
+                permissions.put(Permission.PURCHASE_UPGRADES, Role.valueOf(rs.getString("PURCHASE_UPGRADES").toUpperCase()));
+                permissions.put(Permission.PROMOTE, Role.valueOf(rs.getString("PROMOTE").toUpperCase()));
+                permissions.put(Permission.DEMOTE, Role.valueOf(rs.getString("DEMOTE").toUpperCase()));
+                permissions.put(Permission.MANAGE_FRIENDLY_FIRE, Role.valueOf(rs.getString("MANAGE_FRIENDLY_FIRE").toUpperCase()));
+                permissions.put(Permission.KICK, Role.valueOf(rs.getString("KICK").toUpperCase()));
+                permissions.put(Permission.RENAME_GANG, Role.valueOf(rs.getString("RENAME_GANG").toUpperCase()));
+                permissions.put(Permission.SHOP, Role.valueOf(rs.getString("SHOP").toUpperCase()));
+                permissions.put(Permission.INVSEE, Role.valueOf(rs.getString("INVSEE").toUpperCase()));
+                permissions.put(Permission.INVITE, Role.valueOf(rs.getString("INVITE").toUpperCase()));
 
 
                 perms = permissions;

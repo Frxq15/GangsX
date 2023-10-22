@@ -37,6 +37,9 @@ public enum Role {
         }
         return false;
     }
+    public Role getByName(String name) {
+        return Role.valueOf(name.toUpperCase());
+    }
 
     public int getPriority() {
         return this.ordinal();

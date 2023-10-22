@@ -13,8 +13,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -65,7 +63,7 @@ public class Value extends GUITemplate {
         //normal item creation
         List<String> lore = new ArrayList<String>();
 
-        ItemStack i = new ItemStack(Material.PLAYER_HEAD, 1, (short) SkullType.PLAYER.ordinal());
+        ItemStack i = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
         meta.setOwner(Bukkit.getOfflinePlayer(gang.getLeader()).getName());
         String name = gangtop.getString("VALUE_ITEMS.TOP_FORMAT.NAME")
@@ -95,19 +93,9 @@ public class Value extends GUITemplate {
         //normal item creation
         List<String> lore = new ArrayList<String>();
 
-        ItemStack i = new ItemStack(Material.PLAYER_HEAD, 1, (short) SkullType.PLAYER.ordinal());
+        ItemStack i = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
         SkullMeta meta = (SkullMeta) i.getItemMeta();
-        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
-        PlayerTextures textures = profile.getTextures();
-        URL l;
-
-        try {
-            l = new URL(gangtop.getString("VALUE_ITEMS.GANG_NOT_FOUND.SKULL-TEXTURE"));
-        } catch (MalformedURLException e) {
-            l = null;
-        }
-        textures.setSkin(l);
-        meta.setOwnerProfile(profile);
+        meta.setOwner("MHF_Question");
         String name = gangtop.getString("VALUE_ITEMS.GANG_NOT_FOUND.NAME")
                 .replace("%gang%", "None").replace("%place%", position+"");
 

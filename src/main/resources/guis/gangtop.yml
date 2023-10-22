@@ -57,7 +57,7 @@ VALUE_ITEMS:
 VALUE_MISC_ITEMS:
   1:
     SLOT: 39
-    MATERIAL: "WRITABLE_BOOK"
+    MATERIAL: "BOOK_AND_QUILL"
     AMOUNT: 1
     GLOW: false
     NAME: '&eGang Top Rewards'

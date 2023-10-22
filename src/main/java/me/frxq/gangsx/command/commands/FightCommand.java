@@ -30,10 +30,11 @@ public class FightCommand extends ParentCommand {
             }
             return true;
         }
-        if(!(sender instanceof Player p)) {
+        if(!(sender instanceof Player)) {
             plugin.log("This command cannot be executed from console.");
             return true;
         }
+        Player p = (Player)sender;
         subLabel = args[0];
         subArgs = Arrays.copyOfRange(args, 1, args.length);
 

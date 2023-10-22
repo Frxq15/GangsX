@@ -20,10 +20,11 @@ public class setPositionCommand extends SubCommand {
 
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player p)) {
+        if (!(sender instanceof Player)) {
             plugin.log("This command cannot be executed from console.");
             return;
         }
+        Player p = (Player)sender;
         if (args.length == 2) {
             ArenaUtils arenaUtils = plugin.getArenaUtils();
             String arena = args[0];

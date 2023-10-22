@@ -2,6 +2,7 @@ package me.frxq.gangsx.settings.locale;
 
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.objects.Gang;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;

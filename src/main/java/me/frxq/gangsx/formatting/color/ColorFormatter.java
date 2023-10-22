@@ -1,7 +1,11 @@
 package me.frxq.gangsx.formatting.color;
 
-public interface ColorFormatter {
+import net.md_5.bungee.api.ChatColor;
 
-    String format(String string);
+public class ColorFormatter {
+
+    public String format(String string) {
+        return ChatColor.translateAlternateColorCodes('&', string);
+    }
 
 }
