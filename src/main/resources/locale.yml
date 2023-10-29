@@ -65,7 +65,7 @@ PLAYER_NO_INVITE_PENDING: '&f[&bGangsX&f] &fYou do not have a pending invite for
 PLAYER_ONLY_LEADER_CAN_DISBAND: '&f[&bGangsX&f] &fOnly the gang leader can perform this action.'
 PLAYER_DEMOTED: '&f[&bGangsX&f] &fYou were demoted to &b%role% &fin your gang.'
 PLAYER_PROMOTED: '&f[&bGangsX&f] &fYou were promoted to &b%role% &fin your gang.'
-PLUGIN_VERSION: '&f[&bGangsX&f] &fRunning &bGangsX v%version%-SNAPSHOT'
+PLUGIN_VERSION: '&f[&bGangsX&f] &fRunning &bGangsX v%version%-SNAPSHOT &fby &eFrxq15'
 SHOP_ITEM_PURCHASED: '&f[&bGangsX&f] &7(%gang%) &b%player% &fpurchased a %item% &ffor &b%amount% &f%currency% from the gang shop.'
 SHOP_NOT_ENOUGH_MONEY: '&f[&bGangsX&f] &fYou need &b%amount% &f%currency% &fto purchase this item.'
 SUB_COMMAND_NOT_FOUND: '&f[&bGangsX&f] &fThis sub command could not be found, use &b/gang help &fto see command usage.'

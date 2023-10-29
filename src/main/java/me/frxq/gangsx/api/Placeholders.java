@@ -43,6 +43,10 @@ public class Placeholders extends PlaceholderExpansion {
 
         if(identifier.startsWith("top_name")){
            String pos = identifier.replace("top_name_", "");
+            if(plugin.getLeaderboardManager().getGangByPosition(Integer.valueOf(pos)) == null) {
+                return "None";
+            }
+
             if(Integer.parseInt(pos) < plugin.getConfig().getInt("gang.leaderboard-data-pull-amount")){
                 int p = Integer.parseInt(pos);
                 return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p).getName());
@@ -50,10 +54,13 @@ public class Placeholders extends PlaceholderExpansion {
         }
         if(identifier.startsWith("top_value")){
             String pos = identifier.replace("top_value_", "");
+            if(plugin.getLeaderboardManager().getGangByPosition(Integer.valueOf(pos)) == null) {
+                return "0";
+            }
             if(Integer.parseInt(pos) < plugin.getConfig().getInt("gang.leaderboard-data-pull-amount")){
                 int p = Integer.parseInt(pos);
                 return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p).getValue());
-            } else return "None";
+            } else return "0";
         }
 
         if (gang == null) return "No Gang";
@@ -73,6 +80,8 @@ public class Placeholders extends PlaceholderExpansion {
                 return String.valueOf(gang.getCoins());
             case "coins_formatted":
                 return String.format("%,d", gang.getCoins());
+            case "value":
+                return String.valueOf(gang.getValue());
             case "balance":
                 return String.valueOf(gang.getBankBalance());
             case "balance_formatted":

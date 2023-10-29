@@ -27,17 +27,23 @@ public class GangCommand extends ParentCommand {
         register(new depositCommand(plugin));
         register(new withdrawCommand(plugin));
         register(new leaderCommand(plugin));
-        register(new alertCommand(plugin));
+        if(plugin.getConfig().getBoolean("commands.alert")) {
+            register(new alertCommand(plugin));
+        }
         register(new bankCommand(plugin));
         register(new coinsCommand(plugin));
-        register(new valueCommand(plugin));
+        if(plugin.getConfig().getBoolean("commands.value")) {
+            register(new valueCommand(plugin));
+        }
+        if(plugin.getConfig().getBoolean("commands.invsee")) {
+            register(new InvseeCommand(plugin));
+        }
         register(new onlineCommand(plugin));
         register(new topCommand(plugin));
         register(new disbandCommand(plugin));
         register(new renameCommand(plugin));
         register(new chatCommand(plugin));
         register(new permissionsCommand(plugin));
-        register(new InvseeCommand(plugin));
         register(new friendlyFireCommand(plugin));
         register(new promoteCommand(plugin));
         register(new demoteCommand(plugin));

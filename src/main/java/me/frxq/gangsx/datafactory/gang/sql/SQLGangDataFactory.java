@@ -461,7 +461,7 @@ public class SQLGangDataFactory extends GangDataFactory {
     @Override
     public void updateLeaderboardTopValues() {
         int limit = plugin.getConfig().getInt("gang.leaderboard-data-pull-amount");
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM `" + GANGS_TABLE + "` GROUP BY name ORDER BY gang_value DESC LIMIT "+limit+";")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM `" + GANGS_TABLE + "` GROUP BY name ORDER BY `gang_value` DESC LIMIT "+limit)) {
             ResultSet rs = statement.executeQuery();
             LinkedHashMap<Integer, Gang> top_values = new LinkedHashMap<>();
             AtomicInteger i = new AtomicInteger(1);
@@ -471,6 +471,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             while (rs != null && rs.next()) {
                 gang = getGangData(UUID.fromString(rs.getString("uuid")));
                 top_values.put(i.get(), gang);
+                i.getAndIncrement();
             }
             plugin.getLeaderboardManager().updateTopValues(top_values);
             rs.close();

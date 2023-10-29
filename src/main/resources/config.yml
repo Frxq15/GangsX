@@ -18,13 +18,18 @@ locale:
 fight:
   request-timeout: 60
 
+commands:
+  alert: true
+  value: false
+  invsee: true
+
 gang:
   #how often should gang data be backed up?
   save-interval: 10 #time in minutes
   leaderboard-interval: 15 #time in minutes
-  use-disband-gui: true
-  max-roster-size: 9 #pls dont set this to more than 9, or it will break the menus and cause lag!
   leaderboard-data-pull-amount: 15 #for gang top, how many of the top gangs data should be loaded?
+  use-disband-gui: true
+  max-roster-size: 9 #please don't set this to more than 9, or it will break the menus and cause lag!
   name_regex: '^[a-zA-Z0-9]+$' #so gang names can only be numbers and letters, change this at ur own risk
   command:
     enable_invsee: true #Enable the /gang invsee command?
