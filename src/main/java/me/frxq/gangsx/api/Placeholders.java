@@ -63,14 +63,18 @@ public class Placeholders extends PlaceholderExpansion {
             } else return "0";
         }
 
-        if (gang == null) return "No Gang";
         switch (identifier) {
 
             // GANG PLACEHOLDERS
 
-                case "gang":
-                case "gangname":
+            case "gang_nte": case "gangname_nte":
+                if (gang == null) return "None";
+                return gang.getNameTagEditDisplay();
+
+            case "gang": case "gangname":
+                if (gang == null) return "None";
                 return gang.getName();
+
                 case "leader":
                 case "owner":
                 return Bukkit.getOfflinePlayer(gang.getLeader()).getName();

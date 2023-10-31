@@ -504,4 +504,8 @@ public class Gang {
     public void setActiveFight(UUID activeFight) {
         this.active_fight = activeFight;
     }
+
+    public String getNameTagEditDisplay() {
+        return plugin.getColorFormatter().format("&f«&e"+getName()+"&f»");
+    }
 }
