@@ -3,7 +3,6 @@ package me.frxq.gangsx.command.commands.subcommands.gang;
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.SubCommand;
 import me.frxq.gangsx.formatting.number.NumberFormatter;
-import me.frxq.gangsx.gui.menus.PurchaseValue;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
 import org.bukkit.command.Command;
@@ -14,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class valueCommand extends SubCommand {
+public class pointsCommand extends SubCommand {
     private final GangsX plugin;
 
-    public valueCommand(GangsX plugin) {
-        super("value", "gangsx.command.value", "/gang value <gang>", Arrays.asList("worth"));
+    public pointsCommand(GangsX plugin) {
+        super("points", "gangsx.command.points", "/gang points <gang>", Arrays.asList("p"));
         this.plugin = plugin;
     }
 
@@ -37,7 +36,9 @@ public class valueCommand extends SubCommand {
                 return;
             }
             Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-            new PurchaseValue(plugin, p, gang).open(p);
+            p.sendMessage(plugin.getLocaleManager().getMessage("GANG_POINTS")
+                    .replace("%gang%", gang.getName())
+                    .replace("%amount%", NumberFormatter.format(gang.getPoints()) + ""));
             return;
         }
 
@@ -51,10 +52,10 @@ public class valueCommand extends SubCommand {
             Gang gang = plugin.getGangDataFactory().getGangData(gangId);
             p.sendMessage(plugin.getLocaleManager().getMessage("GANG_VALUE")
                     .replace("%gang%", gang.getName())
-                    .replace("%amount%", NumberFormatter.format(gang.getValue()) + ""));
+                    .replace("%amount%", NumberFormatter.format(gang.getPoints()) + ""));
             return;
         }
-        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang value <gang>");
+        plugin.getLocaleManager().sendUsageMessage(p, "&cUsage: /gang points <gang>");
         return;
     }
 }

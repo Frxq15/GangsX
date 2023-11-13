@@ -24,7 +24,7 @@ VALUE_ITEMS:
     LORE:
       - ''
       - '&e&l • &fPlace: &b#%place%'
-      - '&e&l • &fValue: &b$%value%'
+      - '&e&l • &fPoints: &d%points%'
       - '&e&l • &fLeader: &b%leader%'
       - ''
       - '&e&l • &fGang Level: &b%level%'
@@ -40,7 +40,7 @@ VALUE_ITEMS:
     LORE:
       - ''
       - '&e&l • &fPlace: &b#%place%'
-      - '&e&l • &fValue: &b$0'
+      - '&e&l • &fPoints: &d%points%'
       - '&e&l • &fLeader: &bNone'
       - ''
       - '&e&l • &fGang Level: &b0'

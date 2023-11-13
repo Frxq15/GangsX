@@ -50,7 +50,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + GANGS_TABLE + " " +
                 "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
-                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN, description VARCHAR(36), gang_value BIGINT(132));")) {
+                "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN, description VARCHAR(36), points INT);")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,7 +94,7 @@ public class SQLGangDataFactory extends GangDataFactory {
 
         if (doesGangDataExist(gang.getID())) return;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + GANGS_TABLE + " " +
-                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description, gang_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)")) {
+                "(uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description, points) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)")) {
             statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
             statement.setString(2, gang.getName());
             statement.setLong(3, gang.getCreated());
@@ -217,7 +217,7 @@ public class SQLGangDataFactory extends GangDataFactory {
                 gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"), rs.getString("description"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
-                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null, rs.getLong("gang_value"), perms);
+                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null, rs.getInt("points"), perms);
 
                 gang.importMembers(getGangMembers(UUID.fromString(rs.getString("uuid"))));
 
@@ -241,9 +241,9 @@ public class SQLGangDataFactory extends GangDataFactory {
         }
 
         // Insert if not exists, update if exists
-        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description, gang_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?) ON DUPLICATE KEY " +
+        final String UPDATE_DATA = "INSERT INTO `" + GANGS_TABLE + "` (uuid, name, created, leader, level, coins, bankBalance, kills, deaths, blocksbroken, friendlyFire, description, points) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?) ON DUPLICATE KEY " +
                 "UPDATE name = ?, created = ?, leader = ?, level = ?, coins = ?, bankBalance = ?, " +
-                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?, description = ?, gang_value = ?;";
+                "kills = ?, deaths = ?, blocksbroken = ?, friendlyFire = ?, description = ?, points = ?;";
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPDATE_DATA)) {
             int i = 1;
 
@@ -260,7 +260,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i++, gang.hasFriendlyFire());
             statement.setString(i++, gang.getDescription());
-            statement.setLong(i++, gang.getValue());
+            statement.setInt(i++, gang.getPoints());
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
@@ -275,7 +275,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setInt(i++, gang.getBlocksBroken());
             statement.setBoolean(i++, gang.hasFriendlyFire());
             statement.setString(i++, gang.getDescription());
-            statement.setLong(i, gang.getValue());
+            statement.setInt(i, gang.getPoints());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -461,7 +461,7 @@ public class SQLGangDataFactory extends GangDataFactory {
     @Override
     public void updateLeaderboardTopValues() {
         int limit = plugin.getConfig().getInt("gang.leaderboard-data-pull-amount");
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM `" + GANGS_TABLE + "` GROUP BY name ORDER BY gang_value DESC LIMIT "+limit+";")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM `" + GANGS_TABLE + "` GROUP BY name ORDER BY points DESC LIMIT "+limit+";")) {
             ResultSet rs = statement.executeQuery();
             LinkedHashMap<Integer, Gang> top_values = new LinkedHashMap<>();
             AtomicInteger i = new AtomicInteger(1);
@@ -471,6 +471,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             while (rs != null && rs.next()) {
                 gang = getGangData(UUID.fromString(rs.getString("uuid")));
                 top_values.put(i.get(), gang);
+                i.getAndIncrement();
             }
             plugin.getLeaderboardManager().updateTopValues(top_values);
             rs.close();

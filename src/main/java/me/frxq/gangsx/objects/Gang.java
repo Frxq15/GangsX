@@ -34,7 +34,7 @@ public class Gang {
     private boolean friendlyFire;
     private List<Gang> allies;
 
-    private long value;
+    private int points;
     private ArrayList<GPlayer> members = new ArrayList<>();;
     private ArrayList<GPlayer> invites = new ArrayList<>();
     private HashMap<Upgrades, Integer> upgrades;
@@ -56,7 +56,7 @@ public class Gang {
 
     private boolean isInFight;
 
-    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, long value, HashMap<Permission, Role> permissions) {
+    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, int points, HashMap<Permission, Role> permissions) {
         this.plugin = plugin;
         this.gangUtils = plugin.getGangUtils();
         this.id = id;
@@ -75,7 +75,7 @@ public class Gang {
         this.members = members;
         this.invites = new ArrayList<>();
         this.upgrades = upgrades;
-        this.value = value;
+        this.points = points;
         this.renameCooldown = false;
         this.permissions = permissions;
         this.roster = new ArrayList<>();
@@ -107,7 +107,7 @@ public class Gang {
         addOnlineMember(gPlayer);
         this.invites = new ArrayList<>();
         this.upgrades = null;
-        this.value = 0;
+        this.points = 0;
         this.renameCooldown = false;
         this.permissions = gangUtils.getDefaultPermissions();
         this.roster = new ArrayList<>();
@@ -170,7 +170,7 @@ public class Gang {
         return bankBalance;
     }
 
-    public long getValue() { return value;}
+    public int getPoints() { return points;}
 
     public int getKills() {
         return kills;
@@ -186,8 +186,8 @@ public class Gang {
 
     public void removeFromFightRoster(GPlayer player) { this.roster.remove(player); }
 
-    public String getValueFormatted() {
-        return plugin.getCommandUtils().formatNumber(getValue());
+    public String getPointsFormatted() {
+        return plugin.getCommandUtils().formatNumber(getPoints());
     }
     public String getBlocksMinedFormatted() {
         return plugin.getCommandUtils().formatNumber(getBlocksBroken());
@@ -271,11 +271,11 @@ public class Gang {
         this.level = level;
     }
 
-    public void setValue(long value) { this.value = value; }
+    public void setPoints(int points) { this.points = points; }
 
-    public void addValue(long value) { this.value += value; }
+    public void addPoints(int points) { this.points += points; }
 
-    public void removeValue(long value) { this.value -= value; }
+    public void removePoints(int points) { this.points -= points; }
 
     public void setRenameCooldown(boolean result) { this.renameCooldown = result; }
 

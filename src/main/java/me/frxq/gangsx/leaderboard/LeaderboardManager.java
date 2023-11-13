@@ -23,6 +23,6 @@ public class LeaderboardManager {
     public int startUpdateTask() {
         return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             plugin.getGangDataFactory().updateLeaderboardTopValues();
-        }, 20L * 60L * plugin.getConfig().getInt("gang.leaderboard-interval"), 20L * 60L * plugin.getConfig().getInt("gang.leaderboar-interval")).getTaskId();
+        }, 20L * 60L * plugin.getConfig().getInt("gang.leaderboard-interval"), 20L * 60L * plugin.getConfig().getInt("gang.leaderboard-interval")).getTaskId();
     }
 }

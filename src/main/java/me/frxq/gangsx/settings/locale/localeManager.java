@@ -81,7 +81,7 @@ public class localeManager {
                             .replace("%allies%", "&dinsert allies")
                             .replace("%coins%", gang.getCoins()+"")
                             .replace("%bank%", gang.getBalanceFormatted())
-                                    .replace("%value%", gang.getValueFormatted())
+                                    .replace("%points%", gang.getPoints()+"")
                                     .replace("%totalmembers%", gang.getMembersCount()+"");
             sendRawMessage(sender, line);
         });

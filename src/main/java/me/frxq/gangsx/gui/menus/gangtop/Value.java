@@ -71,13 +71,10 @@ public class Value extends GUITemplate {
         String name = gangtop.getString("VALUE_ITEMS.TOP_FORMAT.NAME")
                 .replace("%gang%", gang.getName()).replace("%place%", position+"");
 
-        String value = gang.getValueFormatted();
-
-
         for (String lines : gangtop.getStringList("VALUE_ITEMS.TOP_FORMAT.LORE")) {
             lines = lines.replace("%gang%", gang.getName())
                     .replace("%place%", position+"")
-                    .replace("%value%", value)
+                    .replace("%points%", gang.getPoints()+"")
                     .replace("%leader%", Bukkit.getOfflinePlayer(gang.getLeader()).getName())
                     .replace("%level%", gang.getLevel()+"")
                     .replace("%blocksmined%", gang.getBlocksMinedFormatted()+"")

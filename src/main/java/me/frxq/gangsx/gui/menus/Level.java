@@ -97,7 +97,6 @@ public class Level extends GUITemplate {
         PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
         PlayerTextures textures = profile.getTextures();
         URL l;
-
         try {
             l = new URL(level.getString("ITEMS."+item+".TEXTURE"));
         } catch (MalformedURLException e) {
