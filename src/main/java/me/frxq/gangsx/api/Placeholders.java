@@ -48,45 +48,67 @@ public class Placeholders extends PlaceholderExpansion {
                 return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p));
             } else return "None";
         }
-        if(identifier.startsWith("top_value")){
+        if(identifier.startsWith("top_points")){
             String pos = identifier.replace("top_value_", "");
             if(Integer.parseInt(pos) < plugin.getConfig().getInt("gang.leaderboard-data-pull-amount")){
                 int p = Integer.parseInt(pos);
-                return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p).getValue());
+                return String.valueOf(plugin.getLeaderboardManager().getGangByPosition(p).getPoints());
             } else return "None";
         }
 
-        if (gang == null) return "No Gang";
+        if(identifier.startsWith("gang")){
+            switch (identifier) {
+
+                // GANG PLACEHOLDERS
+
+                case "name":
+                    if (gang == null) return "None";
+                    return gang.getName();
+                case "leader", "owner":
+                    if (gang == null) return "N/A";
+                    return Bukkit.getOfflinePlayer(gang.getLeader()).getName();
+                case "level":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getLevel());
+                case "coins":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getCoins());
+                case "coins_formatted":
+                    if (gang == null) return "0";
+                    return String.format("%,d", gang.getCoins());
+                case "balance":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getBankBalance());
+                case "balance_formatted":
+                    if (gang == null) return "0";
+                    return String.format("%,d", gang.getBankBalance());
+                case "kills":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getKills());
+                case "blocksmined":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getBlocksBroken());
+                case "blocksmined_formatted":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getBlocksMinedFormatted());
+                case "deaths":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getDeaths());
+                case "friendlyFire":
+                    if (gang == null) return "false";
+                    return String.valueOf(gang.hasFriendlyFire());
+                case "members":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getMembersCount());
+                case "members_online":
+                    if (gang == null) return "0";
+                    return String.valueOf(gang.getOnlineMembers().size());
+                case "members_list": // will sort out formatting for this later
+                    if (gang == null) return "N/A";
+                    return gang.getMembers().toString();
+            }
+        }
         switch (identifier) {
-
-            // GANG PLACEHOLDERS
-
-            case "gang", "gangname":
-                return gang.getName();
-            case "leader", "owner":
-                return Bukkit.getOfflinePlayer(gang.getLeader()).getName();
-            case "level":
-                return String.valueOf(gang.getLevel());
-            case "coins":
-                return String.valueOf(gang.getCoins());
-            case "coins_formatted":
-                return String.format("%,d", gang.getCoins());
-            case "balance":
-                return String.valueOf(gang.getBankBalance());
-            case "balance_formatted":
-                return String.format("%,d", gang.getBankBalance());
-            case "kills":
-                return String.valueOf(gang.getKills());
-            case "deaths":
-                return String.valueOf(gang.getDeaths());
-            case "friendlyFire":
-                return String.valueOf(gang.hasFriendlyFire());
-            case "members":
-                return String.valueOf(gang.getMembersCount());
-            case "members_online":
-                return String.valueOf(gang.getOnlineMembers().size());
-            case "members_list": // will sort out formatting for this later
-                return gang.getMembers().toString();
 
              // PLAYER PLACEHOLDERS
 
@@ -96,6 +118,15 @@ public class Placeholders extends PlaceholderExpansion {
                 return String.valueOf(gPlayer.getDeaths());
             case "player_role":
                 return gPlayer.getRole().getName();
+            case "player_role_icon":
+                return gPlayer.getRole().getRoleIcon();
+            case "player_role_prefix":
+                return gPlayer.getRole().getRolePrefix();
+            case "player_has_gang":
+                if (gang == null) return "false";
+                return "true";
+
+
 
                 /* PLUGIN PLACEHOLDERS MAYBE?
 
