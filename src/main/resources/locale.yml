@@ -17,7 +17,7 @@ GANG_ADMIN_ARENA_ALREADY_EXISTS: '&f[&bGangsX&f] &fAn arena with this name alrea
 GANG_ADMIN_ARENA_CREATED: '&f[&bGangsX&f] &fYou successfully created the arena &b%arena%&f. Please use &b/garena setposition &fto finish the arena setup.'
 GANG_ADMIN_ARENA_SET: '&f[&bGangsX&f] &fYou set the gang arena &b%position% &fposition to your location for the &b%arena% &farena.'
 GANG_ADMIN_ARENA_POSITION_NOT_SET: '&f[&bGangsX&f] &fThat position is not set for the &b%arena% &farena. Set it using &b/garena setposition'
-GANG_ADMIN_ARENA_NOT_FOUND: '&f[&bGangsX&f] &fAn arena with this name could not be found.'
+GANG_ADMIN_ARENA_NOT_FOUND: '&f[&bGangsX&f] &fAn arena with the name &b%arena% &fcould not be found.'
 GANG_ALERT: '&f[&bGangsX&f] &c&lALERT: &b%player% &fneeds help at &b%x%&7, &b%y%&7, &b%z% &fin &b%world%&f.'
 GANG_ALREADY_EXISTS: '&f[&bGangsX&f] &fA gang with this name already exists.'
 GANG_BANK_BALANCE: '&f[&bGangsX&f] Your gang bank contains &b$%balance%'

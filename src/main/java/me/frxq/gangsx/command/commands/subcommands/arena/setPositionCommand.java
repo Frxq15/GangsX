@@ -31,7 +31,7 @@ public class setPositionCommand extends SubCommand {
 
             if(!arenaUtils.doesArenaExist(arena)) {
                 p.sendMessage(plugin.getLocaleManager().getMessage("GANG_ADMIN_ARENA_NOT_FOUND")
-                        .replace("%position%", "challenger"));
+                        .replace("%arena%", arena));
                 return;
             }
 
