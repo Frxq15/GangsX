@@ -1,0 +1,4 @@
+KoTH integration
+All leaderboard types
+Boosters
+Allies

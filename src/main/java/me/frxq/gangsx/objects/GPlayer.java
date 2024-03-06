@@ -162,4 +162,9 @@ public class GPlayer {
         DecimalFormat df = new DecimalFormat("#.00");
         return df.format(getKills()/getDeaths());
     }
+
+    //new settings
+    // TODO: see gang & ally chat, toggle being added to fight roster, toggle invites,
+
+    //
 }

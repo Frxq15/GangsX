@@ -23,7 +23,6 @@ import me.frxq.gangsx.settings.Settings;
 import me.frxq.gangsx.settings.locale.localeManager;
 import me.frxq.gangsx.settings.version.ServerVersion;
 import me.frxq.gangsx.settings.version.ServerVersionChecker;
-import me.frxq.gangsx.utils.ArenaUtils;
 import me.frxq.gangsx.utils.CommandUtils;
 import me.frxq.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
