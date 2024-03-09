@@ -80,6 +80,7 @@ public class localeManager {
                             .replace("%members%", gang.convertMembersForInfo())
                             .replace("%allies%", "&dinsert allies")
                             .replace("%coins%", gang.getCoins()+"")
+                            .replace("%points%", gang.getPoints()+"")
                             .replace("%bank%", gang.getBalanceFormatted())
                                     .replace("%points%", gang.getPoints()+"")
                                     .replace("%totalmembers%", gang.getMembersCount()+"");

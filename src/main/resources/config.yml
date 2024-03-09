@@ -11,6 +11,7 @@ database:
     connection-string: ""
 
 gang:
+  sort-gang-top: 'points' #what should the leaderboard be ordered by? (available options: level,coins,bankBalance,kills,deaths,blocksbroken,points)
   #how often should gang data be backed up?
   save-interval: 10 #time in minutes
   leaderboard-interval: 15 #time in minutes
