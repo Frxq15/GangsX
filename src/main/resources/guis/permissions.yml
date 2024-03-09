@@ -242,6 +242,23 @@ ITEMS:
       - '&e&l • &fRecruit: %recruit%'
       - ''
       - '&e&lClick &fto modify this permission.'
+  GANG_CHAT:
+    SLOT: 13
+    MATERIAL: LIME_CARPET
+    AMOUNT: 1
+    NAME: "&aGang Chat"
+    GLOW: false
+    LORE:
+      - '&7"Allow members to use gang chat"'
+      - ''
+      - '&ePermissions:'
+      - '&e&l • &fLeader: &aYes'
+      - '&e&l • &fCo-Leader: %coleader%'
+      - '&e&l • &fMod: %mod%'
+      - '&e&l • &fMember: %member%'
+      - '&e&l • &fRecruit: %recruit%'
+      - ''
+      - '&e&lClick &fto modify this permission.'
 MISC_ITEMS:
   1:
     SLOT: 31

@@ -2,7 +2,6 @@ package me.frxq.gangsx.objects;
 
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.enums.Permission;
-import me.frxq.gangsx.fight.Fight;
 import me.frxq.gangsx.formatting.number.NumberFormatter;
 import me.frxq.gangsx.enums.Role;
 import me.frxq.gangsx.enums.Upgrades;
@@ -445,40 +444,6 @@ public class Gang {
             gPlayer.kickFromGang();
         }
     }
-    public void sendFightRequest(Gang gang) {
-        this.sent_fight_requests.add(gang);
-        gang.addFightRequest(this);
-    }
-    public void addFightRequest(Gang gang) {
-        this.fight_requests.add(gang);
-    }
-    public List<Gang> getFightRequests() {
-        return this.fight_requests;
-    }
-    public List<Gang> getSentFightRequests() {
-        return this.sent_fight_requests;
-    }
-    public boolean hasAnyRequests() {
-        if(getFightRequests().size() > 1 || (getSentFightRequests().size() > 1)) {
-            return true;
-        }
-        return false;
-    }
-    public void clearRequests() {
-        getFightRequests().clear();
-        getSentFightRequests().clear();
-    }
-    public void removeSentRequest(Gang gang) {
-        this.sent_fight_requests.remove(gang);
-        removeFightRequest(gang);
-    }
-    public void removeFightRequest(Gang gang) {
-        gang.fight_requests.remove(this);
-    }
-    public Integer getFightWinPercentage() {
-        // = wins / totalgames * 100
-        return 0;
-    }
     public Integer getKDR() {
         if(getKills() == 0) {
             return 0;
@@ -497,11 +462,5 @@ public class Gang {
         }
         DecimalFormat df = new DecimalFormat("#.00");
         return df.format(getKills()/getDeaths());
-    }
-    public UUID getActiveFight() {
-        return active_fight;
-    }
-    public void setActiveFight(UUID activeFight) {
-        this.active_fight = activeFight;
     }
 }

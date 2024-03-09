@@ -2,7 +2,6 @@ package me.frxq.gangsx.command.commands.subcommands.gang;
 
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.SubCommand;
-import me.frxq.gangsx.gui.menus.fight.Duel;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
@@ -23,6 +22,6 @@ public class testCommand extends SubCommand {
         Player p = (Player) sender;
         GPlayer gPlayer = plugin.getGPlayerDataFactory().getGPlayerData(p.getUniqueId());
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-        new Duel(plugin, p, gang, gang, "example", "default").open(p);
+        Bukkit.broadcastMessage(gang.getPoints()+"");
     }
 }

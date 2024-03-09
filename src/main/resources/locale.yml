@@ -57,7 +57,7 @@ PLAYER_GANG_CREATED: '&f[&bGangsX&f] &fYou created the gang &b%gang% &fsuccessfu
 PLAYER_GANG_INVITED: '&f[&bGangsX&f] &b%player% &finvited you to join &b%gang%. &fJoin using &b/gang join %gang%'
 PLAYER_GANG_KICKED: '&f[&bGangsX&f] &b%player% &fkicked you from your gang.'
 PLAYER_GIVEN_LEADER: '&f[&bGangsX&f] &b%player% &fgave you ownership of your gang.'
-PLAYER_GANG_NO_PERMISSION: '&f[&bGangsX&f] &fYou dont have the gang permission to use this.'
+PLAYER_GANG_NO_PERMISSION: '&f[&bGangsX&f] &fYou dont have permission to use this gang command.'
 PLAYER_NOT_FOUND: '&f[&bGangsX&f] &fThe player you specified could not be found.'
 PLAYER_NOT_IN_A_GANG: '&f[&bGangsX&f] &fYou are not in a gang.'
 PLAYER_NOT_IN_YOUR_GANG: '&f[&bGangsX&f] &fThis player is not in your gang.'
@@ -121,17 +121,6 @@ GANG_HELP_SOCIAL_MAIN:
   - '&e&l • &f/g uninvite <player> &8- &bDe-invite someone from your gang.'
   - '&e&l • &f/g alert &8- &bAlert gang members to your location.'
   - ''
-GANG_HELP_FIGHT_MAIN:
-  - ''
-  - '&b&lGang Help &8- &bFight'
-  - ''
-  - '&e&l • &f/fight duel <gang> &8- &bChallenge a gang.'
-  - '&e&l • &f/fight accept <gang> &8- &bAccept a fight invitation.'
-  - '&e&l • &f/fight deny <gang> &8- &bDecline a fight invitation.'
-  - '&e&l • &f/fight status &8- &bView your fight status.'
-  - '&e&l • &f/gang roster &8- &bView your fight roster.'
-  - '&e&l • &f/gang setroster &8- &bSet your fight roster.'
-  - ''
 GANG_HELP_CURRENCY_MAIN:
   - ''
   - '&b&lGang Help &8- &bCurrency'
@@ -178,26 +167,3 @@ GANG_HELP_PLAYER_2:
   - '&e&l • &f/g panel &8- &bOpen your gang panel.'
   - '&e&l • &f/g role &8- &bSee your gang role.'
   - ''
-GANG_FIGHT_REQUEST_SENT:
-  - ''
-  - '&b&lFight Request Sent &8- &e%gang%'
-  - '&fSent By: &e%player%'
-  - ''
-  - '&6Fight Information:'
-  - '&e| &fOpponent: &e%opponent%'
-  - '&e| &fType: &e%type%' #referring to roster size
-  - '&e| &fArena: &e%arena%'
-  - '&e| &fKit: &e%kit%'
-  - ''
-GANG_FIGHT_REQUEST_RECEIVED:
-  - ''
-  - '&b&lFight Request Received &8- &e%gang%'
-  - '&fSent By: &e%player%'
-  - ''
-  - '&6Fight Information:'
-  - '&e| &fOpponent: &e%opponent%'
-  - '&e| &fType: &e%type%' #referring to roster size
-  - '&e| &fArena: &e%arena%'
-  - '&e| &fKit: &e%kit%'
-  - ''
-#click to accept line will be sent after

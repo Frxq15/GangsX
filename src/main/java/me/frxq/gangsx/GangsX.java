@@ -1,7 +1,6 @@
 package me.frxq.gangsx;
 
 import me.frxq.gangsx.api.APIHooks;
-import me.frxq.gangsx.fight.ArenaManager;
 import me.frxq.gangsx.listener.PlayerListeners;
 import me.frxq.gangsx.command.CommandHandler;
 import me.frxq.gangsx.datafactory.gang.GangDataFactory;
@@ -45,8 +44,6 @@ public final class GangsX extends JavaPlugin {
     private LeaderboardManager leaderboardManager;
 
     private GangUtils gangUtils;
-    private ArenaUtils arenaUtils;
-    private ArenaManager arenaManager;
 
     public static GangsX instance;
 
@@ -97,8 +94,6 @@ public final class GangsX extends JavaPlugin {
         leaderboardManager = new LeaderboardManager(this);
 
         gangUtils = new GangUtils(this);
-        arenaUtils = new ArenaUtils();
-        arenaManager = new ArenaManager(this);
 
 
         switch (settings.getStorageType()) {
@@ -130,7 +125,7 @@ public final class GangsX extends JavaPlugin {
     public void sqlSetup() {
         SQLHandler sqlHandler = new SQLHandler(this, settings.getHost(), settings.getDatabase(), settings.getUsername(), settings.getPassword(), settings.getPort());
         if (!sqlHandler.connect()) {
-            log("MySQL Connection: failed");
+            log("MySQL connection failed, please ensure your connection details are correct inside of the config.yml file.");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -181,15 +176,11 @@ public final class GangsX extends JavaPlugin {
         return localeManager;
     }
 
-    public ArenaManager getArenaManager() { return arenaManager; }
-
     public CommandUtils getCommandUtils() { return commandUtils; }
 
     public RoleManager getRoleManager() { return roleManager; }
 
     public LeaderboardManager getLeaderboardManager() { return leaderboardManager; }
-
-    public ArenaUtils getArenaUtils() { return arenaUtils; }
 
     public GangUtils getGangUtils() { return gangUtils; }
 

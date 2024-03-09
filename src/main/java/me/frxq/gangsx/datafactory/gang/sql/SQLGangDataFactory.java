@@ -56,7 +56,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             e.printStackTrace();
             return false;
         }
-        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + PERMISSIONS_TABLE + " " + "(uuid VARCHAR(36) PRIMARY KEY, bank_deposit VARCHAR(32), bank_withdraw VARCHAR(32), change_description VARCHAR(36), manage_relations VARCHAR(32), purchase_value VARCHAR(32), purchase_upgrades VARCHAR(32), promote VARCHAR(32), demote VARCHAR(32), manage_friendly_fire VARCHAR(32), kick VARCHAR(32), rename_gang VARCHAR(36), shop VARCHAR(32), invsee VARCHAR(32), invite VARCHAR(32));")) {
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + PERMISSIONS_TABLE + " " + "(uuid VARCHAR(36) PRIMARY KEY, bank_deposit VARCHAR(32), bank_withdraw VARCHAR(32), change_description VARCHAR(36), manage_relations VARCHAR(32), purchase_value VARCHAR(32), purchase_upgrades VARCHAR(32), promote VARCHAR(32), demote VARCHAR(32), manage_friendly_fire VARCHAR(32), kick VARCHAR(32), rename_gang VARCHAR(36), shop VARCHAR(32), invsee VARCHAR(32), invite VARCHAR(32), gang_chat VARCHAR(32));")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             e.printStackTrace();
         }
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + PERMISSIONS_TABLE + " " +
-                "(uuid, bank_deposit, bank_withdraw, change_description, manage_relations, purchase_value, purchase_upgrades, promote, demote, manage_friendly_fire, kick, rename_gang, shop, invsee, invite) VALUES (?, ?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "(uuid, bank_deposit, bank_withdraw, change_description, manage_relations, purchase_value, purchase_upgrades, promote, demote, manage_friendly_fire, kick, rename_gang, shop, invsee, invite, gang_chat) VALUES (?, ?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
             statement.setString(2, gangUtils.getDefaultRolePermissionString(Permission.BANK_DEPOSIT));
             statement.setString(3, gangUtils.getDefaultRolePermissionString(Permission.BANK_WITHDRAW));
@@ -129,6 +129,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setString(13, gangUtils.getDefaultRolePermissionString(Permission.SHOP));
             statement.setString(14, gangUtils.getDefaultRolePermissionString(Permission.INVSEE));
             statement.setString(15, gangUtils.getDefaultRolePermissionString(Permission.INVITE));
+            statement.setString(16, gangUtils.getDefaultRolePermissionString(Permission.GANG_CHAT));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -195,6 +196,7 @@ public class SQLGangDataFactory extends GangDataFactory {
                 permissions.put(Permission.SHOP, Role.valueOf(rs.getString("SHOP")));
                 permissions.put(Permission.INVSEE, Role.valueOf(rs.getString("INVSEE")));
                 permissions.put(Permission.INVITE, Role.valueOf(rs.getString("INVITE")));
+                permissions.put(Permission.GANG_CHAT, Role.valueOf(rs.getString("GANG_CHAT")));
 
 
                 perms = permissions;
@@ -280,9 +282,9 @@ public class SQLGangDataFactory extends GangDataFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        final String PERMISSIONS_UPDATE_DATA = "INSERT INTO `" + PERMISSIONS_TABLE + "` (uuid, bank_deposit, bank_withdraw, change_description, manage_relations, purchase_value, purchase_upgrades, promote, demote, manage_friendly_fire, kick, rename_gang, shop, invsee, invite) VALUES (?, ?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
+        final String PERMISSIONS_UPDATE_DATA = "INSERT INTO `" + PERMISSIONS_TABLE + "` (uuid, bank_deposit, bank_withdraw, change_description, manage_relations, purchase_value, purchase_upgrades, promote, demote, manage_friendly_fire, kick, rename_gang, shop, invsee, invite, gang_chat) VALUES (?, ?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY " +
                 "UPDATE bank_deposit = ?, bank_withdraw = ?, change_description = ?, manage_relations = ?, purchase_value = ?, purchase_upgrades = ?, " +
-                "promote = ?, demote = ?, manage_friendly_fire = ?, kick = ?, rename_gang = ?, shop = ?, invsee = ?, invite = ?;";
+                "promote = ?, demote = ?, manage_friendly_fire = ?, kick = ?, rename_gang = ?, shop = ?, invsee = ?, invite = ?, gang_chat = ?;";
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(PERMISSIONS_UPDATE_DATA)) {
             int i = 1;
 
@@ -302,6 +304,7 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setString(i++, (gang.getRequiredRole(Permission.SHOP) == null ? null : gang.getRequiredRole(Permission.SHOP).name()));
             statement.setString(i++, (gang.getRequiredRole(Permission.INVSEE) == null ? null : gang.getRequiredRole(Permission.INVSEE).name()));
             statement.setString(i++, (gang.getRequiredRole(Permission.INVITE) == null ? null : gang.getRequiredRole(Permission.INVITE).name()));
+            statement.setString(i++, (gang.getRequiredRole(Permission.GANG_CHAT) == null ? null : gang.getRequiredRole(Permission.GANG_CHAT).name()));
 
             // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
             // Setting update variables
@@ -318,7 +321,8 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setString(i++, (gang.getRequiredRole(Permission.RENAME_GANG) == null ? null : gang.getRequiredRole(Permission.RENAME_GANG).name()));
             statement.setString(i++, (gang.getRequiredRole(Permission.SHOP) == null ? null : gang.getRequiredRole(Permission.SHOP).name()));
             statement.setString(i++, (gang.getRequiredRole(Permission.INVSEE) == null ? null : gang.getRequiredRole(Permission.INVSEE).name()));
-            statement.setString(i, (gang.getRequiredRole(Permission.INVITE) == null ? null : gang.getRequiredRole(Permission.INVITE).name()));
+            statement.setString(i++, (gang.getRequiredRole(Permission.INVITE) == null ? null : gang.getRequiredRole(Permission.INVITE).name()));
+            statement.setString(i, (gang.getRequiredRole(Permission.GANG_CHAT) == null ? null : gang.getRequiredRole(Permission.GANG_CHAT).name()));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -24,11 +24,7 @@ public class GangCommand extends ParentCommand {
         register(new inviteCommand(plugin));
         register(new joinCommand(plugin));
         register(new kickCommand(plugin));
-        register(new depositCommand(plugin));
-        register(new withdrawCommand(plugin));
         register(new leaderCommand(plugin));
-        register(new alertCommand(plugin));
-        register(new bankCommand(plugin));
         register(new coinsCommand(plugin));
         register(new pointsCommand(plugin));
         register(new onlineCommand(plugin));
@@ -37,13 +33,23 @@ public class GangCommand extends ParentCommand {
         register(new renameCommand(plugin));
         register(new chatCommand(plugin));
         register(new permissionsCommand(plugin));
-        register(new InvseeCommand(plugin));
         register(new friendlyFireCommand(plugin));
         register(new promoteCommand(plugin));
         register(new demoteCommand(plugin));
         register(new levelCommand(plugin));
         register(new levelupCommand(plugin));
-        register(new rosterCommand(plugin));
+
+        if(plugin.getConfig().getBoolean("gang.enable_commands.invsee")) {
+            register(new InvseeCommand(plugin));
+        }
+        if(plugin.getConfig().getBoolean("gang.enable_commands.alert")) {
+            register(new alertCommand(plugin));
+        }
+        if(plugin.getConfig().getBoolean("gang.enable_commands.economy")) {
+            register(new depositCommand(plugin));
+            register(new withdrawCommand(plugin));
+            register(new bankCommand(plugin));
+        }
     }
 
     @Override

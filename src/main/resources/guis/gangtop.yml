@@ -3,7 +3,7 @@ TITLE: "&8Top Gangs"
 
 DISPLAY_AMOUNT: 14
 DISPLAY_SLOTS:
-  1: 10
+  1: 10 # lb position : slot to be displayed
   2: 11
   3: 12
   4: 13
@@ -40,7 +40,7 @@ VALUE_ITEMS:
     LORE:
       - ''
       - '&e&l • &fPlace: &b#%place%'
-      - '&e&l • &fPoints: &d%points%'
+      - '&e&l • &fPoints: &d0'
       - '&e&l • &fLeader: &bNone'
       - ''
       - '&e&l • &fGang Level: &b0'

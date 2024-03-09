@@ -45,6 +45,11 @@ public class PermissionsSetter extends GUITemplate {
                 setItem(permissions.getInt("ITEMS."+role+".SLOT"), createTexturedItem(role), p -> {
                     p.getOpenInventory().close();
                     gang.updatePermission(permission, Role.valueOf(role));
+                    gang.getOnlineMembers().forEach(om -> {
+                        if(om.getRole().getPriority() < Role.valueOf(role).getPriority()) {
+                            om.setChatEnabled(false);
+                        }
+                    });
                     gang.sendMessage(plugin.getColorFormatter().format(plugin.getLocaleManager().getMessage("PERMISSION_UPDATED"))
                             .replace("%permission%", permission.getName()).replace("%role%", Role.valueOf(role).getName()).replace("%player%", p.getName()));
                 });
@@ -54,6 +59,11 @@ public class PermissionsSetter extends GUITemplate {
                 setItem(permissions.getInt("ITEMS."+role+".SLOT"), createItem(role), p -> {
                     p.getOpenInventory().close();
                     gang.updatePermission(permission, Role.valueOf(role));
+                    gang.getOnlineMembers().forEach(om -> {
+                        if(om.getRole().getPriority() < Role.valueOf(role).getPriority()) {
+                            om.setChatEnabled(false);
+                        }
+                    });
                     gang.sendMessage(plugin.getColorFormatter().format(plugin.getLocaleManager().getMessage("PERMISSION_UPDATED"))
                             .replace("%permission%", permission.getName()).replace("%role%", Role.valueOf(role).getName()).replace("%player%", p.getName()));
                 });

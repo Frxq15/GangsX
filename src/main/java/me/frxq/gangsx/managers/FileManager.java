@@ -33,16 +33,6 @@ public class FileManager {
     public File DisbandFile;
     public FileConfiguration DisbandConfig;
 
-    public File ArenaFile;
-    public FileConfiguration ArenaConfig;
-
-    public File RosterFile;
-    public FileConfiguration RosterConfig;
-    public File addToRosterFile;
-    public FileConfiguration addToRosterConfig;
-
-    public File duelFile;
-    public FileConfiguration duelConfig;
     public FileManager(GangsX plugin) {
         this.plugin = plugin;
     }
@@ -56,10 +46,6 @@ public class FileManager {
         createInvseeFile();
         createLevelFile();
         createDisbandFile();
-        createArenaFile();
-        createRosterFile();
-        createAddToRosterFile();
-        createDuelFile();
     }
 
     public void createShopFile() {
@@ -253,101 +239,4 @@ public class FileManager {
         }
     }
     public FileConfiguration getDisbandFile() { return DisbandConfig; }
-
-    public void createArenaFile() {
-        ArenaFile = new File(plugin.getDataFolder(), "arena.yml");
-        if (!ArenaFile.exists()) {
-            ArenaFile.getParentFile().mkdirs();
-            plugin.log("arena.yml was created successfully");
-            plugin.saveResource("arena.yml", false);
-        }
-
-        ArenaConfig = new YamlConfiguration();
-        try {
-            ArenaConfig.load(ArenaFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    public void reloadArenaFile() { ArenaConfig = YamlConfiguration.loadConfiguration(ArenaFile); }
-    public void saveArenaFile() {
-        try {
-            ArenaConfig.save(ArenaFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getArenaFile() { return ArenaConfig; }
-
-    public void createRosterFile() {
-        RosterFile = new File(plugin.getDataFolder()+"/guis", "roster.yml");
-        if (!RosterFile.exists()) {
-            RosterFile.getParentFile().mkdirs();
-            plugin.log("roster.yml was created successfully");
-            plugin.saveResource("guis/roster.yml", false);
-        }
-        RosterConfig = new YamlConfiguration();
-        try {
-            RosterConfig.load(RosterFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    public void reloadRosterFile() { RosterConfig = YamlConfiguration.loadConfiguration(RosterFile); }
-    public void saveRosterFile() {
-        try {
-            RosterConfig.save(RosterFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getRosterFile() { return RosterConfig; }
-
-    public void createAddToRosterFile() {
-        addToRosterFile = new File(plugin.getDataFolder()+"/guis", "add-to-roster.yml");
-        if (!addToRosterFile.exists()) {
-            addToRosterFile.getParentFile().mkdirs();
-            plugin.log("add-to-roster.yml was created successfully");
-            plugin.saveResource("guis/add-to-roster.yml", false);
-        }
-        addToRosterConfig = new YamlConfiguration();
-        try {
-            addToRosterConfig.load(addToRosterFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    public void reloadAddToRosterFile() { addToRosterConfig = YamlConfiguration.loadConfiguration(addToRosterFile); }
-    public void saveAddToRosterFile() {
-        try {
-            addToRosterConfig.save(addToRosterFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getAddToRosterFile() { return addToRosterConfig; }
-
-    public void createDuelFile() {
-        duelFile = new File(plugin.getDataFolder()+"/guis", "duel.yml");
-        if (!duelFile.exists()) {
-            duelFile.getParentFile().mkdirs();
-            plugin.log("duel.yml was created successfully");
-            plugin.saveResource("guis/duel.yml", false);
-        }
-        duelConfig = new YamlConfiguration();
-        try {
-            duelConfig.load(duelFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    public void reloadDuelFile() { duelConfig = YamlConfiguration.loadConfiguration(duelFile); }
-    public void saveDuelFile() {
-        try {
-            duelConfig.save(duelFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public FileConfiguration getDuelFile() { return duelConfig; }
 }

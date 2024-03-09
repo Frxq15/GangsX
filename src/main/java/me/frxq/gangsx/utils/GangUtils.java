@@ -56,6 +56,7 @@ public class GangUtils {
         permissions.put(Permission.SHOP, getDefaultRolePermission(Permission.SHOP));
         permissions.put(Permission.INVSEE, getDefaultRolePermission(Permission.INVSEE));
         permissions.put(Permission.INVITE, getDefaultRolePermission(Permission.INVITE));
+        permissions.put(Permission.GANG_CHAT, getDefaultRolePermission(Permission.GANG_CHAT));
 
         return permissions;
     }
