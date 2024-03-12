@@ -1,7 +1,5 @@
 KoTH integration
-Boosters
 Allies
-Banner?
 Vault?
-Upgrades
+Upgrades gadmin command, block member join / invite if gang member limit is reached
 add alert permission

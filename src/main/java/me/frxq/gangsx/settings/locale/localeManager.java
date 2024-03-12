@@ -1,6 +1,7 @@
 package me.frxq.gangsx.settings.locale;
 
 import me.frxq.gangsx.GangsX;
+import me.frxq.gangsx.enums.Upgrade;
 import me.frxq.gangsx.objects.Gang;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -83,7 +84,8 @@ public class localeManager {
                             .replace("%points%", gang.getPoints()+"")
                             .replace("%bank%", gang.getBalanceFormatted())
                                     .replace("%points%", gang.getPoints()+"")
-                                    .replace("%totalmembers%", gang.getMembersCount()+"");
+                                    .replace("%totalmembers%", gang.getMembersCount()+"")
+                    .replace("%maxmembers%", gang.getUpgradeLevel(Upgrade.MEMBER_LIMIT)+"");;
             sendRawMessage(sender, line);
         });
     }

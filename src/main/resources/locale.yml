@@ -88,7 +88,7 @@ GANG_INFO:
   - '&b&l | &fDeaths: &b%deaths%'
   - '&b&l | &fBlocks Broken: &b%blocksbroken%'
   - '&b&l | &fAllies: &d%allies%'
-  - '&b&l | &fMembers &8[&e%totalmembers%&8]&f: &b%members%'
+  - '&b&l | &fMembers &8[&e%totalmembers%&8/&e%maxmembers%&8]&f: &b%members%'
   - ''
 GANG_HELP_MAIN:
   - ''

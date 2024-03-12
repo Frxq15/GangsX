@@ -33,7 +33,7 @@ public class GangUtils {
     }
     public int getDefaultUpgradeValue(Upgrade upgrade) {
         String up = upgrade.getName();
-        int value = plugin.getConfig().getInt("default_uupgrades."+up.toLowerCase());
+        int value = plugin.getConfig().getInt("default_upgrades."+up.toLowerCase());   //fix max allies default value returning 0
         return value;
     }
     public Role getDefaultRolePermission(Permission permission) {

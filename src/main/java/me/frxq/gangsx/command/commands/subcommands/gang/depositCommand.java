@@ -3,6 +3,7 @@ package me.frxq.gangsx.command.commands.subcommands.gang;
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.SubCommand;
 import me.frxq.gangsx.enums.Permission;
+import me.frxq.gangsx.enums.Upgrade;
 import me.frxq.gangsx.formatting.number.NumberFormatter;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
@@ -54,8 +55,8 @@ public class depositCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "DEPOSIT_FAIL_AMOUNT");
                 return;
             }
-            if(plugin.getConfig().getBoolean("gang.bank.limit_enabled")) {
-                if(amount+(int)gang.getBankBalance() > plugin.getConfig().getInt("gang.bank.bank_limit")) {
+            if(gang.getUpgrade(Upgrade.BANK_LIMIT) > 0) {
+                if(amount+(int)gang.getBankBalance() > gang.getUpgrade(Upgrade.BANK_LIMIT)) {
                     plugin.getLocaleManager().sendMessage(p, "BANK_BALANCE_EXCEED");
                     return;
                 }

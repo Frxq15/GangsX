@@ -6,8 +6,8 @@ public enum Upgrade {
     BANK_LIMIT("bank_limit"),
     COIN_MULTIPLIER("coin_multiplier"),
     SHOP_DISCOUNT("shop_discount"),
-    COLOURED_DESCRIPTION("colour_description"),
-    MAX_ALLIES("maximum_allies");
+    COLOURED_DESCRIPTION("coloured_description"),
+    MAX_ALLIES("max_allies");
 
     private final String name;
 

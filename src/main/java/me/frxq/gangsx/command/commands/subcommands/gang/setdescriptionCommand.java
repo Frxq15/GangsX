@@ -3,6 +3,7 @@ package me.frxq.gangsx.command.commands.subcommands.gang;
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.enums.Permission;
 import me.frxq.gangsx.command.SubCommand;
+import me.frxq.gangsx.enums.Upgrade;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
 import org.bukkit.command.Command;
@@ -44,7 +45,7 @@ public class setdescriptionCommand extends SubCommand {
                 plugin.getLocaleManager().sendMessage(p, "BLACKLISTED_WORDS");
                 return;
             }
-            if(!p.hasPermission("gangsx.command.setdescription.color")) { //change to upgrade
+            if(!gang.getUpgrade(Upgrade.COLOURED_DESCRIPTION).equals(1)) { //change to upgrade
                 if(description.contains("&")) {
                     plugin.getLocaleManager().sendMessage(p, "INVALID_INPUT");
                 }
