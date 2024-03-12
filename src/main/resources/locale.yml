@@ -82,7 +82,7 @@ GANG_INFO:
   - '&b&l | &fCreated: &b%created%'
   - '&b&l | &fLeader: &b%leader%'
   - '&b&l | &fLevel: &b%level%'
-  - '&b&l | &fPoints: &b$%value%'
+  - '&b&l | &fPoints: &b%points%'
   - '&b&l | &fBalance: &b$%bank%'
   - '&b&l | &fKills: &b%kills%'
   - '&b&l | &fDeaths: &b%deaths%'
@@ -130,7 +130,7 @@ GANG_HELP_CURRENCY_MAIN:
   - '&e&l • &f/g deposit <amount> &8- &bAdd to your gang bank.'
   - '&e&l • &f/g withdraw <amount> &8- &bWithdraw from your gang bank.'
   - '&e&l • &f/g value &8- &bPurchase value for your gang.'
-  - '&e&l • &f/g top &8- &bView the gang value leaderboard.'
+  - '&e&l • &f/g top &8- &bView the top gangs on the leaderboard.'
   - ''
 GANG_HELP_MANAGE_MAIN:
   - ''

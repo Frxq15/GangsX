@@ -4,7 +4,7 @@ import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.enums.Permission;
 import me.frxq.gangsx.formatting.number.NumberFormatter;
 import me.frxq.gangsx.enums.Role;
-import me.frxq.gangsx.enums.Upgrades;
+import me.frxq.gangsx.enums.Upgrade;
 import me.frxq.gangsx.gui.GUITemplate;
 import me.frxq.gangsx.utils.GangUtils;
 import org.bukkit.Bukkit;
@@ -36,7 +36,7 @@ public class Gang {
     private int points;
     private ArrayList<GPlayer> members = new ArrayList<>();;
     private ArrayList<GPlayer> invites = new ArrayList<>();
-    private HashMap<Upgrades, Integer> upgrades;
+    private HashMap<Upgrade, Integer> upgrades;
     private ArrayList<GPlayer> onlinemembers = new ArrayList<>();
 
     private HashMap<Permission, Role> permissions = new HashMap<>();
@@ -45,17 +45,8 @@ public class Gang {
 
     private final GangUtils gangUtils;
 
-    private List<GPlayer> roster;
 
-    private List<Gang> fight_requests;
-
-    private List<Gang> sent_fight_requests;
-
-    private UUID active_fight;
-
-    private boolean isInFight;
-
-    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, HashMap<Upgrades, Integer> upgrades, int points, HashMap<Permission, Role> permissions) {
+    public Gang(GangsX plugin, final UUID id, String name, String description, final long created, UUID leader, int level, int coins, double bankBalance, int kills, int deaths, int blocksbroken, boolean friendlyFire, ArrayList<Gang> allies, ArrayList<GPlayer> members, ArrayList<GPlayer> invites, int points, HashMap<Permission, Role> permissions, HashMap<Upgrade, Integer> upgrades) {
         this.plugin = plugin;
         this.gangUtils = plugin.getGangUtils();
         this.id = id;
@@ -73,15 +64,10 @@ public class Gang {
         this.allies = allies;
         this.members = members;
         this.invites = new ArrayList<>();
-        this.upgrades = upgrades;
         this.points = points;
         this.renameCooldown = false;
         this.permissions = permissions;
-        this.roster = new ArrayList<>();
-        this.fight_requests = new ArrayList<>();
-        this.sent_fight_requests = new ArrayList<>();
-        this.active_fight = null;
-        this.isInFight = false;
+        this.upgrades = upgrades;
     }
 
     public Gang(GangsX plugin, final UUID id, String name, UUID leader) {
@@ -109,11 +95,7 @@ public class Gang {
         this.points = 0;
         this.renameCooldown = false;
         this.permissions = gangUtils.getDefaultPermissions();
-        this.roster = new ArrayList<>();
-        this.fight_requests = new ArrayList<>();
-        this.sent_fight_requests = new ArrayList<>();
-        this.active_fight = null;
-        this.isInFight = false;
+        this.upgrades = gangUtils.getDefaultUpgrades();
     }
 
     public void sendMessage(String message) {
@@ -159,11 +141,22 @@ public class Gang {
         return permissions;
     }
 
+    public HashMap<Upgrade, Integer> getUpgrades() {
+        return upgrades;
+    }
+
     public Role getRequiredRole(Permission permission) {
         return getPermissions().get(permission);
     }
+    public Integer getUpgrade(Upgrade upgrade) {
+        return getUpgrades().get(upgrade);
+    }
     public void updatePermission(Permission permission, Role role) {
         getPermissions().replace(permission, role);
+    }
+
+    public void updateUpgrade(Upgrade upgrade, Integer value) {
+        getUpgrades().replace(upgrade, value);
     }
     public double getBankBalance() {
         return bankBalance;
@@ -178,12 +171,6 @@ public class Gang {
     public int getDeaths() {
         return deaths;
     }
-
-    public List<GPlayer> getFightRoster() { return roster; }
-
-    public void addToFightRoster(GPlayer player) { this.roster.add(player); }
-
-    public void removeFromFightRoster(GPlayer player) { this.roster.remove(player); }
 
     public String getPointsFormatted() {
         return plugin.getCommandUtils().formatNumber(getPoints());
@@ -240,7 +227,7 @@ public class Gang {
         return invites;
     }
 
-    public Integer getUpgradeLevel(Upgrades upgrade) {
+    public Integer getUpgradeLevel(Upgrade upgrade) {
         return upgrades.get(upgrade);
     }
 
@@ -329,7 +316,7 @@ public class Gang {
         this.invites.add(player);
     }
 
-    public void addUpgrade(Upgrades upgrade, Integer level) {
+    public void addUpgrade(Upgrade upgrade, Integer level) {
         this.upgrades.put(upgrade, level);
     }
 
@@ -377,7 +364,7 @@ public class Gang {
         this.onlinemembers.remove(player);
     }
 
-    public void removeUpgrade(Upgrades upgrade) {
+    public void removeUpgrade(Upgrade upgrade) {
         this.upgrades.remove(upgrade);
     }
 

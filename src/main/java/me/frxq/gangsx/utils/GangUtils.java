@@ -2,6 +2,7 @@ package me.frxq.gangsx.utils;
 
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.enums.Permission;
+import me.frxq.gangsx.enums.Upgrade;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
 import me.frxq.gangsx.enums.Role;
@@ -29,6 +30,11 @@ public class GangUtils {
             return false;
         }
         return true;
+    }
+    public int getDefaultUpgradeValue(Upgrade upgrade) {
+        String up = upgrade.getName();
+        int value = plugin.getConfig().getInt("default_uupgrades."+up.toLowerCase());
+        return value;
     }
     public Role getDefaultRolePermission(Permission permission) {
         String perm = permission.getName();
@@ -59,6 +65,16 @@ public class GangUtils {
         permissions.put(Permission.GANG_CHAT, getDefaultRolePermission(Permission.GANG_CHAT));
 
         return permissions;
+    }
+    public HashMap<Upgrade, Integer> getDefaultUpgrades() {
+        HashMap<Upgrade, Integer> upgrades = new HashMap<>();
+        upgrades.put(Upgrade.MEMBER_LIMIT, getDefaultUpgradeValue(Upgrade.MEMBER_LIMIT));
+        upgrades.put(Upgrade.BANK_LIMIT, getDefaultUpgradeValue(Upgrade.BANK_LIMIT));
+        upgrades.put(Upgrade.COIN_MULTIPLIER, getDefaultUpgradeValue(Upgrade.COIN_MULTIPLIER));
+        upgrades.put(Upgrade.SHOP_DISCOUNT, getDefaultUpgradeValue(Upgrade.SHOP_DISCOUNT));
+        upgrades.put(Upgrade.COLOURED_DESCRIPTION, getDefaultUpgradeValue(Upgrade.COLOURED_DESCRIPTION));
+        upgrades.put(Upgrade.MAX_ALLIES, getDefaultUpgradeValue(Upgrade.MAX_ALLIES));
+        return upgrades;
     }
     public boolean playerHasGangPermission(GPlayer gPlayer, Gang gang, Permission permission) {
         Role minimum = gang.getPermissions().get(permission);

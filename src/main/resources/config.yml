@@ -2,11 +2,12 @@
 storage-method: "MySQL"
 database:
   mysql:
-    host: "localhost"
+    host: "eu01-sql.pebblehost.com"
     port: 3306
-    database: "practice"
-    username: "practice"
-    password: "s0DlbR2zitaphuneB8sp"
+    database: "customer_681525_gangsx"
+    username: "customer_681525_gangsx"
+    password: "#b1N7xnlRxM7nsqYKSP4"
+
   mongodb:
     connection-string: ""
 
@@ -87,16 +88,15 @@ gang:
     INVITE: 'CO_LEADER'
     GANG_CHAT: 'RECRUIT'
 
-upgrades:
-  home_limit:
-    maximum_level: 2
-    stages:
-      1:
-        value: 3
-        cost: 100000
-      2:
-        value: 5
-        cost: 250000
+
+default_upgrades:
+  member_limit: 3
+  bank_limit: 15000000
+  coin_multiplier: 0
+  shop_discount: 0
+  coloured_description: 0    #0 = false, 1 = true
+  max_allies: 1
+
 levels:
   2:
     requirements:

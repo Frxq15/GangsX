@@ -5,6 +5,7 @@ import me.frxq.gangsx.enums.Permission;
 import me.frxq.gangsx.datafactory.gang.GangDataFactory;
 import me.frxq.gangsx.datafactory.sql.SQLHandler;
 import me.frxq.gangsx.enums.Role;
+import me.frxq.gangsx.enums.Upgrade;
 import me.frxq.gangsx.objects.GPlayer;
 import me.frxq.gangsx.objects.Gang;
 import me.frxq.gangsx.utils.GangUtils;
@@ -30,7 +31,8 @@ public class SQLGangDataFactory extends GangDataFactory {
 
     private final String PLAYERS_TABLE;
     private final String PERMISSIONS_TABLE;
-
+    private final String UPGRADES_TABLE;
+    private final String ALLIES_TABLE;
     private GangUtils gangUtils = plugin.getGangUtils();
 
     public SQLGangDataFactory(GangsX plugin, SQLHandler sqlHandler, String prefix) {
@@ -39,6 +41,8 @@ public class SQLGangDataFactory extends GangDataFactory {
         this.GANGS_TABLE = prefix + "gangs";
         this.PLAYERS_TABLE = prefix + "players";
         this.PERMISSIONS_TABLE = prefix + "permissions";
+        this.UPGRADES_TABLE = prefix + "upgrades";
+        this.ALLIES_TABLE = prefix + "allies";
     }
 
     @Override
@@ -51,6 +55,14 @@ public class SQLGangDataFactory extends GangDataFactory {
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + GANGS_TABLE + " " +
                 "(uuid VARCHAR(36) PRIMARY KEY, name VARCHAR(16), created BIGINT, leader VARCHAR(36), level INT, " +
                 "coins INT, bankBalance DOUBLE, kills INT, deaths INT, blocksbroken INT, friendlyFire BOOLEAN, description VARCHAR(36), points INT);")) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + UPGRADES_TABLE + " " +
+                "(uuid VARCHAR(36) PRIMARY KEY, MEMBER_LIMIT INT, BANK_LIMIT INT, COLOURED_DESCRIPTION INT, MAX_ALLIES INT, " +
+                "SHOP_DISCOUNT INT, COIN_MULTIPLIER INT);")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,6 +124,19 @@ public class SQLGangDataFactory extends GangDataFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + UPGRADES_TABLE + " " +
+                "(uuid, MEMBER_LIMIT, BANK_LIMIT, COLOURED_DESCRIPTION, MAX_ALLIES, SHOP_DISCOUNT, COIN_MULTIPLIER) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+            statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
+            statement.setInt(2, gangUtils.getDefaultUpgradeValue(Upgrade.MEMBER_LIMIT));
+            statement.setInt(3, gangUtils.getDefaultUpgradeValue(Upgrade.BANK_LIMIT));
+            statement.setInt(4, gangUtils.getDefaultUpgradeValue(Upgrade.COLOURED_DESCRIPTION));
+            statement.setInt(5, gangUtils.getDefaultUpgradeValue(Upgrade.MAX_ALLIES));
+            statement.setInt(6, gangUtils.getDefaultUpgradeValue(Upgrade.SHOP_DISCOUNT));
+            statement.setInt(7, gangUtils.getDefaultUpgradeValue(Upgrade.COIN_MULTIPLIER));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("INSERT INTO " + PERMISSIONS_TABLE + " " +
                 "(uuid, bank_deposit, bank_withdraw, change_description, manage_relations, purchase_value, purchase_upgrades, promote, demote, manage_friendly_fire, kick, rename_gang, shop, invsee, invite, gang_chat) VALUES (?, ?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, (gang.getID() == null ? null : gang.getID().toString()));
@@ -159,6 +184,12 @@ public class SQLGangDataFactory extends GangDataFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("DELETE FROM " + UPGRADES_TABLE + " WHERE uuid=?")) {
+            statement.setString(1, uuid.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         gangs.remove(uuid);
     }
 
@@ -174,14 +205,14 @@ public class SQLGangDataFactory extends GangDataFactory {
             return null;
         }
         Gang gang = null;
-        HashMap<Permission, Role> perms = null;
+        HashMap<Permission, Role> permissions = null;
+        HashMap<Upgrade, Integer> upgrades = null;
         try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM " + PERMISSIONS_TABLE + " WHERE uuid=?")) {
             statement.setString(1, uuid.toString());
 
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                HashMap<Permission, Role> permissions = new HashMap<>();
                 permissions.put(Permission.BANK_DEPOSIT, Role.valueOf(rs.getString("BANK_DEPOSIT")));
                 permissions.put(Permission.BANK_WITHDRAW, Role.valueOf(rs.getString("BANK_WITHDRAW")));
                 permissions.put(Permission.CHANGE_DESCRIPTION, Role.valueOf(rs.getString("CHANGE_DESCRIPTION")));
@@ -197,13 +228,24 @@ public class SQLGangDataFactory extends GangDataFactory {
                 permissions.put(Permission.INVSEE, Role.valueOf(rs.getString("INVSEE")));
                 permissions.put(Permission.INVITE, Role.valueOf(rs.getString("INVITE")));
                 permissions.put(Permission.GANG_CHAT, Role.valueOf(rs.getString("GANG_CHAT")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement("SELECT * FROM " + UPGRADES_TABLE + " WHERE uuid=?")) {
+            statement.setString(1, uuid.toString());
 
+            ResultSet rs = statement.executeQuery();
 
-                perms = permissions;
-                // TODO: 17/04/2022 check how to get table names from each others datafactory
-                // Members: SELECT uuid FROM `*players_table*` WHERE gang=?;
-                // Allies: SELECT ally FROM `*allies_table*` WHERE gang=?; (Requires another table (gang - ally) which is using a composite primary key)
-                // Upgrades: SELECT * FROM `*upgrades_table*` WHERE gang=?; (Could be done within the gangs table but just to minimize having giant tables id recommend making another one (gang - upgrade1 - upgrade2 - upgrade3 - etc.)
+            if (rs.next()) {
+                upgrades.put(Upgrade.MEMBER_LIMIT, rs.getInt("MEMBER_LIMIT"));
+                upgrades.put(Upgrade.BANK_LIMIT, rs.getInt("BANK_LIMIT"));
+                upgrades.put(Upgrade.COIN_MULTIPLIER, rs.getInt("COIN_MULTIPLIER"));
+                upgrades.put(Upgrade.SHOP_DISCOUNT, rs.getInt("SHOP_DISCOUNT"));
+                upgrades.put(Upgrade.COLOURED_DESCRIPTION, rs.getInt("COLOURED_DESCRIPTION"));
+                upgrades.put(Upgrade.MAX_ALLIES, rs.getInt("MAX_ALLIES"));
             }
             rs.close();
         } catch (SQLException e) {
@@ -219,7 +261,7 @@ public class SQLGangDataFactory extends GangDataFactory {
                 gang = new Gang(plugin, UUID.fromString(rs.getString("uuid")), rs.getString("name"), rs.getString("description"),
                         rs.getLong("created"), UUID.fromString(rs.getString("leader")), rs.getInt("level"),
                         rs.getInt("coins"), rs.getDouble("bankBalance"), rs.getInt("kills"), rs.getInt("deaths"),
-                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), null, rs.getInt("points"), perms);
+                        rs.getInt("blocksbroken"), rs.getBoolean("friendlyFire"), null, new ArrayList<GPlayer>(), new ArrayList<GPlayer>(), rs.getInt("points"), permissions, upgrades);
 
                 gang.importMembers(getGangMembers(UUID.fromString(rs.getString("uuid"))));
 
@@ -323,6 +365,32 @@ public class SQLGangDataFactory extends GangDataFactory {
             statement.setString(i++, (gang.getRequiredRole(Permission.INVSEE) == null ? null : gang.getRequiredRole(Permission.INVSEE).name()));
             statement.setString(i++, (gang.getRequiredRole(Permission.INVITE) == null ? null : gang.getRequiredRole(Permission.INVITE).name()));
             statement.setString(i, (gang.getRequiredRole(Permission.GANG_CHAT) == null ? null : gang.getRequiredRole(Permission.GANG_CHAT).name()));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        final String UPGRADES_UPDATE_DATA = "INSERT INTO `" + UPGRADES_TABLE + "` (uuid, MEMBER_LIMIT, BANK_LIMIT, COLOURED_DESCRIPTION, MAX_ALLIES, SHOP_DISCOUNT, COIN_MULTIPLIER) VALUES (?, ?, ? , ? , ?, ?, ?) ON DUPLICATE KEY " +
+                "UPDATE MEMBER_LIMIT = ?, BANK_LIMIT = ?, COLOURED_DESCRIPTION = ?, MAX_ALLIES = ?, SHOP_DISCOUNT = ?, COIN_MULTIPLIER = ?;";
+        try (PreparedStatement statement = sqlHandler.getConnection().prepareStatement(UPGRADES_UPDATE_DATA)) {
+            int i = 1;
+
+            // Setting insert variables
+            statement.setString(i++, (gang.getID() == null ? null : gang.getID().toString()));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.MEMBER_LIMIT) == null ? null : gang.getUpgrade(Upgrade.MEMBER_LIMIT)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.BANK_LIMIT) == null ? null : gang.getUpgrade(Upgrade.BANK_LIMIT)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.COLOURED_DESCRIPTION) == null ? null : gang.getUpgrade(Upgrade.COLOURED_DESCRIPTION)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.MAX_ALLIES) == null ? null : gang.getUpgrade(Upgrade.MAX_ALLIES)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.SHOP_DISCOUNT) == null ? null : gang.getUpgrade(Upgrade.SHOP_DISCOUNT)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.COIN_MULTIPLIER) == null ? null : gang.getUpgrade(Upgrade.COIN_MULTIPLIER)));
+
+            // TODO: 14/04/2022 check if everything here is right and not missdone cz i fucked it up
+            // Setting update variables
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.MEMBER_LIMIT) == null ? null : gang.getUpgrade(Upgrade.MEMBER_LIMIT)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.BANK_LIMIT) == null ? null : gang.getUpgrade(Upgrade.BANK_LIMIT)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.COLOURED_DESCRIPTION) == null ? null : gang.getUpgrade(Upgrade.COLOURED_DESCRIPTION)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.MAX_ALLIES) == null ? null : gang.getUpgrade(Upgrade.MAX_ALLIES)));
+            statement.setInt(i++, (gang.getUpgrade(Upgrade.SHOP_DISCOUNT) == null ? null : gang.getUpgrade(Upgrade.SHOP_DISCOUNT)));
+            statement.setInt(i, (gang.getUpgrade(Upgrade.COIN_MULTIPLIER) == null ? null : gang.getUpgrade(Upgrade.COIN_MULTIPLIER)));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

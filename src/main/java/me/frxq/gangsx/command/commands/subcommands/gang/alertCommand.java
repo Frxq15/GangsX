@@ -33,7 +33,7 @@ public class alertCommand extends SubCommand {
             return;
         }
         Gang gang = plugin.getGangDataFactory().getGangData(gPlayer.getGangId());
-        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer,gang, Permission.ALERT)) {
+        if(!plugin.getGangUtils().playerHasGangPermission(gPlayer, gang, Permission.ALERT)) {
             plugin.getLocaleManager().sendMessage(p, "PLAYER_GANG_NO_PERMISSION");
             return;
         }

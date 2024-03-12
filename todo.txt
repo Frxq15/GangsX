@@ -4,3 +4,4 @@ Allies
 Banner?
 Vault?
 Upgrades
+add alert permission
