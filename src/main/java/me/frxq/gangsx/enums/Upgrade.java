@@ -19,4 +19,15 @@ public enum Upgrade {
         return name;
     }
 
+    public static Upgrade findByValue(String value) {
+        Upgrade result = null;
+        for (Upgrade upgrade : values()) {
+            if (upgrade.getName().equalsIgnoreCase(value)) {
+                result = upgrade;
+                break;
+            }
+        }
+        return result;
+    }
+
 }

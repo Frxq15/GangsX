@@ -114,7 +114,7 @@ levels:
       - '&c&l | &fPlayer Kills: &c5'
       - ''
     levelup_commands:
-      - 'gadmin setmaxmembers %gang% 6'
+      - 'gadmin setupgrade %gang% member_limit 4'
       - 'gadmin addcoins %gang% 5'
     levelup_message:
       - ''

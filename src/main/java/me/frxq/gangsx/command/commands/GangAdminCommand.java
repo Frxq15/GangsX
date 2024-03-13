@@ -3,6 +3,8 @@ package me.frxq.gangsx.command.commands;
 import me.frxq.gangsx.GangsX;
 import me.frxq.gangsx.command.ParentCommand;
 import me.frxq.gangsx.command.SubCommand;
+import me.frxq.gangsx.command.commands.subcommands.admin.setupgradeCommand;
+import me.frxq.gangsx.command.commands.subcommands.gang.helpCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +14,8 @@ import java.util.Arrays;
 public class GangAdminCommand extends ParentCommand {
 
     public GangAdminCommand(GangsX plugin) {
-        super(plugin, "gadmin", "gangsx.command.gangadmin");
+        super(plugin, "gadmin", "gangsx.command.admin");
+        register(new setupgradeCommand(plugin));
     }
 
     @Override
