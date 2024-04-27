@@ -1,0 +1,40 @@
+BLOCKS_MINED:
+  TITLE: '&8Mining Milestones'
+  ROWS: 5
+  ITEMS:
+    MS_1:
+      INCOMPLETE:
+        SLOT: 28
+        MATERIAL: PLAYER_HEAD
+        TEXTURE: 'https://textures.minecraft.net/texture/e0a4c94dd65a7cadc4172cedf3990a8542772bb113cdf1a0f78ef652c6abe6cb'
+        AMOUNT: 10000
+        GLOW: false
+        NAME: '&cMilestone #1'
+        LORE:
+          - ''
+          - '&6Objective:'
+          - '&e | &fMine &e10,000 &fblocks as a gang'
+          - ''
+          - '&6Progress:'
+          - '&e | &c%blocks%&8/&a10,000'
+          - ''
+          - '&6Rewards:'
+          - '&e | &f10x Gang Points'
+          - ''
+          - '&cYou have not completed this milestone.'
+      COMPLETE:
+        SLOT: 28
+        MATERIAL: PLAYER_HEAD
+        TEXTURE: 'https://textures.minecraft.net/texture/e0a4c94dd65a7cadc4172cedf3990a8542772bb113cdf1a0f78ef652c6abe6cb'
+        AMOUNT: 10000
+        GLOW: false
+        NAME: '&aMilestone #1'
+        LORE:
+          - ''
+          - '&6Objective:'
+          - '&e | &fMine &e10,000 &fblocks as a gang'
+          - ''
+          - '&6Progress:'
+          - '&e | &a10,000&8/&a10,000'
+          - ''
+          - '&aYou have completed this milestone.'
